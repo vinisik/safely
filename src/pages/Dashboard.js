@@ -22,7 +22,7 @@ function Dashboard() {
               to={`/video/${video.id}`}
               thumbnail={video.thumbnail}
               title={video.title}
-              description="Vence: 15/10"
+              description={`Vence em: ${video.dueDate}`}
               progress={Math.floor(Math.random() * 100)}
             />
           ))}
@@ -39,9 +39,8 @@ function Dashboard() {
                 <ContentCard
                   key={quiz.id}
                   to={`/quiz/${quiz.id}`}
-                  thumbnail={`https://placehold.co/600x400/4CAF50/white?text=Quiz`}
                   title={quiz.title}
-                  description="Vence: 15/10"
+                  description={`Vence em: ${quiz.dueDate}`}
                   buttonText="Iniciar Quiz"
                 />
               ))}

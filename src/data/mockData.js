@@ -15,6 +15,7 @@ export const videos = [
     description: 'Aprenda a importância e a maneira correta de utilizar os Equipamentos de Proteção Individual para garantir sua segurança no ambiente de trabalho.',
     videoUrl: '/videos/epi-video.mp4',
     relatedQuizId: 101,
+    dueDate: '25/10/2025',
   },
   {
     id: 2,
@@ -23,6 +24,7 @@ export const videos = [
     description: 'Este vídeo aborda os princípios fundamentais da ergonomia para prevenir lesões e melhorar o bem-estar no trabalho.',
     videoUrl: '/videos/ergonomia.mp4',
     relatedQuizId: 102,
+    dueDate: '31/10/2025',
   },
   {
     id: 3,
@@ -30,6 +32,7 @@ export const videos = [
     thumbnail: thumbAltura,
     description: 'Conheça os procedimentos e equipamentos essenciais para realizar trabalhos em altura com máxima segurança.',
     videoUrl: '/videos/nr35.mp4',
+    dueDate: '05/11/2025',
   },
 ];
 
@@ -38,6 +41,7 @@ export const quizzes = [
     id: 101,
     title: 'Teste de Conhecimento: EPIs',
     relatedVideoId: 1,
+    dueDate: '28/10/2025',
     questions: [
       {
         text: 'O que significa a sigla EPI?',
@@ -61,6 +65,7 @@ export const quizzes = [
     id: 102,
     title: 'Teste de Conhecimento: Ergonomia',
     relatedVideoId: 2,
+    dueDate: '07/11/2025',
     questions: [
       {
         text: 'Qual o objetivo principal da ergonomia?',
@@ -76,6 +81,7 @@ export const quizzes = [
     id: 103,
     title: 'Teste de Conhecimento: Primeiros Socorros',
     relatedVideoId: 4, 
+    dueDate: '15/11/2025',
     questions: [
       {
         text: 'Em caso de queimadura, o que se deve fazer primeiro?',
@@ -83,6 +89,102 @@ export const quizzes = [
           { text: 'Passar pasta de dente', correct: false },
           { text: 'Resfriar a área com água corrente', correct: true },
           { text: 'Estourar as bolhas', correct: false },
+        ],
+      },
+    ],
+  },
+  {
+    id: 104,
+    title: 'Quiz NR-10: Segurança em Eletricidade',
+    relatedVideoId: 5,
+    dueDate: '19/10/2025',
+    questions: [
+      {
+        text: 'Qual é a primeira medida de controle a ser adotada em trabalhos com eletricidade?',
+        options: [
+          { text: 'Usar luvas de alta tensão', correct: false },
+          { text: 'Desenergização do circuito', correct: true },
+          { text: 'Sinalizar a área de trabalho', correct: false },
+        ],
+      },
+      {
+        text: 'Qual a sigla para o procedimento que impede o religamento acidental de um circuito?',
+        options: [
+          { text: 'APR (Análise Preliminar de Risco)', correct: false },
+          { text: '5S (Housekeeping)', correct: false },
+          { text: 'LOTO (Lockout/Tagout)', correct: true },
+        ],
+      },
+    ],
+  },
+  {
+    id: 105,
+    title: 'Teste de Conhecimento: NR-12 (Máquinas e Equipamentos)',
+    relatedVideoId: 6,
+    dueDate: '31/10/2025',
+    questions: [
+      {
+        text: 'O que a NR-12 estabelece como medida prioritária de segurança em máquinas?',
+        options: [
+          { text: 'Proteções coletivas (guardas fixas, sensores)', correct: true },
+          { text: 'Uso de Equipamento de Proteção Individual (EPI)', correct: false },
+          { text: 'Treinamento contínuo dos operadores', correct: false },
+        ],
+      },
+    ],
+  },
+  {
+    id: 106,
+    title: 'Avaliação: Prevenção e Combate a Incêndio',
+    relatedVideoId: 7,
+    dueDate: '20/10/2025',
+    questions: [
+      {
+        text: 'Para um incêndio de Classe A (papel, madeira, tecido), qual o extintor mais indicado?',
+        options: [
+          { text: 'Extintor de Água Pressurizada (AP)', correct: true },
+          { text: 'Extintor de CO2 (Dióxido de Carbono)', correct: false },
+          { text: 'Extintor de Pó Químico Seco (PQS)', correct: false },
+        ],
+      },
+      {
+        text: 'Ao usar um extintor, para onde você deve direcionar o jato?',
+        options: [
+          { text: 'Para o meio das chamas', correct: false },
+          { text: 'Para a fumaça', correct: false },
+          { text: 'Para a base do fogo', correct: true },
+        ],
+      },
+    ],
+  },
+  {
+    id: 107,
+    title: 'Quiz Rápido: Operação Segura de Empilhadeiras',
+    relatedVideoId: 8,
+    dueDate: '24/11/2025',
+    questions: [
+      {
+        text: 'Ao dirigir uma empilhadeira com a carga elevada, o que você NUNCA deve fazer?',
+        options: [
+          { text: 'Buzinar nos cruzamentos', correct: false },
+          { text: 'Fazer curvas ou dirigir em rampas', correct: true },
+          { text: 'Olhar por cima do ombro ao dar ré', correct: false },
+        ],
+      },
+    ],
+  },
+  {
+    id: 108,
+    title: 'Desafio Comportamental: Percepção de Riscos',
+    relatedVideoId: 9,
+    dueDate: '29/11/2025',
+    questions: [
+      {
+        text: 'O que é "comportamento seguro"?',
+        options: [
+          { text: 'Apenas seguir as regras e usar EPIs.', correct: false },
+          { text: 'É a atitude proativa de identificar riscos e agir para eliminá-los ou controlá-los, mesmo que não haja uma regra específica.', correct: true },
+          { text: 'Trabalhar mais rápido para evitar a exposição prolongada a um risco.', correct: false },
         ],
       },
     ],

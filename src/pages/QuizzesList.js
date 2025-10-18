@@ -24,6 +24,7 @@ function QuizzesList() {
             to={`/quiz/${quiz.id}`}
             thumbnail={`https://placehold.co/600x400/4CAF50/white?text=Quiz`}
             title={quiz.title}
+            description={`Vence em: ${quiz.dueDate}`}
             buttonText="Iniciar Quiz"
           />
         ))}

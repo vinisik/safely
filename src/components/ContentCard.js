@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ContentCard = ({ to, thumbnail, title, description, progress, buttonText }) => (
   <Link to={to} className="card">
-    <img src={thumbnail} alt={title} className="card-thumbnail" />
+    {thumbnail && <img src={thumbnail} alt={title} className="card-thumbnail" />}
     <div className="card-content">
       <h3>{title}</h3>
       {description && <p>{description}</p>}
