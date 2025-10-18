@@ -69,8 +69,9 @@ main {
 /* Estilo para o nome da empresa */
 .logo-name-safe {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 1000;
   color: var(--primary-color); 
+  border-bottom: 3px solid var(--secondary-company-color);
 }
 
 .logo-name-wrapper {
@@ -80,12 +81,14 @@ main {
 
 .logo-name-ly {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 1000;
   color: var(--secondary-company-color); 
+  border-bottom: 3px solid var(--secondary-company-color);
 }
 
 /* Estilo para o slogan */
 .logo-tagline {
+  padding: 1.2rem;
   font-size: 0.75rem; 
   font-weight: 500;
   color: #555; 
@@ -106,8 +109,8 @@ main {
   font-size: inherit;
 }
 .header .logo img {
-  height: 100px;
-  width: auto; 
+  height: 3.5rem;
+  margin-right: 0px;
 }
 .header nav.desktop-nav {
   position: absolute; 
@@ -1267,14 +1270,14 @@ main {
   background-color: var(--secondary-color);
   color: #333;
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
   transition: background-color 0.2s, opacity 0.2s;
 }
 
 .btn-reward:hover {
-  background-color: #ffda6a;
+  background-color: #84c8f5;
 }
 
 /* Estilo para o botão desabilitado */
@@ -1320,11 +1323,12 @@ main {
     padding: 1rem;
   }
   .header .logo {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .header .logo img {
-  margin-right: 0;
+    height: 3.5rem;
+    margin-right: 0;
 }
 
   .logo-tagline {
@@ -1411,7 +1415,7 @@ main {
 
 @media (max-width: 480px) {
     .header .logo img {
-        height: 50px;
+        height: 3.5rem;
     }
     .hero-banner {
       height: 200px;
