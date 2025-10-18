@@ -9,6 +9,7 @@ import QuizPage from './pages/QuizPage';
 import VideosList from './pages/VideosList';
 import QuizzesList from './pages/QuizzesList';
 import ChecklistsList from './pages/ChecklistsList';
+import ChecklistPage from './pages/ChecklistPage';
 import MyPoints from './pages/MyPoints';
 import LoginPage from './pages/LoginPage'; 
 import RewardsPage from './pages/RewardsPage';
@@ -43,6 +44,7 @@ function App() {
               <Route path="/videos" element={<VideosList />} />
               <Route path="/quizzes" element={<QuizzesList />} />
               <Route path="/checklists" element={<ChecklistsList />} />
+              <Route path="/checklist/:id" element={<ChecklistPage user={user} />} />
               <Route path="/pontos" element={<MyPoints />} />
               <Route path="/recompensas" element={<RewardsPage />} />
               <Route path="/perfil" element={<ProfilePage user={user} />} />

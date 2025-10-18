@@ -4,13 +4,13 @@ import safelyLogo from '../assets/logo.png';
 function LoginPage({ onLogin }) {
   // O estado 'name' foi removido
   const [password, setPassword] = useState('');
-  const [idColaborador, setidColaborador] = useState(''); // Estado para o ID do Colaborador
+  const [idColaborador, setidColaborador] = useState(''); 
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Impede que a página recarregue
     // Validação simplificada para checar apenas o ID
     if (idColaborador.trim() !== '') {
-      onLogin({ name: 'Jose do Vale',
+      onLogin({ name: 'Carlos Eduardo do Vale',
          idColaborador: idColaborador ,
          profilePictureUrl: 'https://i.pravatar.cc/150?img=68'
         });

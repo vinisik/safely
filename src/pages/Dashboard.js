@@ -1,60 +1,61 @@
 import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes, checklists } from '../data/mockData';
+import { Link } from 'react-router-dom';
 import bannerSegurancaImg from '../assets/banner-seguranca.jpg';
 
 function Dashboard() {
   return (
     <>
-        <title>Safely | Início</title>
+    <title>Safely | Início</title>
+      <div className="hero-banner">
+        <h2>"Inteligência que previne, rotina que protege!""</h2>
+      </div>
+
+      <div className="dashboard-section">
+        <h2>Continuar Assistindo</h2>
+        <div className="card-grid">
+          {videos.slice(0, 3).map(video => (
+            <ContentCard
+              key={video.id}
+              to={`/video/${video.id}`}
+              thumbnail={video.thumbnail}
+              title={video.title}
+              description="Vence: 15/10"
+              progress={Math.floor(Math.random() * 100)}
+            />
+          ))}
+        </div>
+      </div>
       
-        <div className="hero-banner">
-          <h2>INTELIGÊNCIA QUE PREVINE, ROTINA QUE PROTEGE!</h2>
-        </div>
+      <div className="dashboard-row">
 
-        <div className="dashboard-section">
-          <h2>Continuar Assistindo</h2>
-          <div className="card-grid">
-            {videos.slice(0, 3).map(video => (
-              <ContentCard
-                key={video.id}
-                to={`/video/${video.id}`}
-                thumbnail={video.thumbnail}
-                title={video.title}
-                description="Vence: 15/10"
-                progress={Math.floor(Math.random() * 100)}
-              />
-            ))}
-          </div>
-        </div>
-        
-        <div className="dashboard-row">
-
-          <div className="main-column">
-            <div className="dashboard-section">
-              <h2>Próximos Quizzes</h2>
-              <div className="card-grid">
-                {quizzes.slice(0, 3).map(quiz => ( // Mostrando 3 quizzes 
-                  <ContentCard
-                    key={quiz.id}
-                    to={`/quiz/${quiz.id}`}
-                    thumbnail={`https://placehold.co/600x400/4CAF50/white?text=Quiz`}
-                    title={quiz.title}
-                    description="Vence: 15/10"
-                    buttonText="Iniciar Quiz"
-                  />
-                ))}
-              </div>
+        <div className="main-column">
+          <div className="dashboard-section">
+            <h2>Próximos Quizzes</h2>
+            <div className="card-grid">
+              {quizzes.slice(0, 3).map(quiz => (
+                <ContentCard
+                  key={quiz.id}
+                  to={`/quiz/${quiz.id}`}
+                  thumbnail={`https://placehold.co/600x400/4CAF50/white?text=Quiz`}
+                  title={quiz.title}
+                  description="Vence: 15/10"
+                  buttonText="Iniciar Quiz"
+                />
+              ))}
             </div>
           </div>
+        </div>
 
-          {/* Coluna dos Checklists  */}
-          <div className="sidebar-column">
-            <div className="dashboard-section">
-              <h2>Checklists Pendentes</h2>
-              <div className="list-container">
-                {checklists.filter(c => c.status === 'pending').slice(0, 3).map(item => ( // Mostrando 2 checklists
-                  <div key={item.id} className="list-item">
+        <div className="sidebar-column">
+          <div className="dashboard-section">
+            <h2>Checklists Pendentes</h2>
+            <div className="list-container">
+              {checklists.filter(c => c.status === 'pending').slice(0, 2).map(item => (
+                // CADA ITEM AQUI TAMBÉM É UM LINK
+                <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
+                  <div className="list-item">
                     <div className="list-item-content">
                       <h3>{item.title}</h3>
                       <p>Status: {item.status === 'pending' ? 'Pendente' : 'Concluído'}</p>
@@ -63,13 +64,13 @@ function Dashboard() {
                       {item.status}
                     </span>
                   </div>
-                  
-                ))}
-              </div>
+                </Link>
+              ))}
             </div>
           </div>
-          
-        </div> {/*.dashboard-row */}
+        </div>
+        
+      </div>
     </>
   );
 }

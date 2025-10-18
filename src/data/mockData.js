@@ -90,9 +90,33 @@ export const quizzes = [
 ];
 
 export const checklists = [
-    { id: 201, title: 'Checklist Diário: Empilhadeira', status: 'pending' },
-    { id: 202, title: 'Checklist: Trabalho em Altura', status: 'pending' },
-    { id: 203, title: 'Inspeção de Ferramentas Elétricas', status: 'completed' },
+  { 
+    id: 201, 
+    title: 'Verificação Pré-Uso - Prensa Hidráulica PH-02', 
+    status: 'pending',
+    items: [
+      { id: 1, text: 'Botão de parada de emergência está desobstruído e funcional?' },
+      { id: 2, text: 'Guardas de proteção (frontal e lateral) estão no lugar e sem avarias?' },
+      { id: 3, text: 'Não há vazamento de óleo visível no cilindro principal ou nas mangueiras?' },
+      { id: 4, text: 'A área ao redor da máquina está limpa e desobstruída?' },
+      { id: 5, text: 'Os sensores de segurança (cortina de luz) estão limpos e operantes?' },
+    ]
+  },
+  { 
+    id: 202, 
+    title: 'Checklist: Trabalho em Altura', 
+    status: 'pending',
+    items: [
+        { id: 1, text: 'Cinto de segurança e talabarte foram inspecionados?' },
+        { id: 2, text: 'O ponto de ancoragem é seguro e foi verificado?' },
+    ]
+  },
+  { 
+    id: 203, 
+    title: 'Inspeção de Ferramentas Elétricas', 
+    status: 'completed',
+    items: []
+  },
 ];
 
 // Dados para a Loja de Recompensas

@@ -414,6 +414,148 @@ main {
   color: #2e7d32;
 }
 
+/* --- ESTILOS PARA PÁGINA DE CHECKLIST --- */
+
+.checklist-page .page-header {
+    align-items: flex-start;
+    flex-direction: column;
+}
+.checklist-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+.checklist-header h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+.checklist-meta {
+    display: flex;
+    gap: 2rem;
+    color: #555;
+    font-size: 1rem;
+}
+
+.checklist-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.checklist-item {
+    padding: 1.5rem;
+}
+.checklist-item .item-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.item-actions {
+    display: flex;
+    gap: 1rem;
+}
+.btn-status {
+    padding: 0.8rem 1.5rem;
+    border: 2px solid #ccc;
+    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+.btn-status.ok { color: #2e7d32; border-color: #a5d6a7; }
+.btn-status.nok { color: #c62828; border-color: #ef9a9a; }
+
+.btn-status:hover {
+    background-color: #f8f9fa;
+}
+.btn-status.active.ok {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-color: #2e7d32;
+}
+.btn-status.active.nok {
+    background-color: #ffcdd2;
+    color: #c62828;
+    border-color: #c62828;
+}
+
+.non-conformance-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #ccc;
+    animation: fadeIn 0.3s ease;
+}
+.non-conformance-section label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+.non-conformance-section textarea {
+    width: 100%;
+    min-height: 80px;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+.btn-attach-photo {
+    padding: 0.6rem 1rem;
+    background-color: #e9ecef;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.btn-submit-checklist {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 2.5rem auto 0 auto;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submission-success {
+    text-align: center;
+    padding: 4rem 1rem;
+}
+.submission-success h2 {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+}
+.submission-success p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+/* Link para o item da lista (remove sublinhado) */
+.list-item-link {
+    text-decoration: none;
+    color: inherit;
+}
+.list-item-link .list-item:hover {
+    background-color: #f8f9fa;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 
 /* ==========================================================================
    5. Estilos de Páginas Específicas (Vídeo, Quiz, Pontos, Login)
