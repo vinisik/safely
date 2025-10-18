@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import safelyLogo from '../assets/logo.png';
 
-// A função 'onLogin' será recebida como uma propriedade (prop) do App.js
 function LoginPage({ onLogin }) {
-  const [name, setName] = useState('');
+  // O estado 'name' foi removido
   const [password, setPassword] = useState('');
+  const [idColaborador, setidColaborador] = useState(''); // Estado para o ID do Colaborador
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Impede que a página recarregue
-    if (name.trim() !== '') { // Validação simples para ver se o nome não está vazio
-      onLogin({ name: name }); // Chama a função do App.js, passando o nome do usuário
+    // Validação simplificada para checar apenas o ID
+    if (idColaborador.trim() !== '') {
+      // Passa o nome fixo "Vinicius Siqueira" junto com o ID digitado
+      onLogin({ name: 'Vinicius Siqueira',
+         idColaborador: idColaborador ,
+         profilePictureUrl: 'https://i.pravatar.cc/150?img=68'
+        });
     } else {
-      alert('Por favor, insira seu nome.');
+      alert('Por favor, preencha o ID de colaborador.');
     }
   };
 
@@ -19,21 +24,22 @@ function LoginPage({ onLogin }) {
     <div className="login-page">
       <div className="login-form-container">
         <form onSubmit={handleSubmit} className="login-form">
-          {/* Pode usar o seu logo aqui também */}
           <div className="login-header">
             <img src={safelyLogo} alt="Safely Logo" />
-            <h2>Bem-vindo ao Safely</h2>
+            <h2>Bem-vindo à Safely</h2>
             <p>Faça login para continuar</p>
           </div>
           
+          {/* O campo de input para 'Nome de Usuário' foi removido */}
+          
           <div className="input-group">
-            <label htmlFor="name">Nome de Usuário</label>
+            <label htmlFor="idColaborador">ID de Colaborador</label>
             <input
               type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Digite seu nome"
+              id="idColaborador"
+              value={idColaborador}
+              onChange={(e) => setidColaborador(e.target.value)}
+              placeholder="Digite seu ID"
             />
           </div>
           

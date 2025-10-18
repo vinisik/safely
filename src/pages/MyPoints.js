@@ -3,8 +3,6 @@ import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
 
-// O import 'rewards' foi removido daqui, pois não é mais necessário nesta página
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function MyPoints() {
@@ -86,7 +84,7 @@ function MyPoints() {
         </div>
       </div>
 
-      {/* --- NOVO CARD DE LINK PARA A LOJA DE RECOMPENSAS --- */}
+      {/* --- LINK PARA A LOJA DE RECOMPENSAS --- */}
       <Link to="/recompensas" className="card rewards-link-card">
         <h3>🛍️ Visite a Loja de Recompensas</h3>
         <p>Troque seus pontos por prêmios incríveis!</p>
@@ -124,10 +122,13 @@ function MyPoints() {
             <p>Ganhe 200 pontos e o badge "Mestre Aprovado"!</p>
             <Link to="/quizzes" className="btn-challenge">Ver Quizzes</Link>
           </div>
+          <div className="challenge-card card">
+            <h3>Conclua todas suas checklists</h3>
+            <p>Ganhe 100 pontos!</p>
+            <Link to="/checklists" className="btn-challenge">Ver Checklits</Link>
+          </div>
         </div>
       </div>
-
-      {/* A antiga seção da loja de recompensas foi removida daqui */}
     </div>
   );
 }

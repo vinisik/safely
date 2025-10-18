@@ -14,9 +14,8 @@ function VideosList() {
       <div className="page-header">
         <h1>Treinamentos em Vídeo</h1>
         
-        {/* 2. Envolva o input e o ícone em um container */}
         <div className="search-bar-container">
-          <FaSearch className="search-icon" /> {/* Adicione o ícone aqui */}
+          <FaSearch className="search-icon" /> 
           <input 
             type="text" 
             placeholder="Buscar treinamento..." 

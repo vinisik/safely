@@ -10,7 +10,7 @@ export const videos = [
     title: 'Uso Correto de EPIs',
     thumbnail: thumbEpis,
     description: 'Aprenda a importância e a maneira correta de utilizar os Equipamentos de Proteção Individual para garantir sua segurança no ambiente de trabalho.',
-    videoUrl: '/videos/treinamento-epis.mp4',
+    videoUrl: '/videos/epi-video.mp4',
     relatedQuizId: 101,
   },
   {
@@ -18,7 +18,7 @@ export const videos = [
     title: 'Princípios de Ergonomia',
     thumbnail: thumbErgonomia,
     description: 'Este vídeo aborda os princípios fundamentais da ergonomia para prevenir lesões e melhorar o bem-estar no trabalho.',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    videoUrl: '/videos/ergonomia.mp4',
     relatedQuizId: 102,
   },
   {
@@ -26,7 +26,7 @@ export const videos = [
     title: 'Segurança em Trabalho em Altura',
     thumbnail: thumbAltura,
     description: 'Conheça os procedimentos e equipamentos essenciais para realizar trabalhos em altura com máxima segurança.',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    videoUrl: '/videos/nr35.mp4',
   },
 ];
 
