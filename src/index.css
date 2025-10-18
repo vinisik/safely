@@ -706,6 +706,21 @@ main {
   flex-wrap: wrap;
   gap: 1.5rem;
 }
+
+.points-summary-column {
+  display: flex;
+  flex-direction: column; /* Empilha os itens verticalmente */
+  gap: 1.5rem; /* Espaçamento entre os dois cards */
+  flex: 1; /* Faz a coluna ocupar 1 parte do espaço */
+}
+
+.points-summary-column .points-summary {
+  width: 100%; /* Garante que o card ocupe toda a largura da coluna */
+  margin-bottom: 0; /* Remove margens extras se houver */
+  flex-grow: 1; /* Permite que os cards cresçam para preencher o espaço */
+}
+
+
 .point-item {
   text-align: center;
   flex: 1;
@@ -721,7 +736,7 @@ main {
 .point-item .large-number {
   font-size: 3.5rem;
   font-weight: bold;
-  color: var(--secondary-color);
+  color: #042139;
   line-height: 1;
 }
 .point-item .large-text {
@@ -776,6 +791,7 @@ main {
     max-width: none; /* Remove a largura máxima que tinha antes */
 }
 
+
 /* Responsividade para o layout da página de pontos */
 @media (max-width: 992px) {
   .points-header-layout {
@@ -789,14 +805,13 @@ main {
 }
 
 .chart-container {
-  padding: 2rem;
-  height: 500px;
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  max-width: 600px;
-  margin: 0 auto;
-  display: flex;
+  height: 100%;
+  padding: 1rem;
+}
+
+.chart-container-wrapper {
+  height: 100%;
+  padding: 1rem;
   justify-content: center;
   align-items: center;
 }

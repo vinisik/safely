@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
+import useIsMobile from '../hooks/useIsMobile';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function MyPoints() {
+  const isMobile = useIsMobile();
   const totalPoints = 1250;
   const rank = 'Especialista em Prevenção';
   const badges = [
@@ -30,10 +32,12 @@ function MyPoints() {
     ],
   };
 
-  const chartOptions = {
+  const chartOptions = useMemo(() => ({
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
+        display: !isMobile, // <-- A MÁGICA ACONTECE AQUI! Mostra a legenda se NÃO for mobile
         position: 'right',
         labels: {
           font: {
@@ -56,37 +60,45 @@ function MyPoints() {
         }
       }
     }
-  };
+  }), [isMobile]);
 
   return (
-    
     <div className="page-container points-page">
+      
       <title>Safely | Meus Pontos</title>
+      
       <div className="page-header">
         <h1>Meus Pontos e Conquistas</h1>
       </div>
 
       <div className="points-header-layout">
-        <div className="points-summary card">
-          <div className="point-item">
-            <h2>🏆 Total de Pontos</h2>
-            <p className="large-number">{totalPoints}</p>
+        {/* Coluna para empilhar os cards de resumo */}
+        <div className="points-summary-column">
+          <div className="points-summary card">
+            <div className="point-item">
+              <h2>🏆 Total de Pontos</h2>
+              <p className="large-number">{totalPoints}</p>
+            </div>
           </div>
-          <div className="point-item">
-            <h2>🌟 Seu Rank Atual</h2>
-            <p className="large-text">{rank}</p>
+          <div className="points-summary card">
+            <div className="point-item">
+              <h2>🌟 Seu Rank Atual</h2>
+              <p className="large-text">{rank}</p>
+            </div>
           </div>
         </div>
 
+        {/* Coluna do gráfico */}
         <div className="points-chart-section">
           <div className="chart-container card">
             <h2>📊 Distribuição dos Pontos</h2>
-            <Pie data={chartData} options={chartOptions} />
+            <div className="chart-container-wrapper">
+                <Pie data={chartData} options={chartOptions} />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* --- LINK PARA A LOJA DE RECOMPENSAS --- */}
       <Link to="/recompensas" className="card rewards-link-card">
         <h3>🛍️ Visite a Loja de Recompensas</h3>
         <p>Troque seus pontos por prêmios incríveis!</p>
@@ -123,11 +135,6 @@ function MyPoints() {
             <h3>Responder 3 Quizzes com 100%</h3>
             <p>Ganhe 200 pontos e o badge "Mestre Aprovado"!</p>
             <Link to="/quizzes" className="btn-challenge">Ver Quizzes</Link>
-          </div>
-          <div className="challenge-card card">
-            <h3>Conclua todas suas checklists</h3>
-            <p>Ganhe 100 pontos!</p>
-            <Link to="/checklists" className="btn-challenge">Ver Checklits</Link>
           </div>
         </div>
       </div>
