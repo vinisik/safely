@@ -8,7 +8,6 @@ function Dashboard() {
     <>
       <div className="hero-banner">
         <h2>INTELIGÊNCIA QUE PREVINE, ROTINA QUE PROTEGE!</h2>
-        
       </div>
 
       <div className="dashboard-section">

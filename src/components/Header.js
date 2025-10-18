@@ -1,30 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// 1. Troque 'Link' por 'NavLink' na importação
+import { NavLink } from 'react-router-dom';
 import safelyLogo from '../assets/logo.png';
 
-// O Header agora recebe o 'user' como uma propriedade
 function Header({ user }) {
   return (
     <header className="header">
-      <Link to="/" className="logo">
+      <NavLink to="/" className="logo">
         <img src={safelyLogo} alt="Safely Logo" />
-        SAFE<span className='sufix'>LY</span>
-      </Link>
+        Safely
+      </NavLink>
       
       <nav className="desktop-nav">
-        {/* ... (o menu continua igual) ... */}
         <ul>
-          <li><Link to="/">Início</Link></li>
-          <li><Link to="/videos">Treinamentos em Vídeo</Link></li>
-          <li><Link to="/quizzes">Quizzes</Link></li>
-          <li><Link to="/checklists">Checklists de Segurança</Link></li>
-          <li><Link to="/pontos">Meus Pontos</Link></li>
+          {/* 2. Substitua todos os <Link> por <NavLink> e adicione a função de classe */}
+          <li>
+            <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>
+              Início
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/videos" className={({ isActive }) => isActive ? "active-link" : ""}>
+              Treinamentos em Vídeo
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/quizzes" className={({ isActive }) => isActive ? "active-link" : ""}>
+              Quizzes
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/checklists" className={({ isActive }) => isActive ? "active-link" : ""}>
+              Checklists de Segurança
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/pontos" className={({ isActive }) => isActive ? "active-link" : ""}>
+              Meus Pontos
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
       <div className="user-info">
         <img src="https://i.pravatar.cc/35" alt="Avatar do Usuário" />
-        {/* A saudação agora usa o nome do usuário que veio do estado do App.js */}
         <span className="user-name">Olá, {user.name}!</span>
       </div>
     </header>

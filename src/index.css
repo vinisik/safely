@@ -47,7 +47,7 @@ main {
 /* Header */
 .header {
   background-color: var(--card-bg);
-  padding: 1rem 2rem;
+  padding: 0rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,18 +56,22 @@ main {
   top: 0;
   z-index: 1000;
 }
+
+.sufix {
+  color: #98c841;
+}
+
 .header .logo {
   display: flex;
   align-items: center;
   text-decoration: none;
   color: var(--primary-color);
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 .header .logo img {
-  height: 40px;
+  height: 100px;
   width: auto; /* Mantém a proporção da imagem */
-  margin-right: 10px;
 }
 .header nav.desktop-nav {
   list-style: none;
@@ -93,6 +97,12 @@ main {
   color: var(--primary-color);
   border-bottom: 2px solid var(--primary-color);
 }
+
+.header nav.desktop-nav a.active-link {
+  color: var(--primary-color); /* Cor azul primária */
+  border-bottom: 2px solid var(--primary-color); /* Mantém a borda inferior */
+}
+
 .user-info {
   display: flex;
   align-items: center;
@@ -175,11 +185,11 @@ main {
 }
 .hero-banner h2 {
   font-size: 2.5rem;
-  margin-bottom: 1rem;
   flex: 1;
   min-width: 250px;
   border-left: none;
   padding-left: 0;
+  text-align: center;
 }
 .hero-banner img {
   max-width: 300px;
@@ -767,7 +777,7 @@ main {
     padding: 1rem;
   }
   .header .logo {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
   }
   
   /* Menu Inferior Mobile */
@@ -838,7 +848,7 @@ main {
 
 @media (max-width: 480px) {
     .header .logo img {
-        height: 30px;
+        height: 50px;
     }
     .hero-banner h2 {
         font-size: 1.8rem;
