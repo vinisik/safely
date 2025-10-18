@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import safelyLogo from '../assets/logo.png';
-import { Helmet } from 'react-helmet-async';
 
 function LoginPage({ onLogin }) {
   // O estado 'name' foi removido
