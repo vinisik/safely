@@ -322,12 +322,28 @@ main {
   font-size: 2rem;
   color: var(--primary-color);
 }
+
+.search-bar-container {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px; /* Distância da borda esquerda */
+  transform: translateY(-50%); /* Alinhamento vertical perfeito */
+  color: #aaa; /* Cor cinza para o ícone */
+  pointer-events: none; /* Impede que o ícone seja clicável */
+}
+
 .search-bar {
   padding: 0.8rem;
+  padding-left: 40px; /* Espaço para o ícone */
   border: 1px solid #ccc;
   border-radius: var(--border-radius);
   font-size: 1rem;
   min-width: 250px;
+  width: 100%;
 }
 .filter-buttons {
   display: flex;

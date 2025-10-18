@@ -3,7 +3,7 @@ import ContentCard from '../components/ContentCard';
 import { quizzes } from '../data/mockData';
 
 // Simula uma lista maior
-const allQuizzes = [...quizzes, ...quizzes, ...quizzes];
+const allQuizzes = [...quizzes];
 
 function QuizzesList() {
   return (

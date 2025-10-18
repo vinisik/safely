@@ -2,15 +2,27 @@ import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos } from '../data/mockData';
 
+// 1. Importe o ícone de pesquisa (Search) do Font Awesome (Fa)
+import { FaSearch } from 'react-icons/fa';
+
 // Simula uma lista maior para o placeholder
-const allVideos = [...videos, ...videos, ...videos];
+const allVideos = [...videos];
 
 function VideosList() {
   return (
     <div className="page-container">
       <div className="page-header">
         <h1>Treinamentos em Vídeo</h1>
-        <input type="text" placeholder="🔍 Buscar treinamento..." className="search-bar" />
+        
+        {/* 2. Envolva o input e o ícone em um container */}
+        <div className="search-bar-container">
+          <FaSearch className="search-icon" /> {/* Adicione o ícone aqui */}
+          <input 
+            type="text" 
+            placeholder="Buscar treinamento..." 
+            className="search-bar" 
+          />
+        </div>
       </div>
       <div className="card-grid">
         {allVideos.map((video, index) => (

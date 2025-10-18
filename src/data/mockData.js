@@ -8,7 +8,7 @@ export const videos = [
     title: 'Uso Correto de EPIs',
     thumbnail: thumbEpis,
     description: 'Aprenda a importância e a maneira correta de utilizar os Equipamentos de Proteção Individual para garantir sua segurança no ambiente de trabalho.',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    videoUrl: '/videos/epi-video.mp4',
     relatedQuizId: 101,
   },
   {
@@ -16,15 +16,15 @@ export const videos = [
     title: 'Princípios de Ergonomia',
     thumbnail: thumbErgonomia,
     description: 'Este vídeo aborda os princípios fundamentais da ergonomia para prevenir lesões e melhorar o bem-estar no trabalho.',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    videoUrl: '/videos/ergonomia.mp4',
     relatedQuizId: 102,
   },
   {
     id: 3,
-    title: 'Segurança em Trabalho em Altura',
+    title: 'Segurança em Trabalho em Altura NR 35',
     thumbnail: thumbAltura,
     description: 'Conheça os procedimentos e equipamentos essenciais para realizar trabalhos em altura com máxima segurança.',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    videoUrl: '/videos/nr35.mp4',
   },
 ];
 
@@ -87,5 +87,5 @@ export const quizzes = [
 export const checklists = [
     { id: 201, title: 'Checklist Diário: Empilhadeira', status: 'pending' },
     { id: 202, title: 'Checklist: Trabalho em Altura', status: 'pending' },
-    { id: 203, title: 'Inspeção de Ferramentas Elétricas', status: 'completed' },
+    { id: 203, title: 'Inspeção de Ferramentas Elétricas', status: 'pending' },
 ]

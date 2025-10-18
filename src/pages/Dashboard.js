@@ -51,7 +51,7 @@ function Dashboard() {
           <div className="dashboard-section">
             <h2>Checklists Pendentes</h2>
             <div className="list-container">
-              {checklists.filter(c => c.status === 'pending').slice(0, 2).map(item => ( // Mostrando 2 checklists
+              {checklists.filter(c => c.status === 'pending').slice(0, 3).map(item => ( // Mostrando 2 checklists
                 <div key={item.id} className="list-item">
                   <div className="list-item-content">
                     <h3>{item.title}</h3>

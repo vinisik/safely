@@ -2,7 +2,7 @@ import React from 'react';
 import { checklists } from '../data/mockData';
 
 // Simula uma lista maior
-const allChecklists = [...checklists, ...checklists.slice(0,2).map(c => ({...c, status: 'completed'}))];
+const allChecklists = [...checklists, ...checklists.slice(0,3).map(c => ({...c, status: 'completed'}))];
 
 function ChecklistsList() {
   return (
