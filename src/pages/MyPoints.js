@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Link } from 'react-router-dom';
 
-// Registrar os elementos necessários do Chart.js
+// O import 'rewards' foi removido daqui, pois não é mais necessário nesta página
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function MeusPontos() {
-  // Dados simulados para a página de pontos
+function MyPoints() {
   const totalPoints = 1250;
   const rank = 'Especialista em Prevenção';
   const badges = [
@@ -16,17 +16,16 @@ function MeusPontos() {
     { name: 'Checklist Ágil', icon: '✅', color: '#005A9C' },
   ];
 
-  // Dados para o gráfico de pizza (ex: pontos por categoria de conteúdo)
   const chartData = {
     labels: ['Vídeos Concluídos', 'Quizzes Acertados', 'Checklists Preenchidos', 'Participação Extra'],
     datasets: [
       {
-        data: [400, 500, 250, 100], // Pontos simulados para cada categoria
+        data: [400, 500, 250, 100],
         backgroundColor: [
-          '#005A9C', // Azul principal
-          '#4CAF50', // Verde
-          '#FFC107', // Amarelo
-          '#E91E63', // Rosa (um pouco diferente para 'extra')
+          '#005A9C',
+          '#4CAF50',
+          '#FFC107',
+          '#E91E63',
         ],
         hoverOffset: 10,
       },
@@ -37,7 +36,7 @@ function MeusPontos() {
     responsive: true,
     plugins: {
       legend: {
-        position: 'right', // Coloca a legenda à direita
+        position: 'right',
         labels: {
           font: {
             size: 14,
@@ -67,23 +66,32 @@ function MeusPontos() {
         <h1>Meus Pontos e Conquistas</h1>
       </div>
 
-      <div className="points-summary card">
-        <div className="point-item">
-          <h2>🏆 Total de Pontos</h2>
-          <p className="large-number">{totalPoints}</p>
+      <div className="points-header-layout">
+        <div className="points-summary card">
+          <div className="point-item">
+            <h2>🏆 Total de Pontos</h2>
+            <p className="large-number">{totalPoints}</p>
+          </div>
+          <div className="point-item">
+            <h2>🌟 Seu Rank Atual</h2>
+            <p className="large-text">{rank}</p>
+          </div>
         </div>
-        <div className="point-item">
-          <h2>🌟 Seu Rank Atual</h2>
-          <p className="large-text">{rank}</p>
+
+        <div className="points-chart-section">
+          <div className="chart-container card">
+            <h2>📊 Distribuição dos Pontos</h2>
+            <Pie data={chartData} options={chartOptions} />
+          </div>
         </div>
       </div>
 
-      <div className="points-section">
-        <h2>Distribuição dos seus Pontos</h2>
-        <div className="chart-container card">
-          <Pie data={chartData} options={chartOptions} />
-        </div>
-      </div>
+      {/* --- NOVO CARD DE LINK PARA A LOJA DE RECOMPENSAS --- */}
+      <Link to="/recompensas" className="card rewards-link-card">
+        <h3>🛍️ Visite a Loja de Recompensas</h3>
+        <p>Troque seus pontos por prêmios incríveis!</p>
+        <span className="rewards-link-arrow">→</span>
+      </Link>
 
       <div className="points-section">
         <h2>Meus Badges</h2>
@@ -95,7 +103,6 @@ function MeusPontos() {
               <p>Desbloqueado em {new Date().toLocaleDateString()}</p>
             </div>
           ))}
-          {/* Placeholder para mais badges */}
           <div className="badge-card card placeholder-badge">
             <span className="badge-icon">❓</span>
             <h3>Próximo Badge</h3>
@@ -119,8 +126,10 @@ function MeusPontos() {
           </div>
         </div>
       </div>
+
+      {/* A antiga seção da loja de recompensas foi removida daqui */}
     </div>
   );
 }
 
-export default MeusPontos;
+export default MyPoints;

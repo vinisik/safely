@@ -513,7 +513,7 @@ main {
 .points-summary {
   display: flex;
   justify-content: space-around;
-  padding: 2rem;
+  padding: 1rem;
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
@@ -554,8 +554,58 @@ main {
   border-left: 5px solid var(--primary-color);
   padding-left: 1rem;
 }
+
+/* --- ESTILOS PARA LAYOUT DA PÁGINA DE PONTOS --- */
+
+.points-header-layout {
+  display: flex;
+  gap: 1.5rem; /* Espaçamento entre as colunas */
+  align-items: stretch; /* Faz as colunas terem a mesma altura */
+  margin-bottom: 3rem; /* Espaço abaixo do layout de colunas */
+}
+
+.points-summary {
+  flex: 1; /* Ocupa 1 parte do espaço */
+  margin-bottom: 0; /* Remove a margem que estava nele */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+}
+
+.points-chart-section {
+  flex: 1.5; /* Ocupa 1.5 parte do espaço, deixando o gráfico um pouco maior */
+}
+
+.points-chart-section h2 {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  border-left: none;
+  padding-left: 0;
+}
+
+/* Garante que o container do gráfico não tenha padding/margem extra desnecessária */
+.points-chart-section .chart-container {
+    margin: 0;
+    width: 100%;
+    max-width: none; /* Remove a largura máxima que tinha antes */
+}
+
+/* Responsividade para o layout da página de pontos */
+@media (max-width: 992px) {
+  .points-header-layout {
+    flex-direction: column; /* Faz as colunas ficarem uma em cima da outra */
+    align-items: stretch; /* Reseta o alinhamento para o padrão */
+  }
+
+  .points-summary {
+    margin-bottom: 2.5rem; /* Adiciona a margem de volta quando estiver empilhado */
+  }
+}
+
 .chart-container {
   padding: 2rem;
+  height: 500px;
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
@@ -755,6 +805,117 @@ main {
 }
 .bottom-nav a span {
   margin-top: 4px;
+}
+
+/* --- ESTILOS PARA LOJA DE RECOMPENSAS --- */
+
+.rewards-link-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, var(--primary-color), #007bff);
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rewards-link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 90, 156, 0.3);
+}
+
+.rewards-link-card h3 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.rewards-link-card p {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.rewards-link-arrow {
+  font-size: 2.5rem;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.rewards-link-card:hover .rewards-link-arrow {
+  transform: translateX(10px);
+}
+
+.rewards-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: -1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.rewards-grid {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.reward-card {
+  padding: 0;
+  text-align: center;
+}
+
+.reward-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #f8f9fa; /* Fundo claro para as imagens */
+}
+
+.reward-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.reward-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  flex-grow: 1; /* Faz o título ocupar espaço e empurrar o resto para baixo */
+}
+
+.reward-cost {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.reward-cost span {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.btn-reward {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: var(--secondary-color);
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.btn-reward:hover {
+  background-color: #ffda6a;
+}
+
+/* Estilo para o botão desabilitado */
+.btn-reward:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 /* Media Queries Globais para Responsividade */

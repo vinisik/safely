@@ -10,28 +10,24 @@ import VideosList from './pages/VideosList';
 import QuizzesList from './pages/QuizzesList';
 import ChecklistsList from './pages/ChecklistsList';
 import MyPoints from './pages/MyPoints';
-import LoginPage from './pages/LoginPage'; // 1. Importe a página de login
+import LoginPage from './pages/LoginPage'; 
+import RewardsPage from './pages/RewardsPage';
 
 function App() {
-  // 2. Crie um estado para armazenar os dados do usuário
-  // O valor inicial é 'null', significando que ninguém está logado.
   const [user, setUser] = useState(null);
 
-  // 3. Crie a função que será chamada pela LoginPage
   const handleLogin = (userData) => {
-    setUser(userData); // Atualiza o estado com os dados do usuário (o nome)
+    setUser(userData);
   };
 
-  // 4. Se não houver usuário logado, mostre a tela de login
   if (!user) {
     return <LoginPage onLogin={handleLogin} />;
   }
 
-  // 5. Se houver um usuário, mostre a plataforma completa
   return (
     <Router>
       <div className="app-container">
-        <Header user={user} /> {/* Passe o usuário para o Header */}
+        <Header user={user} /> 
         <main>
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -41,6 +37,7 @@ function App() {
             <Route path="/quizzes" element={<QuizzesList />} />
             <Route path="/checklists" element={<ChecklistsList />} />
             <Route path="/pontos" element={<MyPoints />} />
+            <Route path="/recompensas" element={<RewardsPage />} />
           </Routes>
         </main>
         <Footer />
