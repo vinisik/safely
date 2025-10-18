@@ -29,6 +29,7 @@ function VideosList() {
             to={`/video/${video.id}`}
             thumbnail={video.thumbnail}
             title={video.title}
+            description={`Vence em: ${video.dueDate}`}
             progress={Math.floor(Math.random() * 100)}
           />
         ))}

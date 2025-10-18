@@ -29,7 +29,7 @@ function LoginPage({ onLogin }) {
         <form onSubmit={handleSubmit} className="login-form">
           <div className="login-header">
             <img src={safelyLogo} alt="Safely Logo" />
-            <h2>Bem-vindo à Safely</h2>
+            <h2>Bem-vindo(a) à SAFELY</h2>
             <p>Faça login para continuar</p>
           </div>
 

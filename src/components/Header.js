@@ -26,14 +26,13 @@ function Header({ user, onLogout }) {
     <header className="header">
       <NavLink to="/" className="logo">
         <img src={safelyLogo} alt="Safely Logo" />
-        {/* Agrupamos o nome e o slogan */}
         <div className="logo-text-container">
           <div className="logo-name-wrapper">
             <span className="logo-name-safe">SAFE</span>
             <span className="logo-name-ly">LY</span>
           </div>
-          <span className="logo-tagline">Inteligência que previne, rotina que protege.</span>
         </div>
+        <span className="logo-tagline">Inteligência que previne, rotina que protege.</span>
       </NavLink>
       
       <nav className="desktop-nav">
@@ -49,7 +48,7 @@ function Header({ user, onLogout }) {
       <div className="user-info-container" ref={dropdownRef}>
         <div className="user-info" onClick={() => setDropdownOpen(!isDropdownOpen)}>
           <img src={user.profilePictureUrl} alt="Avatar do Usuário" />
-          {!isMobile && (
+          {isMobile && (
             <span className="user-name">
               Olá, {user.name}!
             </span>

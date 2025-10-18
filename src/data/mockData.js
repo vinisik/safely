@@ -6,6 +6,7 @@ import rewardCaderno from '../assets/rewards/caderno.png';
 import rewardCaneca from '../assets/rewards/caneca.png';
 import rewardGarrafa from '../assets/rewards/garrafa.png';
 import rewardCafe from '../assets/rewards/cafe.png';
+import rewardCertificado from '../assets/rewards/certificado.jpg';
 
 export const videos = [
   {
@@ -246,8 +247,15 @@ export const rewards = [
   },
   {
     id: 304,
+    title: 'Certificado de Consciente em Segurança!',
+    cost: 1600,
+    image: rewardCertificado,
+    stock: 20,
+  },
+  {
+    id: 305,
     title: 'Voucher: Café Grátis (1 semana)',
-    cost: 1500,
+    cost: 2200,
     image: rewardCafe,
     stock: 20,
   },
