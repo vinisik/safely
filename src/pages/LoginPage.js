@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import safelyLogo from '../assets/logo.png';
+import { Helmet } from 'react-helmet-async';
 
 function LoginPage({ onLogin }) {
   // O estado 'name' foi removido
@@ -22,6 +23,9 @@ function LoginPage({ onLogin }) {
   // Formulário de login
   return (
     <div className="login-page">
+      
+        <title>Safely | Login</title>
+      
       <div className="login-form-container">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="login-header">

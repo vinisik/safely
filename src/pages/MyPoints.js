@@ -59,7 +59,9 @@ function MyPoints() {
   };
 
   return (
+    
     <div className="page-container points-page">
+      <title>Safely | Meus Pontos</title>
       <div className="page-header">
         <h1>Meus Pontos e Conquistas</h1>
       </div>

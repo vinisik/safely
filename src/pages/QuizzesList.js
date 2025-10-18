@@ -8,6 +8,7 @@ const allQuizzes = [...quizzes];
 function QuizzesList() {
   return (
     <div className="page-container">
+      <title>Safely | Quizzes</title>
       <div className="page-header">
         <h1>Meus Quizzes</h1>
         <div className="filter-buttons">

@@ -11,6 +11,7 @@ const allVideos = [...videos];
 function VideosList() {
   return (
     <div className="page-container">
+      <title>Safely | Treinamento</title>
       <div className="page-header">
         <h1>Treinamentos em Vídeo</h1>
         

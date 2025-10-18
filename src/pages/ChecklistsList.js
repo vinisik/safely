@@ -7,6 +7,7 @@ const allChecklists = [...checklists, ...checklists.slice(0,3).map(c => ({...c, 
 function ChecklistsList() {
   return (
     <div className="page-container">
+      <title>Safely | Checklists</title>
       <div className="page-header">
         <h1>Checklists de Segurança</h1>
         <button className="btn btn-primary">＋ Novo Checklist</button>

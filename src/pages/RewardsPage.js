@@ -8,6 +8,7 @@ function RewardsPage() {
 
   return (
     <div className="page-container">
+      <title>Safely | Recompensas</title>
       <div className="page-header">
         <h1>🛍️ Loja de Recompensas</h1>
       </div>

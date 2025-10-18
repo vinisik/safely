@@ -12,6 +12,7 @@ function VideoPage() {
 
   return (
     <div className="video-page">
+      <title>Safely | Video - {video.title}</title>
       <h2>{video.title}</h2>
       <video className="video-player" controls>
         <source src={video.videoUrl} type="video/mp4" />

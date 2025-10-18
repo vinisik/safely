@@ -11,6 +11,7 @@ function ProfilePage({ user }) {
 
   return (
     <div className="page-container profile-page">
+      <title>Safely | Perfil</title>
       <div className="profile-header">
         <img src={user.profilePictureUrl} alt="Avatar do Usuário" className="profile-avatar" />
         <img src={logoEmpresa} alt="Logo da Empresa" className="profile-avatar" />
