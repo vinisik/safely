@@ -19,6 +19,7 @@ function LoginPage({ onLogin }) {
     }
   };
 
+  // Formulário de login
   return (
     <div className="login-page">
       <div className="login-form-container">
@@ -28,7 +29,8 @@ function LoginPage({ onLogin }) {
             <h2>Bem-vindo à Safely</h2>
             <p>Faça login para continuar</p>
           </div>
-                    
+
+          {/* Campo de ID */}
           <div className="input-group">
             <label htmlFor="idColaborador">ID de Colaborador</label>
             <input
@@ -40,6 +42,7 @@ function LoginPage({ onLogin }) {
             />
           </div>
           
+          {/* Campo de Senha */}
           <div className="input-group">
             <label htmlFor="password">Senha</label>
             <input

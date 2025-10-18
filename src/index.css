@@ -810,7 +810,7 @@ main {
 /* --- ESTILOS PARA MENU SUSPENSO (DROPDOWN) --- */
 
 .user-info-container {
-  position: relative; /* Essencial para o posicionamento do dropdown */
+  position: relative; 
 }
 
 .user-info .dropdown-arrow {
@@ -886,12 +886,12 @@ main {
 
 .profile-avatar-container {
   position: relative;
-  width: 120px; /* Tamanho da foto principal */
+  width: 120px; 
   height: 120px;
-  margin: 0 auto 1.5rem auto; /* Centraliza e dá espaço abaixo */
+  margin: 0 auto 1.5rem auto; 
 }
 
-/* ATUALIZADO: Foto de perfil principal */
+/* Foto de perfil principal */
 .profile-avatar-main {
   width: 100%;
   height: 100%;
@@ -900,16 +900,16 @@ main {
   border: 4px solid var(--card-bg);
 }
 
-/* NOVO: Logo da empresa sobreposto */
+/* Logo da empresa sobreposto */
 .profile-avatar-company {
   position: absolute;
   bottom: -5px;
   right: -5px;
-  width: 50px; /* Tamanho do logo menor */
+  width: 50px; 
   height: 50px;
   border-radius: 50%;
-  background-color: white; /* Fundo para o logo */
-  border: 3px solid white; /* Borda para separação */
+  background-color: white; 
+  border: 3px solid white; 
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 

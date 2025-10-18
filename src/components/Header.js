@@ -40,7 +40,7 @@ function Header({ user, onLogout }) {
         </ul>
       </nav>
 
-      {/* Usamos a Ref no container do usuário */}
+      {/* Ref no container do usuário */}
       <div className="user-info-container" ref={dropdownRef}>
         <div className="user-info" onClick={() => setDropdownOpen(!isDropdownOpen)}>
           <img src={user.profilePictureUrl} alt="Avatar do Usuário" />

@@ -5,7 +5,6 @@ import { FaHome, FaVideo, FaClipboardList, FaCheckSquare, FaStar } from 'react-i
 function BottomNav() {
   return (
     <nav className="bottom-nav">
-      {/* Usamos a mesma lógica de 'className' aqui */}
       <NavLink to="/" end className={({ isActive }) => isActive ? "active" : ""}>
         <FaHome size={22} />
         <span>Início</span>

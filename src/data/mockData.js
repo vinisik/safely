@@ -95,7 +95,7 @@ export const checklists = [
     { id: 203, title: 'Inspeção de Ferramentas Elétricas', status: 'completed' },
 ];
 
-// NOVO: Dados para a Loja de Recompensas
+// Dados para a Loja de Recompensas
 export const rewards = [
   {
     id: 301,
