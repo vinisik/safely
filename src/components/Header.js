@@ -40,7 +40,7 @@ function Header({ user, onLogout }) {
           <li><NavLink to="/videos" className={({ isActive }) => isActive ? "active-link" : ""}>Treinamentos</NavLink></li>
           <li><NavLink to="/quizzes" className={({ isActive }) => isActive ? "active-link" : ""}>Quizzes</NavLink></li>
           <li><NavLink to="/checklists" className={({ isActive }) => isActive ? "active-link" : ""}>Checklists</NavLink></li>
-          <li><NavLink to="/recompensas" className={({ isActive }) => isActive ? "active-link" : ""}>Recompensas</NavLink></li>
+          <li><NavLink to="/pontos" className={({ isActive }) => isActive ? "active-link" : ""}>Meus Pontos</NavLink></li>
         </ul>
       </nav>
 

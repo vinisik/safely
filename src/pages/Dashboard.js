@@ -2,6 +2,7 @@ import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes, checklists } from '../data/mockData';
 import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import bannerSegurancaImg from '../assets/banner-seguranca.jpg';
 
 function Dashboard() {
@@ -9,7 +10,7 @@ function Dashboard() {
     <>
     <title>Safely | Início</title>
       <div className="hero-banner">
-        <h3>Michelin - Itatiaia <br></br>Operador de Produção </h3>
+        <h1>Michelin - Itatiaia <br></br>Operador de Produção </h1>
       </div>
 
       <div className="dashboard-section">

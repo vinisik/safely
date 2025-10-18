@@ -4,6 +4,7 @@ function Footer() {
   return (
     <footer className="footer">
       <p>&copy; 2025 Safely - Todos os direitos reservados.</p>
+      <p>safelyseguranca@gmail.com</p>
     </footer>
   );
 }
