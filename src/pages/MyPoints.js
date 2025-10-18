@@ -37,7 +37,7 @@ function MyPoints() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: !isMobile, // <-- A MÁGICA ACONTECE AQUI! Mostra a legenda se NÃO for mobile
+        display: !isMobile, 
         position: 'right',
         labels: {
           font: {

@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import safelyLogo from '../assets/logo.png';
+import useIsMobile from '../hooks/useIsMobile';
 
 function Header({ user, onLogout }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const isMobile = useIsMobile
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -47,7 +49,11 @@ function Header({ user, onLogout }) {
       <div className="user-info-container" ref={dropdownRef}>
         <div className="user-info" onClick={() => setDropdownOpen(!isDropdownOpen)}>
           <img src={user.profilePictureUrl} alt="Avatar do Usuário" />
-          <span className="user-name">Olá, {user.name}!</span>
+          {!isMobile && (
+            <span className="user-name">
+              Olá, {user.name}!
+            </span>
+          )}
           <span className={`dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}>▾</span>
         </div>
 

@@ -1303,6 +1303,9 @@ main {
   .search-bar {
     width: 100%;
   }
+  .user-name {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1339,6 +1342,10 @@ main {
   /* Menu Inferior Mobile */
   .bottom-nav {
     display: flex;
+  }
+
+  .user-name {
+    display: none;
   }
 
   /* Ajustes Gerais para Mobile */
@@ -1421,5 +1428,9 @@ main {
 
     .search-bar {
     width: 100%;
+  }
+
+  .user-name {
+    display: none;
   }
 }
