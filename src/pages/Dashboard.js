@@ -1,13 +1,14 @@
 import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes, checklists } from '../data/mockData';
+import bannerSegurancaImg from '../assets/banner-seguranca.jpg';
 
 function Dashboard() {
   return (
     <>
       <div className="hero-banner">
-        <h2>FIQUE SEGURO, FIQUE ATUALIZADO.</h2>
-        <img src="https://placehold.co/300x200/007bff/white?text=Banner+Segurança" alt="Banner de Segurança" />
+        <h2>INTELIGÊNCIA QUE PREVINE, ROTINA QUE PROTEGE!</h2>
+        
       </div>
 
       <div className="dashboard-section">
