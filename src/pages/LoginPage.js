@@ -10,8 +10,7 @@ function LoginPage({ onLogin }) {
     event.preventDefault(); // Impede que a página recarregue
     // Validação simplificada para checar apenas o ID
     if (idColaborador.trim() !== '') {
-      // Passa o nome fixo "Vinicius Siqueira" junto com o ID digitado
-      onLogin({ name: 'Vinicius Siqueira',
+      onLogin({ name: 'Jose do Vale',
          idColaborador: idColaborador ,
          profilePictureUrl: 'https://i.pravatar.cc/150?img=68'
         });
@@ -29,9 +28,7 @@ function LoginPage({ onLogin }) {
             <h2>Bem-vindo à Safely</h2>
             <p>Faça login para continuar</p>
           </div>
-          
-          {/* O campo de input para 'Nome de Usuário' foi removido */}
-          
+                    
           <div className="input-group">
             <label htmlFor="idColaborador">ID de Colaborador</label>
             <input

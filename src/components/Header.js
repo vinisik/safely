@@ -27,7 +27,7 @@ function Header({ user, onLogout }) {
     <header className="header">
       <NavLink to="/" className="logo">
         <img src={safelyLogo} alt="Safely Logo" />
-        Safely
+        Safe<span className='sufix'>ly</span>
       </NavLink>
       
       <nav className="desktop-nav">

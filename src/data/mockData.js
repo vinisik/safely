@@ -2,7 +2,10 @@
 import thumbEpis from '../assets/thumbnails/epis.jpg';
 import thumbErgonomia from '../assets/thumbnails/ergonomia.png';
 import thumbAltura from '../assets/thumbnails/trabalho-altura.jpg';
-
+import rewardCaderno from '../assets/rewards/caderno.png';
+import rewardCaneca from '../assets/rewards/caneca.png';
+import rewardGarrafa from '../assets/rewards/garrafa.png';
+import rewardCafe from '../assets/rewards/cafe.png';
 
 export const videos = [
   {
@@ -98,28 +101,28 @@ export const rewards = [
     id: 301,
     title: 'Caderno Safely',
     cost: 500,
-    image: 'https://placehold.co/400x400/005A9C/white?text=Caderno',
+    image: rewardCaderno,
     stock: 15,
   },
   {
     id: 302,
     title: 'Caneca Safely',
     cost: 750,
-    image: 'https://placehold.co/400x400/E91E63/white?text=Caneca',
+    image: rewardCaneca,
     stock: 10,
   },
   {
     id: 303,
     title: 'Garrafa Térmica',
     cost: 1200,
-    image: 'https://placehold.co/400x400/4CAF50/white?text=Garrafa',
+    image: rewardGarrafa,
     stock: 5,
   },
   {
     id: 304,
     title: 'Voucher: Café Grátis (1 semana)',
     cost: 1500,
-    image: 'https://placehold.co/400x400/FFC107/black?text=Café',
+    image: rewardCafe,
     stock: 20,
   },
 ];
