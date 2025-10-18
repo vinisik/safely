@@ -10,7 +10,7 @@ function LoginPage({ onLogin }) {
     event.preventDefault(); // Impede que a página recarregue
     // Validação simplificada para checar apenas o ID
     if (idColaborador.trim() !== '') {
-      onLogin({ name: 'Carlos Eduardo do Vale',
+      onLogin({ name: 'Carlos do Vale',
          idColaborador: idColaborador ,
          profilePictureUrl: 'https://i.pravatar.cc/150?img=68'
         });

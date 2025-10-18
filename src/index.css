@@ -2,9 +2,10 @@
    1. Reset Básico e Variáveis de Cor (Setup Global)
    ========================================================================== */
 :root {
-  --primary-color: #005A9C; /* Azul principal */
-  --secondary-color: #FFC107; /* Amarelo de destaque */
+  --primary-color: #005A9C; 
+  --secondary-color: #c2e7ff; 
   --background-color: #f4f7fa;
+  --secondary-company-color: #98c841;
   --text-color: #333;
   --card-bg: #fff;
   --shadow: 0 2px 4px rgba(0,0,0,0.08); /* Sombra mais suave */
@@ -47,18 +48,53 @@ main {
 /* Header */
 .header {
   background-color: var(--card-bg);
-  padding: 0rem 2rem;
+  padding: 0.5rem 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
   box-shadow: var(--shadow);
-  position: sticky;
+  position: relative; 
   top: 0;
   z-index: 1000;
 }
 
-.sufix {
-  color: #98c841;
+
+/* Novo container para o nome e slogan */
+.logo-text-container {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1; 
+}
+
+/* Estilo para o nome da empresa */
+.logo-name-safe {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color); 
+}
+
+.logo-name-wrapper {
+  display: flex; 
+  align-items: baseline; 
+}
+
+.logo-name-ly {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--secondary-company-color); 
+}
+
+/* Estilo para o slogan */
+.logo-tagline {
+  font-size: 0.75rem; 
+  font-weight: 500;
+  color: #555; 
+  font-style: italic;
+}
+
+/* Ajuste no container do logo para remover o font-size que estava nele */
+.header .logo {
+  font-size: inherit; 
 }
 
 .header .logo {
@@ -67,13 +103,17 @@ main {
   text-decoration: none;
   color: var(--primary-color);
   font-weight: bold;
-  font-size: 2rem;
+  font-size: inherit;
 }
 .header .logo img {
   height: 100px;
-  width: auto; /* Mantém a proporção da imagem */
+  width: auto; 
+  margin-right: 15px;
 }
 .header nav.desktop-nav {
+  position: absolute; 
+  left: 50%; 
+  transform: translateX(-50%); 
   list-style: none;
   display: flex;
 }
@@ -133,7 +173,7 @@ main {
 .btn {
   display: inline-block;
   background-color: var(--secondary-color);
-  color: #333;
+  color: #042139;
   padding: 0.8rem 1.5rem;
   border: none;
   border-radius: 20px;
@@ -143,7 +183,7 @@ main {
   transition: background-color 0.2s;
 }
 .btn:hover {
-  background-color: #ffda6a;
+  background-color: #84c8f5;
 }
 .btn.btn-primary {
     background-color: var(--primary-color);
@@ -172,7 +212,11 @@ main {
 
 /* Banner de Destaque */
 .hero-banner {
-  background: linear-gradient(90deg, var(--primary-color) 0%, #007bff 100%);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
   color: white;
   padding: 3rem 2rem;
   border-radius: var(--border-radius);
@@ -192,10 +236,7 @@ main {
   text-align: center;
 }
 .hero-banner img {
-  max-width: 300px;
-  height: auto;
-  border-radius: var(--border-radius);
-  margin-left: 2rem;
+  display: none;
 }
 
 /* Layout de Colunas do Dashboard */
@@ -297,7 +338,7 @@ main {
     margin-top: 0.5rem;
 }
 .card .btn-start:hover {
-    background-color: #ffda6a;
+    background-color: #84c8f5;
 }
 .checklist-card {
     display: flex;
@@ -342,15 +383,16 @@ main {
   top: 50%;
   left: 15px; /* Distância da borda esquerda */
   transform: translateY(-50%); /* Alinhamento vertical perfeito */
-  color: #aaa; /* Cor cinza para o ícone */
+  color: #616161; /* Cor cinza para o ícone */
   pointer-events: none; /* Impede que o ícone seja clicável */
 }
 
 .search-bar {
+  background-color: #e9eef6;
   padding: 0.8rem;
   padding-left: 40px; /* Espaço para o ícone */
-  border: 1px solid #ccc;
-  border-radius: var(--border-radius);
+  border: none;
+  border-radius: 40px;
   font-size: 1rem;
   min-width: 250px;
   width: 100%;
@@ -837,7 +879,7 @@ main {
     align-self: flex-start;
 }
 .btn-challenge:hover {
-    background-color: #ffda6a;
+    background-color: #84c8f5;
 }
 
 /* Página de Login */
@@ -1233,6 +1275,18 @@ main {
   .dashboard-row {
     flex-direction: column;
   }
+
+  .logo-tagline {
+    display: none; 
+  }
+
+  .hero-banner {
+    height: 120px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1248,6 +1302,22 @@ main {
   }
   .header .logo {
     font-size: 1.8rem;
+  }
+
+  .header .logo img {
+  margin-right: 0;
+}
+
+  .logo-tagline {
+    display: none; 
+  }
+
+  .hero-banner {
+    height: 120px;
+  }
+
+  .search-bar {
+    width: 100%;
   }
   
   /* Menu Inferior Mobile */
@@ -1320,6 +1390,9 @@ main {
     .header .logo img {
         height: 50px;
     }
+    .hero-banner {
+      height: 120px;
+    }
     .hero-banner h2 {
         font-size: 1.8rem;
     }
@@ -1329,4 +1402,8 @@ main {
     .quiz-question h3 {
         font-size: 1.2rem;
     }
+
+    .search-bar {
+    width: 100%;
+  }
 }

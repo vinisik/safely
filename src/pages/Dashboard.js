@@ -9,7 +9,7 @@ function Dashboard() {
     <>
     <title>Safely | Início</title>
       <div className="hero-banner">
-        <h2>"Inteligência que previne, rotina que protege!""</h2>
+        <h3>Michelin - Itatiaia <br></br>Operador de Produção </h3>
       </div>
 
       <div className="dashboard-section">

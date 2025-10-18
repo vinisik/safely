@@ -1,8 +1,6 @@
 import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos } from '../data/mockData';
-
-// 1. Importe o ícone de pesquisa (Search) do Font Awesome (Fa)
 import { FaSearch } from 'react-icons/fa';
 
 // Simula uma lista maior para o placeholder
