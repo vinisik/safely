@@ -223,7 +223,6 @@ main {
   background-repeat: no-repeat;
   height: 200px;
   color: white;
-  padding: 1rem;
   border-radius: var(--border-radius);
   margin-bottom: 2.5rem;
   display: flex;
@@ -365,6 +364,33 @@ main {
     background-color: var(--secondary-color);
     border-radius: 50%;
     margin-left: auto;
+}
+
+/* --- ESTILOS PARA CARD "TODOS CONCLUÍDOS" --- */
+
+.all-completed-card {
+  padding: 2rem;
+  text-align: center;
+  border-left: 5px solid #4CAF50; 
+  background-color: #f8fdf8;
+}
+
+.all-completed-card h3 {
+  color: #2e7d32;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.all-completed-card p {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+
+/* Ajuste no contador quando for zero */
+.pending-counter.zero {
+  background-color: #f0f0f0; 
+  color: #888; 
 }
 
 /* --- ESTILOS PARA O CONTADOR DE PENDÊNCIAS --- */
@@ -1038,6 +1064,23 @@ main {
   margin-top: 4px;
 }
 
+.nav-icon-wrapper {
+  position: relative;
+}
+
+/* A bolinha amarela */
+.notification-dot {
+  position: absolute;
+  top: -2px; 
+  right: -4px; 
+  width: 12px;
+  height: 12px;
+  background-color: #FFC107; 
+  border-radius: 50%;
+  border: 1px solid var(--card-bg); 
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
 /* --- ESTILOS PARA MENU SUSPENSO (DROPDOWN) --- */
 
 .user-info-container {
@@ -1660,7 +1703,7 @@ main {
   }
 
   .hero-banner {
-    height: 200px;
+    height: 100px;
   }
 
   .search-bar {
@@ -1696,7 +1739,7 @@ main {
   }
 
   .hero-banner {
-    height: 200px;
+    height: 100px;
   }
 
   .search-bar {
@@ -1778,7 +1821,7 @@ main {
         height: 3.5rem;
     }
     .hero-banner {
-      height: 200px;
+      height: 80px;
     }
     .hero-banner h2 {
         font-size: 1.8rem;

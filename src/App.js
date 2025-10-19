@@ -25,6 +25,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [checklistsData, setChecklistsData] = useState(initialChecklists);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const pendingChecklistsCount = checklistsData.filter(c => c.status === 'pending').length;
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -40,6 +41,16 @@ function App() {
 
   const deleteChecklist = (idToDelete) => {
     setChecklistsData(prevChecklists => prevChecklists.filter(checklist => checklist.id !== idToDelete));
+  };
+
+  const updateChecklistStatus = (checklistId, newStatus) => {
+    setChecklistsData(prevChecklists => 
+      prevChecklists.map(checklist => 
+        checklist.id === checklistId 
+          ? { ...checklist, status: newStatus } // Se encontrar o ID, atualiza o status
+          : checklist // Senão, mantém o checklist como está
+      )
+    );
   };
 
   if (!user) {
@@ -63,7 +74,7 @@ function App() {
             />
             <Route 
               path="/checklists/:id" 
-              element={<ChecklistPage user={user} checklists={checklistsData} />} 
+              element={<ChecklistPage user={user} checklists={checklistsData} updateChecklistStatus={updateChecklistStatus}/>} 
             />
             <Route path="/recompensas" element={<RewardsPage />} />
             <Route path="/pontos" element={<MyPoints />} />
@@ -76,7 +87,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
-        <BottomNav />
+        <BottomNav pendingCount={pendingChecklistsCount}/>
         <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
         {!isChatOpen && <FloatingChatButton onClick={() => setIsChatOpen(true)} />}
       </div>

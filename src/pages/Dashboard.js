@@ -38,23 +38,34 @@ function Dashboard({checklists}) {
           <div className="dashboard-section">
             <div className="section-title-with-counter">
               <h2>Checklists Pendentes</h2>
-              {pendingCount > 0 && <span className="pending-counter">{pendingCount}</span>}
+              <span className={`pending-counter ${pendingCount === 0 ? 'zero' : ''}`}>{pendingCount}</span>
             </div>
-            <div className="list-container">
-              {pendingChecklists.slice(0, 10).map(item => ( 
-                <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
-                  <div className="list-item">
-                    <div className="list-item-content">
-                      <h3>{item.title}</h3>
-                      <p>Vence em: {item.dueDate}</p>
-                    </div>
-                    <span className={`status-badge ${item.status}`}>
+
+            {pendingCount === 0 ? (
+              // Se não houver checklists pendentes, mostra este card:
+              <div className="all-completed-card card">
+                <h3>Parabéns!</h3>
+                <p>Você não possui nenhum checklist pendente.</p>
+              </div>
+            ) : (
+              // Caso contrário, mostra a lista de pendentes:
+              <div className="list-container">
+                {pendingChecklists.slice(0, 3).map(item => (
+                  <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
+                    <div className="list-item">
+                      <div className="list-item-content">
+                        <h3>{item.title}</h3>
+                        <p>Vence em: {item.dueDate}</p>
+                      </div>
+                      <span className={`status-badge ${item.status}`}>
                       {item.status === 'pending' ? '!' : 'Concluído'}
                     </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            )}
+
           </div>
         </div>
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 // A importação estática de 'checklists' foi removida daqui
 
-function ChecklistPage({ user, checklists }) { // Recebe 'checklists' como propriedade
+function ChecklistPage({ user, checklists, updateChecklistStatus }) { // Recebe 'checklists' como propriedade
   const { id } = useParams();
   
   // A busca agora é feita na lista atualizada que vem das props
@@ -27,6 +27,7 @@ function ChecklistPage({ user, checklists }) { // Recebe 'checklists' como propr
   
   const handleSubmit = () => {
       console.log("Checklist Enviado:", answers);
+      updateChecklistStatus(checklistData.id, 'completed');
       setIsSubmitted(true);
   }
 
@@ -46,7 +47,7 @@ function ChecklistPage({ user, checklists }) { // Recebe 'checklists' como propr
             <h2>✅ Checklist Enviado com Sucesso!</h2>
             <p>Obrigado, {user.name}. Suas respostas foram registradas.</p>
             <p>Qualquer não conformidade reportada já foi notificada ao seu supervisor.</p>
-            <Link to="/" className="btn">Voltar ao Início</Link>
+            <Link to="/checklists" className="btn">Voltar ao Início</Link>
         </div>
       );
   }
