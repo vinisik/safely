@@ -62,10 +62,17 @@ function App() {
               path="/checklists" 
               element={<ChecklistsList checklists={checklistsData} addChecklist={addChecklist} deleteChecklist={deleteChecklist} />} 
             />
-            <Route path="/checklists/:id" element={<ChecklistPage user={user} checklists={checklistsData} />} />
+            <Route 
+              path="/checklists/:id" 
+              element={<ChecklistPage user={user} checklists={checklistsData} />} 
+            />
             <Route path="/recompensas" element={<RewardsPage />} />
             <Route path="/pontos" element={<MyPoints />} />
-            <Route path="/perfil" element={<ProfilePage user={user} />} />
+            {/* --- GARANTA QUE ESTA LINHA ESTEJA CORRETA --- */}
+            <Route 
+              path="/perfil" 
+              element={<ProfilePage user={user} checklists={checklistsData} />} 
+            />
             <Route path="/configuracoes" element={<SettingsPage />} />
           </Routes>
         </main>

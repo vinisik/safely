@@ -1156,6 +1156,10 @@ main {
   margin-bottom: 0.2rem;
 }
 
+.profile-header h2 {
+  color: var(--primary-color);
+}
+
 .profile-header p {
   font-size: 1.2rem;
   color: #666;

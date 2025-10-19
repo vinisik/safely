@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import safelyLogo from '../assets/logo.png';
+import profilePicture from '../assets/profile-placeholder.png';
 
 function LoginPage({ onLogin }) {
   // O estado 'name' foi removido
@@ -10,9 +11,9 @@ function LoginPage({ onLogin }) {
     event.preventDefault(); // Impede que a página recarregue
     // Validação simplificada para checar apenas o ID
     if (idColaborador.trim() !== '') {
-      onLogin({ name: 'Carlos do Vale',
+      onLogin({ name: 'Vinicius Siqueira',
          idColaborador: idColaborador ,
-         profilePictureUrl: 'https://i.pravatar.cc/150?img=68'
+         profilePictureUrl: profilePicture
         });
     } else {
       alert('Por favor, preencha o ID de colaborador.');

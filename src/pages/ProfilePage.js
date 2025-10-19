@@ -1,9 +1,8 @@
 import React from 'react';
-import { checklists } from '../data/mockData';
 import { Link } from 'react-router-dom';
 import logoEmpresa from '../assets/michelin.png';
 
-function ProfilePage({ user }) {
+function ProfilePage({ user, checklists }) {
   // Dados simulados, como em outras páginas
   const totalPoints = 1250;
   const companyName = 'Michelin - Operador de Produção';
@@ -16,27 +15,24 @@ function ProfilePage({ user }) {
         <img src={user.profilePictureUrl} alt="Avatar do Usuário" className="profile-avatar" />
         <img src={logoEmpresa} alt="Logo da Empresa" className="profile-avatar" />
         <h1>{user.name}</h1>
-        <p>{companyName}</p>
+        <h2 className='id-user'>ID: {user.idColaborador}</h2>
+        <h3>{companyName}</h3>
       </div>
 
       <div className="profile-info-grid">
         <div className="info-card card">
-          <h3>ID de Colaborador</h3>
-          <p>{user.idColaborador}</p>
+          <h3>Tarefas Pendentes</h3>
+          <p>{pendingTasks}</p>
         </div>
         <div className="info-card card">
           <h3>Pontuação Total</h3>
           <p>{totalPoints}</p>
         </div>
-        <div className="info-card card">
-          <h3>Tarefas Pendentes</h3>
-          <p>{pendingTasks}</p>
-        </div>
       </div>
       
       <div className="profile-actions">
-          <Link to="/recompensas" className="btn">Ver Recompensas</Link>
           <Link to="/checklists" className="btn">Ver Tarefas</Link>
+          <Link to="/recompensas" className="btn">Ver Recompensas</Link>
       </div>
     </div>
   );
