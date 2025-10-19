@@ -1,36 +1,44 @@
-import React from 'react';
-import { checklists } from '../data/mockData';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AddChecklistModal from '../components/AddChecklistModal';
 
-// Simula uma lista maior
-const allChecklists = [...checklists, ...checklists.slice(0,2).map(c => ({...c, status: 'completed', id: c.id + 100}))];
+// Recebe 'checklists' e 'addChecklist' como props do App.js
+function ChecklistsList({ checklists, addChecklist }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-function ChecklistsList() {
   return (
-    <div className="page-container">
-      <title>Safely | Checklists</title>
-      <div className="page-header">
-        <h1>Checklists de Segurança</h1>
-        <button className="btn btn-primary">＋ Novo Checklist</button>
-      </div>
-      <div className="list-container">
-        {allChecklists.map((item, index) => (
-          // CADA ITEM AGORA É UM LINK PARA A PÁGINA ESPECÍFICA DO CHECKLIST
-          <Link to={`/checklist/${item.id}`} key={`${item.id}-${index}`} className="list-item-link">
-            <div className="list-item">
-              <div className="list-item-content">
-                <h3>{item.title}</h3>
-                <p>Status: {item.status === 'pending' ? 'Pendente' : 'Concluído'}</p>
+    <>
+      {/* O componente do Modal é renderizado aqui */}
+      <AddChecklistModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={addChecklist}
+      />
+
+      <div className="page-container">
+        <div className="page-header">
+          <h1>Checklists de Segurança</h1>
+          {/* O botão agora abre o modal */}
+          <button onClick={() => setIsModalOpen(true)} className="btn btn-primary">＋ Novo Checklist</button>
+        </div>
+        <div className="list-container">
+          {/* A lista agora vem das props, garantindo que ela seja atualizada */}
+          {checklists.map((item) => (
+            <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
+              <div className="list-item">
+                <div className="list-item-content">
+                  <h3>{item.title}</h3>
+                  <p>Status: {item.status}</p>
+                </div>
+                <span className={`status-badge ${item.status}`}>
+                  {item.status}
+                </span>
               </div>
-              <span className={`status-badge ${item.status}`}>
-                {item.status}
-              </span>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

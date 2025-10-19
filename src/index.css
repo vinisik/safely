@@ -60,13 +60,15 @@ main {
 }
 
 
-.logo-text-container {
+/* .logo-text-container {
   display: flex;
   flex-direction: column;
   line-height: 1.1; 
+  align-items: center; 
+  text-align: center;
 }
 
-/* Estilo para o nome da empresa */
+
 .logo-name-safe {
   font-size: 2.5rem;
   font-weight: 1000;
@@ -86,14 +88,15 @@ main {
   border-bottom: 3px solid var(--secondary-company-color);
 }
 
-/* Estilo para o slogan */
+
 .logo-tagline {
-  padding: 1.2rem;
+  margin-top: 5px;
   font-size: 0.75rem; 
   font-weight: 500;
   color: #555; 
   font-style: italic;
-}
+} 
+*/
 
 /* Ajuste no container do logo para remover o font-size que estava nele */
 .header .logo {
@@ -109,7 +112,7 @@ main {
   font-size: inherit;
 }
 .header .logo img {
-  height: 3.5rem;
+  height: 5rem;
   margin-right: 0px;
 }
 .header nav.desktop-nav {
@@ -1278,6 +1281,68 @@ main {
 
 .btn-reward:hover {
   background-color: #84c8f5;
+}
+
+/* --- ESTILOS PARA O MODAL --- */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.modal-content {
+  background-color: white;
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 600px;
+  animation: fadeIn 0.3s ease;
+}
+.modal-content h2 {
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.modal-content p {
+  margin-bottom: 1.5rem;
+}
+.modal-content textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.modal-actions button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn-cancel {
+  background-color: #eee;
+  color: #333;
+}
+.btn-add {
+  background-color: var(--primary-color);
+  color: white;
 }
 
 /* Estilo para o botão desabilitado */

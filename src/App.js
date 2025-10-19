@@ -1,5 +1,6 @@
 import React, { useState } from 'react'; // Importe o useState
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { checklists as initialChecklists } from './data/mockData';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BottomNav from './components/BottomNav';
@@ -19,6 +20,7 @@ const SettingsPage = () => <div style={{padding: '2rem', textAlign: 'center'}}><
 
 function App() {
   const [user, setUser] = useState(null);
+  const [checklistsData, setChecklistsData]= useState(initialChecklists);
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -26,6 +28,11 @@ function App() {
 
   const handleLogout = () => {
     setUser(null); // Limpa o estado do usuário, efetivamente fazendo o logout
+  };
+
+  const addChecklist = (newChecklist) => {
+    // Adiciona o novo checklist no início da lista existente
+    setChecklistsData(prevChecklists => [newChecklist, ...prevChecklists]);
   };
 
   if (!user) {
@@ -38,12 +45,12 @@ function App() {
         <Header user={user} onLogout={handleLogout}/> 
           <main>
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Dashboard checklists={checklistsData}/>} />
               <Route path="/video/:id" element={<VideoPage />} />
               <Route path="/quiz/:id" element={<QuizPage />} />
               <Route path="/videos" element={<VideosList />} />
               <Route path="/quizzes" element={<QuizzesList />} />
-              <Route path="/checklists" element={<ChecklistsList />} />
+              <Route path="/checklists" element={<ChecklistsList checklists={checklistsData} addChecklist={addChecklist}/>} />
               <Route path="/checklist/:id" element={<ChecklistPage user={user} />} />
               <Route path="/pontos" element={<MyPoints />} />
               <Route path="/recompensas" element={<RewardsPage />} />

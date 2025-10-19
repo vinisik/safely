@@ -26,21 +26,14 @@ function Header({ user, onLogout }) {
     <header className="header">
       <NavLink to="/" className="logo">
         <img src={safelyLogo} alt="Safely Logo" />
-        <div className="logo-text-container">
-          <div className="logo-name-wrapper">
-            <span className="logo-name-safe">SAFE</span>
-            <span className="logo-name-ly">LY</span>
-          </div>
-        </div>
-        <span className="logo-tagline">Inteligência que previne, rotina que protege.</span>
       </NavLink>
       
       <nav className="desktop-nav">
         <ul>
           <li><NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>Início</NavLink></li>
           <li><NavLink to="/videos" className={({ isActive }) => isActive ? "active-link" : ""}>Treinamentos</NavLink></li>
-          <li><NavLink to="/quizzes" className={({ isActive }) => isActive ? "active-link" : ""}>Quizzes</NavLink></li>
           <li><NavLink to="/checklists" className={({ isActive }) => isActive ? "active-link" : ""}>Checklists</NavLink></li>
+          <li><NavLink to="/quizzes" className={({ isActive }) => isActive ? "active-link" : ""}>Quizzes</NavLink></li>
           <li><NavLink to="/pontos" className={({ isActive }) => isActive ? "active-link" : ""}>Meus Pontos</NavLink></li>
         </ul>
       </nav>

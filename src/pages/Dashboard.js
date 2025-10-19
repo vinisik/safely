@@ -1,11 +1,11 @@
 import React from 'react';
 import ContentCard from '../components/ContentCard';
-import { videos, quizzes, checklists } from '../data/mockData';
+import { videos, quizzes } from '../data/mockData';
 import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import bannerSegurancaImg from '../assets/banner-seguranca.jpg';
 
-function Dashboard() {
+function Dashboard({checklists}) {
   return (
     <>
     <title>Safely | Início</title>
@@ -30,7 +30,6 @@ function Dashboard() {
       </div>
       
       <div className="dashboard-row">
-
         <div className="main-column">
           <div className="dashboard-section">
             <h2>Próximos Quizzes</h2>
@@ -53,7 +52,6 @@ function Dashboard() {
             <h2>Checklists Pendentes</h2>
             <div className="list-container">
               {checklists.filter(c => c.status === 'pending').slice(0, 2).map(item => (
-                // CADA ITEM AQUI TAMBÉM É UM LINK
                 <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
                   <div className="list-item">
                     <div className="list-item-content">
