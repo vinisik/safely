@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddChecklistModal from '../components/AddChecklistModal';
+import { FaTrash } from 'react-icons/fa';
 
 // Recebe 'checklists' e 'addChecklist' como props do App.js
-function ChecklistsList({ checklists, addChecklist }) {
+function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleDelete = (e, checklistId, checklistTitle) => {
+    // Impede que o clique no botão também ative o link da linha
+    e.preventDefault(); 
+    e.stopPropagation();
+
+    // Adiciona uma confirmação para segurança
+    if (window.confirm(`Tem certeza que deseja excluir o checklist "${checklistTitle}"?`)) {
+      deleteChecklist(checklistId);
+    }
+  };
 
   return (
     <>
@@ -27,12 +39,17 @@ function ChecklistsList({ checklists, addChecklist }) {
             <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
               <div className="list-item">
                 <div className="list-item-content">
-                  <h3>{item.title}</h3>
-                  <p>Status: {item.status}</p>
+                  <div>
+                    <h3>{item.title}<span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span></h3>
+                  </div>
                 </div>
-                <span className={`status-badge ${item.status}`}>
-                  {item.status}
-                </span>
+                <button 
+                  className="btn-delete" 
+                  onClick={(e) => handleDelete(e, item.id, item.title)}
+                >
+                  <FaTrash /> {/* Ícone */}
+                </button>
+                
               </div>
             </Link>
           ))}

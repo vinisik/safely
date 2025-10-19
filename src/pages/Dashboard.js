@@ -56,10 +56,10 @@ function Dashboard({checklists}) {
                   <div className="list-item">
                     <div className="list-item-content">
                       <h3>{item.title}</h3>
-                      <p>Status: {item.status === 'pending' ? 'Pendente' : 'Concluído'}</p>
+                      
                     </div>
                     <span className={`status-badge ${item.status}`}>
-                      {item.status}
+                      {item.status === 'pending' ? 'Pendente' : 'Concluído'}
                     </span>
                   </div>
                 </Link>

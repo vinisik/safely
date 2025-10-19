@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { checklists } from '../data/mockData';
-import { FaCheck, FaTimes } from 'react-icons/fa';
+// A importação estática de 'checklists' foi removida daqui
 
-function ChecklistPage({ user }) {
+function ChecklistPage({ user, checklists }) { // Recebe 'checklists' como propriedade
   const { id } = useParams();
+  
+  // A busca agora é feita na lista atualizada que vem das props
   const checklistData = checklists.find(c => c.id === parseInt(id));
 
   const [answers, setAnswers] = useState({});
@@ -25,19 +26,24 @@ function ChecklistPage({ user }) {
   };
   
   const handleSubmit = () => {
-      // Em uma aplicação real, aqui você enviaria o objeto 'answers' para o backend
       console.log("Checklist Enviado:", answers);
       setIsSubmitted(true);
   }
 
   if (!checklistData) {
-    return <div>Checklist não encontrado.</div>;
+    return (
+        <div className="page-container" style={{textAlign: 'center'}}>
+            <h2>Checklist não encontrado.</h2>
+            <p>Este item pode ter sido removido ou o link é inválido.</p>
+            <Link to="/checklists" className="btn">Voltar para a Lista</Link>
+        </div>
+    );
   }
   
   if (isSubmitted) {
       return (
         <div className="page-container submission-success">
-            <h2>{FaCheck} Checklist Enviado com Sucesso!</h2>
+            <h2>✅ Checklist Enviado com Sucesso!</h2>
             <p>Obrigado, {user.name}. Suas respostas foram registradas.</p>
             <p>Qualquer não conformidade reportada já foi notificada ao seu supervisor.</p>
             <Link to="/" className="btn">Voltar ao Início</Link>
@@ -64,17 +70,16 @@ function ChecklistPage({ user }) {
                 className={`btn-status ok ${answers[item.id]?.status === 'ok' ? 'active' : ''}`}
                 onClick={() => handleStatusChange(item.id, 'ok')}
               >
-                <FaCheck size={22}/>
+                ✅ Conforme
               </button>
               <button
                 className={`btn-status nok ${answers[item.id]?.status === 'nok' ? 'active' : ''}`}
                 onClick={() => handleStatusChange(item.id, 'nok')}
               >
-                <FaTimes size={22}/>
+                ❌ Não Conforme
               </button>
             </div>
             
-            {/* Seção que aparece condicionalmente */}
             {answers[item.id]?.status === 'nok' && (
               <div className="non-conformance-section">
                 <label>Descreva o problema:</label>
