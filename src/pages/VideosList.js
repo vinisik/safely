@@ -30,7 +30,7 @@ function VideosList() {
             thumbnail={video.thumbnail}
             title={video.title}
             description={`Vence em: ${video.dueDate}`}
-            progress={Math.floor(Math.random() * 100)}
+            progress={50}
           />
         ))}
       </div>

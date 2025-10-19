@@ -217,29 +217,31 @@ main {
 
 /* Banner de Destaque */
 .hero-banner {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./assets/hero-bg.png');
+  background-image: url('./assets/hero-bg.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   height: 200px;
   color: white;
-  padding: 3rem 2rem;
+  padding: 1rem;
   border-radius: var(--border-radius);
   margin-bottom: 2.5rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-end;
+  justify-content: flex-start;
   flex-wrap: wrap;
   text-align: left;
 }
 
 .hero-banner h2 {
-  font-size: 2.5rem;
+  display: none;
+  font-size: 2rem;
   flex: 1;
   min-width: 250px;
   border-left: none;
   padding-left: 0;
-  text-align: center;
+  margin: 0;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.6);
 }
 .hero-banner img {
   display: none;

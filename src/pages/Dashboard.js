@@ -14,7 +14,7 @@ function Dashboard({checklists}) {
     <>
     <title>Safely | Início</title>
       <div className="hero-banner">
-        <h1>Michelin - Itatiaia <br></br>Operador de Produção </h1>
+        <h2>Operador de Produção</h2>
       </div>
 
       <div className="dashboard-section">
@@ -27,7 +27,7 @@ function Dashboard({checklists}) {
               thumbnail={video.thumbnail}
               title={video.title}
               description={`Vence em: ${video.dueDate}`}
-              progress={Math.floor(Math.random() * 100)}
+              progress={50}
             />
           ))}
         </div>

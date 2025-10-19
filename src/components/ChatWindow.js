@@ -39,7 +39,7 @@ function ChatWindow({ isOpen, onClose }) {
   return (
     <div className="chat-window">
       <div className="chat-header">
-        <h3>Suporte à Gestão</h3>
+        <h3>Chat de Suporte</h3>
         <button onClick={onClose} className="close-chat-btn">×</button>
       </div>
       <div className="chat-messages">
@@ -48,7 +48,6 @@ function ChatWindow({ isOpen, onClose }) {
             <p>{msg.text}</p>
           </div>
         ))}
-        {/* Elemento invisível no final para o qual vamos rolar */}
         <div ref={messagesEndRef} />
       </div>
       <form className="chat-input-form" onSubmit={handleSendMessage}>
