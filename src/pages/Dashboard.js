@@ -36,23 +36,6 @@ function Dashboard({checklists}) {
       <div className="dashboard-row">
         <div className="main-column">
           <div className="dashboard-section">
-            <h2>Próximos Quizzes</h2>
-            <div className="card-grid">
-              {quizzes.slice(0, 3).map(quiz => (
-                <ContentCard
-                  key={quiz.id}
-                  to={`/quiz/${quiz.id}`}
-                  title={quiz.title}
-                  description={`Vence em: ${quiz.dueDate}`}
-                  buttonText="Iniciar Quiz"
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="sidebar-column">
-          <div className="dashboard-section">
             <div className="section-title-with-counter">
               <h2>Checklists Pendentes</h2>
               {pendingCount > 0 && <span className="pending-counter">{pendingCount}</span>}
@@ -70,6 +53,23 @@ function Dashboard({checklists}) {
                     </span>
                   </div>
                 </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="sidebar-column">
+          <div className="dashboard-section">
+            <h2>Próximos Quizzes</h2>
+            <div className="card-grid">
+              {quizzes.slice(0, 2).map(quiz => (
+                <ContentCard
+                  key={quiz.id}
+                  to={`/quiz/${quiz.id}`}
+                  title={quiz.title}
+                  description={`Vence em: ${quiz.dueDate}`}
+                  buttonText="Iniciar Quiz"
+                />
               ))}
             </div>
           </div>

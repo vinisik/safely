@@ -200,7 +200,7 @@ export const checklists = [
   { 
     id: 203, 
     title: 'Inspeção de Ferramentas Elétricas', 
-    status: 'completed',
+    status: 'pending',
     dueDate: '29/11/2025',
     items: []
   },

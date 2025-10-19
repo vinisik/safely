@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { checklists as initialChecklists } from './data/mockData';
-
-// Componentes
 import Header from './components/Header';
 import Footer from './components/Footer';
+import FloatingChatButton from './components/FloatingChatButton'; 
+import ChatWindow from './components/ChatWindow';
 import BottomNav from './components/BottomNav';
-
-// Páginas
 import Dashboard from './pages/Dashboard';
 import VideosList from './pages/VideosList';
 import VideoPage from './pages/VideoPage';
@@ -26,6 +24,7 @@ const SettingsPage = () => <div style={{padding: '2rem', textAlign: 'center'}}><
 function App() {
   const [user, setUser] = useState(null);
   const [checklistsData, setChecklistsData] = useState(initialChecklists);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -78,6 +77,8 @@ function App() {
         </main>
         <Footer />
         <BottomNav />
+        <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+        {!isChatOpen && <FloatingChatButton onClick={() => setIsChatOpen(true)} />}
       </div>
     </Router>
   );
