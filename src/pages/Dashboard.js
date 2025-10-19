@@ -23,7 +23,7 @@ function Dashboard({checklists}) {
           {videos.slice(0, 3).map(video => (
             <ContentCard
               key={video.id}
-              to={`/video/${video.id}`}
+              to={`/videos/${video.id}`}
               thumbnail={video.thumbnail}
               title={video.title}
               description={`Vence em: ${video.dueDate}`}
@@ -58,8 +58,8 @@ function Dashboard({checklists}) {
               {pendingCount > 0 && <span className="pending-counter">{pendingCount}</span>}
             </div>
             <div className="list-container">
-              {pendingChecklists.slice(0, 10).map(item => ( // Aumentei para 3 para o exemplo
-                <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
+              {pendingChecklists.slice(0, 10).map(item => ( 
+                <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
                   <div className="list-item">
                     <div className="list-item-content">
                       <h3>{item.title}</h3>

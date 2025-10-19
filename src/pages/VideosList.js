@@ -26,7 +26,7 @@ function VideosList() {
         {allVideos.map((video, index) => (
           <ContentCard
             key={`${video.id}-${index}`}
-            to={`/video/${video.id}`}
+            to={`/videos/${video.id}`}
             thumbnail={video.thumbnail}
             title={video.title}
             description={`Vence em: ${video.dueDate}`}

@@ -60,11 +60,11 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
 
         <div className="list-container">
           {filteredChecklists.map((item) => (
-            <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
+            <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
               <div className="list-item">
                 <div className="list-item-content">
                   <h3>{item.title}<span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span></h3>
-                  <p>Vencimento: {item.dueDate}</p>
+                  <p><strong>Vencimento:</strong> {item.dueDate}</p>
                 </div>
                 <button 
                   className="btn-delete" 

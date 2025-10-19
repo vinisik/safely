@@ -113,7 +113,7 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
 
             <div className="modal-actions">
               <button onClick={handleClose} className="btn-cancel">Cancelar</button>
-              {/* <button onClick={generateJson} className="btn-secondary">Ver JSON</button> */}
+              <button onClick={generateJson} className="btn-secondary">Ver JSON</button>
               <button onClick={handleSave} className="btn-add">Salvar Checklist</button>
             </div>
           </>

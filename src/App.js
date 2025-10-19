@@ -55,17 +55,14 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard checklists={checklistsData} />} />
             <Route path="/videos" element={<VideosList />} />
-            <Route path="/video/:id" element={<VideoPage />} />
+            <Route path="/videos/:id" element={<VideoPage />} />
             <Route path="/quizzes" element={<QuizzesList />} />
             <Route path="/quiz/:id" element={<QuizPage />} />
             <Route 
               path="/checklists" 
               element={<ChecklistsList checklists={checklistsData} addChecklist={addChecklist} deleteChecklist={deleteChecklist} />} 
             />
-            <Route 
-              path="/checklist/:id" 
-              element={<ChecklistPage user={user} checklists={checklistsData} />} 
-            />
+            <Route path="/checklists/:id" element={<ChecklistPage user={user} checklists={checklistsData} />} />
             <Route path="/recompensas" element={<RewardsPage />} />
             <Route path="/pontos" element={<MyPoints />} />
             <Route path="/perfil" element={<ProfilePage user={user} />} />

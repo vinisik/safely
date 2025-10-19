@@ -63,21 +63,21 @@ function ChecklistPage({ user, checklists }) { // Recebe 'checklists' como propr
       </div>
 
       <div className="checklist-items-container">
-        {checklistData.items.map((item) => (
+        {checklistData.items.map((item, index) => (
           <div key={item.id} className="checklist-item card">
-            <p className="item-text">{item.id}. {item.text}</p>
+            <p className="item-text">{index + 1}. {item.text}</p>
             <div className="item-actions">
               <button
                 className={`btn-status ok ${answers[item.id]?.status === 'ok' ? 'active' : ''}`}
                 onClick={() => handleStatusChange(item.id, 'ok')}
               >
-                ✅ Conforme
+                Conforme
               </button>
               <button
                 className={`btn-status nok ${answers[item.id]?.status === 'nok' ? 'active' : ''}`}
                 onClick={() => handleStatusChange(item.id, 'nok')}
               >
-                ❌ Não Conforme
+                Não Conforme
               </button>
             </div>
             

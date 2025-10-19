@@ -129,7 +129,7 @@ function MyPoints() {
           <div className="challenge-card card">
             <h3>Concluir "EPIs Avançado"</h3>
             <p>Ganhe 150 pontos!</p>
-            <Link to="/video/1" className="btn-challenge">Iniciar Treinamento</Link>
+            <Link to="/videos/1" className="btn-challenge">Iniciar Treinamento</Link>
           </div>
           <div className="challenge-card card">
             <h3>Responder 3 Quizzes com 100%</h3>
