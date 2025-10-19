@@ -72,7 +72,6 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
                 type="text" 
                 value={title} 
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Ex: Verificação Pré-Uso - Empilhadeira"
               />
             </div>
             
@@ -94,7 +93,7 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
 
             <div className="modal-actions">
               <button onClick={onClose} className="btn-cancel">Cancelar</button>
-              <button onClick={generateJson} className="btn-secondary">Ver JSON</button>
+              {/* <button onClick={generateJson} className="btn-secondary">Ver JSON</button> */}
               <button onClick={handleSave} className="btn-add">Salvar Checklist</button>
             </div>
           </>

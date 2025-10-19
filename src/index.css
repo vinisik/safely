@@ -456,7 +456,7 @@ main {
   margin-left: 10px;
 }
 .status-badge.pending {
-  background-color: #fff8e1;
+  background-color: #ffe1e1;
   color: #f57f17;
 }
 .status-badge.completed {
@@ -1338,10 +1338,12 @@ main {
   cursor: pointer;
 }
 .btn-cancel {
+  border-radius: 20px;
   background-color: #eee;
   color: #333;
 }
 .btn-add {
+  border-radius: 20px;
   background-color: var(--primary-color);
   color: white;
 }
@@ -1435,6 +1437,16 @@ main {
   color: #666;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+/* --- ESTILO PARA CONTROLES DA PÁGINA DE LISTA --- */
+.page-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 /* Media Queries Globais para Responsividade */

@@ -7,6 +7,13 @@ import rewardCaneca from '../assets/rewards/caneca.png';
 import rewardGarrafa from '../assets/rewards/garrafa.png';
 import rewardCafe from '../assets/rewards/cafe.png';
 import rewardCertificado from '../assets/rewards/certificado.jpg';
+import quizEpi from '../assets/thumbnails/quiz-epi.png';
+import quizErgonomia from '../assets/thumbnails/quiz-ergonomia.png';
+import quizPs from '../assets/thumbnails/quiz-ps.png';
+import quizElet from '../assets/thumbnails/quiz-elet.png';
+import quizNr from '../assets/thumbnails/quiz-nr.png';
+import quizIncendio from '../assets/thumbnails/quiz-incendio.png';
+
 
 export const videos = [
   {
@@ -41,6 +48,7 @@ export const quizzes = [
   {
     id: 101,
     title: 'Teste de Conhecimento: EPIs',
+    thumbnail: quizEpi,
     relatedVideoId: 1,
     dueDate: '28/10/2025',
     questions: [
@@ -66,6 +74,7 @@ export const quizzes = [
     id: 102,
     title: 'Teste de Conhecimento: Ergonomia',
     relatedVideoId: 2,
+    thumbnail: quizErgonomia,
     dueDate: '07/11/2025',
     questions: [
       {
@@ -82,6 +91,7 @@ export const quizzes = [
     id: 103,
     title: 'Teste de Conhecimento: Primeiros Socorros',
     relatedVideoId: 4, 
+    thumbnail: quizPs,
     dueDate: '15/11/2025',
     questions: [
       {
@@ -98,6 +108,7 @@ export const quizzes = [
     id: 104,
     title: 'Quiz NR-10: Segurança em Eletricidade',
     relatedVideoId: 5,
+    thumbnail: quizElet,
     dueDate: '19/10/2025',
     questions: [
       {
@@ -122,6 +133,7 @@ export const quizzes = [
     id: 105,
     title: 'Teste de Conhecimento: NR-12 (Máquinas e Equipamentos)',
     relatedVideoId: 6,
+    thumbnail: quizNr,
     dueDate: '31/10/2025',
     questions: [
       {
@@ -138,6 +150,7 @@ export const quizzes = [
     id: 106,
     title: 'Avaliação: Prevenção e Combate a Incêndio',
     relatedVideoId: 7,
+    thumbnail: quizIncendio,
     dueDate: '20/10/2025',
     questions: [
       {
@@ -158,38 +171,6 @@ export const quizzes = [
       },
     ],
   },
-  {
-    id: 107,
-    title: 'Quiz Rápido: Operação Segura de Empilhadeiras',
-    relatedVideoId: 8,
-    dueDate: '24/11/2025',
-    questions: [
-      {
-        text: 'Ao dirigir uma empilhadeira com a carga elevada, o que você NUNCA deve fazer?',
-        options: [
-          { text: 'Buzinar nos cruzamentos', correct: false },
-          { text: 'Fazer curvas ou dirigir em rampas', correct: true },
-          { text: 'Olhar por cima do ombro ao dar ré', correct: false },
-        ],
-      },
-    ],
-  },
-  {
-    id: 108,
-    title: 'Desafio Comportamental: Percepção de Riscos',
-    relatedVideoId: 9,
-    dueDate: '29/11/2025',
-    questions: [
-      {
-        text: 'O que é "comportamento seguro"?',
-        options: [
-          { text: 'Apenas seguir as regras e usar EPIs.', correct: false },
-          { text: 'É a atitude proativa de identificar riscos e agir para eliminá-los ou controlá-los, mesmo que não haja uma regra específica.', correct: true },
-          { text: 'Trabalhar mais rápido para evitar a exposição prolongada a um risco.', correct: false },
-        ],
-      },
-    ],
-  }
 ];
 
 export const checklists = [

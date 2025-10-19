@@ -2,8 +2,6 @@ import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes } from '../data/mockData';
 import { Link } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
-import bannerSegurancaImg from '../assets/banner-seguranca.jpg';
 
 function Dashboard({checklists}) {
   return (
@@ -59,7 +57,7 @@ function Dashboard({checklists}) {
                       
                     </div>
                     <span className={`status-badge ${item.status}`}>
-                      {item.status === 'pending' ? 'Pendente' : 'Concluído'}
+                      {item.status === 'pending' ? '!' : 'Concluído'}
                     </span>
                   </div>
                 </Link>

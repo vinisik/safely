@@ -22,7 +22,7 @@ function QuizzesList() {
           <ContentCard
             key={`${quiz.id}-${index}`}
             to={`/quiz/${quiz.id}`}
-            thumbnail={`https://placehold.co/600x400/4CAF50/white?text=Quiz`}
+            thumbnail={quiz.thumbnail}
             title={quiz.title}
             description={`Vence em: ${quiz.dueDate}`}
             buttonText="Iniciar Quiz"

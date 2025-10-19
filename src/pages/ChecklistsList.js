@@ -7,6 +7,8 @@ import { FaTrash } from 'react-icons/fa';
 function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [activeFilter, setActiveFilter] = useState('all');
+
   const handleDelete = (e, checklistId, checklistTitle) => {
     // Impede que o clique no botão também ative o link da linha
     e.preventDefault(); 
@@ -18,38 +20,64 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
     }
   };
 
+  const filteredChecklists = checklists.filter(checklist => {
+    if (activeFilter === 'all') {
+      return true; // Mostra todos
+    }
+    return checklist.status === activeFilter; // Mostra apenas os com status correspondente
+  });
+
   return (
     <>
-      {/* O componente do Modal é renderizado aqui */}
       <AddChecklistModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAdd={addChecklist}
       />
-
       <div className="page-container">
         <div className="page-header">
           <h1>Checklists de Segurança</h1>
-          {/* O botão agora abre o modal */}
+        </div>
+        
+        {/* 4. Adicionar os botões de filtro */}
+        <div className="page-controls">
+          <div className="filter-buttons">
+            <button 
+              className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('all')}
+            >
+              Todos
+            </button>
+            <button 
+              className={`filter-btn ${activeFilter === 'pending' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('pending')}
+            >
+              Pendentes
+            </button>
+            <button 
+              className={`filter-btn ${activeFilter === 'completed' ? 'active' : ''}`}
+              onClick={() => setActiveFilter('completed')}
+            >
+              Concluídos
+            </button>
+          </div>
           <button onClick={() => setIsModalOpen(true)} className="btn btn-primary">＋ Novo Checklist</button>
         </div>
+
         <div className="list-container">
-          {/* A lista agora vem das props, garantindo que ela seja atualizada */}
-          {checklists.map((item) => (
+          {/* 5. Mapear sobre a lista JÁ FILTRADA */}
+          {filteredChecklists.map((item) => (
             <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
               <div className="list-item">
                 <div className="list-item-content">
-                  <div>
-                    <h3>{item.title}<span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span></h3>
-                  </div>
+                  <h3>{item.title}<span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span></h3>   
                 </div>
                 <button 
                   className="btn-delete" 
                   onClick={(e) => handleDelete(e, item.id, item.title)}
                 >
-                  <FaTrash /> {/* Ícone */}
+                  <FaTrash />
                 </button>
-                
               </div>
             </Link>
           ))}
