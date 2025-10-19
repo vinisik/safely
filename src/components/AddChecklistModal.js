@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 function AddChecklistModal({ isOpen, onClose, onAdd }) {
   const [title, setTitle] = useState('');
   const [items, setItems] = useState([{ id: 1, text: '' }]);
+  const [dueDate, setDueDate] = useState('');
   const [showJson, setShowJson] = useState(false);
   const [outputJson, setOutputJson] = useState('');
 
   const handleAddItem = () => {
-    // Adiciona uma nova etapa com um ID único
     setItems([...items, { id: Date.now(), text: '' }]);
   };
 
@@ -16,7 +16,6 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
   };
 
   const handleRemoveItem = (id) => {
-    // Remove uma etapa, mas garante que sempre haja pelo menos uma
     if (items.length > 1) {
       setItems(items.filter(item => item.id !== id));
     }
@@ -27,32 +26,44 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
       id: Date.now(),
       title: title,
       status: 'pending',
-      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR'), // Vence em 7 dias
-      items: items.filter(item => item.text.trim() !== ''), // Salva apenas itens preenchidos
+      dueDate: dueDate ? new Date(dueDate).toLocaleDateString('pt-BR', {timeZone: 'UTC'}) : "Sem data",
+      items: items.filter(item => item.text.trim() !== ''),
     };
-    const jsonString = JSON.stringify(newChecklist, null, 2); // O 2 é para formatação bonita
+    const jsonString = JSON.stringify(newChecklist, null, 2);
     setOutputJson(jsonString);
     setShowJson(true);
   };
   
   const handleSave = () => {
-    if (title.trim() === '') {
-        alert('Por favor, adicione um título ao checklist.');
+    if (title.trim() === '' || dueDate === '') {
+        alert('Por favor, adicione um título e uma data de validade.');
         return;
     }
     const newChecklist = {
       id: Date.now(),
       title: title,
       status: 'pending',
-      dueDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR'),
+      // Adiciona 1 dia e usa UTC para evitar problemas de fuso horário
+      dueDate: new Date(dueDate).toLocaleDateString('pt-BR', {timeZone: 'UTC'}),
       items: items.filter(item => item.text.trim() !== ''),
     };
     onAdd(newChecklist);
-    onClose();
-    // Limpa o formulário para a próxima vez
+    
+    // Limpa o formulário e fecha o modal
     setTitle('');
     setItems([{ id: 1, text: '' }]);
+    setDueDate('');
     setShowJson(false);
+    onClose();
+  }
+
+  // Função para fechar e resetar o modal
+  const handleClose = () => {
+    setTitle('');
+    setItems([{ id: 1, text: '' }]);
+    setDueDate('');
+    setShowJson(false);
+    onClose();
   }
 
   if (!isOpen) {
@@ -74,6 +85,15 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
+
+            <div className="form-group">
+              <label>Data de Validade</label>
+              <input 
+                type="date" 
+                value={dueDate} 
+                onChange={(e) => setDueDate(e.target.value)}
+              />
+            </div>
             
             <div className="form-group">
               <label>Etapas do Checklist</label>
@@ -92,7 +112,7 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
             </div>
 
             <div className="modal-actions">
-              <button onClick={onClose} className="btn-cancel">Cancelar</button>
+              <button onClick={handleClose} className="btn-cancel">Cancelar</button>
               {/* <button onClick={generateJson} className="btn-secondary">Ver JSON</button> */}
               <button onClick={handleSave} className="btn-add">Salvar Checklist</button>
             </div>

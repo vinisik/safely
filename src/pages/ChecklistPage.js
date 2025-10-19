@@ -58,6 +58,7 @@ function ChecklistPage({ user, checklists }) { // Recebe 'checklists' como propr
         <div className="checklist-meta">
           <span>Operador: <strong>{user.name}</strong></span>
           <span>Data: <strong>{new Date().toLocaleDateString()}</strong></span>
+          <span>Vencimento: <strong>{checklistData.dueDate}</strong></span>
         </div>
       </div>
 

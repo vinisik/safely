@@ -178,6 +178,7 @@ export const checklists = [
     id: 201, 
     title: 'Verificação Pré-Uso - Prensa Hidráulica PH-02', 
     status: 'pending',
+    dueDate: '20/10/2025',
     items: [
       { id: 1, text: 'Botão de parada de emergência está desobstruído e funcional?' },
       { id: 2, text: 'Guardas de proteção (frontal e lateral) estão no lugar e sem avarias?' },
@@ -190,6 +191,7 @@ export const checklists = [
     id: 202, 
     title: 'Checklist: Trabalho em Altura', 
     status: 'pending',
+    dueDate: '20/10/2025',
     items: [
         { id: 1, text: 'Cinto de segurança e talabarte foram inspecionados?' },
         { id: 2, text: 'O ponto de ancoragem é seguro e foi verificado?' },
@@ -199,6 +201,7 @@ export const checklists = [
     id: 203, 
     title: 'Inspeção de Ferramentas Elétricas', 
     status: 'completed',
+    dueDate: '29/11/2025',
     items: []
   },
 ];

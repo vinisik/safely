@@ -3,28 +3,23 @@ import { Link } from 'react-router-dom';
 import AddChecklistModal from '../components/AddChecklistModal';
 import { FaTrash } from 'react-icons/fa';
 
-// Recebe 'checklists' e 'addChecklist' como props do App.js
 function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const [activeFilter, setActiveFilter] = useState('all');
 
   const handleDelete = (e, checklistId, checklistTitle) => {
-    // Impede que o clique no botão também ative o link da linha
     e.preventDefault(); 
     e.stopPropagation();
-
-    // Adiciona uma confirmação para segurança
     if (window.confirm(`Tem certeza que deseja excluir o checklist "${checklistTitle}"?`)) {
       deleteChecklist(checklistId);
     }
   };
-
+  
   const filteredChecklists = checklists.filter(checklist => {
     if (activeFilter === 'all') {
-      return true; // Mostra todos
+      return true;
     }
-    return checklist.status === activeFilter; // Mostra apenas os com status correspondente
+    return checklist.status === activeFilter;
   });
 
   return (
@@ -39,7 +34,6 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
           <h1>Checklists de Segurança</h1>
         </div>
         
-        {/* 4. Adicionar os botões de filtro */}
         <div className="page-controls">
           <div className="filter-buttons">
             <button 
@@ -65,12 +59,12 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
         </div>
 
         <div className="list-container">
-          {/* 5. Mapear sobre a lista JÁ FILTRADA */}
           {filteredChecklists.map((item) => (
             <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
               <div className="list-item">
                 <div className="list-item-content">
-                  <h3>{item.title}<span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span></h3>   
+                  <h3>{item.title}<span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span></h3>
+                  <p>Vencimento: {item.dueDate}</p>
                 </div>
                 <button 
                   className="btn-delete" 
@@ -78,6 +72,7 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
                 >
                   <FaTrash />
                 </button>
+                
               </div>
             </Link>
           ))}

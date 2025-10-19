@@ -4,6 +4,12 @@ import { videos, quizzes } from '../data/mockData';
 import { Link } from 'react-router-dom';
 
 function Dashboard({checklists}) {
+
+  // Filtra a lista para pegar apenas os checklists pendentes
+  const pendingChecklists = checklists.filter(c => c.status === 'pending');
+  // Pega a quantidade de itens na lista filtrada
+  const pendingCount = pendingChecklists.length;
+
   return (
     <>
     <title>Safely | Início</title>
@@ -47,14 +53,17 @@ function Dashboard({checklists}) {
 
         <div className="sidebar-column">
           <div className="dashboard-section">
-            <h2>Checklists Pendentes</h2>
+            <div className="section-title-with-counter">
+              <h2>Checklists Pendentes</h2>
+              {pendingCount > 0 && <span className="pending-counter">{pendingCount}</span>}
+            </div>
             <div className="list-container">
-              {checklists.filter(c => c.status === 'pending').slice(0, 2).map(item => (
+              {pendingChecklists.slice(0, 10).map(item => ( // Aumentei para 3 para o exemplo
                 <Link to={`/checklist/${item.id}`} key={item.id} className="list-item-link">
                   <div className="list-item">
                     <div className="list-item-content">
                       <h3>{item.title}</h3>
-                      
+                      <p>Vence em: {item.dueDate}</p>
                     </div>
                     <span className={`status-badge ${item.status}`}>
                       {item.status === 'pending' ? '!' : 'Concluído'}

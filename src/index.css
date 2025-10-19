@@ -364,6 +364,27 @@ main {
     margin-left: auto;
 }
 
+/* --- ESTILOS PARA O CONTADOR DE PENDÊNCIAS --- */
+
+.section-title-with-counter {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o título e o contador */
+}
+
+.pending-counter {
+  background-color: #ffebee; 
+  color: #c62828; 
+  border-radius: 50%; 
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
 /* Estilos para Páginas de Lista (Checklists, etc) */
 .page-container {
   width: 100%;
@@ -1346,6 +1367,29 @@ main {
   border-radius: 20px;
   background-color: var(--primary-color);
   color: white;
+}
+
+/* --- ESTILO PARA O CAMPO DE DATA NO MODAL --- */
+
+.form-group input[type="date"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-family: inherit; /* Garante que a fonte seja a mesma do resto do app */
+  color: #333; /* Cor do texto da data */
+}
+
+/* Estilo para o ícone do calendário (funciona em navegadores Chrome, Edge, etc.) */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 /* --- ESTILO PARA BOTÃO DE EXCLUIR --- */
