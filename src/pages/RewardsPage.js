@@ -1,5 +1,6 @@
 import React from 'react';
 import { rewards } from '../data/mockData';
+import { FaBagShopping } from 'react-icons/fa6';
 
 function RewardsPage() {
   // Para o protótipo, podemos repetir o total de pontos aqui.
@@ -10,7 +11,7 @@ function RewardsPage() {
     <div className="page-container">
       <title>Safely | Recompensas</title>
       <div className="page-header">
-        <h1>🛍️ Loja de Recompensas</h1>
+        <h1><FaBagShopping/> Loja de Recompensas</h1>
       </div>
       <p className="rewards-subtitle">
         Você tem <strong>{totalPoints} pontos</strong>. Use-os para resgatar prêmios exclusivos!

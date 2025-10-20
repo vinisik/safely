@@ -3,6 +3,8 @@ import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
+import { FaHelmetSafety, FaBrain, FaClipboardCheck, FaQuestion, FaTrophy, FaChartPie, FaBagShopping, FaCircleArrowRight } from 'react-icons/fa6';
+import { IoIosPodium } from 'react-icons/io';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -11,9 +13,9 @@ function MyPoints() {
   const totalPoints = 1250;
   const rank = 'Especialista em Prevenção';
   const badges = [
-    { name: 'Primeiro EPI', icon: '👷‍♂️', color: '#FFC107' },
-    { name: 'Mestre do Quiz', icon: '🧠', color: '#4CAF50' },
-    { name: 'Checklist Ágil', icon: '✅', color: '#005A9C' },
+    { name: 'Primeiro EPI', icon: <FaHelmetSafety/>, color: '#FFC107' },
+    { name: 'Mestre do Quiz', icon: <FaBrain/>, color: '#4CAF50' },
+    { name: 'Checklist Ágil', icon: <FaClipboardCheck/>, color: '#005A9C' },
   ];
 
   const chartData = {
@@ -76,13 +78,13 @@ function MyPoints() {
         <div className="points-summary-column">
           <div className="points-summary card">
             <div className="point-item">
-              <h2>🏆 Total de Pontos</h2>
+              <h2><FaTrophy/> Total de Pontos</h2>
               <p className="large-number">{totalPoints}</p>
             </div>
           </div>
           <div className="points-summary card">
             <div className="point-item">
-              <h2>🌟 Seu Rank Atual</h2>
+              <h2><IoIosPodium/> Seu Rank Atual</h2>
               <p className="large-text">{rank}</p>
             </div>
           </div>
@@ -91,7 +93,7 @@ function MyPoints() {
         {/* Coluna do gráfico */}
         <div className="points-chart-section">
           <div className="chart-container card">
-            <h2>📊 Distribuição dos Pontos</h2>
+            <h2><FaChartPie/> Distribuição dos Pontos</h2>
             <div className="chart-container-wrapper">
                 <Pie data={chartData} options={chartOptions} />
             </div>
@@ -100,9 +102,8 @@ function MyPoints() {
       </div>
 
       <Link to="/recompensas" className="card rewards-link-card">
-        <h3>🛍️ Visite a Loja de Recompensas</h3>
+        <h3><FaBagShopping/> Visite a Loja de Recompensas</h3>
         <p>Troque seus pontos por prêmios incríveis!</p>
-        <span className="rewards-link-arrow">→</span>
       </Link>
 
       <div className="points-section">
@@ -116,7 +117,7 @@ function MyPoints() {
             </div>
           ))}
           <div className="badge-card card placeholder-badge">
-            <span className="badge-icon">❓</span>
+            <span className="badge-icon"><FaQuestion/></span>
             <h3>Próximo Badge</h3>
             <p>Conclua mais 5 vídeos</p>
           </div>

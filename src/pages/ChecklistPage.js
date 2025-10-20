@@ -44,7 +44,7 @@ function ChecklistPage({ user, checklists, updateChecklistStatus }) { // Recebe 
   if (isSubmitted) {
       return (
         <div className="page-container submission-success">
-            <h2>✅ Checklist Enviado com Sucesso!</h2>
+            <h2>Checklist Enviado com Sucesso!</h2>
             <p>Obrigado, {user.name}. Suas respostas foram registradas.</p>
             <p>Qualquer não conformidade reportada já foi notificada ao seu supervisor.</p>
             <Link to="/checklists" className="btn">Voltar ao Início</Link>
