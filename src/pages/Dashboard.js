@@ -14,7 +14,7 @@ function Dashboard({checklists}) {
     <>
     <title>Safely | Início</title>
       <div className="hero-banner">
-        <h2>Operador de Produção</h2>
+        <h2>Operador de Produção <br></br>Michelin - Itatiaia </h2>
       </div>
 
       <div className="dashboard-section">

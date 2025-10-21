@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import safelyLogo from '../assets/logo.png';
+import kaduPic from '../assets/kadu.png';
+import elisPic from '../assets/elis.png';
+import gabrielPic from '../assets/gabriel.png';
+import rafaelaPic from '../assets/rafaela.png';
+import viniciusPic from '../assets/vinicius.png';
 import profilePicture from '../assets/profile-placeholder.png';
 
 function LoginPage({ onLogin }) {
@@ -7,17 +12,47 @@ function LoginPage({ onLogin }) {
   const [password, setPassword] = useState('');
   const [idColaborador, setidColaborador] = useState(''); 
 
+  const validIds = ['kadu123', 'elis123', 'gabriel123', 'rafaela123', 'vinicius123']; // ID do Jose e do Vinicius
+
   const handleSubmit = (event) => {
-    event.preventDefault(); // Impede que a página recarregue
-    // Validação simplificada para checar apenas o ID
-    if (idColaborador.trim() !== '') {
-      onLogin({ name: 'Vinicius Siqueira',
-         idColaborador: idColaborador ,
-         profilePictureUrl: profilePicture
-        });
-    } else {
+    event.preventDefault();
+
+    // Validação de campo vazio
+    if (idColaborador.trim() === '') {
       alert('Por favor, preencha o ID de colaborador.');
+      return; // Interrompe a função
     }
+
+    let userName;
+    let profilePic;
+
+    if (idColaborador === validIds[0]) {
+      userName = 'Carlos Eduardo';
+      profilePic = kaduPic;
+    } else if (idColaborador === validIds[1]) {
+      // Definimos o ID do Vinicius Siqueira aqui
+      userName = 'Elis Santos';
+      profilePic = elisPic;
+    } else if (idColaborador === validIds[2]) {
+      userName = 'Gabriel Maciel';
+      profilePic = gabrielPic;
+    } else if (idColaborador === validIds[3]) {
+      userName = rafaelaPic;
+      profilePic = '../assets/rafaela.png';
+    } else if (idColaborador === validIds[4]) {
+      userName = 'Vinicius Siqueira';
+      profilePic = viniciusPic;
+    } else {
+      userName = 'Usuário';
+      profilePic = profilePicture;
+    }
+
+    // Passa o objeto de usuário com o nome e foto corretos
+    onLogin({ 
+      name: userName, 
+      idColaborador: idColaborador,
+      profilePictureUrl: profilePic
+    });
   };
 
   // Formulário de login
