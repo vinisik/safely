@@ -214,6 +214,10 @@ main {
   border-left: 5px solid var(--primary-color);
   padding-left: 1rem;
 }
+.new-section {
+  text-align: center;
+  color: #808080;
+}
 
 /* Banner de Destaque */
 .hero-banner {
@@ -745,6 +749,15 @@ main {
     display: block;
     width: fit-content;
     margin: 1.5rem auto 0 auto;
+}
+
+/* --- ESTILO PARA MENSAGEM DE PONTOS NO QUIZ --- */
+.quiz-results .points-earned {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2e7d32; /* Verde */
+  margin-top: -1rem;
+  margin-bottom: 2rem;
 }
 
 /* Página de Pontos */

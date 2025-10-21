@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logoEmpresa from '../assets/michelin.png';
 
-function ProfilePage({ user, checklists }) {
+function ProfilePage({ user, checklists, totalPoints }) {
   // Dados simulados, como em outras páginas
-  const totalPoints = 1250;
   const companyName = 'Michelin - Operador de Produção';
   const pendingTasks = checklists.filter(c => c.status === 'pending').length;
 

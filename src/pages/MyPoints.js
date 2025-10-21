@@ -3,14 +3,13 @@ import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
-import { FaHelmetSafety, FaBrain, FaClipboardCheck, FaQuestion, FaTrophy, FaChartPie, FaBagShopping, FaCircleArrowRight } from 'react-icons/fa6';
+import { FaHelmetSafety, FaBrain, FaClipboardCheck, FaQuestion, FaTrophy, FaChartPie, FaBagShopping } from 'react-icons/fa6';
 import { IoIosPodium } from 'react-icons/io';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function MyPoints() {
+function MyPoints({ totalPoints }) {
   const isMobile = useIsMobile();
-  const totalPoints = 1250;
   const rank = 'Especialista em Prevenção';
   const badges = [
     { name: 'Primeiro EPI', icon: <FaHelmetSafety/>, color: '#FFC107' },

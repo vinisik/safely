@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { quizzes } from '../data/mockData';
 
-function QuizPage() {
+function QuizPage({addPoints}) {
   const { id } = useParams();
   const quiz = quizzes.find(q => q.id === parseInt(id));
 
@@ -22,7 +22,20 @@ function QuizPage() {
   };
 
   const handleSubmit = () => {
-    setShowResults(true);
+    let correctAnswersCount = 0;
+    quiz.questions.forEach((question, index) => {
+      const selectedOptionIndex = selectedAnswers[index];
+      if (selectedOptionIndex !== undefined && question.options[selectedOptionIndex].correct) {
+        correctAnswersCount++;
+      }
+    });
+
+    const pointsEarned = correctAnswersCount * 10; // 10 pontos por acerto
+    if (pointsEarned > 0) {
+      addPoints(pointsEarned); // Chama a função do App.js para adicionar os pontos
+    }
+
+    setShowResults(true); // Mostra a tela de resultados
   };
 
   if (showResults) {
@@ -38,7 +51,8 @@ function QuizPage() {
       <div className="quiz-page quiz-results">
         <h2>Resultados do Quiz</h2>
         <p>Você acertou {score} de {quiz.questions.length} perguntas!</p>
-        <Link to="/" className="btn">Voltar ao Dashboard</Link>
+        {score > 0 && <p className="points-earned">Você ganhou {score * 10} pontos!</p>}
+        <Link to="/quizzes" className="btn">Voltar aos quizzes</Link>
       </div>
     );
   }

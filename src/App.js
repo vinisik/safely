@@ -25,6 +25,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [checklistsData, setChecklistsData] = useState(initialChecklists);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [completedVideoIds, setCompletedVideoIds] = useState(new Set());
   const pendingChecklistsCount = checklistsData.filter(c => c.status === 'pending').length;
 
   const handleLogin = (userData) => {
@@ -35,6 +37,18 @@ function App() {
     setUser(null);
   };
 
+  const markVideoAsCompleted = (videoId, pointsValue = 75) => { // Pontuação padrão de 75
+    // Verifica se o vídeo JÁ FOI concluído antes
+    if (!completedVideoIds.has(videoId)) {
+      addPoints(pointsValue); // Adiciona os pontos
+      // Adiciona o ID do vídeo ao conjunto de concluídos
+      setCompletedVideoIds(prevIds => new Set(prevIds).add(videoId)); 
+      console.log(`Vídeo ${videoId} concluído! +${pointsValue} pontos.`); // Para depuração
+    } else {
+      console.log(`Vídeo ${videoId} já foi concluído anteriormente.`); // Para depuração
+    }
+  };
+  
   const addChecklist = (newChecklist) => {
     setChecklistsData(prevChecklists => [newChecklist, ...prevChecklists]);
   };
@@ -53,6 +67,11 @@ function App() {
     );
   };
 
+  const addPoints = (pointsToAdd) => {
+    setTotalPoints(prevPoints => prevPoints + pointsToAdd);
+  };
+
+
   if (!user) {
     return <LoginPage onLogin={handleLogin} />;
   }
@@ -65,23 +84,22 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard checklists={checklistsData} />} />
             <Route path="/videos" element={<VideosList />} />
-            <Route path="/videos/:id" element={<VideoPage />} />
+            <Route path="/videos/:id" element={<VideoPage markVideoAsCompleted={markVideoAsCompleted} completedVideoIds={completedVideoIds}/>} />
             <Route path="/quizzes" element={<QuizzesList />} />
-            <Route path="/quiz/:id" element={<QuizPage />} />
+            <Route path="/quiz/:id" element={<QuizPage addPoints={addPoints}/>} />
             <Route 
               path="/checklists" 
               element={<ChecklistsList checklists={checklistsData} addChecklist={addChecklist} deleteChecklist={deleteChecklist} />} 
             />
             <Route 
               path="/checklists/:id" 
-              element={<ChecklistPage user={user} checklists={checklistsData} updateChecklistStatus={updateChecklistStatus}/>} 
+              element={<ChecklistPage user={user} checklists={checklistsData} updateChecklistStatus={updateChecklistStatus} addPoints={addPoints}/>} 
             />
-            <Route path="/recompensas" element={<RewardsPage />} />
-            <Route path="/pontos" element={<MyPoints />} />
-            {/* --- GARANTA QUE ESTA LINHA ESTEJA CORRETA --- */}
+            <Route path="/recompensas" element={<RewardsPage totalPoints={totalPoints}/>} />
+            <Route path="/pontos" element={<MyPoints totalPoints={totalPoints}/>}/>
             <Route 
               path="/perfil" 
-              element={<ProfilePage user={user} checklists={checklistsData} />} 
+              element={<ProfilePage user={user} checklists={checklistsData} totalPoints={totalPoints}/>} 
             />
             <Route path="/configuracoes" element={<SettingsPage />} />
           </Routes>

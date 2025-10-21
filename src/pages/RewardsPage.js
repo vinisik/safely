@@ -2,11 +2,9 @@ import React from 'react';
 import { rewards } from '../data/mockData';
 import { FaBagShopping } from 'react-icons/fa6';
 
-function RewardsPage() {
+function RewardsPage({totalPoints}) {
   // Para o protótipo, podemos repetir o total de pontos aqui.
-  // Em uma aplicação real, essa informação viria de um local compartilhado.
-  const totalPoints = 1250;
-
+  // Em uma aplicação real, essa informação viria de um local compartilhado
   return (
     <div className="page-container">
       <title>Safely | Recompensas</title>

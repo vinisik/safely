@@ -85,8 +85,14 @@ function Dashboard({checklists}) {
             </div>
           </div>
         </div>
-        
+  
       </div>
+
+        <div className='dashboard-section'>
+            <div className='new-section'>
+              <p>Nova seção em breve!</p>
+            </div>
+        </div>
     </>
   );
 }

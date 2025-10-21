@@ -12,7 +12,7 @@ function BottomNav( {pendingCount} ) {
       <NavLink to="/videos" className={({ isActive }) => isActive ? "active" : ""}>
         <div className='nav-icon-wrapper'>
           <FaVideo size={22} />
-          <span className='notification-dot'></span>
+          {/* <span className='notification-dot'></span> */}
         </div>
         <span>Vídeos</span>
       </NavLink>
@@ -26,7 +26,7 @@ function BottomNav( {pendingCount} ) {
       <NavLink to="/quizzes" className={({ isActive }) => isActive ? "active" : ""}>
         <div className='nav-icon-wrapper'>
           <FaClipboardList size={22} />
-          <span className='notification-dot'></span>
+          {/* <span className='notification-dot'></span> */}
         </div>
         <span>Quizzes</span>
       </NavLink>
