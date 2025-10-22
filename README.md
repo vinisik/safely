@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# **Safely \- Protótipo da Plataforma de Segurança do Trabalho**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este é um protótipo frontend funcional da plataforma Safely, projetada para engajamento em segurança do trabalho.
 
-## Available Scripts
+## **Funcionalidades Principais**
 
-In the project directory, you can run:
+* **Login por ID:** Simula múltiplos usuários com IDs específicos.  
+* **Dashboard:** Visualização rápida de vídeos, quizzes e checklists pendentes.  
+* **Treinamentos em Vídeo:** Página de listagem e visualização de vídeos.  
+* **Sistema de Quizzes:** Quizzes interativos por treinamento.  
+* **Checklists Dinâmicos:**  
+  * Criação de novos checklists via formulário.  
+  * Preenchimento interativo com status "Conforme" / "Não Conforme".  
+  * Report de não conformidades (descrição e anexo de foto).  
+  * Atualização de status para "Concluído" após envio.  
+  * Exclusão de checklists.  
+  * Filtros (Todos, Pendentes, Concluídos).  
+  * Contador de pendências.  
+* **Gamificação:**  
+  * **Pontuação Dinâmica:** Ganho de pontos por concluir vídeos, checklists e acertar quizzes.  
+  * **Página de Pontos:** Resumo, rank, gráfico de distribuição e badges.  
+  * **Loja de Recompensas:** Troca de pontos por prêmios.  
+* **Perfil do Usuário:** Página com dados do colaborador e resumo de progresso.  
+* **Chat de Suporte:** Botão flutuante para simular envio de mensagens à gestão.  
+* **Interface Responsiva:** Adaptada para desktop e mobile (com menu inferior).
 
-### `npm start`
+## **👤 IDs de Usuário para Login (Teste)**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Use qualquer senha.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* kadu123 (Usuário: Carlos Eduardo)  
+* elis123 (Usuário: Elis Santos)  
+* gabriel123 (Usuário: Gabriel Maciel)  
+* rafaela123 (Usuário: Rafaela Souza)  
+* vinicius123 (Usuário: Vinicius Siqueira)
 
-### `npm test`
+## **Como Rodar**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Clone o repositório.  
+2. Navegue até a pasta do projeto: cd safely  
+3. Instale as dependências: npm install  
+4. Inicie a aplicação: npm start
