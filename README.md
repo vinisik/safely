@@ -24,7 +24,7 @@ Este é um protótipo frontend funcional da plataforma Safely, projetada para en
 * **Chat de Suporte:** Botão flutuante para simular envio de mensagens à gestão.  
 * **Interface Responsiva:** Adaptada para desktop e mobile (com menu inferior).
 
-## **👤 IDs de Usuário para Login (Teste)**
+## **IDs de Usuário para Login (Teste)**
 
 Use qualquer senha.
 
