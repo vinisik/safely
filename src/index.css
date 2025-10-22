@@ -1751,6 +1751,9 @@ main {
     font-size: 1rem;
     font-weight: 500;
   }
+  .profile-dropdown .user-name-dropdown .arrow-up:hover {
+    background-color: #666;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1790,6 +1793,10 @@ main {
     border: none;
     font-size: 1rem;
     font-weight: 500;
+  }
+
+  .profile-dropdown .user-name-dropdown .arrow-up:hover {
+    background-color: #666;
   }
 
   .logo-tagline {
@@ -1917,5 +1924,8 @@ main {
     border: none;
     font-size: 1rem;
     font-weight: 500;
+  }
+  .profile-dropdown .user-name-dropdown .arrow-up:hover {
+    background-color: #666;
   }
 }

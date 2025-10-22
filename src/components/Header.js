@@ -53,7 +53,7 @@ function Header({ user, onLogout }) {
         {isDropdownOpen && (
           <div className="profile-dropdown">
             <ul>
-              <li className='user-name-dropdown'>{user.name} <FaAngleUp/></li>
+              <li className='user-name-dropdown'>{user.name} <span className='arrow-up' ><FaAngleUp onClick={() => setDropdownOpen(!isDropdownOpen)}/></span></li>
               <li><NavLink to="/perfil" onClick={() => setDropdownOpen(false)}>Meu Perfil</NavLink></li>
               <li><NavLink to="/configuracoes" onClick={() => setDropdownOpen(false)}>Configurações</NavLink></li>
               <li>
