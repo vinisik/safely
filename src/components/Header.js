@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import safelyLogo from '../assets/logo.png';
 import useIsMobile from '../hooks/useIsMobile';
+import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
 function Header({ user, onLogout }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -43,15 +44,16 @@ function Header({ user, onLogout }) {
           <img src={user.profilePictureUrl} alt="Avatar do Usuário" />
           {isMobile && (
             <span className="user-name">
-              Olá, {user.name}!
+              {user.name}
             </span>
           )}
-          <span className={`dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}>▾</span>
+          <span className={`dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}><FaAngleDown/></span>
         </div>
 
         {isDropdownOpen && (
           <div className="profile-dropdown">
             <ul>
+              <li className='user-name-dropdown'>{user.name} <FaAngleUp/></li>
               <li><NavLink to="/perfil" onClick={() => setDropdownOpen(false)}>Meu Perfil</NavLink></li>
               <li><NavLink to="/configuracoes" onClick={() => setDropdownOpen(false)}>Configurações</NavLink></li>
               <li>
