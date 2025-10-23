@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddChecklistModal from '../components/AddChecklistModal';
 import { FaTrash } from 'react-icons/fa';
-import { FaClock } from 'react-icons/fa6';
+import { FaBrain, FaClock } from 'react-icons/fa6';
 
 
 function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
@@ -64,13 +64,15 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
 
         {/* O container ainda existe, mas será estilizado para ser invisível */}
         <div className="list-container">
-          {filteredChecklists.map((item) => (
-            <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
-              <div className="list-item">
+        {filteredChecklists.map((item) => (
+          <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
+             <div className="list-item checklist-item-with-icon"> {/* Adiciona nova classe */}
+                {/* 2. Adiciona o ícone aqui */}
+                <FaBrain className="item-prefix-icon" /> 
                 <div className="list-item-content">
                   <h3>{item.title}<span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span></h3>
                   <p className="due-date-text">
-                    <FaClock className="due-date-icon" /> {item.dueDate}
+                    <FaClock className="due-date-icon" /> <strong>Vencimento:</strong> {item.dueDate}
                   </p>
                 </div>
                 <button
@@ -80,9 +82,9 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
                   <FaTrash />
                 </button>
               </div>
-            </Link>
-          ))}
-        </div>
+          </Link>
+        ))}
+      </div>
       </div>
     </>
   );

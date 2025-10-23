@@ -2,7 +2,7 @@ import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes, securityAlerts } from '../data/mockData'; // Certifique-se que 'videos' está aqui se precisar
 import { Link } from 'react-router-dom';
-import { FaClock } from 'react-icons/fa';
+import { FaClock, FaBrain, FaClipboard } from 'react-icons/fa';
 
 function Dashboard({checklists}) {
 
@@ -24,33 +24,31 @@ function Dashboard({checklists}) {
         <div className="main-column">
           <div className="dashboard-section">
             <div className="section-title-with-counter">
-              {/* Agrupa Título e Contador */}
               <div className="title-and-counter">
                 <h2>Checklists Pendentes</h2>
                 <span className={`pending-counter ${pendingCount === 0 ? 'zero' : ''}`}>{pendingCount}</span>
               </div>
-              {/* Botão Ver Todos (condicional) */}
               {pendingCount > 0 && (
                 <Link to="/checklists" className="view-all-link">Ver Todos</Link>
               )}
             </div>
 
             {pendingCount === 0 ? (
-              // Se não houver checklists pendentes, mostra este card:
               <div className="all-completed-card card">
                 <h3>Parabéns! 🎉</h3>
                 <p>Você não possui nenhum checklist pendente.</p>
               </div>
             ) : (
-              // Caso contrário, mostra a lista de pendentes:
               <div className="list-container">
                 {pendingChecklists.slice(0, 3).map(item => (
                   <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
-                    <div className="list-item">
+                    {/* --- ALTERAÇÃO APLICADA AQUI --- */}
+                    <div className="list-item checklist-item-with-icon"> 
+                      <FaBrain className="item-prefix-icon" /> 
                       <div className="list-item-content">
                         <h3>{item.title}</h3>
                         <p className="due-date-text">
-                          <FaClock className="due-date-icon" /> {item.dueDate}
+                          <FaClock className="due-date-icon" /> Vence em: {item.dueDate}
                         </p>
                       </div>
                       <span className={`status-badge ${item.status}`}>
@@ -61,7 +59,6 @@ function Dashboard({checklists}) {
                 ))}
               </div>
             )}
-
           </div>
         </div>
         
@@ -110,24 +107,24 @@ function Dashboard({checklists}) {
 
         <div className="sidebar-column">
           <div className="dashboard-section">
-            <div className="section-title-with-counter"> 
-              <div className="title-and-counter"> 
+            <div className="section-title-with-counter">
+              <div className="title-and-counter">
                 <h2>Quizzes Recomendados</h2>
               </div>
-              <Link to="/videos" className="view-all-link">Ver Todos</Link>
+              <Link to="/quizzes" className="view-all-link">Ver Todos</Link>
             </div>
             <div className="list-container">
               {quizzes.slice(0, 3).map(quiz => (
-                // 2. Cada item agora é um Link envolvendo um list-item
                 <Link to={`/quizzes/${quiz.id}`} key={quiz.id} className="list-item-link">
-                  <div className="list-item quiz-item"> {/* Adicionamos classe 'quiz-item' */}
+                  {/* --- ALTERAÇÃO APLICADA AQUI: Ícone FaClipboard --- */}
+                  <div className="list-item quiz-item quiz-item-with-icon"> {/* Adiciona nova classe para estilo */}
+                    <FaClipboard className="item-prefix-icon quiz-prefix-icon" /> {/* Usa FaClipboard */}
                     <div className="list-item-content">
                       <h3>{quiz.title}</h3>
                       <p className="due-date-text">
-                          <FaClock className="due-date-icon" /> {quiz.dueDate}
-                        </p>
+                        <FaClock className="due-date-icon" /> {quiz.dueDate}
+                      </p>
                     </div>
-                    {/* 3. Botão "Iniciar Quiz" estilizado como link */}
                     <span className="list-item-action">Iniciar Quiz</span>
                   </div>
                 </Link>
@@ -140,12 +137,6 @@ function Dashboard({checklists}) {
         {/* <div className="sidebar-column"> ... </div> */}
       </div>
 
-      {/* Seção extra que você tinha (pode remover se não precisar) */}
-      <div className='dashboard-section'>
-        <div className='new-section' style={{padding: '1rem', textAlign: 'center'}}>
-          <p>Nova seção em breve!</p>
-        </div>
-      </div>
     </>
   );
 }

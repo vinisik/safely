@@ -182,7 +182,7 @@ main {
   color: #042139;
   padding: 0.8rem 1.5rem;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
@@ -217,7 +217,7 @@ main {
   font-size: 1.7rem;
   margin-bottom: 1.2rem;
   color: var(--text-color);
-  border-left: 5px solid var(--primary-color);
+  border-left: 5px solid var(--secondary-company-color);
   padding-left: 1rem;
 }
 .new-section {
@@ -611,7 +611,7 @@ main {
   padding: 0.6rem 1.2rem;
   border: 1px solid #ccc;
   background-color: transparent;
-  border-radius: 20px;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -639,6 +639,65 @@ main {
 }
 .list-item.quiz-item {
   align-items: center; /* Alinha verticalmente */
+}
+.list-item.checklist-item-with-icon {
+  display: flex;
+  align-items: center; /* Alinha verticalmente */
+  gap: 1rem; /* Espaço entre o ícone e o conteúdo */
+}
+
+/* Estilo para o ícone de prefixo (cérebro) */
+.item-prefix-icon {
+  font-size: 2.5rem; /* Tamanho do ícone */
+  color: var(--primary-color); /* Cor do ícone */
+  background-color: #e9f5ff; /* Fundo azul claro (opcional) */
+  padding: 8px; /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  flex-shrink: 0; /* Impede que o ícone encolha */
+}
+
+/* Garante que o conteúdo principal ocupe o espaço restante */
+.checklist-item-with-icon .list-item-content {
+  flex-grow: 1;
+}
+
+/* Ajusta a posição do botão delete e do ícone de alerta/badge */
+.checklist-item-with-icon .btn-delete,
+.checklist-item-with-icon .alert-icon,
+.checklist-list-page .list-item-content .status-badge { 
+  margin-left: auto; /* Empurra para a direita */
+  position: static; /* Remove o posicionamento absoluto se houver */
+  transform: none; /* Remove a transformação se houver */
+}
+
+/* Ajusta o item da lista de quiz para acomodar o ícone */
+.list-item.quiz-item.quiz-item-with-icon { /* Garante que a classe combine com o HTML */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Estilo para o ícone de quiz (clipboard) - se quiser cor diferente */
+.item-prefix-icon.quiz-prefix-icon {
+  background-color: #e6f7ff; /* Fundo azul mais claro para quizzes, por exemplo */
+  color: var(--primary-color); /* Cor do ícone para quizzes */
+}
+
+/* Garante que o conteúdo principal ocupe o espaço restante */
+.quiz-item-with-icon .list-item-content {
+  flex-grow: 1;
+}
+
+/* Ajusta a posição do botão "Iniciar Quiz" */
+.quiz-item-with-icon .list-item-action { 
+  margin-left: auto; /* Empurra para a direita */
+  flex-shrink: 0; /* Impede que o botão encolha */
+}
+
+/* Pequeno ajuste para o badge na lista não ficar colado no botão delete */
+.checklist-list-page .list-item-content .status-badge {
+    margin-left: 0; /* Reset no H3 */
+    margin-right: 1rem; /* Espaço antes do botão delete */
 }
 .due-date-text {
   display: flex;
@@ -807,7 +866,7 @@ main {
     background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
