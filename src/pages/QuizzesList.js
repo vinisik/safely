@@ -1,6 +1,7 @@
 import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { quizzes } from '../data/mockData';
+import { FaClock } from 'react-icons/fa6';
 
 // Simula uma lista maior
 const allQuizzes = [...quizzes];
@@ -24,7 +25,9 @@ function QuizzesList() {
             to={`/quiz/${quiz.id}`}
             thumbnail={quiz.thumbnail}
             title={quiz.title}
-            description={`Vence em: ${quiz.dueDate}`}
+            description={<p className="due-date-text">
+                          <FaClock className="due-date-icon" /> {quiz.dueDate}
+                        </p>}
             buttonText="Iniciar Quiz"
           />
         ))}

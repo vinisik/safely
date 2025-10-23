@@ -40,7 +40,7 @@ body {
 main {
   flex-grow: 1;
   padding: 1.5rem 2rem;
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   width: 100%;
 }
@@ -207,6 +207,11 @@ main {
 /* Seções do Dashboard */
 .dashboard-section {
   margin-bottom: 2.5rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-bottom: 0px;
+  border: 0.8px solid rgba(0, 0, 0, 0.1);
 }
 .dashboard-section h2 {
   font-size: 1.7rem;
@@ -251,7 +256,48 @@ main {
 .dashboard-row {
   display: flex;
   gap: 1.5rem;
-  align-items: flex-start;
+  align-items: stretch; /* Garante que as colunas filhas tenham a mesma altura */
+  margin-bottom: 1.5rem;
+  
+}
+/* Faz as colunas ocuparem 100% da altura da linha */
+.dashboard-row > .main-column,
+.dashboard-row > .sidebar-column {
+  display: flex; /* Permite que a seção interna se estique */
+  flex-direction: column; /* Empilha o conteúdo da coluna */
+}
+
+/* Faz a seção do dashboard ocupar toda a altura da coluna */
+.dashboard-row > .main-column > .dashboard-section,
+.dashboard-row > .sidebar-column > .dashboard-section {
+  display: flex; /* Permite que o container/card interno se estique */
+  flex-direction: column; /* Empilha título e conteúdo */
+  flex-grow: 1; /* Faz a seção crescer para ocupar a coluna */
+  height: 100%; /* Ocupa 100% da altura da coluna pai */
+}
+
+/* Faz o container da lista ou o card de alerta ocupar toda a altura da seção */
+.dashboard-row .list-container,
+.dashboard-row .alerts-container,
+.dashboard-row .daily-tasks-card,
+.dashboard-row .all-completed-card {
+   display: flex; /* Permite flexibilidade interna */
+   flex-direction: column; /* Empilha os itens internos */
+   flex-grow: 1; /* Faz o container crescer para ocupar a seção */
+   height: 100%; /* Ocupa 100% da altura disponível */
+}
+
+/* Garante que o card de alerta individual se estique se for o único item */
+.alerts-container .alert-card {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.alerts-container .alert-card p {
+    flex-grow: 1; /* Faz o parágrafo ocupar espaço disponível */
+}
+.dashboard-row a {
+  text-decoration: none;
 }
 .main-column {
   flex: 2.5;
@@ -259,13 +305,83 @@ main {
   width: 100%;
 }
 .sidebar-column {
-  flex: 3;
+  flex: 1.5;
   min-width: 0;
   width: 100%;
 }
 .main-column .card-grid {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-light-color);
+  margin-top: -0.8rem; /* Puxa para mais perto do título */
+  margin-bottom: 1.5rem;
+  display: block; /* Garante que o span ocupa sua própria linha */
+}
+
+.alerts-container {
+  /* Pode ser um grid se tiver múltiplos alertas, mas para 1 é um flex item */
+}
+
+.alert-card {
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  background-color: var(--card-bg-color); /* Cor de fundo padrão do card */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden; /* Garante que nada saia do card */
+  margin-bottom: 15px;
+}
+
+.alert-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+.alert-card p {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  line-height: 1.5;
+  margin-bottom: 0.8rem;
+}
+
+.alert-card .alert-time {
+  font-size: 0.8rem;
+  color: var(--text-light-color);
+  display: block; /* Para garantir que o tempo fique em sua própria linha */
+  text-align: right;
+  margin-top: 1rem;
+}
+
+/* Estilos de borda baseados na prioridade (opcional) */
+.alert-card.priority-low {
+  border: 1px solid #6c757d; /* Cinza */
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.alert-card.priority-medium {
+  border: 1px solid #ffc107; /* Amarelo */
+  background-color: #fff3cd;
+  color: #ffc107;
+}
+
+.alert-card.priority-high {
+  background-color: #f8d7da;
+  border: 1px solid #f76f6f;
+  color: #f76f6f;
+}
+
+/* Estilo para a borda amarela da imagem que você mostrou */
+.alert-card.priority-medium { /* Ou crie uma classe específica se for fixo */
+  border: 1px solid #FFC107; /* Borda amarela */
+  background-color: #fffde7; /* Fundo ligeiramente amarelado */
+}
+
 
 
 /* ==========================================================================
@@ -275,16 +391,16 @@ main {
 /* Grade de Cards */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 1.5rem;
 }
+
 /* Card Genérico */
 .card {
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   text-decoration: none;
   color: var(--text-color);
   display: flex;
@@ -397,7 +513,39 @@ main {
 /* --- ESTILOS PARA O CONTADOR DE PENDÊNCIAS --- */
 .section-title-with-counter {
   display: flex;
-  gap: 10px; /* Espaço entre o título e o contador */
+  align-items: center;
+  justify-content: space-between; /* Empurra o título/contador para um lado e o link para o outro */
+  gap: 10px; 
+  margin-bottom: 1.2rem; /* Espaço entre o título e o contador */
+}
+
+.title-and-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Remove a margem inferior do H2 que está dentro do title-and-counter */
+.section-title-with-counter h2 {
+    margin-bottom: 0; 
+}
+
+/* Estilo para o link "Ver Todos" */
+.view-all-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: 1px solid #ccc; /* Borda sutil como na imagem */
+  padding: 0.3rem 0.8rem;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.view-all-link:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
 }
 
 .pending-counter {
@@ -476,7 +624,6 @@ main {
 .list-container {
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
   overflow: hidden;
   width: 100%;
 }
@@ -485,11 +632,48 @@ main {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid #eee;
+  border-radius: 15px;
+  border: 1px solid #eee;
+  margin-bottom: 15px;
   width: 100%;
 }
-.list-item:last-child {
-  border-bottom: none;
+.list-item.quiz-item {
+  align-items: center; /* Alinha verticalmente */
+}
+.due-date-text {
+  display: flex;
+  align-items: center; /* Alinha verticalmente */
+  gap: 6px; /* Espaço entre o ícone e o texto */
+  font-size: 0.85rem; /* Ajusta o tamanho da fonte se necessário */
+  color: #666; /* Cor do texto da data */
+}
+
+/* Estilo para o ícone do relógio */
+.due-date-icon {
+  flex-shrink: 0; /* Impede que o ícone encolha */
+  /* Ajuste o tamanho ou a cor se necessário */
+  /* font-size: 0.8rem; */
+  /* color: #888; */
+}
+
+/* Estilo para o 'botão' Iniciar Quiz */
+.list-item-action {
+  background-color: var(--secondary-color);
+  color: #042139;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  white-space: nowrap; /* Impede que o texto quebre linha */
+  margin-left: 1rem; /* Espaço à esquerda */
+  transition: background-color 0.2s;
+}
+
+.list-item-link:hover .list-item-action {
+  background-color: #84c8f5; /* Cor do hover do botão */
+}
+.list-container .list-item-link:last-child .list-item {
+  margin-bottom: none; /* Remove a borda inferior APENAS do último item */
 }
 .list-item-content h3 {
   font-size: 1.1rem;
@@ -757,28 +941,79 @@ main {
   margin-bottom: 2rem;
 }
 
+.checklist-list-page .list-container {
+  background-color: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0; /* Remove padding interno se houver */
+}
+
+/* Adiciona espaçamento entre os links (que agora são os "cards" visíveis) */
+.checklist-list-page .list-item-link {
+  display: block; /* Garante que a margem funcione */
+  margin-bottom: 1rem; /* Espaço entre os itens */
+}
+.checklist-list-page .list-item-link:last-child {
+  margin-bottom: 0; /* Remove a margem do último item */
+}
+
+
+/* Adiciona fundo, sombra e padding aos itens individuais */
+.checklist-list-page .list-item {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  border-bottom: none; /* Remove a linha divisória original */
+  padding: 1.5rem; /* Aumenta um pouco o padding interno */
+  transition: box-shadow 0.2s ease-in-out; /* Adiciona transição suave */
+}
+
+
+.checklist-list-page .list-item-link .btn-delete {
+  right: 1.5rem; 
+}
+
+/* Ajuste no badge de status */
+.checklist-list-page .list-item-content h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    margin-bottom: 0.5rem; 
+}
+.checklist-list-page .list-item-content p {
+    margin-bottom: 0; 
+    margin-left: 0; /* Alinha a data com o título */
+}
+.checklist-list-page .status-badge {
+    order: 1; 
+    margin-left: auto; 
+
+}
+
 /* Página de Pontos */
 .points-page {
-  max-width: 1000px;
+  /* max-width: 1000px; */
   margin: 0 auto;
 }
 .points-summary {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow);
-  margin-bottom: 2.5rem;
   flex-wrap: wrap;
   gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 0.8px solid rgba(0, 0, 0, 0.1);
 }
 
 .points-summary-column {
   display: flex;
   flex-direction: column; /* Empilha os itens verticalmente */
   gap: 1.5rem; /* Espaçamento entre os dois cards */
-  flex: 1; /* Faz a coluna ocupar 1 parte do espaço */
+  flex: 1.5; /* Faz a coluna ocupar 1 parte do espaço */
 }
 
 .points-summary-column .points-summary {
@@ -812,7 +1047,12 @@ main {
   color: var(--text-color);
 }
 .points-section {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 0.8px solid rgba(0, 0, 0, 0.1);
 }
 .points-section h2 {
   font-size: 1.7rem;
@@ -832,7 +1072,7 @@ main {
 }
 
 .points-summary {
-  flex: 1; /* Ocupa 1 parte do espaço */
+  flex: 3; /* Ocupa 1 parte do espaço */
   margin-bottom: 0; /* Remove a margem que estava nele */
   display: flex;
   flex-direction: column;
@@ -840,7 +1080,13 @@ main {
 }
 
 .points-chart-section {
-  flex: 1.5; /* Ocupa 1.5 parte do espaço, deixando o gráfico um pouco maior */
+  flex: 1.5; 
+  margin-bottom: 2.5rem;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  border: 0.8px solid rgba(0, 0, 0, 0.1);
 }
 
 .points-chart-section h2 {
@@ -854,8 +1100,15 @@ main {
 /* Garante que o container do gráfico não tenha padding/margem extra desnecessária */
 .points-chart-section .chart-container {
     margin: 0;
-    width: 100%;
     max-width: none; /* Remove a largura máxima que tinha antes */
+}
+.chart-card {
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  flex: 1.5;
 }
 
 
@@ -887,7 +1140,7 @@ main {
     height: auto !important;
 }
 .badges-grid {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 .badge-card {
   text-align: center;
@@ -1321,7 +1574,7 @@ main {
 }
 
 .rewards-grid {
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .reward-card {
@@ -1717,6 +1970,15 @@ main {
   /* Layout de colunas do dashboard volta a ser vertical */
   .dashboard-row {
     flex-direction: column;
+    align-items: stretch;
+  }
+  .dashboard-row > .main-column > .dashboard-section,
+  .dashboard-row > .sidebar-column > .dashboard-section,
+  .dashboard-row .list-container,
+  .dashboard-row .alerts-container,
+  .dashboard-row .daily-tasks-card,
+  .dashboard-row .all-completed-card {
+     height: auto;
   }
 
   .logo-tagline {

@@ -42,6 +42,14 @@ export const videos = [
     videoUrl: '/videos/nr35.mp4',
     dueDate: '05/11/2025',
   },
+  {
+    id: 4,
+    title: 'Segurança em Trabalho em Altura',
+    thumbnail: thumbAltura,
+    description: 'Conheça os procedimentos e equipamentos essenciais para realizar trabalhos em altura com máxima segurança.',
+    videoUrl: '/videos/nr35.mp4',
+    dueDate: '05/11/2025',
+  },
 ];
 
 export const quizzes = [
@@ -178,7 +186,7 @@ export const checklists = [
     id: 201, 
     title: 'Verificação Pré-Uso - Prensa Hidráulica PH-02', 
     status: 'pending',
-    dueDate: '20/10/2025',
+    dueDate: 'Amanhã, 9:30',
     items: [
       { id: 1, text: 'Botão de parada de emergência está desobstruído e funcional?' },
       { id: 2, text: 'Guardas de proteção (frontal e lateral) estão no lugar e sem avarias?' },
@@ -191,7 +199,7 @@ export const checklists = [
     id: 202, 
     title: 'Checklist: Trabalho em Altura', 
     status: 'pending',
-    dueDate: '20/10/2025',
+    dueDate: 'Em 5 dias',
     items: [
         { id: 1, text: 'Cinto de segurança e talabarte foram inspecionados?' },
         { id: 2, text: 'O ponto de ancoragem é seguro e foi verificado?' },
@@ -201,7 +209,7 @@ export const checklists = [
     id: 203, 
     title: 'Inspeção de Ferramentas Elétricas', 
     status: 'pending',
-    dueDate: '29/11/2025',
+    dueDate: 'Em 5 dias',
     items: []
   },
   { 
@@ -315,4 +323,22 @@ export const rewards = [
     image: rewardCertificado,
     stock: 20,
   },
+];
+export const securityAlerts = [
+  {
+    id: 1,
+    title: 'Manutenção Programada - Setor B',
+    message: 'Equipamentos estarão em manutenção amanhã das 14h às 16h. Use rotas alternativas.',
+    timeAgo: 'Há 2 horas',
+    priority: 'medium', // 'low', 'medium', 'high'
+    icon: 'wrench' // Poderíamos usar um ícone aqui
+  },
+  {
+    id: 2,
+    title: 'Simulado de Emergência',
+    message: 'Simulado de evacuação será realizado na próxima terça-feira às 10h. Esteja atento às instruções.',
+    timeAgo: 'Ontem',
+    priority: 'high',
+    icon: 'fire-extinguisher'
+  }
 ];

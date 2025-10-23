@@ -64,7 +64,7 @@ function MyPoints({ totalPoints }) {
   }), [isMobile]);
 
   return (
-    <div className="page-container points-page">
+    <div className="points-page">
       
       <title>Safely | Meus Pontos</title>
       
@@ -74,24 +74,25 @@ function MyPoints({ totalPoints }) {
 
       <div className="points-header-layout">
         {/* Coluna para empilhar os cards de resumo */}
-        <div className="points-summary-column">
-          <div className="points-summary card">
-            <div className="point-item">
-              <h2><FaTrophy/> Total de Pontos</h2>
-              <p className="large-number">{totalPoints}</p>
+            <div className="points-summary-column">
+            <div className="points-summary ">
+              <div className="point-item">
+                <h2><FaTrophy/> Total de Pontos</h2>
+                <p className="large-number">{totalPoints}</p>
+              </div>
+            </div>
+            <div className="points-summary ">
+              <div className="point-item">
+                <h2><IoIosPodium/> Seu Rank Atual</h2>
+                <p className="large-text">{rank}</p>
+              </div>
             </div>
           </div>
-          <div className="points-summary card">
-            <div className="point-item">
-              <h2><IoIosPodium/> Seu Rank Atual</h2>
-              <p className="large-text">{rank}</p>
-            </div>
-          </div>
-        </div>
+
 
         {/* Coluna do gráfico */}
         <div className="points-chart-section">
-          <div className="chart-container card">
+          <div className="chart-container chart-card">
             <h2><FaChartPie/> Distribuição dos Pontos</h2>
             <div className="chart-container-wrapper">
                 <Pie data={chartData} options={chartOptions} />
@@ -130,6 +131,16 @@ function MyPoints({ totalPoints }) {
             <h3>Concluir "EPIs Avançado"</h3>
             <p>Ganhe 150 pontos!</p>
             <Link to="/videos/1" className="btn-challenge">Iniciar Treinamento</Link>
+          </div>
+          <div className="challenge-card card">
+            <h3>Responder 3 Quizzes com 100%</h3>
+            <p>Ganhe 200 pontos e o badge "Mestre Aprovado"!</p>
+            <Link to="/quizzes" className="btn-challenge">Ver Quizzes</Link>
+          </div>
+          <div className="challenge-card card">
+            <h3>Responder 3 Quizzes com 100%</h3>
+            <p>Ganhe 200 pontos e o badge "Mestre Aprovado"!</p>
+            <Link to="/quizzes" className="btn-challenge">Ver Quizzes</Link>
           </div>
           <div className="challenge-card card">
             <h3>Responder 3 Quizzes com 100%</h3>
