@@ -3,8 +3,6 @@ import { rewards } from '../data/mockData';
 import { FaBagShopping } from 'react-icons/fa6';
 
 function RewardsPage({totalPoints}) {
-  // Para o protótipo, podemos repetir o total de pontos aqui.
-  // Em uma aplicação real, essa informação viria de um local compartilhado
   return (
     <div className="page-container">
       <title>Safely | Recompensas</title>
@@ -12,7 +10,7 @@ function RewardsPage({totalPoints}) {
         <h1><FaBagShopping/> Loja de Recompensas</h1>
       </div>
       <p className="rewards-subtitle">
-        Você tem <strong>{totalPoints} pontos</strong>. Use-os para resgatar prêmios exclusivos!
+        Você tem <strong>{totalPoints} pontos</strong>
       </p>
       <div className="rewards-grid card-grid">
         {rewards.map((reward) => (

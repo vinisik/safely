@@ -34,7 +34,11 @@ function App() {
   };
 
   const handleLogout = () => {
-    setUser(null);
+    setUser(null); // Limpa o usuário logado
+    setTotalPoints(1250); // Reseta a pontuação para o valor inicial
+    setChecklistsData(initialChecklists); // Reseta a lista de checklists para a original
+    setCompletedVideoIds(new Set()); // Limpa a lista de vídeos concluídos
+    setIsChatOpen(false);
   };
 
   const markVideoAsCompleted = (videoId, pointsValue = 75) => { // Pontuação padrão de 75

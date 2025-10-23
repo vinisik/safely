@@ -18,7 +18,7 @@ function Dashboard({checklists}) {
       </div>
 
       <div className="dashboard-section">
-        <h2>Continuar Assistindo</h2>
+        <h2>Assistir</h2>
         <div className="card-grid">
           {videos.slice(0, 3).map(video => (
             <ContentCard
@@ -71,7 +71,7 @@ function Dashboard({checklists}) {
 
         <div className="sidebar-column">
           <div className="dashboard-section">
-            <h2>Próximos Quizzes</h2>
+            <h2>Quizzes Recomendados</h2>
             <div className="card-grid">
               {quizzes.slice(0, 2).map(quiz => (
                 <ContentCard
