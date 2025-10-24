@@ -19,11 +19,11 @@ function ProfilePage({ user, checklists, totalPoints }) {
       </div>
 
       <div className="profile-info-grid">
-        <div className="info-card card">
+        <div className="info-card">
           <h3>Tarefas Pendentes</h3>
           <p>{pendingTasks}</p>
         </div>
-        <div className="info-card card">
+        <div className="info-card">
           <h3>Pontuação Total</h3>
           <p>{totalPoints}</p>
         </div>

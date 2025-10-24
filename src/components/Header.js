@@ -9,6 +9,8 @@ function Header({ user, onLogout }) {
   const dropdownRef = useRef(null);
   const isMobile = useIsMobile
 
+  const companyInfo = 'Michelin - Itatiaia';
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -43,9 +45,15 @@ function Header({ user, onLogout }) {
         <div className="user-info" onClick={() => setDropdownOpen(!isDropdownOpen)}>
           <img src={user.profilePictureUrl} alt="Avatar do Usuário" />
           {isMobile && (
-            <span className="user-name">
-              {user.name}
-            </span>
+            <div className='user-details'>
+              <span className="user-name">
+                {user.name}
+              </span>
+              <span className="user-subtitle">
+                  {companyInfo} 
+              </span>
+            </div>
+            
           )}
           <span className={`dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}><FaAngleDown/></span>
         </div>

@@ -86,7 +86,7 @@ function App() {
         <Header user={user} onLogout={handleLogout} />
         <main>
           <Routes>
-            <Route path="/" element={<Dashboard checklists={checklistsData} />} />
+            <Route path="/" element={<Dashboard checklists={checklistsData} user={user} totalPoints={totalPoints}/>} />
             <Route path="/videos" element={<VideosList />} />
             <Route path="/videos/:id" element={<VideoPage markVideoAsCompleted={markVideoAsCompleted} completedVideoIds={completedVideoIds}/>} />
             <Route path="/quizzes" element={<QuizzesList />} />

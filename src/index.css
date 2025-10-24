@@ -59,6 +59,38 @@ main {
   max-height: 90px;
 }
 
+/* --- ESTILOS PARA SUBTÍTULO NO HEADER --- */
+.user-info {
+  display: flex;
+  align-items: center; 
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* Container para nome e subtítulo */
+.user-details {
+  display: flex;
+  flex-direction: column; 
+  line-height: 1.2; 
+}
+
+/* Estilo para o nome do usuário (pode já existir) */
+.user-name {
+  display: block;
+  font-weight: 500; 
+  font-size: 0.95rem; 
+}
+
+/* Novo estilo para o subtítulo */
+.user-subtitle {
+  font-size: 0.75rem; 
+  color: #777;
+}
+
+.user-info .dropdown-arrow {
+  margin-left: 5px; 
+}
+
 
 /* .logo-text-container {
   display: flex;
@@ -251,6 +283,89 @@ main {
   display: none;
 }
 
+.welcome-section {
+  margin-bottom: 2rem;
+}
+
+.welcome-section h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.summary-card {
+  display: flex;
+  justify-content: space-between; 
+  background-color: #ffffff;
+  padding: 1rem 1.2rem;
+  min-height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra mais sutil por padrão */
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Permite que o conteúdo cresça e ocupe o espaço */
+  margin-right: 1rem; /* Adiciona um espaço entre o texto e o ícone */
+}
+
+.summary-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0.3rem;
+}
+
+.summary-value {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.2rem;
+}
+
+.summary-subtext {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.summary-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-shrink: 0; /* Impede que o ícone encolha se o texto for muito longo */
+}
+
+/* Cores específicas (mantêm-se as mesmas) */
+.icon-calendar {
+  background-color: #e0f2f7;
+  color: #2e7d32;
+}
+.icon-check {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+.icon-medal {
+  background-color: #f3e5f5;
+  color: #6a1b9a;
+}
 
 /* Layout de Colunas do Dashboard */
 .dashboard-row {
@@ -1551,8 +1666,11 @@ main {
 }
 
 .info-card {
+  background-color: #ffffff;
   text-align: center;
   padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .info-card h3 {
@@ -2054,7 +2172,9 @@ main {
   .user-name {
     display: none;
   }
-
+  .user-details {
+    display: none;
+  }
   .user-info .dropdown-arrow {
     display: none;
   }
@@ -2138,6 +2258,9 @@ main {
   }
 
   .user-name {
+    display: none;
+  }
+  .user-details {
     display: none;
   }
 
@@ -2225,6 +2348,9 @@ main {
   }
 
   .user-name {
+    display: none;
+  }
+  .user-details {
     display: none;
   }
 
