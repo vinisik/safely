@@ -35,7 +35,7 @@ function App() {
 
   const handleLogout = () => {
     setUser(null); // Limpa o usuário logado
-    setTotalPoints(1250); // Reseta a pontuação para o valor inicial
+    setTotalPoints(0); // Reseta a pontuação para o valor inicial
     setChecklistsData(initialChecklists); // Reseta a lista de checklists para a original
     setCompletedVideoIds(new Set()); // Limpa a lista de vídeos concluídos
     setIsChatOpen(false);

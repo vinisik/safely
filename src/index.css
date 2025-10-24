@@ -239,7 +239,7 @@ main {
 /* Seções do Dashboard */
 .dashboard-section {
   margin-bottom: 2.5rem;
-  padding: 2rem;
+  padding: 1.5rem;
   background-color: #ffffff;
   border-radius: 15px;
   margin-bottom: 0px;
@@ -355,6 +355,10 @@ main {
 
 /* Cores específicas (mantêm-se as mesmas) */
 .icon-calendar {
+  color: #ff5a1e;
+  background-color: #fadfd5;
+}
+.icon-chalkboard{
   background-color: #e0f2f7;
   color: #2e7d32;
 }
@@ -2194,6 +2198,9 @@ main {
   .profile-dropdown .user-name-dropdown .arrow-up:hover {
     background-color: #666;
   }
+  .list-item-action {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2323,6 +2330,9 @@ main {
   .badges-grid, .challenges-list {
     grid-template-columns: 1fr;
   }
+  .list-item-action {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2373,5 +2383,8 @@ main {
   }
   .profile-dropdown .user-name-dropdown .arrow-up:hover {
     background-color: #666;
+  }
+  .list-item-action {
+    display: none;
   }
 }

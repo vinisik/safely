@@ -23,7 +23,7 @@ export const videos = [
     description: 'Aprenda a importância e a maneira correta de utilizar os Equipamentos de Proteção Individual para garantir sua segurança no ambiente de trabalho.',
     videoUrl: '/videos/epi-video.mp4',
     relatedQuizId: 101,
-    dueDate: '25/10/2025',
+    dueDate: '2 Min',
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ export const videos = [
     description: 'Este vídeo aborda os princípios fundamentais da ergonomia para prevenir lesões e melhorar o bem-estar no trabalho.',
     videoUrl: '/videos/ergonomia.mp4',
     relatedQuizId: 102,
-    dueDate: '31/10/2025',
+    dueDate: '2 Min',
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ export const videos = [
     thumbnail: thumbAltura,
     description: 'Conheça os procedimentos e equipamentos essenciais para realizar trabalhos em altura com máxima segurança.',
     videoUrl: '/videos/nr35.mp4',
-    dueDate: '05/11/2025',
+    dueDate: '7 Min',
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ export const videos = [
     thumbnail: thumbAltura,
     description: 'Conheça os procedimentos e equipamentos essenciais para realizar trabalhos em altura com máxima segurança.',
     videoUrl: '/videos/nr35.mp4',
-    dueDate: '05/11/2025',
+    dueDate: '7 Min',
   },
 ];
 

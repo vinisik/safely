@@ -2,7 +2,7 @@ import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes, securityAlerts } from '../data/mockData'; 
 import { Link } from 'react-router-dom';
-import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaCheckSquare, FaMedal } from 'react-icons/fa'; 
+import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaCheckSquare, FaMedal, FaChalkboardTeacher } from 'react-icons/fa'; 
 function Dashboard({user, checklists, totalPoints}) {
 
   // Filtra a lista para pegar apenas os checklists pendentes
@@ -20,6 +20,7 @@ function Dashboard({user, checklists, totalPoints}) {
 
   // Placeholder para Dias sem Acidentes
   const daysWithoutAccidents = 127;
+  const completedTraining = 0;
 
   // Saudação dinâmica
   const getCurrentGreeting = () => {
@@ -44,7 +45,6 @@ function Dashboard({user, checklists, totalPoints}) {
       </div> */}
       <div className="welcome-section">
         <h1>{greeting}, {user.name}!</h1>
-        <p>Bem-vindo(a) ao seu painel de segurança do trabalho</p>
       </div>
 
       <div className="summary-cards-grid">
@@ -72,10 +72,21 @@ function Dashboard({user, checklists, totalPoints}) {
           </div>
         </div>
 
+        <div className="summary-card">
+          <div className="summary-content">
+            <span className="summary-label">Treinamentos Completos</span>
+            <span className="summary-value">{completedTraining}</span>
+            <span className="summary-subtext">4 disponíveis</span> {/* Texto extra */}
+          </div>
+          <div className="summary-icon icon-chalkboard">
+            <FaChalkboardTeacher size={20}/>
+          </div>
+        </div>
+
         {/* Card: Pontos de Segurança */}
         <div className="summary-card">
           <div className="summary-content">
-            <span className="summary-label">Pontos de Segurança</span>
+            <span className="summary-label">Pontos</span>
             <span className="summary-value">{totalPoints}</span>
           </div>
           <div className="summary-icon icon-medal">
@@ -107,7 +118,7 @@ function Dashboard({user, checklists, totalPoints}) {
                 {pendingChecklists.slice(0, 3).map(item => (
                   <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
                     <div className="list-item checklist-item-with-icon"> 
-                      <FaBrain className="item-prefix-icon" /> 
+                      <FaClipboard className="item-prefix-icon" /> 
                       <div className="list-item-content">
                         <h3>{item.title}</h3>
                         <p className="due-date-text">
@@ -156,11 +167,12 @@ function Dashboard({user, checklists, totalPoints}) {
                   key={video.id}
                   to={`/videos/${video.id}`}
                   thumbnail={video.thumbnail}
+                  progress={Math.floor(Math.random() * 100)}
                   title={video.title}
                   description={<p className="due-date-text">
                           <FaClock className="due-date-icon" /> {video.dueDate}
                         </p>}
-                  progress={Math.floor(Math.random() * 100)}
+                  
                 />
               ))}
             </div>
@@ -180,7 +192,7 @@ function Dashboard({user, checklists, totalPoints}) {
                 <Link to={`/quizzes/${quiz.id}`} key={quiz.id} className="list-item-link">
                   {/* --- ALTERAÇÃO APLICADA AQUI: Ícone FaClipboard --- */}
                   <div className="list-item quiz-item quiz-item-with-icon"> {/* Adiciona nova classe para estilo */}
-                    <FaClipboard className="item-prefix-icon quiz-prefix-icon" /> {/* Usa FaClipboard */}
+                    <FaBrain className="item-prefix-icon quiz-prefix-icon" /> {/* Usa FaClipboard */}
                     <div className="list-item-content">
                       <h3>{quiz.title}</h3>
                       <p className="due-date-text">
