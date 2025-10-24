@@ -312,7 +312,7 @@ main {
   background-color: #ffffff;
   padding: 1rem 1.2rem;
   min-height: auto;
-  border-radius: 12px;
+  border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -351,6 +351,24 @@ main {
   align-items: center;
   color: white;
   flex-shrink: 0; /* Impede que o ícone encolha se o texto for muito longo */
+}
+
+.checklist-summary-grid {
+    margin-bottom: 2rem; /* Espaço antes dos controles de filtro */
+}
+
+/* Cores específicas para os ícones dos cards de resumo de checklists */
+.summary-icon.icon-total {
+  background-color: #e3f2fd; /* Azul claro */
+  color: #0d47a1;
+}
+.summary-icon.icon-pending {
+  background-color: #fff8e1; /* Amarelo claro */
+  color: #f57f17;
+}
+.summary-icon.icon-completed {
+  background-color: #e8f5e9; /* Verde claro */
+  color: #2e7d32;
 }
 
 /* Cores específicas (mantêm-se as mesmas) */
@@ -700,6 +718,7 @@ main {
 
 .search-bar-container {
   position: relative;
+  margin-bottom: 20px;
 }
 
 .search-icon {
@@ -1140,7 +1159,6 @@ main {
   background-color: var(--card-bg);
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: none; /* Remove a linha divisória original */
   padding: 1.5rem; /* Aumenta um pouco o padding interno */
   transition: box-shadow 0.2s ease-in-out; /* Adiciona transição suave */
 }
