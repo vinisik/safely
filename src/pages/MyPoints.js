@@ -119,7 +119,7 @@ function MyPoints({ totalPoints }) {
                       <Pie data={chartData} options={chartOptions} />
                   </div>
               </div>
-                <div className="summary-icon icon-poduim">
+                <div className="summary-icon icon-chart">
                     <FaChartPie size={20}/>
                 </div>
           </div>

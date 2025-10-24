@@ -289,7 +289,7 @@ main {
 
 .welcome-section h1 {
   font-size: 2.2rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-color);
   margin-bottom: 0.5rem;
 }
@@ -408,6 +408,10 @@ main {
 .icon-poduim {
   background-color: #e5e8f5;
   color: #1b459a;
+}
+.icon-chart {
+  background-color: #f5e5e5;
+  color: #9a1b1b;
 }
 .icon-brain {
   background-color: #e7e5f5;
@@ -2250,6 +2254,9 @@ main {
   .list-item-action {
     display: none;
   }
+  .welcome-section {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2293,6 +2300,9 @@ main {
 
   .profile-dropdown .user-name-dropdown .arrow-up:hover {
     background-color: #666;
+  }
+  .welcome-section {
+    display: none;
   }
 
   .logo-tagline {
@@ -2402,8 +2412,11 @@ main {
     }
 
     .search-bar {
-    width: 100%;
-  }
+      width: 100%;
+    }
+    .welcome-section {
+      display: none;
+    }
 
   .user-name {
     display: none;

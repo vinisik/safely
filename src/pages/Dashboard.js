@@ -45,6 +45,7 @@ function Dashboard({user, checklists, totalPoints}) {
       </div> */}
       <div className="welcome-section">
         <h1>{greeting}, {user.name}!</h1>
+        <p>Bem vindo(a) ao seu painel de segurança do trabalho.</p>
       </div>
 
       <div className="summary-cards-grid">
