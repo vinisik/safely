@@ -187,6 +187,7 @@ export const checklists = [
     title: 'Verificação Pré-Uso - Prensa Hidráulica PH-02', 
     status: 'pending',
     dueDate: 'Amanhã, 9:30',
+    category: 'Diária',
     items: [
       { id: 1, text: 'Botão de parada de emergência está desobstruído e funcional?' },
       { id: 2, text: 'Guardas de proteção (frontal e lateral) estão no lugar e sem avarias?' },
@@ -200,6 +201,7 @@ export const checklists = [
     title: 'Checklist: Trabalho em Altura', 
     status: 'pending',
     dueDate: 'Em 5 dias',
+    category: 'Semanal',
     items: [
         { id: 1, text: 'Cinto de segurança e talabarte foram inspecionados?' },
         { id: 2, text: 'O ponto de ancoragem é seguro e foi verificado?' },
@@ -210,6 +212,7 @@ export const checklists = [
     title: 'Inspeção de Ferramentas Elétricas', 
     status: 'pending',
     dueDate: 'Em 5 dias',
+    category: 'Semanal',
     items: []
   },
   { 
@@ -217,6 +220,7 @@ export const checklists = [
     title: 'Inspeção Semanal - Kit de Primeiros Socorros', 
     status: 'completed',
     dueDate: '15/10/2025',
+    category: 'Mensal',
     items: [
       { id: 1, text: 'Verificar validade dos medicamentos e antissépticos.' },
       { id: 2, text: 'Repor itens utilizados (gaze, esparadrapo, etc.).' },
@@ -227,6 +231,7 @@ export const checklists = [
     title: 'Verificação de Segurança - Área de Soldagem', 
     status: 'completed',
     dueDate: '14/10/2025',
+    category: 'Mensal',
     items: [
       { id: 1, text: 'Extintor de incêndio apropriado está acessível e inspecionado?' },
       { id: 2, text: 'O sistema de exaustão de fumos está funcionando corretamente?' },
@@ -237,6 +242,7 @@ export const checklists = [
     title: 'Checklist de Ergonomia - Posto de Montagem', 
     status: 'completed',
     dueDate: '12/10/2025',
+    category: 'Mensal',
     items: [
       { id: 1, text: 'A altura da bancada está adequada para o operador?' },
       { id: 2, text: 'A iluminação do posto de trabalho é suficiente?' },
@@ -247,6 +253,7 @@ export const checklists = [
     title: 'Checklist de Ordem e Limpeza (5S) - Setor B', 
     status: 'completed',
     dueDate: '13/10/2025',
+    category: 'Mensal',
     items: [
       { id: 1, text: 'Corredores e passagens estão livres de obstruções?' },
       { id: 2, text: 'Ferramentas estão guardadas nos locais designados?' },
@@ -258,6 +265,7 @@ export const checklists = [
     title: 'Verificação Diária - Veículo Utilitário', 
     status: 'completed',
     dueDate: '11/10/2025',
+    category: 'Quinzenal',
     items: [
       { id: 1, text: 'Nível do óleo e da água do radiador conferidos?' },
       { id: 2, text: 'Freios e luzes de alerta estão funcionando?' },
@@ -268,6 +276,7 @@ export const checklists = [
     title: 'Inspeção de Segurança - Painel Elétrico P-05', 
     status: 'completed',
     dueDate: '10/10/2025',
+    category: 'Diária',
     items: [
       { id: 1, text: 'A porta do painel fecha e trava corretamente?' },
       { id: 2, text: 'Não há sinais de superaquecimento ou fios expostos?' },
@@ -279,6 +288,7 @@ export const checklists = [
     title: 'Auditoria de EPIs - Linha de Produção 3', 
     status: 'completed',
     dueDate: '09/10/2025',
+    category: 'Mensal',
     items: [
       { id: 1, text: 'Todos os colaboradores estão utilizando os óculos de proteção?' },
       { id: 2, text: 'Os protetores auriculares estão sendo usados corretamente na área de ruído?' },

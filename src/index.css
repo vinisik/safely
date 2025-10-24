@@ -315,8 +315,25 @@ main {
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
+.summary-card-points {
+  display: flex;
+  background-color: #ffffff;
+  padding: 1rem 1.2rem;
+  flex: 1;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.summary-card-points h2 {
+  color: var(--primary-color);
+}
 
 .summary-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Permite que o conteúdo cresça e ocupe o espaço */
+  margin-right: 1rem; /* Adiciona um espaço entre o texto e o ícone */
+}
+.summary-content-points {
   display: flex;
   flex-direction: column;
   flex-grow: 1; /* Permite que o conteúdo cresça e ocupe o espaço */
@@ -387,6 +404,14 @@ main {
 .icon-medal {
   background-color: #f3e5f5;
   color: #6a1b9a;
+}
+.icon-poduim {
+  background-color: #e5e8f5;
+  color: #1b459a;
+}
+.icon-brain {
+  background-color: #e7e5f5;
+  color: #1b3b9a;
 }
 
 /* Layout de Colunas do Dashboard */
@@ -896,6 +921,13 @@ main {
   background-color: #e8f5e9;
   color: #2e7d32;
 }
+.checklist-category {
+  display: flex;
+  align-items: center; /* Alinha verticalmente */
+  gap: 6px; /* Espaço entre o ícone e o texto */
+  font-size: 0.85rem; /* Ajusta o tamanho da fonte se necessário */
+  color: #666;
+}
 
 /* --- ESTILOS PARA PÁGINA DE CHECKLIST --- */
 
@@ -1219,7 +1251,7 @@ main {
 
 
 .point-item {
-  text-align: center;
+  /* text-align: center; */
   flex: 1;
   min-width: 200px;
 }
@@ -1277,11 +1309,8 @@ main {
 .points-chart-section {
   flex: 1.5; 
   margin-bottom: 2.5rem;
-  padding: 2rem;
-  background-color: #ffffff;
   border-radius: 15px;
   margin-bottom: 20px;
-  border: 0.8px solid rgba(0, 0, 0, 0.1);
 }
 
 .points-chart-section h2 {
@@ -1322,6 +1351,8 @@ main {
 .chart-container {
   height: 100%;
   padding: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .chart-container-wrapper {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import safelyLogo from '../assets/logo.png';
+import safelyLogoLogin from '../assets/safelyLogin.png';
 import kaduPic from '../assets/kadu.png';
 import elisPic from '../assets/elis.png';
 import gabrielPic from '../assets/gabriel.png';
@@ -64,7 +64,7 @@ function LoginPage({ onLogin }) {
       <div className="login-form-container">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="login-header">
-            <img src={safelyLogo} alt="Safely Logo" />
+            <img src={safelyLogoLogin} alt="Safely Logo" />
             <h2>Bem-vindo(a) à SAFELY</h2>
             <p>Faça login para continuar</p>
           </div>

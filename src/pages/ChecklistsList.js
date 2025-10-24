@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddChecklistModal from '../components/AddChecklistModal';
-import { FaClipboard, FaClipboardList,  FaCheckCircle, FaClock, FaSearch} from 'react-icons/fa';
+import { FaClipboard, FaClipboardList,  FaCheckCircle, FaClock, FaSearch, FaCalendar} from 'react-icons/fa';
 
 function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -97,19 +97,19 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
               className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
               onClick={() => setActiveFilter('all')}
             >
-              Todos
+              Todos ({totalCount})
             </button>
             <button
               className={`filter-btn ${activeFilter === 'pending' ? 'active' : ''}`}
               onClick={() => setActiveFilter('pending')}
             >
-              Pendentes
+              Pendentes ({pendingCount})
             </button>
             <button
               className={`filter-btn ${activeFilter === 'completed' ? 'active' : ''}`}
               onClick={() => setActiveFilter('completed')}
             >
-              Concluídos
+              Concluídos ({completedCount})
             </button>
           </div>
         </div>
@@ -123,6 +123,7 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
                 <FaClipboard className="item-prefix-icon" /> 
                 <div className="list-item-content">
                   <h3>{item.title}</h3>
+                  <span className='checklist-category'><FaCalendar/> {item.category}</span>
                   <p className="due-date-text">
                     <FaClock className="due-date-icon" /> {item.dueDate}
                   </p>

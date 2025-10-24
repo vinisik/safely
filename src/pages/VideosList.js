@@ -1,7 +1,7 @@
 import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos } from '../data/mockData';
-import { FaSearch, FaClock } from 'react-icons/fa';
+import { FaSearch, FaClock, FaCheckCircle, FaPlay } from 'react-icons/fa';
 
 // Simula uma lista maior para o placeholder
 const allVideos = [...videos];
@@ -12,9 +12,40 @@ function VideosList() {
       <title>Safely | Treinamento</title>
       <div className="page-header">
         <h1>Treinamentos em Vídeo</h1>
-        
       </div>
       <div className='page-container' >
+        <div className="summary-cards-grid checklist-summary-grid"> {/* Adiciona classe específica */}
+                  {/* Card Total */}
+                  <div className="summary-card">
+                    <div className="summary-content">
+                      <span className="summary-value">4</span>
+                      <span className="summary-label">Total Disponível</span>
+                    </div>
+                    <div className="summary-icon icon-total"> {/* Classe específica para cor */}
+                      <FaPlay size={20}/>
+                    </div>
+                  </div>
+                  {/* Card Pendentes */}
+                  <div className="summary-card">
+                    <div className="summary-content">
+                      <span className="summary-value">4</span>
+                      <span className="summary-label">Treinamentos Pendentes</span>
+                    </div>
+                    <div className="summary-icon icon-pending"> {/* Classe específica para cor */}
+                      <FaClock size={20}/>
+                    </div>
+                  </div>
+                  {/* Card Concluídos */}
+                  <div className="summary-card">
+                    <div className="summary-content">
+                      <span className="summary-value">0</span>
+                      <span className="summary-label">Concluídos</span>
+                    </div>
+                    <div className="summary-icon icon-completed"> {/* Classe específica para cor */}
+                       <FaCheckCircle size={20}/>
+                    </div>
+                  </div>
+                </div>
         <div className="search-bar-container">
           <FaSearch className="search-icon" /> 
           <input 
@@ -24,9 +55,9 @@ function VideosList() {
           />
         </div>
         <div className="filter-buttons" style={{marginBottom: '20px'}}>
-          <button className="filter-btn active">Todos</button>
-          <button className="filter-btn">Pendentes</button>
-          <button className="filter-btn">Concluídos</button>
+          <button className="filter-btn active">Todos (4)</button>
+          <button className="filter-btn">Pendentes (4)</button>
+          <button className="filter-btn">Concluídos (0)</button>
         </div>
         <div className="card-grid">
           {allVideos.map((video, index) => (

@@ -3,7 +3,7 @@ import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
 import useIsMobile from '../hooks/useIsMobile';
-import { FaHelmetSafety, FaBrain, FaClipboardCheck, FaQuestion, FaTrophy, FaChartPie, FaBagShopping } from 'react-icons/fa6';
+import { FaHelmetSafety, FaBrain, FaClipboardCheck, FaQuestion, FaChartPie, FaBagShopping, FaMedal } from 'react-icons/fa6';
 import { IoIosPodium } from 'react-icons/io';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -75,28 +75,53 @@ function MyPoints({ totalPoints }) {
       <div className="points-header-layout">
         {/* Coluna para empilhar os cards de resumo */}
             <div className="points-summary-column">
-            <div className="points-summary ">
+              <div className="summary-card-points">
+                <div className="summary-content-points">
+                  <h2>Pontuação Total</h2>
+                  <span className="summary-value">{totalPoints}</span>
+                </div>
+                <div className="summary-icon icon-medal">
+                    <FaMedal size={20}/>
+                </div>
+              </div>
+              
+              <div className="summary-card-points">
+                <div className="summary-content-points">
+                  <h2> Seu Rank Atual</h2>
+                  <span className="large-text">{rank}</span>
+                </div>
+                <div className="summary-icon icon-poduim">
+                    <IoIosPodium size={20}/>
+                </div>
+              </div>
+              
+            {/* <div className="points-summary ">
               <div className="point-item">
                 <h2><FaTrophy/> Total de Pontos</h2>
                 <p className="large-number">{totalPoints}</p>
               </div>
-            </div>
-            <div className="points-summary ">
+            </div> */}
+
+            {/* <div className="points-summary ">
               <div className="point-item">
-                <h2><IoIosPodium/> Seu Rank Atual</h2>
-                <p className="large-text">{rank}</p>
+                
               </div>
-            </div>
+            </div> */}
           </div>
 
 
         {/* Coluna do gráfico */}
         <div className="points-chart-section">
-          <div className="chart-container chart-card">
-            <h2><FaChartPie/> Distribuição dos Pontos</h2>
-            <div className="chart-container-wrapper">
-                <Pie data={chartData} options={chartOptions} />
-            </div>
+          <div className="summary-card-points">
+                <div className="chart-container chart-card">
+                  <h2>Distribuição dos Pontos</h2>
+                  <div className="chart-container-wrapper">
+                      <Pie data={chartData} options={chartOptions} />
+                  </div>
+              </div>
+                <div className="summary-icon icon-poduim">
+                    <FaChartPie size={20}/>
+                </div>
           </div>
         </div>
       </div>

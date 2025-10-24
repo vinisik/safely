@@ -2,7 +2,7 @@ import React from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes, securityAlerts } from '../data/mockData'; 
 import { Link } from 'react-router-dom';
-import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaCheckSquare, FaMedal, FaChalkboardTeacher } from 'react-icons/fa'; 
+import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaMedal, FaChalkboardTeacher } from 'react-icons/fa'; 
 function Dashboard({user, checklists, totalPoints}) {
 
   // Filtra a lista para pegar apenas os checklists pendentes
@@ -68,7 +68,7 @@ function Dashboard({user, checklists, totalPoints}) {
             <span className="summary-subtext">{completionPercentage}% concluído</span>
           </div>
           <div className="summary-icon icon-check">
-             <FaCheckSquare size={20}/>
+             <FaClipboard size={20}/>
           </div>
         </div>
 
@@ -84,6 +84,16 @@ function Dashboard({user, checklists, totalPoints}) {
         </div>
 
         {/* Card: Pontos de Segurança */}
+        <div className="summary-card">
+          <div className="summary-content">
+            <span className="summary-label">Quizzes Concluídos</span>
+            <span className="summary-value">0</span>
+            <span className="summary-subtext">6 disponíveis</span>
+          </div>
+          <div className="summary-icon icon-brain">
+             <FaBrain size={20}/>
+          </div>
+        </div>
         <div className="summary-card">
           <div className="summary-content">
             <span className="summary-label">Pontos</span>
