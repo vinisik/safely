@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ContentCard from '../components/ContentCard';
 import { videos, quizzes, securityAlerts } from '../data/mockData'; 
 import { Link } from 'react-router-dom';
-import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaMedal, FaChalkboardTeacher } from 'react-icons/fa'; 
-function Dashboard({user, checklists, totalPoints}) {
+import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaMedal, FaChalkboardTeacher, FaChevronUp, FaChevronDown } from 'react-icons/fa'; 
+import useIsMobile from '../hooks/useIsMobile';
 
+function Dashboard({user, checklists, totalPoints}) {
+  const [isSummaryDropdownOpen, setIsSummaryDropdownOpen] = useState(false);
+  const isMobile = useIsMobile();
   // Filtra a lista para pegar apenas os checklists pendentes
   const pendingChecklists = checklists.filter(c => c.status === 'pending');
   // Pega a quantidade de itens na lista filtrada
@@ -47,6 +50,62 @@ function Dashboard({user, checklists, totalPoints}) {
         <h1>{greeting}, {user.name}!</h1>
         <p>Bem vindo(a) ao seu painel de segurança do trabalho.</p>
       </div>
+
+      <button 
+        className="summary-dropdown-toggle" 
+        onClick={() => setIsSummaryDropdownOpen(!isSummaryDropdownOpen)}
+      >
+        Ver Resumo 
+        {isSummaryDropdownOpen ? <FaChevronUp /> : <FaChevronDown />} 
+      </button>
+
+      {/* 2. Conteúdo do Dropdown (condicionalmente renderizado) */}
+      {isSummaryDropdownOpen && isMobile && ( // Só mostra se aberto E se for mobile
+        <div className="summary-dropdown-content">
+          {/* Item: Dias sem Acidentes */}
+          <div className="summary-dropdown-item">
+            <div className="summary-content">
+              <span className="summary-label">Dias sem Acidentes</span>
+              <span className="summary-value">{daysWithoutAccidents}</span>
+              <span className="summary-subtext">+5 dias</span>
+            </div>
+            <div className="summary-icon icon-calendar"><FaCalendarAlt size={18}/></div>
+          </div>
+          {/* Item: Checklists Completos */}
+          <div className="summary-dropdown-item">
+            <div className="summary-content">
+              <span className="summary-label">Checklists Completos</span>
+              <span className="summary-value">{completedChecklistsCount}/{totalChecklistsCount}</span>
+              <span className="summary-subtext">{completionPercentage}% concluído</span> 
+            </div>
+            <div className="summary-icon icon-check"><FaClipboard size={18}/></div>
+          </div>
+          <div className="summary-dropdown-item">
+            <div className="summary-content">
+              <span className="summary-label">Treinamentos Completos</span>
+              <span className="summary-value">{completedTraining}</span>
+              <span className="summary-subtext">4 disponíveis</span> 
+            </div>
+            <div className="summary-icon icon-chalkboard"><FaChalkboardTeacher size={18}/></div>
+          </div>
+          <div className="summary-dropdown-item">
+            <div className="summary-content">
+              <span className="summary-label">Quizzes Concluídos</span>
+              <span className="summary-value">0</span>
+              <span className="summary-subtext">6 disponíveis</span> 
+            </div>
+            <div className="summary-icon icon-brain"><FaBrain size={18}/></div>
+          </div>
+          {/* Item: Pontos de Segurança */}
+          <div className="summary-dropdown-item">
+             <div className="summary-content">
+               <span className="summary-label">Pontos</span>
+               <span className="summary-value">{totalPoints}</span>
+             </div>
+             <div className="summary-icon icon-medal"><FaMedal size={18}/></div>
+           </div>
+        </div>
+      )}
 
       <div className="summary-cards-grid">
         {/* Card: Dias sem Acidentes */}

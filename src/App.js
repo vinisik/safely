@@ -17,6 +17,8 @@ import RewardsPage from './pages/RewardsPage';
 import MyPoints from './pages/MyPoints';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
+import SidePanelMenu from './components/SidePanelMenu';
+import useIsMobile from './hooks/useIsMobile';
 
 // Páginas Placeholder
 const SettingsPage = () => <div style={{padding: '2rem', textAlign: 'center'}}><h2>Página de Configurações (Em breve)</h2></div>;
@@ -29,6 +31,12 @@ function App() {
   const [completedVideoIds, setCompletedVideoIds] = useState(new Set());
   const pendingChecklistsCount = checklistsData.filter(c => c.status === 'pending').length;
 
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
+  const isMobile = useIsMobile();
+  const toggleSidePanel = () => {
+    setIsSidePanelOpen(!isSidePanelOpen);
+  };
+
   const handleLogin = (userData) => {
     setUser(userData);
   };
@@ -39,6 +47,7 @@ function App() {
     setChecklistsData(initialChecklists); // Reseta a lista de checklists para a original
     setCompletedVideoIds(new Set()); // Limpa a lista de vídeos concluídos
     setIsChatOpen(false);
+    setIsSidePanelOpen(false);
   };
 
   const markVideoAsCompleted = (videoId, pointsValue = 75) => { // Pontuação padrão de 75
@@ -83,7 +92,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <Header user={user} onLogout={handleLogout} />
+        <Header user={user} onLogout={handleLogout} onProfileClick={toggleSidePanel}/>
         <main>
           <Routes>
             <Route path="/" element={<Dashboard checklists={checklistsData} user={user} totalPoints={totalPoints}/>} />
@@ -112,6 +121,14 @@ function App() {
         <BottomNav pendingCount={pendingChecklistsCount}/>
         <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
         {!isChatOpen && <FloatingChatButton onClick={() => setIsChatOpen(true)} />}
+          {isMobile && (
+          <SidePanelMenu 
+            isOpen={isSidePanelOpen} 
+            onClose={toggleSidePanel} 
+            user={user} 
+            onLogout={handleLogout} 
+          />
+        )}
       </div>
     </Router>
   );

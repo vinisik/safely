@@ -89,46 +89,67 @@ main {
 
 .user-info .dropdown-arrow {
   margin-left: 5px; 
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
 }
 
-
-/* .logo-text-container {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1; 
-  align-items: center; 
-  text-align: center;
+.user-info .dropdown-arrow.open { 
+  transform: rotate(180deg);
 }
-
-
-.logo-name-safe {
-  font-size: 2.5rem;
-  font-weight: 1000;
-  color: var(--primary-color); 
-  border-bottom: 3px solid var(--secondary-company-color);
+.profile-dropdown {
+  position: absolute;
+  top: 100%; 
+  right: 0;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 1px solid #eee;
+  width: 220px; /* Aumenta um pouco a largura para os ícones */
+  z-index: 1100;
+  margin-top: 10px;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out; /* Adiciona uma animação suave */
 }
-
-.logo-name-wrapper {
-  display: flex; 
-  align-items: baseline; 
+.profile-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-
-.logo-name-ly {
-  font-size: 2.5rem;
-  font-weight: 1000;
-  color: var(--secondary-company-color); 
-  border-bottom: 3px solid var(--secondary-company-color);
+.profile-dropdown ul li a,
+.profile-dropdown ul li button {
+  display: flex; /* Para alinhar ícone e texto */
+  align-items: center; /* Alinha verticalmente */
+  gap: 10px; /* Espaço entre ícone e texto */
+  width: 100%;
+  text-align: left;
+  padding: 0.9rem 1.2rem; /* Ajusta o padding */
+  text-decoration: none;
+  color: var(--text-color);
+  background: none;
+  border: none;
+  font-size: 0.95rem; /* Levemente menor */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-
-
-.logo-tagline {
-  margin-top: 5px;
-  font-size: 0.75rem; 
+.profile-dropdown ul li a svg,
+.profile-dropdown ul li button svg {
+  color: #555; /* Cor para os ícones */
+  font-size: 1rem;
+}
+.profile-dropdown ul li a:hover,
+.profile-dropdown ul li button:hover {
+  background-color: #f4f7fa;
+}
+.profile-dropdown ul li:last-child {
+  border-top: 1px solid #eee;
+}
+.profile-dropdown ul li:last-child button {
+  color: #c0392b; 
   font-weight: 500;
-  color: #555; 
-  font-style: italic;
-} 
-*/
+}
+.profile-dropdown ul li:last-child button svg {
+  color: #c0392b; 
+}
 
 /* Ajuste no container do logo para remover o font-size que estava nele */
 .header .logo {
@@ -1580,72 +1601,200 @@ main {
   position: relative; 
 }
 
-.user-info .dropdown-arrow {
-  margin-left: 2px;
-  font-size: 0.8rem;
-  transition: transform 0.2s ease;
-  padding-left:0.6rem;
-  padding-right:0.6rem;
-  padding-top: 0.3rem;
-  background-color: #f4f7fa;
-  border-radius: 5px;
-
-}
-
-.user-info:hover .dropdown-arrow {
-  background-color: rgb(228, 228, 228);
-}
-
-.profile-dropdown {
-  position: absolute;
-  top: 100%; /* Posiciona logo abaixo do header */
-  right: 0;
-  background-color: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  border: 1px solid #eee;
-  width: 200px;
-  z-index: 1100;
-  margin-top: 10px; /* Pequeno espaço do header */
-  overflow: hidden;
-}
-
-.profile-dropdown ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.profile-dropdown ul li a,
-.profile-dropdown ul li button {
-  display: block;
+.side-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  text-align: left;
-  padding: 1rem;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 1200; /* Acima do header */
+}
+.side-panel-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* O Painel Lateral */
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: -320px; /* Começa fora da tela */
+  width: 300px; /* Largura do painel */
+  height: 100%;
+  background-color: var(--card-bg); /* Fundo branco */
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease-out;
+  z-index: 1201; /* Acima do overlay */
+  display: flex;
+  flex-direction: column;
+}
+.side-panel.open {
+  right: 0; /* Desliza para dentro da tela */
+}
+
+/* Cabeçalho do Painel Lateral */
+.side-panel-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.side-panel-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.side-panel-user-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Ocupa espaço */
+}
+.side-panel-user-info .user-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+.side-panel-user-info .user-subtitle {
+  font-size: 0.8rem;
+  color: #777;
+}
+.add-account-btn {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+/* Navegação do Painel Lateral */
+.side-panel-nav {
+  flex-grow: 1; /* Ocupa o espaço restante */
+  overflow-y: auto; /* Permite rolagem se houver muitos links */
+  padding: 1rem 0;
+}
+.side-panel-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-panel-nav li a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
   text-decoration: none;
   color: var(--text-color);
-  background: none;
-  border: none;
   font-size: 1rem;
-  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+.side-panel-nav li a:hover,
+.side-panel-nav li a.active { /* Estilo do link ativo */
+  background-color: #f0f0f0;
+  color: var(--primary-color);
+}
+.side-panel-nav li a svg { /* Estilo para os ícones */
+  font-size: 1.2rem;
+  color: #555;
+}
+.side-panel-nav li a:hover svg,
+.side-panel-nav li a.active svg {
+  color: var(--primary-color);
 }
 
-.profile-dropdown .user-name-dropdown {
-  display: none;
-}
-
-.profile-dropdown ul li a:hover,
-.profile-dropdown ul li button:hover {
-  background-color: #f4f7fa;
-}
-
-.profile-dropdown ul li:last-child {
+/* Rodapé do Painel Lateral (Botão Sair) */
+.side-panel-footer {
+  padding: 1rem 1.5rem;
   border-top: 1px solid #eee;
 }
-
-.profile-dropdown ul li:last-child button {
-  color: #c0392b; /* Cor vermelha para 'Sair' */
+.logout-button {
+  background: none;
+  border: none;
+  color: #c0392b; /* Vermelho */
+  font-size: 1rem;
   font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem 0; /* Ajuste o padding se necessário */
+}
+.logout-button svg {
+  font-size: 1.2rem;
+}
+
+.summary-dropdown-toggle {
+  display: none; /* Escondido por padrão */
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid #eee;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  cursor: pointer;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Conteúdo do Dropdown */
+.summary-dropdown-content {
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.5s ease; /* Reutiliza a animação fadeIn */
+}
+
+.summary-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem; 
+  border: 1px solid #eee; 
+  border-radius: 15px;
+  background-color: #ffffff;
+  margin-bottom: 0.7rem;
+}
+.summary-dropdown-item:last-child {
+  border-bottom: none; /* Remove a linha do último item */
+}
+
+/* Reutiliza os estilos do .summary-icon, mas talvez com tamanho menor */
+.summary-dropdown-item .summary-icon {
+  width: 40px; 
+  height: 40px;
+  border-radius: 8px; /* Ajusta o raio */
+  margin-left: 0; /* Remove margem */
+}
+.summary-dropdown-item .summary-content {
+  margin-right: 0; /* Remove margem */
+}
+
+/* Ajusta os textos dentro do dropdown */
+.summary-dropdown-item .summary-label {
+  font-size: 0.8rem;
+  margin-bottom: 0.1rem;
+}
+.summary-dropdown-item .summary-value {
+  font-size: 1.4rem;
+  margin-bottom: 0.1rem;
+}
+.summary-dropdown-item .summary-subtext {
+  font-size: 0.7rem;
 }
 
 
@@ -2225,9 +2374,6 @@ main {
   .search-bar {
     width: 100%;
   }
-  .user-name {
-    display: none;
-  }
   .user-details {
     display: none;
   }
@@ -2254,7 +2400,10 @@ main {
   .list-item-action {
     display: none;
   }
-  .welcome-section {
+  .welcome-section h1 {
+    font-size: 1.8rem;
+  }
+  .welcome-section p {
     display: none;
   }
 }
@@ -2279,31 +2428,8 @@ main {
     margin-right: 0;
 }
 
-  .user-info .dropdown-arrow {
-    display: none;
-  }
 
-  .profile-dropdown .user-name-dropdown {
-    display: flex; /* 1. Transforma o item da lista em um container flexível */
-    justify-content: space-between; /* 2. Empurra os itens para as extremidades (esquerda e direita) */
-    align-items: center;
-    width: 100%;
-    text-align: left;
-    padding: 1rem;
-    text-decoration: none;
-    color: var(--text-color);
-    background-color: #f4f7fa;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-
-  .profile-dropdown .user-name-dropdown .arrow-up:hover {
-    background-color: #666;
-  }
-  .welcome-section {
-    display: none;
-  }
+  
 
   .logo-tagline {
     display: none; 
@@ -2320,13 +2446,6 @@ main {
   /* Menu Inferior Mobile */
   .bottom-nav {
     display: flex;
-  }
-
-  .user-name {
-    display: none;
-  }
-  .user-details {
-    display: none;
   }
 
   /* Ajustes Gerais para Mobile */
@@ -2392,6 +2511,13 @@ main {
   .list-item-action {
     display: none;
   }
+  .summary-cards-grid {
+    display: none; 
+  }
+  /* Mostra o botão de toggle no mobile */
+  .summary-dropdown-toggle {
+    display: flex; 
+  }
 }
 
 @media (max-width: 480px) {
@@ -2414,39 +2540,10 @@ main {
     .search-bar {
       width: 100%;
     }
-    .welcome-section {
+    .user-details {
       display: none;
     }
-
-  .user-name {
-    display: none;
-  }
-  .user-details {
-    display: none;
-  }
-
-  .user-info .dropdown-arrow {
-    display: none;
-  }
-
-  .profile-dropdown .user-name-dropdown {
-    display: flex; /* 1. Transforma o item da lista em um container flexível */
-    justify-content: space-between; /* 2. Empurra os itens para as extremidades (esquerda e direita) */
-    align-items: center;
-    width: 100%;
-    text-align: left;
-    padding: 1rem;
-    text-decoration: none;
-    color: var(--text-color);
-    background-color: #f4f7fa;
-    border: none;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-  .profile-dropdown .user-name-dropdown .arrow-up:hover {
-    background-color: #666;
-  }
-  .list-item-action {
-    display: none;
-  }
+    .list-item-action {
+      display: none;
+    }
 }
