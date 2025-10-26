@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaMedal, FaChalkboardTeacher, FaChevronUp, FaChevronDown } from 'react-icons/fa'; 
 import useIsMobile from '../hooks/useIsMobile';
 
-function Dashboard({user, checklists, totalPoints}) {
+function Dashboard({user, checklists, totalPoints, 
+    completedVideosCount, totalVideosCount, 
+    completedQuizzesCount, totalQuizzesCount, currentRankName}) {
   const [isSummaryDropdownOpen, setIsSummaryDropdownOpen] = useState(false);
   const isMobile = useIsMobile();
   // Filtra a lista para pegar apenas os checklists pendentes
@@ -14,7 +16,7 @@ function Dashboard({user, checklists, totalPoints}) {
   const pendingCount = pendingChecklists.length;
   // Calcula o número de checklists concluídos
   const completedChecklistsCount = checklists.filter(c => c.status === 'completed').length;
-  const totalChecklistsCount = checklists.length; // Ou use um valor fixo se preferir
+  const totalChecklistsCount = checklists.length; 
 
   // Cálculo de porcentagem de checklists completas
   const completionPercentage = totalChecklistsCount > 0 
@@ -23,8 +25,6 @@ function Dashboard({user, checklists, totalPoints}) {
 
   // Placeholder para Dias sem Acidentes
   const daysWithoutAccidents = 127;
-  const completedTraining = 0;
-
   // Saudação dinâmica
   const getCurrentGreeting = () => {
     const currentHour = new Date().getHours();
@@ -83,16 +83,16 @@ function Dashboard({user, checklists, totalPoints}) {
           <div className="summary-dropdown-item">
             <div className="summary-content">
               <span className="summary-label">Treinamentos Completos</span>
-              <span className="summary-value">{completedTraining}</span>
-              <span className="summary-subtext">4 disponíveis</span> 
+              <span className="summary-value">{completedVideosCount}</span>
+              <span className="summary-subtext">{totalVideosCount} disponíveis</span> 
             </div>
             <div className="summary-icon icon-chalkboard"><FaChalkboardTeacher size={18}/></div>
           </div>
           <div className="summary-dropdown-item">
             <div className="summary-content">
               <span className="summary-label">Quizzes Concluídos</span>
-              <span className="summary-value">0</span>
-              <span className="summary-subtext">6 disponíveis</span> 
+              <span className="summary-value">{completedQuizzesCount}</span>
+              <span className="summary-subtext">{totalQuizzesCount} disponíveis</span> 
             </div>
             <div className="summary-icon icon-brain"><FaBrain size={18}/></div>
           </div>
@@ -101,6 +101,7 @@ function Dashboard({user, checklists, totalPoints}) {
              <div className="summary-content">
                <span className="summary-label">Pontos</span>
                <span className="summary-value">{totalPoints}</span>
+               <span className="summary-subtext">{currentRankName}</span>
              </div>
              <div className="summary-icon icon-medal"><FaMedal size={18}/></div>
            </div>
@@ -135,8 +136,8 @@ function Dashboard({user, checklists, totalPoints}) {
         <div className="summary-card">
           <div className="summary-content">
             <span className="summary-label">Treinamentos Completos</span>
-            <span className="summary-value">{completedTraining}</span>
-            <span className="summary-subtext">4 disponíveis</span> {/* Texto extra */}
+            <span className="summary-value">{completedVideosCount}</span>
+            <span className="summary-subtext">{totalVideosCount} disponíveis</span> {/* Texto extra */}
           </div>
           <div className="summary-icon icon-chalkboard">
             <FaChalkboardTeacher size={20}/>
@@ -147,8 +148,8 @@ function Dashboard({user, checklists, totalPoints}) {
         <div className="summary-card">
           <div className="summary-content">
             <span className="summary-label">Quizzes Concluídos</span>
-            <span className="summary-value">0</span>
-            <span className="summary-subtext">6 disponíveis</span>
+            <span className="summary-value">{completedQuizzesCount}</span>
+            <span className="summary-subtext">{totalQuizzesCount} disponíveis</span>
           </div>
           <div className="summary-icon icon-brain">
              <FaBrain size={20}/>
@@ -158,6 +159,7 @@ function Dashboard({user, checklists, totalPoints}) {
           <div className="summary-content">
             <span className="summary-label">Pontos</span>
             <span className="summary-value">{totalPoints}</span>
+            <span className="summary-subtext">"{currentRankName}"</span>
           </div>
           <div className="summary-icon icon-medal">
              <FaMedal size={20}/>

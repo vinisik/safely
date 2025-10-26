@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { checklists as initialChecklists } from './data/mockData';
+import { checklists as initialChecklists, videos, quizzes } from './data/mockData';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FloatingChatButton from './components/FloatingChatButton'; 
@@ -29,8 +29,29 @@ function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [totalPoints, setTotalPoints] = useState(0);
   const [completedVideoIds, setCompletedVideoIds] = useState(new Set());
-  const pendingChecklistsCount = checklistsData.filter(c => c.status === 'pending').length;
+  const [completedQuizIds, setCompletedQuizIds] = useState(new Set()); 
 
+  const pendingChecklistsCount = checklistsData.filter(c => c.status === 'pending').length;
+  const completedVideosCount = completedVideoIds.size;
+  const completedQuizzesCount = completedQuizIds.size;
+  const totalVideosCount = videos.length; // Pega o total do mockData
+  const totalQuizzesCount = quizzes.length;
+
+  const rankTiers = [
+  { name: 'Mestre da Segurança', minPoints: 5000 },
+  { name: 'Especialista em Prevenção', minPoints: 2500 },
+  { name: 'Guardião da Segurança', minPoints: 1000 },
+  { name: 'Aprendiz Atento', minPoints: 500 },
+  { name: 'Iniciante Consciente', minPoints: 0 }
+];
+
+const getRank = (points) => {
+  const currentRank = rankTiers.find(tier => points >= tier.minPoints);
+  return currentRank ? currentRank.name : rankTiers[rankTiers.length - 1].name;
+};
+
+const currentRankName = getRank(totalPoints); 
+  
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const isMobile = useIsMobile();
   const toggleSidePanel = () => {
@@ -45,7 +66,8 @@ function App() {
     setUser(null); // Limpa o usuário logado
     setTotalPoints(0); // Reseta a pontuação para o valor inicial
     setChecklistsData(initialChecklists); // Reseta a lista de checklists para a original
-    setCompletedVideoIds(new Set()); // Limpa a lista de vídeos concluídos
+    setCompletedVideoIds(new Set()); 
+    setCompletedQuizIds(new Set());
     setIsChatOpen(false);
     setIsSidePanelOpen(false);
   };
@@ -59,6 +81,14 @@ function App() {
       console.log(`Vídeo ${videoId} concluído! +${pointsValue} pontos.`); // Para depuração
     } else {
       console.log(`Vídeo ${videoId} já foi concluído anteriormente.`); // Para depuração
+    }
+  };
+
+  const markQuizAsCompleted = (quizId) => {
+    // Verifica se o quiz JÁ FOI concluído antes
+    if (!completedQuizIds.has(quizId)) {
+      setCompletedQuizIds(prevIds => new Set(prevIds).add(quizId));
+      console.log(`Quiz ${quizId} concluído.`); // Para depuração
     }
   };
   
@@ -95,11 +125,18 @@ function App() {
         <Header user={user} onLogout={handleLogout} onProfileClick={toggleSidePanel}/>
         <main>
           <Routes>
-            <Route path="/" element={<Dashboard checklists={checklistsData} user={user} totalPoints={totalPoints}/>} />
+            <Route path="/" element={<Dashboard user={user} 
+                          checklists={checklistsData} 
+                          totalPoints={totalPoints} 
+                          completedVideosCount={completedVideosCount}
+                          totalVideosCount={totalVideosCount}
+                          completedQuizzesCount={completedQuizzesCount}
+                          totalQuizzesCount={totalQuizzesCount}
+                          currentRankName={currentRankName} />} />
             <Route path="/videos" element={<VideosList />} />
             <Route path="/videos/:id" element={<VideoPage markVideoAsCompleted={markVideoAsCompleted} completedVideoIds={completedVideoIds}/>} />
             <Route path="/quizzes" element={<QuizzesList />} />
-            <Route path="/quiz/:id" element={<QuizPage addPoints={addPoints}/>} />
+            <Route path="/quiz/:id" element={<QuizPage addPoints={addPoints} markQuizAsCompleted={markQuizAsCompleted}/>} />
             <Route 
               path="/checklists" 
               element={<ChecklistsList checklists={checklistsData} addChecklist={addChecklist} deleteChecklist={deleteChecklist} />} 
@@ -109,7 +146,7 @@ function App() {
               element={<ChecklistPage user={user} checklists={checklistsData} updateChecklistStatus={updateChecklistStatus} addPoints={addPoints}/>} 
             />
             <Route path="/recompensas" element={<RewardsPage totalPoints={totalPoints}/>} />
-            <Route path="/pontos" element={<MyPoints totalPoints={totalPoints}/>}/>
+            <Route path="/pontos" element={<MyPoints totalPoints={totalPoints} currentRankName={currentRankName} />}/>
             <Route 
               path="/perfil" 
               element={<ProfilePage user={user} checklists={checklistsData} totalPoints={totalPoints}/>} 

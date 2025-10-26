@@ -8,9 +8,8 @@ import { IoIosPodium } from 'react-icons/io';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function MyPoints({ totalPoints }) {
+function MyPoints({ totalPoints, currentRankName }) {
   const isMobile = useIsMobile();
-  const rank = 'Especialista em Prevenção';
   const badges = [
     { name: 'Primeiro EPI', icon: <FaHelmetSafety/>, color: '#FFC107' },
     { name: 'Mestre do Quiz', icon: <FaBrain/>, color: '#4CAF50' },
@@ -88,7 +87,7 @@ function MyPoints({ totalPoints }) {
               <div className="summary-card-points">
                 <div className="summary-content-points">
                   <h2> Seu Rank Atual</h2>
-                  <span className="large-text">{rank}</span>
+                  <span className="large-text">{currentRankName}</span>
                 </div>
                 <div className="summary-icon icon-poduim">
                     <IoIosPodium size={20}/>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { quizzes } from '../data/mockData';
 
-function QuizPage({addPoints}) {
+function QuizPage({addPoints, markQuizAsCompleted}) {
   const { id } = useParams();
   const quiz = quizzes.find(q => q.id === parseInt(id));
 
@@ -35,6 +35,7 @@ function QuizPage({addPoints}) {
       addPoints(pointsEarned); // Chama a função do App.js para adicionar os pontos
     }
 
+    markQuizAsCompleted(quiz.id); 
     setShowResults(true); // Mostra a tela de resultados
   };
 
