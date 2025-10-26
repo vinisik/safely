@@ -56,9 +56,9 @@ function VideosList({ completedVideosCount, totalVideosCount }) {
           />
         </div>
         <div className="filter-buttons" style={{marginBottom: '20px'}}>
-          <button className="filter-btn active">Todos (4)</button>
-          <button className="filter-btn">Pendentes (4)</button>
-          <button className="filter-btn">Concluídos (0)</button>
+          <button className="filter-btn active">Todos ({totalVideosCount})</button>
+          <button className="filter-btn">Pendentes ({pendingVideosCount})</button>
+          <button className="filter-btn">Concluídos ({completedVideosCount})</button>
         </div>
         <div className="card-grid">
           {allVideos.map((video, index) => (

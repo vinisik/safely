@@ -57,9 +57,9 @@ function QuizzesList({completedQuizzesCount, totalQuizzesCount}) {
           />
         </div>
         <div className="filter-buttons" style={{marginBottom: '20px'}}>
-          <button className="filter-btn active">Todos (6)</button>
-          <button className="filter-btn">Pendentes (6)</button>
-          <button className="filter-btn">Concluídos (0)</button>
+          <button className="filter-btn active">Todos ({totalQuizzesCount})</button>
+          <button className="filter-btn">Pendentes ({pendingQuizzesCount})</button>
+          <button className="filter-btn">Concluídos ({completedQuizzesCount})</button>
         </div>
         <div className="card-grid">
           {allQuizzes.map((quiz, index) => (
