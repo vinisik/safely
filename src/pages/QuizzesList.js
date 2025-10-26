@@ -6,7 +6,8 @@ import { FaClock, FaSearch, FaBrain, FaCheckCircle } from 'react-icons/fa';
 // Simula uma lista maior
 const allQuizzes = [...quizzes];
 
-function QuizzesList() {
+function QuizzesList({completedQuizzesCount, totalQuizzesCount}) {
+  const pendingQuizzesCount = totalQuizzesCount - completedQuizzesCount
   return (
     <div className="page-container">
       <title>Safely | Quizzes</title>
@@ -19,7 +20,7 @@ function QuizzesList() {
                           {/* Card Total */}
             <div className="summary-card">
               <div className="summary-content">
-                <span className="summary-value">6</span>
+                <span className="summary-value">{totalQuizzesCount}</span>
                 <span className="summary-label">Total Disponível</span>
               </div>
               <div className="summary-icon icon-total"> {/* Classe específica para cor */}
@@ -29,7 +30,7 @@ function QuizzesList() {
             {/* Card Pendentes */}
             <div className="summary-card">
               <div className="summary-content">
-                <span className="summary-value">6</span>
+                <span className="summary-value">{pendingQuizzesCount}</span>
                 <span className="summary-label">Quizzes Pendentes</span>
               </div>
               <div className="summary-icon icon-pending"> {/* Classe específica para cor */}
@@ -39,7 +40,7 @@ function QuizzesList() {
             {/* Card Concluídos */}
             <div className="summary-card">
               <div className="summary-content">
-                <span className="summary-value">0</span>
+                <span className="summary-value">{completedQuizzesCount}</span>
                 <span className="summary-label">Concluídos</span>
               </div>
               <div className="summary-icon icon-completed"> {/* Classe específica para cor */}

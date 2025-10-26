@@ -6,7 +6,8 @@ import { FaSearch, FaClock, FaCheckCircle, FaPlay } from 'react-icons/fa';
 // Simula uma lista maior para o placeholder
 const allVideos = [...videos];
 
-function VideosList() {
+function VideosList({ completedVideosCount, totalVideosCount }) {
+  const pendingVideosCount = totalVideosCount - completedVideosCount
   return (
     <div className="page-container">
       <title>Safely | Treinamento</title>
@@ -18,7 +19,7 @@ function VideosList() {
                   {/* Card Total */}
                   <div className="summary-card">
                     <div className="summary-content">
-                      <span className="summary-value">4</span>
+                      <span className="summary-value">{totalVideosCount}</span>
                       <span className="summary-label">Total Disponível</span>
                     </div>
                     <div className="summary-icon icon-total"> {/* Classe específica para cor */}
@@ -28,7 +29,7 @@ function VideosList() {
                   {/* Card Pendentes */}
                   <div className="summary-card">
                     <div className="summary-content">
-                      <span className="summary-value">4</span>
+                      <span className="summary-value">{pendingVideosCount}</span>
                       <span className="summary-label">Treinamentos Pendentes</span>
                     </div>
                     <div className="summary-icon icon-pending"> {/* Classe específica para cor */}
@@ -38,7 +39,7 @@ function VideosList() {
                   {/* Card Concluídos */}
                   <div className="summary-card">
                     <div className="summary-content">
-                      <span className="summary-value">0</span>
+                      <span className="summary-value">{completedVideosCount}</span>
                       <span className="summary-label">Concluídos</span>
                     </div>
                     <div className="summary-icon icon-completed"> {/* Classe específica para cor */}

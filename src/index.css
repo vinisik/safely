@@ -472,6 +472,7 @@ main {
    flex-direction: column; /* Empilha os itens internos */
    flex-grow: 1; /* Faz o container crescer para ocupar a seção */
    height: 100%; /* Ocupa 100% da altura disponível */
+   align-content: center;
 }
 
 /* Garante que o card de alerta individual se estique se for o único item */

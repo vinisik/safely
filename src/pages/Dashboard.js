@@ -182,7 +182,7 @@ function Dashboard({user, checklists, totalPoints,
 
             {pendingCount === 0 ? (
               <div className="all-completed-card card">
-                <h3>Parabéns! 🎉</h3>
+                <h3>Parabéns!</h3>
                 <p>Você não possui nenhum checklist pendente.</p>
               </div>
             ) : (

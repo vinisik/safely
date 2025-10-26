@@ -133,9 +133,11 @@ const currentRankName = getRank(totalPoints);
                           completedQuizzesCount={completedQuizzesCount}
                           totalQuizzesCount={totalQuizzesCount}
                           currentRankName={currentRankName} />} />
-            <Route path="/videos" element={<VideosList />} />
+            <Route path="/videos" element={<VideosList completedVideosCount={completedVideosCount}
+                          totalVideosCount={totalVideosCount}/>} />
             <Route path="/videos/:id" element={<VideoPage markVideoAsCompleted={markVideoAsCompleted} completedVideoIds={completedVideoIds}/>} />
-            <Route path="/quizzes" element={<QuizzesList />} />
+            <Route path="/quizzes" element={<QuizzesList completedQuizzesCount={completedQuizzesCount}
+                          totalQuizzesCount={totalQuizzesCount}/>} />
             <Route path="/quiz/:id" element={<QuizPage addPoints={addPoints} markQuizAsCompleted={markQuizAsCompleted}/>} />
             <Route 
               path="/checklists" 
