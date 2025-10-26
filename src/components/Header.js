@@ -44,28 +44,24 @@ function Header({ user, onProfileClick, onLogout }) {
 
   return (
     <header className="header">
-      {/* Logo e Nome da Empresa */}
       <NavLink to="/" className="logo">
         <img src={safelyLogo} alt="Safely Logo" />
       </NavLink>
       
-      {/* Navegação Principal (Desktop) */}
       <nav className="desktop-nav">
         <ul>
           <li><NavLink to="/" className={({ isActive }) => isActive ? "active-link" : ""}>Início</NavLink></li>
           <li><NavLink to="/videos" className={({ isActive }) => isActive ? "active-link" : ""}>Treinamentos</NavLink></li>
           <li><NavLink to="/quizzes" className={({ isActive }) => isActive ? "active-link" : ""}>Quizzes</NavLink></li>
           <li><NavLink to="/checklists" className={({ isActive }) => isActive ? "active-link" : ""}>Checklists</NavLink></li>
-          <li><NavLink to="/recompensas" className={({ isActive }) => isActive ? "active-link" : ""}>Recompensas</NavLink></li>
+          <li><NavLink to="/pontos" className={({ isActive }) => isActive ? "active-link" : ""}>Meus Pontos</NavLink></li>
         </ul>
       </nav>
 
-      {/* Container das Informações do Usuário (com Ref para o dropdown) */}
       <div className="user-info-container" ref={dropdownRef}>
         {/* Área clicável do usuário */}
         <div className="user-info" onClick={handleUserInfoClick}>
           <img src={user.profilePictureUrl} alt="Avatar do Usuário" />
-          {/* Mostra nome e subtítulo apenas no desktop */}
           {!isMobile && (
             <div className="user-details">
               <span className="user-name">
@@ -76,11 +72,9 @@ function Header({ user, onProfileClick, onLogout }) {
               </span>
             </div>
           )}
-          {/* Mostra a seta apenas no desktop */}
           {!isMobile && <span className={`dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}>▾</span>}
         </div>
 
-        {/* Renderiza o Dropdown APENAS se NÃO for mobile E estiver aberto */}
         {!isMobile && isDropdownOpen && (
           <div className="profile-dropdown">
             <ul>

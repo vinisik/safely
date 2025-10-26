@@ -94,19 +94,6 @@ function MyPoints({ totalPoints }) {
                     <IoIosPodium size={20}/>
                 </div>
               </div>
-              
-            {/* <div className="points-summary ">
-              <div className="point-item">
-                <h2><FaTrophy/> Total de Pontos</h2>
-                <p className="large-number">{totalPoints}</p>
-              </div>
-            </div> */}
-
-            {/* <div className="points-summary ">
-              <div className="point-item">
-                
-              </div>
-            </div> */}
           </div>
 
 
