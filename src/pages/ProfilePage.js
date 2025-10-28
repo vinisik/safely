@@ -4,7 +4,10 @@ import logoEmpresa from '../assets/michelin.png';
 
 function ProfilePage({ user, checklists, totalPoints }) {
   // Dados simulados, como em outras páginas
-  const companyName = 'Michelin - Operador de Produção';
+  let subtitle = 'Michelin - Operador de Produção';
+  if (user.role === 'gestor') {
+    subtitle = 'Michelin - Supervisor de Produção'; // Cargo se for gestor
+  }
   const pendingTasks = checklists.filter(c => c.status === 'pending').length;
 
   return (
@@ -15,7 +18,7 @@ function ProfilePage({ user, checklists, totalPoints }) {
         <img src={logoEmpresa} alt="Logo da Empresa" className="profile-avatar" />
         <h1>{user.name}</h1>
         <h2 className='id-user'>ID: {user.idColaborador}</h2>
-        <h3>{companyName}</h3>
+        <h3>{subtitle}</h3>
       </div>
 
       <div className="profile-info-grid">

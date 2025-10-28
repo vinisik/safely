@@ -5,6 +5,7 @@ import elisPic from '../assets/elis.png';
 import gabrielPic from '../assets/gabriel.png';
 import rafaelaPic from '../assets/rafaela.png';
 import viniciusPic from '../assets/vinicius.png';
+import gerentePic from '../assets/gerente.png';
 
 function LoginPage({ onLogin }) {
   // O estado 'name' foi removido
@@ -30,8 +31,8 @@ function LoginPage({ onLogin }) {
     else if (idColaborador === 'rafaela123') { userName = 'Rafaela Souza'; profilePic = rafaelaPic; }
     else if (idColaborador === 'vinicius123') { userName = 'Vinicius Siqueira'; profilePic = viniciusPic; }
     else if (idColaborador === 'gerente123') { // ID do Gestor
-        userName = 'Jose Gestor';
-        profilePic = 'https://i.pravatar.cc/150?img=5'; // Foto diferente
+        userName = 'José Gestor';
+        profilePic = gerentePic; 
         userRole = 'gestor'; // Define o papel como gestor
     }
 
