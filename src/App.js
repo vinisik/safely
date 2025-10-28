@@ -18,6 +18,7 @@ import MyPoints from './pages/MyPoints';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import SidePanelMenu from './components/SidePanelMenu';
+import ManagerDashboard from './pages/ManagerDashboard'; // Importa a nova página
 import useIsMobile from './hooks/useIsMobile';
 
 // Páginas Placeholder
@@ -154,10 +155,20 @@ const currentRankName = getRank(totalPoints);
               element={<ProfilePage user={user} checklists={checklistsData} totalPoints={totalPoints}/>} 
             />
             <Route path="/configuracoes" element={<SettingsPage />} />
+            <Route 
+              path="/gestao" 
+              element={<ManagerDashboard 
+                          checklists={checklistsData} 
+                          completedVideosCount={completedVideosCount}
+                          totalVideosCount={totalVideosCount}
+                          completedQuizzesCount={completedQuizzesCount}
+                          totalQuizzesCount={totalQuizzesCount}
+                       />} 
+            />
           </Routes>
         </main>
         <Footer />
-        <BottomNav pendingCount={pendingChecklistsCount}/>
+        <BottomNav pendingCount={pendingChecklistsCount} user={user}/>
         <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
         {!isChatOpen && <FloatingChatButton onClick={() => setIsChatOpen(true)} />}
           {isMobile && (

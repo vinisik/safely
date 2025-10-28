@@ -352,3 +352,18 @@ export const securityAlerts = [
     icon: 'fire-extinguisher'
   }
 ];
+export const topPerformers = [
+  { id: 'kadu123', name: 'Carlos Eduardo', role: 'Técnico', score: 98, trainings: 15, avatarColor: '#ffcc80' }, // Laranja claro
+  { id: 'elis123', name: 'Elis Santos', role: 'Operadora', score: 96, trainings: 14, avatarColor: '#b39ddb' }, // Roxo claro
+  { id: 'gabriel123', name: 'Gabriel Maciel', role: 'Operador', score: 95, trainings: 13, avatarColor: '#a5d6a7' }, // Verde claro
+  { id: 'rafaela123', name: 'Rafaela Souza', role: 'Técnica', score: 94, trainings: 14, avatarColor: '#ffab91' }, // Salmão claro
+  { id: 'vinicius123', name: 'Vinicius Siqueira', role: 'Operador', score: 93, trainings: 12, avatarColor: '#90caf9' }, // Azul claro
+];
+
+// Dados simulados para Incidentes Recentes
+export const recentIncidents = [
+  { id: 1, date: '20/10/2025', type: 'Quase Acidente', location: 'Linha 2 - Setor B', severity: 'Baixa', status: 'Resolvido' },
+  { id: 2, date: '18/10/2025', type: 'Condição Insegura', location: 'Almoxarifado', severity: 'Média', status: 'Em análise' },
+  { id: 3, date: '15/10/2025', type: 'Não Conformidade', location: 'Linha 1 - Setor A', severity: 'Baixa', status: 'Resolvido' },
+  { id: 4, date: '12/10/2025', type: 'Quase Acidente', location: 'Área de Carga', severity: 'Média', status: 'Resolvido' },
+];

@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { FaHome, FaVideo, FaClipboardList, FaCheckSquare, FaStar } from 'react-icons/fa';
+import { FaHome, FaVideo, FaClipboardList, FaCheckSquare, FaStar, FaChartBar } from 'react-icons/fa';
 
-function BottomNav( {pendingCount} ) {
+function BottomNav( {pendingCount, user} ) {
   return (
     <nav className="bottom-nav">
       <NavLink to="/" end className={({ isActive }) => isActive ? "active" : ""}>
@@ -34,6 +34,12 @@ function BottomNav( {pendingCount} ) {
         <FaStar size={22} />
         <span>Pontos</span>
       </NavLink>
+      {user.role === 'gestor' && (
+        <NavLink to="/gestao" className={({ isActive }) => isActive ? "active" : ""}>
+          <FaChartBar size={22} /> {/* Ícone de gráfico */}
+          <span>Gestão</span>
+        </NavLink>
+      )}
     </nav>
   );
 }

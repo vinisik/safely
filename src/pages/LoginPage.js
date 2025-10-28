@@ -5,14 +5,11 @@ import elisPic from '../assets/elis.png';
 import gabrielPic from '../assets/gabriel.png';
 import rafaelaPic from '../assets/rafaela.png';
 import viniciusPic from '../assets/vinicius.png';
-import profilePicture from '../assets/profile-placeholder.png';
 
 function LoginPage({ onLogin }) {
   // O estado 'name' foi removido
   const [password, setPassword] = useState('');
   const [idColaborador, setidColaborador] = useState(''); 
-
-  const validIds = ['kadu123', 'elis123', 'gabriel123', 'rafaela123', 'vinicius123']; // ID do Jose e do Vinicius
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,33 +22,25 @@ function LoginPage({ onLogin }) {
 
     let userName;
     let profilePic;
+    let userRole = 'colaborador';
 
-    if (idColaborador === validIds[0]) {
-      userName = 'Carlos Eduardo';
-      profilePic = kaduPic;
-    } else if (idColaborador === validIds[1]) {
-      // Definimos o ID do Vinicius Siqueira aqui
-      userName = 'Elis Santos';
-      profilePic = elisPic;
-    } else if (idColaborador === validIds[2]) {
-      userName = 'Gabriel Maciel';
-      profilePic = gabrielPic;
-    } else if (idColaborador === validIds[3]) {
-      userName = rafaelaPic;
-      profilePic = '../assets/rafaela.png';
-    } else if (idColaborador === validIds[4]) {
-      userName = 'Vinicius Siqueira';
-      profilePic = viniciusPic;
-    } else {
-      userName = 'Usuário';
-      profilePic = profilePicture;
+    if (idColaborador === 'kadu123') { userName = 'Carlos Eduardo'; profilePic = kaduPic; }
+    else if (idColaborador === 'elis123') { userName = 'Elis Santos'; profilePic = elisPic; }
+    else if (idColaborador === 'gabriel123') { userName = 'Gabriel Maciel'; profilePic = gabrielPic; }
+    else if (idColaborador === 'rafaela123') { userName = 'Rafaela Souza'; profilePic = rafaelaPic; }
+    else if (idColaborador === 'vinicius123') { userName = 'Vinicius Siqueira'; profilePic = viniciusPic; }
+    else if (idColaborador === 'gerente123') { // ID do Gestor
+        userName = 'Jose Gestor';
+        profilePic = 'https://i.pravatar.cc/150?img=5'; // Foto diferente
+        userRole = 'gestor'; // Define o papel como gestor
     }
 
     // Passa o objeto de usuário com o nome e foto corretos
     onLogin({ 
       name: userName, 
       idColaborador: idColaborador,
-      profilePictureUrl: profilePic
+      profilePictureUrl: profilePic,
+      role: userRole
     });
   };
 

@@ -509,10 +509,6 @@ main {
   display: block; /* Garante que o span ocupa sua própria linha */
 }
 
-.alerts-container {
-  /* Pode ser um grid se tiver múltiplos alertas, mas para 1 é um flex item */
-}
-
 .alert-card {
   padding: 1rem 1.5rem;
   border-radius: 15px;
@@ -541,7 +537,7 @@ main {
   font-size: 0.8rem;
   color: var(--text-light-color);
   display: block; /* Para garantir que o tempo fique em sua própria linha */
-  text-align: right;
+  text-align: left;
   margin-top: 1rem;
 }
 
@@ -1361,6 +1357,312 @@ main {
   flex: 1.5;
 }
 
+.manager-dashboard .page-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.manager-kpis {
+  /* Pode reutilizar .summary-cards-grid ou criar estilos específicos */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Mais colunas talvez */
+  margin-bottom: 2.5rem;
+}
+
+.manager-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.chart-card {
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  border: 1px solid #e0e0e0;
+}
+/* Garante que o gráfico de rosca não fique muito grande */
+.chart-card canvas[role="img"] {
+  max-height: 300px;
+  margin: 0 auto;
+}
+
+.manager-kpi-grid {
+  display: grid;
+  /* Cria 3 colunas em desktop, 2 em tablet e 1 em mobile */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.kpi-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg); /* Garante fundo branco */
+  border-radius: 15px; /* Usa a variável global */
+  border: 1px solid #e0e0e0; /* Borda sutil */
+  min-height: 150px; /* Altura mínima para alinhamento */
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Alinha ícone e tendência no topo */
+  margin-bottom: 0.8rem; /* Espaço entre cabeçalho e label */
+}
+
+.kpi-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white; /* Cor padrão do ícone - será sobrescrita */
+}
+
+/* Cores específicas para cada ícone */
+.kpi-icon.icon-participation { background-color: #e3f2fd; color: #0d47a1; } /* Azul */
+.kpi-icon.icon-time { background-color: #f3e5f5; color: #6a1b9a; } /* Roxo */
+.kpi-icon.icon-audits { background-color: #e0f2f7; color: #006064; } /* Ciano */
+.kpi-icon.icon-nonconformity { background-color: #ffebee; color: #c62828; } /* Vermelho */
+.kpi-icon.icon-certifications { background-color: #fff8e1; color: #f57f17; } /* Amarelo */
+.kpi-icon.icon-severity { background-color: #fff3e0; color: #e65100; } /* Laranja */
+
+.kpi-trend {
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 5px; /* Pequeno padding */
+  border-radius: 4px; /* Bordas levemente arredondadas */
+}
+.kpi-trend.positive {
+  color: #2e7d32; /* Verde */
+  background-color: #e8f5e9; /* Fundo verde claro */
+}
+.kpi-trend.negative {
+  color: #c62828; /* Vermelho */
+  background-color: #ffebee; /* Fundo vermelho claro */
+}
+
+.kpi-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem; /* Espaço entre label e valor */
+  flex-grow: 1; /* Empurra o valor e subtexto para baixo */
+}
+
+.kpi-value {
+  font-size: 2.2rem; /* Valor maior */
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.2rem;
+  line-height: 1.1; /* Ajusta altura da linha */
+}
+
+.kpi-subtext {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Ajustes menores para a grade em telas grandes (opcional) */
+@media (min-width: 1200px) {
+    .manager-kpi-grid {
+        grid-template-columns: repeat(3, 1fr); /* Força 3 colunas */
+    }
+}
+
+.manager-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); /* 2 colunas flexíveis */
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Estilos gerais para os cards de detalhes */
+.top-performers-card, .recent-incidents-card {
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  border: 1px solid #e0e0e0;
+}
+
+.top-performers-card h2, .recent-incidents-card h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.3rem;
+  /* Remove estilos de seção anteriores se houver */
+  border-left: none;
+  padding-left: 0;
+}
+
+/* Subtítulo das seções (Reutiliza a classe já existente) */
+.section-subtitle {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  display: block; /* Garante que o span ocupa sua própria linha */
+}
+
+/* Lista de Top Performers */
+.performers-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.performers-header, .performer-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr; /* Colaborador | Score | Treinamentos */
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+  gap: 1rem;
+}
+
+.performers-header {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 2px solid #ddd; /* Linha mais grossa para o cabeçalho */
+}
+
+.performer-item:last-child {
+  border-bottom: none;
+}
+
+.performer-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.performer-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  color: rgba(0,0,0,0.6);
+  flex-shrink: 0;
+}
+
+.performer-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.performer-name {
+  font-weight: 500;
+}
+
+.performer-role {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.performer-score {
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  text-align: center;
+  /* Usa as classes de status para cor */
+}
+
+.performer-trainings {
+  text-align: center;
+  font-weight: 500;
+}
+
+
+/* Tabela/Lista de Incidentes Recentes */
+.incidents-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.incidents-header, .incident-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr; /* Data | Tipo/Local | Severidade | Status */
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #eee;
+  gap: 1rem;
+}
+
+.incidents-header {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: 2px solid #ddd;
+}
+
+.incident-item:last-child {
+  border-bottom: none;
+}
+
+.incident-item span {
+  font-size: 0.9rem;
+}
+
+.incident-type-location {
+  display: flex;
+  flex-direction: column;
+}
+
+.incident-type {
+  font-weight: 500;
+}
+
+.incident-location {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* Reutiliza o estilo do status-badge, mas ajusta margem */
+.incident-item .status-badge {
+  margin: 0;
+  padding: 4px 10px;
+  text-align: center;
+  font-size: 0.75rem; /* Levemente menor */
+}
+
+/* Classes para cores de Severidade/Status (Reutiliza do checklist) */
+.status-low { background-color: #e8f5e9; color: #2e7d32; } 
+.status-medium { background-color: #fff8e1; color: #f57f17; } 
+.status-high { background-color: #ffebee; color: #c62828; } 
+
+
+/* Responsividade para os novos cards */
+@media (max-width: 992px) {
+    .manager-details-grid {
+        grid-template-columns: 1fr; /* Empilha os cards */
+    }
+}
+@media (max-width: 576px) {
+    .incidents-header, .incident-item {
+        /* Ajusta as colunas para telas menores */
+        grid-template-columns: 1.5fr 1fr 1fr; /* Data+Tipo | Severidade | Status */
+        gap: 0.5rem;
+    }
+    .incidents-header span:nth-child(2), /* Esconde a coluna Tipo/Local do cabeçalho */
+    .incident-item .incident-type-location {
+        display: none;
+    }
+     .incident-item span:first-child { /* Ajusta a fonte da data */
+        font-size: 0.8rem;
+    }
+    .incident-item .status-badge {
+        padding: 3px 6px;
+        font-size: 0.7rem;
+    }
+}
 
 /* Responsividade para o layout da página de pontos */
 @media (max-width: 992px) {

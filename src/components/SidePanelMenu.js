@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 // Importe os ícones que desejar para o menu lateral
-import { FaUser, FaCog, FaSignOutAlt, FaPlus } from 'react-icons/fa'; 
+import { FaUser, FaCog, FaSignOutAlt, FaPlus, FaChartBar } from 'react-icons/fa'; 
 
 // Recebe props para controlar visibilidade, fechar, dados do usuário e logout
 function SidePanelMenu({ isOpen, onClose, user, onLogout }) {
@@ -30,8 +30,9 @@ function SidePanelMenu({ isOpen, onClose, user, onLogout }) {
         <nav className="side-panel-nav">
           <ul>
             <li><NavLink to="/perfil" onClick={onClose}><FaUser /> Perfil</NavLink></li>
-            {/* Adicione mais links aqui se desejar, como no exemplo do X */}
-            {/* <li><NavLink to="/comunidades" onClick={onClose}><FaUsers /> Comunidades</NavLink></li> */}
+            {user.role === 'gestor' && (
+              <li><NavLink to="/gestao" onClick={onClose}><FaChartBar /> Gestão</NavLink></li>
+            )}
             <li><NavLink to="/configuracoes" onClick={onClose}><FaCog /> Configurações</NavLink></li>
           </ul>
         </nav>

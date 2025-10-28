@@ -55,6 +55,9 @@ function Header({ user, onProfileClick, onLogout }) {
           <li><NavLink to="/quizzes" className={({ isActive }) => isActive ? "active-link" : ""}>Quizzes</NavLink></li>
           <li><NavLink to="/checklists" className={({ isActive }) => isActive ? "active-link" : ""}>Checklists</NavLink></li>
           <li><NavLink to="/pontos" className={({ isActive }) => isActive ? "active-link" : ""}>Meus Pontos</NavLink></li>
+          {user.role === 'gestor' && (
+            <li><NavLink to="/gestao" className={({ isActive }) => isActive ? "active-link" : ""}>Gestão</NavLink></li>
+          )}
         </ul>
       </nav>
 
