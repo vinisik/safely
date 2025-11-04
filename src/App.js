@@ -18,7 +18,9 @@ import MyPoints from './pages/MyPoints';
 import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import SidePanelMenu from './components/SidePanelMenu';
-import ManagerDashboard from './pages/ManagerDashboard'; // Importa a nova página
+import ManagerDashboard from './pages/ManagerDashboard'; 
+
+import GestorRoute from './components/GestorRoute';
 import useIsMobile from './hooks/useIsMobile';
 
 // Páginas Placeholder
@@ -157,13 +159,17 @@ const currentRankName = getRank(totalPoints);
             <Route path="/configuracoes" element={<SettingsPage />} />
             <Route 
               path="/gestao" 
-              element={<ManagerDashboard 
-                          checklists={checklistsData} 
-                          completedVideosCount={completedVideosCount}
-                          totalVideosCount={totalVideosCount}
-                          completedQuizzesCount={completedQuizzesCount}
-                          totalQuizzesCount={totalQuizzesCount}
-                       />} 
+              element={
+                <GestorRoute user={user} element={
+                  <ManagerDashboard 
+                    checklists={checklistsData} 
+                    completedVideosCount={completedVideosCount}
+                    totalVideosCount={totalVideosCount}
+                    completedQuizzesCount={completedQuizzesCount}
+                    totalQuizzesCount={totalQuizzesCount}
+                  />
+                } />
+              } 
             />
           </Routes>
         </main>

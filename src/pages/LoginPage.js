@@ -6,6 +6,7 @@ import gabrielPic from '../assets/gabriel.png';
 import rafaelaPic from '../assets/rafaela.png';
 import viniciusPic from '../assets/vinicius.png';
 import gerentePic from '../assets/gerente.png';
+import defaultPic from '../assets/profile-placeholder.png'; 
 
 function LoginPage({ onLogin }) {
   // O estado 'name' foi removido
@@ -31,9 +32,13 @@ function LoginPage({ onLogin }) {
     else if (idColaborador === 'rafaela123') { userName = 'Rafaela Souza'; profilePic = rafaelaPic; }
     else if (idColaborador === 'vinicius123') { userName = 'Vinicius Siqueira'; profilePic = viniciusPic; }
     else if (idColaborador === 'gerente123') { // ID do Gestor
-        userName = 'José Gestor';
+        userName = 'Gestor';
         profilePic = gerentePic; 
         userRole = 'gestor'; // Define o papel como gestor
+    } else {
+      userName = 'Usuário'; // Nome genérico
+      profilePic = defaultPic; // Foto de perfil padrão
+      userRole = 'colaborador'; 
     }
 
     // Passa o objeto de usuário com o nome e foto corretos

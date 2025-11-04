@@ -57,8 +57,8 @@ function ManagerDashboard({ checklists, completedVideosCount, totalVideosCount, 
     ],
   };
 
-  const barOptions = { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Engajamento Semanal (Pontos)' } } };
-  const doughnutOptions = { responsive: true, plugins: { legend: { position: 'right'}, title: { display: true, text: 'Principais Não Conformidades Reportadas' } } };
+  const barOptions = { responsive: true, plugins: { legend: { display: false }, title: { display: false, text: 'Engajamento Semanal (Pontos)' } } };
+  const doughnutOptions = { responsive: true, plugins: { legend: { position: 'right'}, title: { display: false, text: 'Principais Não Conformidades Reportadas' } } };
 
   return (
     <div className="page-container manager-dashboard">
@@ -165,9 +165,11 @@ function ManagerDashboard({ checklists, completedVideosCount, totalVideosCount, 
       {/* Gráficos (Mantêm-se como estavam) */}
       <div className="manager-charts-grid">
         <div className="chart-card ">
+        <h2>Engajamento Semanal (Pontos)</h2>
           <Bar options={barOptions} data={engagementData} />
         </div>
         <div className="chart-card ">
+          <h2>Principais Não Conformidades Reportadas</h2>
           <Doughnut options={doughnutOptions} data={nonConformanceData} />
         </div>
       </div>
