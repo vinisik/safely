@@ -2,6 +2,7 @@
 import thumbEpis from '../assets/thumbnails/epis.jpg';
 import thumbErgonomia from '../assets/thumbnails/ergonomia.png';
 import thumbAltura from '../assets/thumbnails/trabalho-altura.jpg';
+import thumbPagina from '../assets/thumbnails/thumbSafely.png'
 import rewardCaderno from '../assets/rewards/caderno.png';
 import rewardCaneca from '../assets/rewards/caneca.png';
 import rewardGarrafa from '../assets/rewards/garrafa.png';
@@ -44,11 +45,11 @@ export const videos = [
   },
   {
     id: 4,
-    title: 'Segurança em Trabalho em Altura',
-    thumbnail: thumbAltura,
-    description: 'Conheça os procedimentos e equipamentos essenciais para realizar trabalhos em altura com máxima segurança.',
-    videoUrl: '/videos/nr35.mp4',
-    dueDate: '7 Min',
+    title: 'Vídeo de Funcionamento da Plataforma',
+    thumbnail: thumbPagina,
+    description: 'Conheça todas as funcionalidades da plataforma Safely nesse vídeo rápido!',
+    videoUrl: '/videos/safelyvideo.mp4',
+    dueDate: '2 Min',
   },
 ];
 
@@ -334,22 +335,48 @@ export const rewards = [
     stock: 20,
   },
 ];
-export const securityAlerts = [
+export const allSecurityAlerts = [
   {
     id: 1,
     title: 'Manutenção Programada - Setor B',
     message: 'Equipamentos estarão em manutenção amanhã das 14h às 16h. Use rotas alternativas.',
     timeAgo: 'Há 2 horas',
-    priority: 'medium', // 'low', 'medium', 'high'
-    icon: 'wrench' // Poderíamos usar um ícone aqui
+    priority: 'medium',
   },
   {
     id: 2,
+    title: 'Alerta de Chuva Forte',
+    message: 'Previsão de chuva forte para as próximas 6 horas. Atenção redobrada em áreas externas.',
+    timeAgo: 'Há 5 horas',
+    priority: 'low',
+  },
+  {
+    id: 3,
     title: 'Simulado de Emergência',
-    message: 'Simulado de evacuação será realizado na próxima terça-feira às 10h. Esteja atento às instruções.',
+    message: 'Simulado de evacuação será realizado na próxima terça-feira às 10h.',
     timeAgo: 'Ontem',
     priority: 'high',
-    icon: 'fire-extinguisher'
+  },
+  {
+    id: 4,
+    title: 'Uso Obrigatório de Protetor Auricular',
+    message: 'Novas medições de ruído no Setor C. O uso de protetor auricular agora é obrigatório na área.',
+    timeAgo: 'Há 1 hora',
+    priority: 'high',
+  },
+  {
+    id: 5,
+    title: 'Inspeção de Veículos',
+    message: 'Atenção, empilhadeiras 03 e 05 precisam de inspeção de freios antes do uso.',
+    timeAgo: 'Hoje, 08:00',
+    priority: 'medium',
+  },
+  {
+    id: 6,
+    title: 'Visita da CIPA',
+    message: 'Membros da CIPA farão uma auditoria comportamental no Setor A hoje à tarde.',
+    timeAgo: 'Hoje, 09:00',
+    priority: 'low',
   }
 ];
 export const topPerformers = [

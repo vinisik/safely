@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ContentCard from '../components/ContentCard';
-import { videos, quizzes, securityAlerts } from '../data/mockData'; 
+import { videos, quizzes, allSecurityAlerts } from '../data/mockData'; 
 import { Link } from 'react-router-dom';
 import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaMedal, FaChalkboardTeacher, FaChevronUp, FaChevronDown } from 'react-icons/fa'; 
 import useIsMobile from '../hooks/useIsMobile';
@@ -17,6 +17,14 @@ function Dashboard({user, checklists, totalPoints,
   // Calcula o número de checklists concluídos
   const completedChecklistsCount = checklists.filter(c => c.status === 'completed').length;
   const totalChecklistsCount = checklists.length; 
+
+  const [currentAlerts, setCurrentAlerts] = useState([]);
+
+  useEffect(() => {
+    const shuffledAlerts = [...allSecurityAlerts].sort(() => 0.5 - Math.random());
+    const selectedAlerts = shuffledAlerts.slice(0, 2);
+    setCurrentAlerts(selectedAlerts);
+  }, []);
 
   // Cálculo de porcentagem de checklists completas
   const completionPercentage = totalChecklistsCount > 0 
@@ -212,7 +220,7 @@ function Dashboard({user, checklists, totalPoints,
           <div className="dashboard-section">
             <h2>Alertas de Segurança</h2>
             <div className="alerts-container">
-              {securityAlerts.slice(0, 2).map(alert => ( // Mostra apenas o primeiro alerta
+              {currentAlerts.map(alert => (
                 <div key={alert.id} className={`alert-card priority-${alert.priority}`}>
                   <h3>{alert.title}</h3>
                   <p>{alert.message}</p>
