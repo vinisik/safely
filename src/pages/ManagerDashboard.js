@@ -1,89 +1,113 @@
 import React from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-import { FaUsers, FaClock, FaCheckCircle, FaExclamationTriangle, FaCertificate, FaHeartbeat, FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import { FaUsers, FaClock, FaCheckCircle, FaExclamationTriangle, FaCertificate, FaHeartbeat, FaArrowUp, FaArrowDown, FaFilePdf, FaFileExport } from 'react-icons/fa';
 import { topPerformers, recentIncidents } from '../data/mockData';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
 function ManagerDashboard({ checklists, completedVideosCount, totalVideosCount, completedQuizzesCount, totalQuizzesCount }) {
-  // Cálculos (alguns são placeholders)
+  // Cálculos (placeholders)
   const totalChecklists = checklists.length;
   const pendingChecklists = checklists.filter(c => c.status === 'pending').length;
-  const nonConformities = 8; // Placeholder
-  const participationRate = 96; // Placeholder
-  const avgResponseTime = 2.3; // Placeholder
-  const auditsCompleted = 47; // Placeholder
-  const activeCertifications = 142; // Placeholder
-  const severityIndex = 0.12; // Placeholder
+  const nonConformities = 8;
+  const participationRate = 96;
+  const avgResponseTime = 2.3;
+  const auditsCompleted = 47;
+  const activeCertifications = 142;
+  const severityIndex = 0.12;
 
-  // Dados Simulados para Gráficos
+  // Dados simulados para gráficos
   const engagementData = {
     labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
     datasets: [
       {
         label: 'Pontos Ganhos',
-        data: [650, 590, 800, 810], // Dados simulados
-        backgroundColor: 'rgba(0, 90, 156, 0.6)', // Azul Safely com transparência
+        data: [650, 590, 800, 810],
+        backgroundColor: 'rgba(0, 90, 156, 0.6)',
         borderColor: 'rgba(0, 90, 156, 1)',
         borderWidth: 1,
       },
     ],
   };
 
-  const getInitials = (name) => {
-    const names = name.split(' ');
-    if (names.length === 1) return names[0][0].toUpperCase();
-    return (names[0][0] + names[names.length - 1][0]).toUpperCase();
-  }
-
-  // Função auxiliar para classes CSS de severidade/status
-  const getBadgeClass = (value) => {
-      value = value.toLowerCase();
-      if (value === 'baixa' || value === 'resolvido') return 'status-low';
-      if (value === 'média' || value === 'em análise') return 'status-medium';
-      if (value === 'alta') return 'status-high';
-      return '';
-  }
-
   const nonConformanceData = {
     labels: ['EPIs Faltando', 'Vazamentos', 'Obstrução', 'Falha Elétrica', 'Outros'],
     datasets: [
       {
-        data: [12, 19, 3, 5, 2], // Dados simulados
-        backgroundColor: [ '#dc3545', '#ffc107', '#fd7e14', '#6f42c1', '#6c757d'],
+        data: [12, 19, 3, 5, 2],
+        backgroundColor: ['#dc3545', '#ffc107', '#fd7e14', '#6f42c1', '#6c757d'],
         hoverOffset: 4,
       },
     ],
   };
 
-  const barOptions = { responsive: true, plugins: { legend: { display: false }, title: { display: false, text: 'Engajamento Semanal (Pontos)' } } };
-  const doughnutOptions = { responsive: true, plugins: { legend: { position: 'right'}, title: { display: false, text: 'Principais Não Conformidades Reportadas' } } };
+  const barOptions = { responsive: true, plugins: { legend: { display: false }, title: { display: false } } };
+  const doughnutOptions = { responsive: true, plugins: { legend: { position: 'right' }, title: { display: false } } };
+
+  const getInitials = (name) => {
+    const names = name.split(' ');
+    if (names.length === 1) return names[0][0].toUpperCase();
+    return (names[0][0] + names[names.length - 1][0]).toUpperCase();
+  };
+
+  const getBadgeClass = (value) => {
+    value = value.toLowerCase();
+    if (value === 'baixa' || value === 'resolvido') return 'status-low';
+    if (value === 'média' || value === 'em análise') return 'status-medium';
+    if (value === 'alta') return 'status-high';
+    return '';
+  };
+
+  // --- Funções para exportar e imprimir ---
+  const handleExportJSON = () => {
+    const data = {
+      metrics: {
+        participationRate,
+        avgResponseTime,
+        auditsCompleted,
+        nonConformities,
+        activeCertifications,
+        severityIndex,
+      },
+      topPerformers,
+      recentIncidents,
+      checklists,
+    };
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'painel-gestor.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handlePrintPDF = () => {
+    window.print();
+  };
 
   return (
     <div className="page-container manager-dashboard">
       <title>Safely | Painel do Gestor</title>
+
       <div className="page-header">
         <h1>Painel do Gestor</h1>
+
+        {/* Botões de Exportar e Imprimir */}
+        <div className="export-buttons">
+          <button className="btn btn-primary json" onClick={handleExportJSON}>
+            <FaFileExport style={{ marginRight: '6px' }} /> Exportar JSON
+          </button>
+          <button className="btn btn-primary pdf" onClick={handlePrintPDF}>
+            <FaFilePdf style={{ marginRight: '6px' }} /> Imprimir PDF
+          </button>
+        </div>
       </div>
 
-      {/* --- NOVA SEÇÃO DE KPIs --- */}
+      {/* KPIs */}
       <div className="manager-kpi-grid">
-        {/* Card: Taxa de Participação */}
-        <div className="kpi-card ">
-          <div className="kpi-header">
-            <div className="kpi-icon icon-participation">
-              <FaUsers size={20}/>
-            </div>
-            <span className="kpi-trend positive">
-              <FaArrowUp size={12}/> +4%
-            </span>
-          </div>
-          <span className="kpi-label">Taxa de Participação</span>
-          <span className="kpi-value">{participationRate}%</span>
-          <span className="kpi-subtext">Colaboradores engajados</span>
-        </div>
-
         {/* Card: Tempo Médio de Resposta */}
         <div className="kpi-card ">
           <div className="kpi-header">
@@ -158,25 +182,38 @@ function ManagerDashboard({ checklists, completedVideosCount, totalVideosCount, 
           <span className="kpi-value">{severityIndex}</span>
           <span className="kpi-subtext">Por 1000 horas trabalhadas</span>
         </div>
+        <div className="kpi-card ">
+          <div className="kpi-header">
+            <div className="kpi-icon icon-participation">
+              <FaUsers size={20}/>
+            </div>
+            <span className="kpi-trend positive">
+              <FaArrowUp size={12}/> +4%
+            </span>
+          </div>
+          <span className="kpi-label">Taxa de Participação</span>
+          <span className="kpi-value">{participationRate}%</span>
+          <span className="kpi-subtext">Colaboradores engajados</span>
+        </div>
 
+        {/* ... (demais cartões permanecem idênticos) ... */}
       </div>
-      {/* --- FIM DA NOVA SEÇÃO DE KPIs --- */}
 
-      {/* Gráficos (Mantêm-se como estavam) */}
+      {/* Gráficos */}
       <div className="manager-charts-grid">
-        <div className="chart-card ">
-        <h2>Engajamento Semanal (Pontos)</h2>
+        <div className="chart-card">
+          <h2>Engajamento Semanal (Pontos)</h2>
           <Bar options={barOptions} data={engagementData} />
         </div>
-        <div className="chart-card ">
+        <div className="chart-card">
           <h2>Principais Não Conformidades Reportadas</h2>
           <Doughnut options={doughnutOptions} data={nonConformanceData} />
         </div>
       </div>
 
+      {/* Tabelas de Detalhes */}
       <div className="manager-details-grid">
-        {/* Card: Top Performers */}
-        <div className="top-performers-card ">
+        <div className="top-performers-card">
           <h2>Top Performers em Segurança</h2>
           <p className="section-subtitle">Colaboradores com melhor desempenho</p>
           <div className="performers-list">
@@ -203,32 +240,30 @@ function ManagerDashboard({ checklists, completedVideosCount, totalVideosCount, 
           </div>
         </div>
 
-        {/* Card: Incidentes Recentes */}
-        <div className="recent-incidents-card ">
-           <h2>Incidentes Recentes</h2>
-           <p className="section-subtitle">Últimas ocorrências registradas</p>
-           <div className="incidents-table">
-              <div className="incidents-header">
-                  <span>Data</span>
-                  <span>Tipo</span>
-                  <span>Severidade</span>
-                  <span>Status</span>
+        <div className="recent-incidents-card">
+          <h2>Incidentes Recentes</h2>
+          <p className="section-subtitle">Últimas ocorrências registradas</p>
+          <div className="incidents-table">
+            <div className="incidents-header">
+              <span>Data</span>
+              <span>Tipo</span>
+              <span>Severidade</span>
+              <span>Status</span>
+            </div>
+            {recentIncidents.map(incident => (
+              <div key={incident.id} className="incident-item">
+                <span>{incident.date}</span>
+                <div className="incident-type-location">
+                  <span className="incident-type">{incident.type}</span>
+                  <span className="incident-location">{incident.location}</span>
+                </div>
+                <span className={`status-badge ${getBadgeClass(incident.severity)}`}>{incident.severity}</span>
+                <span className={`status-badge ${getBadgeClass(incident.status)}`}>{incident.status}</span>
               </div>
-              {recentIncidents.map(incident => (
-                  <div key={incident.id} className="incident-item">
-                      <span>{incident.date}</span>
-                      <div className="incident-type-location">
-                          <span className="incident-type">{incident.type}</span>
-                          <span className="incident-location">{incident.location}</span>
-                      </div>
-                      <span className={`status-badge ${getBadgeClass(incident.severity)}`}>{incident.severity}</span>
-                      <span className={`status-badge ${getBadgeClass(incident.status)}`}>{incident.status}</span>
-                  </div>
-              ))}
-           </div>
+            ))}
+          </div>
         </div>
       </div>
-
     </div>
   );
 }
