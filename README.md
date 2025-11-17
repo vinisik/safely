@@ -33,10 +33,3 @@ Use qualquer senha.
 * gabriel123 (Usuário: Gabriel Maciel)  
 * rafaela123 (Usuário: Rafaela Souza)  
 * vinicius123 (Usuário: Vinicius Siqueira)
-
-## **Como Rodar**
-
-1. Clone o repositório.  
-2. Navegue até a pasta do projeto: cd safely  
-3. Instale as dependências: npm install  
-4. Inicie a aplicação: npm start
