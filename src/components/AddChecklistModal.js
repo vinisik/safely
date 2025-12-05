@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { FaTimes, FaHeading, FaCalendarAlt, FaListUl, FaPlus, FaTrash, FaSave, FaCode } from 'react-icons/fa';
+
+// Importa o CSS
+import './Components.css';
 
 function AddChecklistModal({ isOpen, onClose, onAdd }) {
   const [title, setTitle] = useState('');
@@ -43,21 +47,13 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
       id: Date.now(),
       title: title,
       status: 'pending',
-      // Adiciona 1 dia e usa UTC para evitar problemas de fuso horário
       dueDate: new Date(dueDate).toLocaleDateString('pt-BR', {timeZone: 'UTC'}),
       items: items.filter(item => item.text.trim() !== ''),
     };
     onAdd(newChecklist);
-    
-    // Limpa o formulário e fecha o modal
-    setTitle('');
-    setItems([{ id: 1, text: '' }]);
-    setDueDate('');
-    setShowJson(false);
-    onClose();
+    handleClose();
   }
 
-  // Função para fechar e resetar o modal
   const handleClose = () => {
     setTitle('');
     setItems([{ id: 1, text: '' }]);
@@ -66,63 +62,102 @@ function AddChecklistModal({ isOpen, onClose, onAdd }) {
     onClose();
   }
 
-  if (!isOpen) {
-    return null;
-  }
+  if (!isOpen) return null;
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal-content">
-        <h2>Criar Novo Checklist</h2>
+    <div className="modalBackdropGlass">
+      <div className="modalCardGlass">
+        
+        {/* Header do Modal */}
+        <div className="modalHeaderModern">
+          <h2>{showJson ? 'JSON Gerado' : 'Novo Checklist'}</h2>
+          <button onClick={handleClose} className="btnCloseModal">
+            <FaTimes />
+          </button>
+        </div>
         
         {!showJson ? (
           <>
-            <div className="form-group">
+            {/* Input: Título */}
+            <div className="inputGroupModal">
               <label>Título do Checklist</label>
-              <input 
-                type="text" 
-                value={title} 
-                onChange={(e) => setTitle(e.target.value)}
-              />
+              <div className="inputWrapper">
+                 <FaHeading className="inputIcon" />
+                 <input 
+                    type="text" 
+                    className="inputModern"
+                    value={title} 
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Ex: Inspeção de Extintores"
+                 />
+              </div>
             </div>
 
-            <div className="form-group">
+            {/* Input: Data */}
+            <div className="inputGroupModal">
               <label>Data de Validade</label>
-              <input 
-                type="date" 
-                value={dueDate} 
-                onChange={(e) => setDueDate(e.target.value)}
-              />
+              <div className="inputWrapper">
+                 <FaCalendarAlt className="inputIcon" />
+                 <input 
+                    type="date" 
+                    className="inputModern"
+                    value={dueDate} 
+                    onChange={(e) => setDueDate(e.target.value)}
+                 />
+              </div>
             </div>
             
-            <div className="form-group">
-              <label>Etapas do Checklist</label>
-              {items.map((item, index) => (
-                <div className="checklist-item-builder" key={item.id}>
-                  <input
-                    type="text"
-                    value={item.text}
-                    onChange={(e) => handleItemTextChange(item.id, e.target.value)}
-                    placeholder={`Etapa ${index + 1}`}
-                  />
-                  <button onClick={() => handleRemoveItem(item.id)} className="btn-remove-item">－</button>
-                </div>
-              ))}
-              <button onClick={handleAddItem} className="btn-add-item">＋ Adicionar Etapa</button>
+            {/* Lista de Itens */}
+            <div className="inputGroupModal">
+              <label style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+                 <FaListUl /> Etapas do Processo
+              </label>
+              
+              <div style={{background: '#f8f9fa', padding: '1rem', borderRadius: '20px', border: '1px solid #eee'}}>
+                  {items.map((item, index) => (
+                    <div className="itemBuilderRow" key={item.id}>
+                      <span style={{fontWeight: 'bold', color: '#005A9C', width: '20px'}}>{index + 1}.</span>
+                      <input
+                        type="text"
+                        className="inputModern"
+                        style={{padding: '0.6rem 1rem', fontSize: '0.9rem'}} // Ajuste fino
+                        value={item.text}
+                        onChange={(e) => handleItemTextChange(item.id, e.target.value)}
+                        placeholder={`Descreva a etapa ${index + 1}`}
+                      />
+                      <button onClick={() => handleRemoveItem(item.id)} className="btnIconDelete" title="Remover item">
+                        <FaTrash />
+                      </button>
+                    </div>
+                  ))}
+                  
+                  <button onClick={handleAddItem} className="btnAddStep">
+                    <FaPlus /> Adicionar Nova Etapa
+                  </button>
+              </div>
             </div>
 
-            <div className="modal-actions">
-              <button onClick={handleClose} className="btn-cancel">Cancelar</button>
-              <button onClick={generateJson} className="btn-secondary">Ver JSON</button>
-              <button onClick={handleSave} className="btn-add">Salvar Checklist</button>
+            {/* Ações */}
+            <div className="modalActionsModern">
+              <button onClick={generateJson} className="btnGhost" title="Ver JSON para desenvolvedores">
+                 <FaCode /> JSON
+              </button>
+              <button onClick={handleClose} className="btnGhost">
+                 Cancelar
+              </button>
+              <button onClick={handleSave} className="btnNewChecklist">
+                 <FaSave /> Salvar Checklist
+              </button>
             </div>
           </>
         ) : (
+            // Visualização do JSON
             <>
-                <h3>JSON Gerado</h3>
-                <pre className="json-output">{outputJson}</pre>
-                <div className="modal-actions">
-                    <button onClick={() => setShowJson(false)} className="btn-cancel">Voltar ao Editor</button>
+                <pre className="jsonPreviewBox">{outputJson}</pre>
+                <div className="modalActionsModern">
+                    <button onClick={() => setShowJson(false)} className="btnGhost">
+                       <FaTimes /> Fechar Visualização
+                    </button>
                 </div>
             </>
         )}

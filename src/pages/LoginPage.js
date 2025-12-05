@@ -60,13 +60,12 @@ function LoginPage({ onLogin }) {
         <form onSubmit={handleSubmit}>
           <div className="loginHeaderModern">
             <img src={safelyLogoLogin} alt="Safely Logo" />
-            <h2>Bem-vindo de volta</h2>
+            <h2>Bem-vindo(a) de volta!</h2>
             <p>Acesse sua conta para continuar</p>
           </div>
 
           {/* Campo de ID com Ícone */}
           <div className="inputGroupModern">
-            <label htmlFor="idColaborador">ID de Colaborador</label>
             <div className="inputWrapper">
                <FaUser className="inputIcon" />
                <input
@@ -75,13 +74,12 @@ function LoginPage({ onLogin }) {
                  className="inputModern"
                  value={idColaborador}
                  onChange={(e) => setidColaborador(e.target.value)}
+                 placeholder='ID de Colaborador'
                />
             </div>
           </div>
           
-          {/* Campo de Senha com Ícone */}
           <div className="inputGroupModern">
-            <label htmlFor="password">Senha</label>
             <div className="inputWrapper">
               <FaLock className="inputIcon" />
               <input
@@ -90,7 +88,7 @@ function LoginPage({ onLogin }) {
                 className="inputModern"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Senha"
               />
             </div>
           </div>

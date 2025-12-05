@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logoEmpresa from '../assets/michelin.png';
 import { FaIdBadge, FaBuilding, FaClipboardList, FaMedal } from 'react-icons/fa';
-
-// Importa o CSS Unificado
 import './Pages.css';
 
 function ProfilePage({ user, checklists, totalPoints }) {

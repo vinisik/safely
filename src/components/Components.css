@@ -542,6 +542,180 @@
   padding-bottom: env(safe-area-inset-bottom); /* Ajuste para iPhone X+ */
 }
 
+.modalBackdropGlass {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px); /* Desfoque no fundo atrás do modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modalCardGlass {
+  background: rgba(255, 255, 255, 0.95); /* Quase sólido para leitura */
+  width: 90%;
+  max-width: 600px;
+  border-radius: 30px;
+  padding: 2.5rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; /* Evita que estoure a altura da tela */
+  overflow-y: auto;
+}
+
+.modalHeaderModern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.modalHeaderModern h2 {
+  font-family: 'Poppins', sans-serif;
+  color: #005A9C;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.btnCloseModal {
+  background: #f0f0f0;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.btnCloseModal:hover {
+  background: #ffcdd2;
+  color: #c62828;
+  transform: rotate(90deg);
+}
+
+/* Inputs dentro do Modal */
+.inputGroupModal {
+  margin-bottom: 1.5rem;
+}
+
+.inputGroupModal label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: #444;
+}
+
+/* Linha de Item do Checklist */
+.itemBuilderRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.8rem;
+  animation: slideDown 0.2s ease;
+}
+
+.itemBuilderRow input {
+  flex-grow: 1;
+}
+
+.btnIconDelete {
+  background: #ffebee;
+  color: #c62828;
+  border: none;
+  width: 42px;
+  height: 42px; /* Altura igual ao input */
+  border-radius: 50%; /* Redondo */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.btnIconDelete:hover {
+  background: #ef5350;
+  color: white;
+  transform: scale(1.1);
+}
+
+.btnAddStep {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px dashed #2e7d32;
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btnAddStep:hover {
+  background: #c8e6c9;
+}
+
+/* Ações do Modal */
+.modalActionsModern {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.btnGhost {
+  background: transparent;
+  color: #777;
+  border: 1px solid #ccc;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btnGhost:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+/* Área de JSON */
+.jsonPreviewBox {
+  background: #282c34;
+  color: #61dafb;
+  padding: 1rem;
+  border-radius: 15px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  max-height: 300px;
+  overflow: auto;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
 @media (max-width: 992px) {
   .bottom-nav {
     display: flex;
