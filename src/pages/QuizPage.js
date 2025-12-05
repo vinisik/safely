@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { quizzes } from '../data/mockData';
+import { FaTrophy, FaArrowRight, FaRedo } from 'react-icons/fa';
+import './Pages.css';
 
 function QuizPage({addPoints, markQuizAsCompleted}) {
   const { id } = useParams();
@@ -10,9 +12,7 @@ function QuizPage({addPoints, markQuizAsCompleted}) {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
 
-  if (!quiz) {
-    return <div>Quiz não encontrado.</div>;
-  }
+  if (!quiz) return <div className="checklistPageModern">Quiz não encontrado.</div>;
 
   const handleAnswerSelect = (questionIndex, optionIndex) => {
     setSelectedAnswers({
@@ -30,15 +30,16 @@ function QuizPage({addPoints, markQuizAsCompleted}) {
       }
     });
 
-    const pointsEarned = correctAnswersCount * 10; // 10 pontos por acerto
+    const pointsEarned = correctAnswersCount * 10; 
     if (pointsEarned > 0) {
-      addPoints(pointsEarned); // Chama a função do App.js para adicionar os pontos
+      addPoints(pointsEarned);
     }
 
     markQuizAsCompleted(quiz.id); 
-    setShowResults(true); // Mostra a tela de resultados
+    setShowResults(true); 
   };
 
+  // --- Tela de Resultados ---
   if (showResults) {
     let score = 0;
     quiz.questions.forEach((question, index) => {
@@ -49,46 +50,92 @@ function QuizPage({addPoints, markQuizAsCompleted}) {
     });
 
     return (
-      <div className="quiz-page quiz-results">
-        <h2>Resultados do Quiz</h2>
-        <p>Você acertou {score} de {quiz.questions.length} perguntas!</p>
-        {score > 0 && <p className="points-earned">Você ganhou {score * 10} pontos!</p>}
-        <Link to="/quizzes" className="btn">Voltar aos quizzes</Link>
+      <div className="checklistPageModern">
+        <div className="successCard">
+          <div style={{fontSize: '4rem', color: '#ffca28', marginBottom: '1rem'}}>
+            <FaTrophy />
+          </div>
+          <h2>Resultados do Quiz</h2>
+          <p style={{fontSize: '1.2rem', margin: '1rem 0'}}>
+            Você acertou <strong>{score}</strong> de <strong>{quiz.questions.length}</strong> perguntas!
+          </p>
+          
+          {score > 0 && (
+             <div className="pointsGained" style={{fontSize: '1.2rem', marginBottom: '2rem'}}>
+                Você ganhou {score * 10} pontos!
+             </div>
+          )}
+          
+          <div style={{display: 'flex', gap: '1rem', justifyContent: 'center'}}>
+            <Link to="/quizzes" className="btnNewChecklist">
+               Voltar aos Quizzes
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
   
   const question = quiz.questions[currentQuestionIndex];
+  const progressPercentage = ((currentQuestionIndex + 1) / quiz.questions.length) * 100;
 
   return (
-    <div className="quiz-page">
-      <h2>{quiz.title}</h2>
-      <div className="quiz-question">
-        <h3>{`Pergunta ${currentQuestionIndex + 1}: ${question.text}`}</h3>
+    <div className="checklistPageModern">
+      {/* Header com Barra de Progresso */}
+      <div className="checklistHeaderCard" style={{paddingBottom: '4rem', position: 'relative'}}>
+        <h1>{quiz.title}</h1>
+        <p style={{opacity: 0.9}}>Pergunta {currentQuestionIndex + 1} de {quiz.questions.length}</p>
+        
+        {/* Barra de Progresso */}
+        <div style={{
+            position: 'absolute', bottom: 0, left: 0, width: '100%', height: '8px', 
+            background: 'rgba(0,0,0,0.2)', overflow: 'hidden', borderBottomLeftRadius: '24px', borderBottomRightRadius: '24px'
+        }}>
+            <div style={{
+                width: `${progressPercentage}%`, height: '100%', background: '#4caf50', 
+                transition: 'width 0.3s ease'
+            }}></div>
+        </div>
       </div>
-      <div className="quiz-options">
-        <ul>
+
+      {/* Card da Pergunta */}
+      <div className="questionCard">
+        <div className="questionText">
+           {question.text}
+        </div>
+        
+        <div className="quizOptionsList">
           {question.options.map((option, index) => (
-            <li
+            <div
               key={index}
-              className={selectedAnswers[currentQuestionIndex] === index ? 'selected' : ''}
+              className={`quizOptionItem ${selectedAnswers[currentQuestionIndex] === index ? 'selected' : ''}`}
               onClick={() => handleAnswerSelect(currentQuestionIndex, index)}
             >
-              {option.text}
-            </li>
+              <div className="quizOptionCircle"></div>
+              <span>{option.text}</span>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       
-      {currentQuestionIndex < quiz.questions.length - 1 ? (
-        <button className="btn" onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}>
-          Próxima Pergunta
-        </button>
-      ) : (
-        <button className="btn" onClick={handleSubmit}>
-          Finalizar Quiz
-        </button>
-      )}
+      <div className="submitButtonContainer" style={{display: 'flex', justifyContent: 'flex-end'}}>
+        {currentQuestionIndex < quiz.questions.length - 1 ? (
+          <button 
+            className="btnNewChecklist" 
+            onClick={() => setCurrentQuestionIndex(currentQuestionIndex + 1)}
+            style={{width: 'auto', paddingLeft: '2rem', paddingRight: '2rem'}}
+          >
+            Próxima <FaArrowRight style={{marginLeft: '8px'}}/>
+          </button>
+        ) : (
+          <button 
+            className="btnSubmitHuge" 
+            onClick={handleSubmit}
+          >
+            Finalizar Quiz
+          </button>
+        )}
+      </div>
     </div>
   );
 }

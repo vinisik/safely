@@ -1,295 +1,256 @@
 import React, { useState, useEffect } from 'react';
-import ContentCard from '../components/ContentCard';
-import { videos, quizzes, allSecurityAlerts } from '../data/mockData'; 
 import { Link } from 'react-router-dom';
-import { FaClock, FaBrain, FaClipboard, FaCalendarAlt, FaMedal, FaChalkboardTeacher, FaChevronUp, FaChevronDown } from 'react-icons/fa'; 
+import { videos, quizzes, allSecurityAlerts } from '../data/mockData'; 
+import { FaClock, FaBrain, FaClipboardList, FaCalendarAlt, FaMedal, FaChalkboardTeacher, FaChevronUp, FaChevronDown, FaBell, FaPlayCircle } from 'react-icons/fa'; 
 import useIsMobile from '../hooks/useIsMobile';
+
+// Importa o CSS Unificado
+import './Pages.css';
 
 function Dashboard({user, checklists, totalPoints, 
     completedVideosCount, totalVideosCount, 
     completedQuizzesCount, totalQuizzesCount, currentRankName}) {
+  
   const [isSummaryDropdownOpen, setIsSummaryDropdownOpen] = useState(false);
   const isMobile = useIsMobile();
-  // Filtra a lista para pegar apenas os checklists pendentes
+  
+  // Filtros
   const pendingChecklists = checklists.filter(c => c.status === 'pending');
-  // Pega a quantidade de itens na lista filtrada
   const pendingCount = pendingChecklists.length;
-  // Calcula o número de checklists concluídos
   const completedChecklistsCount = checklists.filter(c => c.status === 'completed').length;
   const totalChecklistsCount = checklists.length; 
 
-  const [currentAlerts, setCurrentAlerts] = useState([]);
-
-  useEffect(() => {
-    const shuffledAlerts = [...allSecurityAlerts].sort(() => 0.5 - Math.random());
-    const selectedAlerts = shuffledAlerts.slice(0, 2);
-    setCurrentAlerts(selectedAlerts);
-  }, []);
-
-  // Cálculo de porcentagem de checklists completas
+  // Porcentagem (opcional, se quiser usar uma barra de progresso depois)
   const completionPercentage = totalChecklistsCount > 0 
     ? Math.round((completedChecklistsCount / totalChecklistsCount) * 100) 
     : 0;
 
-  // Placeholder para Dias sem Acidentes
+  // Alertas Aleatórios
+  const [currentAlerts, setCurrentAlerts] = useState([]);
+  useEffect(() => {
+    const shuffledAlerts = [...allSecurityAlerts].sort(() => 0.5 - Math.random());
+    const selectedAlerts = shuffledAlerts.slice(0, 3); // Mostra 3 alertas
+    setCurrentAlerts(selectedAlerts);
+  }, []);
+
+  // Dados Mockados
   const daysWithoutAccidents = 127;
-  // Saudação dinâmica
+  
   const getCurrentGreeting = () => {
     const currentHour = new Date().getHours();
-    if (currentHour >= 5 && currentHour < 12) {
-      return "Bom dia";
-    } else if (currentHour >= 12 && currentHour < 18) {
-      return "Boa tarde";
-    } else {
-      return "Boa noite";
-    }
+    if (currentHour >= 5 && currentHour < 12) return "Bom dia";
+    else if (currentHour >= 12 && currentHour < 18) return "Boa tarde";
+    else return "Boa noite";
   };
 
-   const greeting = getCurrentGreeting();
+  const greeting = getCurrentGreeting();
 
   return (
-    <>
+    <div className="checklistPageModern">
       <title>Safely | Início</title> 
       
-      {/* <div className="hero-banner">
-        <h2>Operador de Produção <br></br>Michelin - Itatiaia </h2>
-      </div> */}
-      <div className="welcome-section">
+      {/* Banner de Boas-vindas */}
+      <div className="welcomeBannerGlass">
         <h1>{greeting}, {user.name}!</h1>
-        <p>Bem vindo(a) ao seu painel de segurança do trabalho.</p>
+        <p>Aqui está o resumo da sua segurança hoje. Mantenha o foco e continue seguro.</p>
       </div>
 
-      <button 
-        className="summary-dropdown-toggle" 
-        onClick={() => setIsSummaryDropdownOpen(!isSummaryDropdownOpen)}
-      >
-        Ver Resumo 
-        {isSummaryDropdownOpen ? <FaChevronUp /> : <FaChevronDown />} 
-      </button>
+      {/* Controle Mobile (Dropdown) */}
+      {isMobile && (
+        <>
+          <button 
+            className="mobileSummaryToggle" 
+            onClick={() => setIsSummaryDropdownOpen(!isSummaryDropdownOpen)}
+          >
+            <span>Ver Resumo de Dados</span>
+            {isSummaryDropdownOpen ? <FaChevronUp /> : <FaChevronDown />} 
+          </button>
 
-      {/* 2. Conteúdo do Dropdown (condicionalmente renderizado) */}
-      {isSummaryDropdownOpen && isMobile && ( // Só mostra se aberto E se for mobile
-        <div className="summary-dropdown-content">
-          {/* Item: Dias sem Acidentes */}
-          <div className="summary-dropdown-item">
-            <div className="summary-content">
-              <span className="summary-label">Dias sem Acidentes</span>
-              <span className="summary-value">{daysWithoutAccidents}</span>
-              <span className="summary-subtext">+5 dias</span>
+          {isSummaryDropdownOpen && (
+            <div className="summaryGridModern" style={{marginBottom: '2rem'}}>
+               {/* Réplica dos cards para mobile dentro do dropdown se necessário, 
+                   ou apenas deixe o grid fluir normalmente no mobile.
+                   Aqui optei por mostrar o grid normal abaixo quando aberto. */}
             </div>
-            <div className="summary-icon icon-calendar"><FaCalendarAlt size={18}/></div>
-          </div>
-          {/* Item: Checklists Completos */}
-          <div className="summary-dropdown-item">
-            <div className="summary-content">
-              <span className="summary-label">Checklists Completos</span>
-              <span className="summary-value">{completedChecklistsCount}/{totalChecklistsCount}</span>
-              <span className="summary-subtext">{completionPercentage}% concluído</span> 
+          )}
+        </>
+      )}
+
+      {/* Grid de Resumo (Cards Glass) - Esconde no mobile se dropdown fechado */}
+      {(!isMobile || isSummaryDropdownOpen) && (
+        <div className="summaryGridModern">
+          {/* Dias sem Acidentes */}
+          <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{daysWithoutAccidents}</h3>
+              <span>Dias Sem Acidentes</span>
             </div>
-            <div className="summary-icon icon-check"><FaClipboard size={18}/></div>
-          </div>
-          <div className="summary-dropdown-item">
-            <div className="summary-content">
-              <span className="summary-label">Treinamentos Completos</span>
-              <span className="summary-value">{completedVideosCount}</span>
-              <span className="summary-subtext">{totalVideosCount} disponíveis</span> 
+            <div className="summaryIconBox" style={{background: '#e0f2f1', color: '#00695c'}}>
+              <FaCalendarAlt />
             </div>
-            <div className="summary-icon icon-chalkboard"><FaChalkboardTeacher size={18}/></div>
           </div>
-          <div className="summary-dropdown-item">
-            <div className="summary-content">
-              <span className="summary-label">Quizzes Concluídos</span>
-              <span className="summary-value">{completedQuizzesCount}</span>
-              <span className="summary-subtext">{totalQuizzesCount} disponíveis</span> 
+
+          {/* Checklists */}
+          <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{completedChecklistsCount}/{totalChecklistsCount}</h3>
+              <span>Checklists</span>
             </div>
-            <div className="summary-icon icon-brain"><FaBrain size={18}/></div>
+            <div className="summaryIconBox iconTotal">
+               <FaClipboardList />
+            </div>
           </div>
-          {/* Item: Pontos de Segurança */}
-          <div className="summary-dropdown-item">
-             <div className="summary-content">
-               <span className="summary-label">Pontos</span>
-               <span className="summary-value">{totalPoints}</span>
-               <span className="summary-subtext">{currentRankName}</span>
-             </div>
-             <div className="summary-icon icon-medal"><FaMedal size={18}/></div>
-           </div>
+
+          {/* Treinamentos */}
+          <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{completedVideosCount}</h3>
+              <span>Vídeos Vistos</span>
+            </div>
+            <div className="summaryIconBox iconPending">
+              <FaChalkboardTeacher />
+            </div>
+          </div>
+
+          {/* Quizzes */}
+          <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{completedQuizzesCount}</h3>
+              <span>Quizzes</span>
+            </div>
+            <div className="summaryIconBox iconCompleted">
+               <FaBrain />
+            </div>
+          </div>
+
+           {/* Pontos */}
+           <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{totalPoints}</h3>
+              <span>{currentRankName}</span>
+            </div>
+            <div className="summaryIconBox" style={{background: '#fff8e1', color: '#ff8f00'}}>
+               <FaMedal />
+            </div>
+          </div>
         </div>
       )}
 
-      <div className="summary-cards-grid">
-        {/* Card: Dias sem Acidentes */}
-        <div className="summary-card">
-          <div className="summary-content">
-            <span className="summary-label">Dias sem Acidentes</span>
-            <span className="summary-value">{daysWithoutAccidents}</span>
-            <span className="summary-subtext">+5 dias</span> {/* Texto extra */}
-          </div>
-          <div className="summary-icon icon-calendar">
-            <FaCalendarAlt size={20}/>
-          </div>
-        </div>
-
-        {/* Card: Checklists Completos */}
-        <div className="summary-card">
-          <div className="summary-content">
-            <span className="summary-label">Checklists Completos</span>
-            <span className="summary-value">{completedChecklistsCount}/{totalChecklistsCount}</span>
-            <span className="summary-subtext">{completionPercentage}% concluído</span>
-          </div>
-          <div className="summary-icon icon-check">
-             <FaClipboard size={20}/>
-          </div>
-        </div>
-
-        <div className="summary-card">
-          <div className="summary-content">
-            <span className="summary-label">Treinamentos Completos</span>
-            <span className="summary-value">{completedVideosCount}</span>
-            <span className="summary-subtext">{totalVideosCount} disponíveis</span> {/* Texto extra */}
-          </div>
-          <div className="summary-icon icon-chalkboard">
-            <FaChalkboardTeacher size={20}/>
-          </div>
-        </div>
-
-        {/* Card: Pontos de Segurança */}
-        <div className="summary-card">
-          <div className="summary-content">
-            <span className="summary-label">Quizzes Concluídos</span>
-            <span className="summary-value">{completedQuizzesCount}</span>
-            <span className="summary-subtext">{totalQuizzesCount} disponíveis</span>
-          </div>
-          <div className="summary-icon icon-brain">
-             <FaBrain size={20}/>
-          </div>
-        </div>
-        <div className="summary-card">
-          <div className="summary-content">
-            <span className="summary-label">Pontos</span>
-            <span className="summary-value">{totalPoints}</span>
-            <span className="summary-subtext">"{currentRankName}"</span>
-          </div>
-          <div className="summary-icon icon-medal">
-             <FaMedal size={20}/>
-          </div>
-        </div>
-      </div>
-
-      <div className="dashboard-row">
-        <div className="main-column">
-          <div className="dashboard-section">
-            <div className="section-title-with-counter">
-              <div className="title-and-counter">
-                <h2>Checklists Pendentes</h2>
-                <span className={`pending-counter ${pendingCount === 0 ? 'zero' : ''}`}>{pendingCount}</span>
-              </div>
-              {pendingCount > 0 && (
-                <Link to="/checklists" className="view-all-link">Ver Todos</Link>
-              )}
+      {/* Grid Principal Assimétrico */}
+      <div className="dashboardGridModern">
+        
+        {/* Coluna Principal (Esquerda) */}
+        <div className="mainColumn">
+          
+          {/* Seção: Checklists Pendentes */}
+          <div className="dashboardSectionGlass">
+            <div className="sectionHeader">
+              <h2>
+                Checklists Pendentes
+                {pendingCount > 0 && <span className="counterBadge">{pendingCount}</span>}
+              </h2>
+              <Link to="/checklists" className="linkViewAll">Ver Todos</Link>
             </div>
 
             {pendingCount === 0 ? (
-              <div className="all-completed-card card">
-                <h3>Parabéns!</h3>
-                <p>Você não possui nenhum checklist pendente.</p>
+              <div className="emptyStateCard">
+                <h3>Tudo Limpo!</h3>
+                <p>Você não tem checklists pendentes no momento.</p>
               </div>
             ) : (
-              <div className="list-container">
+              <div style={{display: 'flex', flexDirection: 'column'}}>
                 {pendingChecklists.slice(0, 3).map(item => (
-                  <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
-                    <div className="list-item checklist-item-with-icon"> 
-                      <FaClipboard className="item-prefix-icon" /> 
-                      <div className="list-item-content">
-                        <h3>{item.title}</h3>
-                        <p className="due-date-text">
-                          <FaClock className="due-date-icon" />{item.dueDate}
-                        </p>
-                      </div>
-                      <span className={`status-badge ${item.status}`}>
-                      {item.status === 'pending' ? '!' : 'Concluído'}
-                    </span>
+                  <Link to={`/checklists/${item.id}`} key={item.id} className="compactListItem">
+                    <div className="compactIconBox"> 
+                      <FaClipboardList /> 
                     </div>
+                    <div className="compactContent">
+                      <h3>{item.title}</h3>
+                      <div className="compactMeta">
+                        <FaClock size={10} /> Vence em: {item.dueDate}
+                      </div>
+                    </div>
+                    <div className={`statusBadgePill pending`}>Pendente</div>
                   </Link>
                 ))}
               </div>
             )}
           </div>
-        </div>
-        
-        <div className="sidebar-column">
-          <div className="dashboard-section">
-            <h2>Alertas de Segurança</h2>
-            <div className="alerts-container">
-              {currentAlerts.map(alert => (
-                <div key={alert.id} className={`alert-card priority-${alert.priority}`}>
-                  <h3>{alert.title}</h3>
-                  <p>{alert.message}</p>
-                  <span className="alert-time">{alert.timeAgo}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="dashboard-row">
-        <div className="main-column">
-          <div className="dashboard-section">
-            <div className="section-title-with-counter"> 
-              <div className="title-and-counter"> 
-                <h2>Assistir</h2>
-              </div>
-              <Link to="/videos" className="view-all-link">Ver Todos</Link>
+          {/* Seção: Treinamentos (Videos) */}
+          <div className="dashboardSectionGlass">
+            <div className="sectionHeader">
+              <h2>Continuar Assistindo</h2>
+              <Link to="/videos" className="linkViewAll">Galeria de Vídeos</Link>
             </div>
-            <div className="card-grid">
+            
+            {/* Grid de Vídeos Inline */}
+            <div className="mediaGridModern" style={{gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', paddingBottom: 0}}>
               {videos.slice(0, 3).map(video => (
-                <ContentCard
-                  key={video.id}
-                  to={`/videos/${video.id}`}
-                  thumbnail={video.thumbnail}
-                  progress={Math.floor(Math.random() * 100)}
-                  title={video.title}
-                  description={<p className="due-date-text">
-                          <FaClock className="due-date-icon" /> {video.dueDate}
-                        </p>}
-                  
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="sidebar-column">
-          <div className="dashboard-section">
-            <div className="section-title-with-counter">
-              <div className="title-and-counter">
-                <h2>Quizzes Recomendados</h2>
-              </div>
-              <Link to="/quizzes" className="view-all-link">Ver Todos</Link>
-            </div>
-            <div className="list-container">
-              {quizzes.slice(0, 3).map(quiz => (
-                <Link to={`/quizzes/${quiz.id}`} key={quiz.id} className="list-item-link">
-                  {/* --- ALTERAÇÃO APLICADA AQUI: Ícone FaClipboard --- */}
-                  <div className="list-item quiz-item quiz-item-with-icon"> {/* Adiciona nova classe para estilo */}
-                    <FaBrain className="item-prefix-icon quiz-prefix-icon" /> {/* Usa FaClipboard */}
-                    <div className="list-item-content">
-                      <h3>{quiz.title}</h3>
-                      <p className="due-date-text">
-                        <FaClock className="due-date-icon" /> {quiz.dueDate}
-                      </p>
-                    </div>
-                    <span className="list-item-action">Iniciar Quiz</span>
-                  </div>
+                <Link to={`/videos/${video.id}`} key={video.id} className="mediaCardGlass" style={{marginBottom: 0}}>
+                   <div className="mediaThumbnailContainer" style={{height: '140px'}}>
+                      <img src={video.thumbnail} alt={video.title} className="mediaThumbnail" />
+                      <div className="mediaOverlayIcon"><FaPlayCircle /></div>
+                   </div>
+                   <div className="mediaContent" style={{padding: '1rem'}}>
+                      <h3 style={{fontSize: '0.95rem'}}>{video.title}</h3>
+                      <div className="mediaMeta">
+                        <FaClock /> {video.dueDate || '15 min'}
+                      </div>
+                   </div>
                 </Link>
               ))}
             </div>
           </div>
+
+        </div>
+        
+        {/* Coluna Lateral (Direita) */}
+        <div className="sidebarColumn">
+          
+          {/* Alertas */}
+          <div className="dashboardSectionGlass">
+            <div className="sectionHeader">
+               <h2><FaBell style={{marginRight: '8px', color: '#ef5350'}}/> Avisos</h2>
+            </div>
+            <div>
+              {currentAlerts.map(alert => (
+                <div key={alert.id} className={`alertCardGlass priority-${alert.priority}`}>
+                  <h3>{alert.title}</h3>
+                  <p>{alert.message}</p>
+                  <span className="alertTime">{alert.timeAgo}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Quizzes Recomendados */}
+          <div className="dashboardSectionGlass">
+             <div className="sectionHeader">
+               <h2>Quizzes</h2>
+               <Link to="/quizzes" className="linkViewAll">Ver</Link>
+             </div>
+             <div>
+              {quizzes.slice(0, 3).map(quiz => (
+                <Link to={`/quizzes/${quiz.id}`} key={quiz.id} className="compactListItem">
+                  <div className="compactIconBox quizIcon"> 
+                    <FaBrain /> 
+                  </div>
+                  <div className="compactContent">
+                    <h3>{quiz.title}</h3>
+                    <div className="compactMeta">
+                      <FaMedal size={10} /> +10 pts
+                    </div>
+                  </div>
+                </Link>
+              ))}
+             </div>
+          </div>
+
         </div>
 
       </div>
-
-    </>
+    </div>
   );
 }
 

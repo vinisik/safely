@@ -1,77 +1,122 @@
-import React from 'react';
-import ContentCard from '../components/ContentCard';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { videos } from '../data/mockData';
-import { FaSearch, FaClock, FaCheckCircle, FaPlay } from 'react-icons/fa';
+import { FaSearch, FaClock, FaCheckCircle, FaPlay, FaFilm } from 'react-icons/fa';
+import './Pages.css'; 
 
-// Simula uma lista maior para o placeholder
+// Simula uma lista maior
 const allVideos = [...videos];
 
 function VideosList({ completedVideosCount, totalVideosCount }) {
-  const pendingVideosCount = totalVideosCount - completedVideosCount
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  const pendingVideosCount = totalVideosCount - completedVideosCount;
+
+  // Filtros (opcional: implementar lógica real se os dados tiverem status)
+  const filteredVideos = allVideos.filter(video => 
+    video.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="page-container">
+    <div className="checklistPageModern">
       <title>Safely | Treinamento</title>
-      <div className="page-header">
+      
+      {/* Header Moderno */}
+      <div className="pageHeaderModern">
         <h1>Treinamentos em Vídeo</h1>
       </div>
-      <div className='page-container' >
-        <div className="summary-cards-grid checklist-summary-grid"> {/* Adiciona classe específica */}
-                  {/* Card Total */}
-                  <div className="summary-card">
-                    <div className="summary-content">
-                      <span className="summary-value">{totalVideosCount}</span>
-                      <span className="summary-label">Total Disponível</span>
-                    </div>
-                    <div className="summary-icon icon-total"> {/* Classe específica para cor */}
-                      <FaPlay size={20}/>
-                    </div>
-                  </div>
-                  {/* Card Pendentes */}
-                  <div className="summary-card">
-                    <div className="summary-content">
-                      <span className="summary-value">{pendingVideosCount}</span>
-                      <span className="summary-label">Treinamentos Pendentes</span>
-                    </div>
-                    <div className="summary-icon icon-pending"> {/* Classe específica para cor */}
-                      <FaClock size={20}/>
-                    </div>
-                  </div>
-                  {/* Card Concluídos */}
-                  <div className="summary-card">
-                    <div className="summary-content">
-                      <span className="summary-value">{completedVideosCount}</span>
-                      <span className="summary-label">Concluídos</span>
-                    </div>
-                    <div className="summary-icon icon-completed"> {/* Classe específica para cor */}
-                       <FaCheckCircle size={20}/>
-                    </div>
-                  </div>
-                </div>
-        <div className="search-bar-container">
-          <FaSearch className="search-icon" /> 
+      
+      {/* Cards de Resumo Glass */}
+      <div className="summaryGridModern">
+        <div className="summaryCardGlass">
+          <div className="summaryContent">
+            <h3>{totalVideosCount}</h3>
+            <span>Disponíveis</span>
+          </div>
+          <div className="summaryIconBox iconTotal">
+            <FaFilm />
+          </div>
+        </div>
+
+        <div className="summaryCardGlass">
+          <div className="summaryContent">
+            <h3>{pendingVideosCount}</h3>
+            <span>Pendentes</span>
+          </div>
+          <div className="summaryIconBox iconPending">
+            <FaClock />
+          </div>
+        </div>
+
+        <div className="summaryCardGlass">
+          <div className="summaryContent">
+            <h3>{completedVideosCount}</h3>
+            <span>Concluídos</span>
+          </div>
+          <div className="summaryIconBox iconCompleted">
+              <FaCheckCircle />
+          </div>
+        </div>
+      </div>
+
+      {/* Controles de Busca e Filtro */}
+      <div className="controlsContainer">
+        <div className="searchBarGlass">
+          <FaSearch className="searchIconModern" /> 
           <input 
             type="text" 
             placeholder="Buscar treinamento..." 
-            className="search-bar" 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="filter-buttons" style={{marginBottom: '20px'}}>
-          <button className="filter-btn active">Todos ({totalVideosCount})</button>
-          <button className="filter-btn">Pendentes ({pendingVideosCount})</button>
-          <button className="filter-btn">Concluídos ({completedVideosCount})</button>
+        
+        <div className="filterPills">
+          <button 
+            className={`filterBtnPill ${activeFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('all')}
+          >
+            Todos
+          </button>
+          <button 
+            className={`filterBtnPill ${activeFilter === 'pending' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('pending')}
+          >
+            Pendentes
+          </button>
+          <button 
+            className={`filterBtnPill ${activeFilter === 'completed' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('completed')}
+          >
+            Concluídos
+          </button>
         </div>
-        <div className="card-grid">
-          {allVideos.map((video, index) => (
-            <ContentCard
-              key={`${video.id}-${index}`}
-              to={`/videos/${video.id}`}
-              thumbnail={video.thumbnail}
-              title={video.title}
-              description={<p><FaClock/> {video.dueDate}</p>}
-              progress={50}
-            />
-          ))}
-        </div>
+      </div>
+
+      {/* Grid de Vídeos Moderno */}
+      <div className="mediaGridModern">
+        {filteredVideos.map((video, index) => (
+          <Link 
+            key={`${video.id}-${index}`}
+            to={`/videos/${video.id}`}
+            className="mediaCardGlass"
+          >
+            <div className="mediaThumbnailContainer">
+              <img src={video.thumbnail} alt={video.title} className="mediaThumbnail" />
+              <div className="mediaOverlayIcon">
+                <FaPlay />
+              </div>
+            </div>
+            
+            <div className="mediaContent">
+              <h3>{video.title}</h3>
+              <div className="mediaMeta">
+                <FaClock /> <span>{video.dueDate || '30 min'}</span>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

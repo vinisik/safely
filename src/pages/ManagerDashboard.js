@@ -1,15 +1,16 @@
 import React from 'react';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
-import { FaUsers, FaClock, FaCheckCircle, FaExclamationTriangle, FaCertificate, FaHeartbeat, FaArrowUp, FaArrowDown, FaFilePdf, FaFileExport } from 'react-icons/fa';
+import { FaUsers, FaClock, FaCheckCircle, FaExclamationTriangle, FaCertificate, FaHeartbeat, FaArrowUp, FaArrowDown, FaFilePdf, FaFileExport, FaChartBar, FaChartPie } from 'react-icons/fa';
 import { topPerformers, recentIncidents } from '../data/mockData';
+
+// Importa o CSS Moderno
+import './Pages.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
-function ManagerDashboard({ checklists, completedVideosCount, totalVideosCount, completedQuizzesCount, totalQuizzesCount }) {
-  // Cálculos (placeholders)
-  const totalChecklists = checklists.length;
-  const pendingChecklists = checklists.filter(c => c.status === 'pending').length;
+function ManagerDashboard({ checklists }) {
+  // Cálculos (simulados)
   const nonConformities = 8;
   const participationRate = 96;
   const avgResponseTime = 2.3;
@@ -17,252 +18,218 @@ function ManagerDashboard({ checklists, completedVideosCount, totalVideosCount, 
   const activeCertifications = 142;
   const severityIndex = 0.12;
 
-  // Dados simulados para gráficos
+  // Dados dos gráficos
   const engagementData = {
-    labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
-    datasets: [
-      {
-        label: 'Pontos Ganhos',
-        data: [650, 590, 800, 810],
-        backgroundColor: 'rgba(0, 90, 156, 0.6)',
-        borderColor: 'rgba(0, 90, 156, 1)',
-        borderWidth: 1,
-      },
-    ],
+    labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'],
+    datasets: [{
+      label: 'Pontos',
+      data: [650, 590, 800, 810],
+      backgroundColor: 'rgba(0, 90, 156, 0.7)',
+      borderRadius: 8, // Bordas arredondadas nas barras
+    }],
   };
 
   const nonConformanceData = {
-    labels: ['EPIs Faltando', 'Vazamentos', 'Obstrução', 'Falha Elétrica', 'Outros'],
-    datasets: [
-      {
-        data: [12, 19, 3, 5, 2],
-        backgroundColor: ['#dc3545', '#ffc107', '#fd7e14', '#6f42c1', '#6c757d'],
-        hoverOffset: 4,
-      },
-    ],
+    labels: ['EPIs', 'Vazamentos', 'Obstrução', 'Elétrica', 'Outros'],
+    datasets: [{
+      data: [12, 19, 3, 5, 2],
+      backgroundColor: ['#ef5350', '#ffa726', '#ff7043', '#7e57c2', '#bdbdbd'],
+      borderWidth: 0,
+    }],
   };
 
-  const barOptions = { responsive: true, plugins: { legend: { display: false }, title: { display: false } } };
-  const doughnutOptions = { responsive: true, plugins: { legend: { position: 'right' }, title: { display: false } } };
+  const barOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { display: false } },
+      y: { grid: { color: 'rgba(0,0,0,0.05)' } }
+    }
+  };
+
+  const doughnutOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'right', labels: { usePointStyle: true } } }
+  };
 
   const getInitials = (name) => {
     const names = name.split(' ');
-    if (names.length === 1) return names[0][0].toUpperCase();
-    return (names[0][0] + names[names.length - 1][0]).toUpperCase();
+    return (names[0][0] + (names.length > 1 ? names[names.length - 1][0] : '')).toUpperCase();
   };
 
-  const getBadgeClass = (value) => {
-    value = value.toLowerCase();
-    if (value === 'baixa' || value === 'resolvido') return 'status-low';
-    if (value === 'média' || value === 'em análise') return 'status-medium';
-    if (value === 'alta') return 'status-high';
-    return '';
+  const getStatusPillClass = (status) => {
+    const s = status.toLowerCase();
+    if (s === 'resolvido' || s === 'baixa') return 'statusBadgePill completed'; // Verde
+    if (s === 'em análise' || s === 'média') return 'statusBadgePill pending'; // Laranja
+    return 'statusBadgePill'; // Padrão ou criar classe 'high' para vermelho
   };
 
-  // --- Funções para exportar e imprimir ---
-  const handleExportJSON = () => {
-    const data = {
-      metrics: {
-        participationRate,
-        avgResponseTime,
-        auditsCompleted,
-        nonConformities,
-        activeCertifications,
-        severityIndex,
-      },
-      topPerformers,
-      recentIncidents,
-      checklists,
-    };
-
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'painel-gestor.json';
-    a.click();
-    URL.revokeObjectURL(url);
-  };
-
-  const handlePrintPDF = () => {
-    window.print();
-  };
+  // Funções de Ação
+  const handleExportJSON = () => { alert("Exportando dados em JSON..."); };
+  const handlePrintPDF = () => { window.print(); };
 
   return (
-    <div className="page-container manager-dashboard">
+    <div className="checklistPageModern">
       <title>Safely | Painel do Gestor</title>
 
-      <div className="page-header">
+      {/* Header com Ações */}
+      <div className="pageHeaderModern">
         <h1>Painel do Gestor</h1>
-
-        {/* Botões de Exportar e Imprimir */}
-        <div className="export-buttons">
-          <button className="btn btn-primary json" onClick={handleExportJSON}>
-            <FaFileExport style={{ marginRight: '6px' }} /> Exportar JSON
+        
+        <div style={{display: 'flex', gap: '10px'}}>
+          <button className="btnNewChecklist" onClick={handleExportJSON} style={{background: 'white', color: '#005A9C', border: '1px solid #005A9C'}}>
+            <FaFileExport /> Exportar
           </button>
-          <button className="btn btn-primary pdf" onClick={handlePrintPDF}>
-            <FaFilePdf style={{ marginRight: '6px' }} /> Imprimir PDF
+          <button className="btnNewChecklist" onClick={handlePrintPDF}>
+            <FaFilePdf /> Imprimir
           </button>
         </div>
       </div>
 
-      {/* KPIs */}
-      <div className="manager-kpi-grid">
-        {/* Card: Tempo Médio de Resposta */}
-        <div className="kpi-card ">
-          <div className="kpi-header">
-            <div className="kpi-icon icon-time">
-              <FaClock size={20}/>
-            </div>
-             <span className="kpi-trend negative">
-              <FaArrowDown size={12}/> -0.8h
-            </span>
+      {/* Grid de KPIs */}
+      <div className="kpiGridModern">
+        
+        {/* KPI: Tempo Resposta */}
+        <div className="kpiCardGlass">
+          <div className="kpiHeader">
+            <div className="kpiIconGlass iconTime"><FaClock /></div>
+            <span className="trendPill positive"><FaArrowDown size={10}/> -0.8h</span> {/* Seta para baixo é bom aqui (menos tempo) */}
           </div>
-          <span className="kpi-label">Tempo Médio de Resposta</span>
-          <span className="kpi-value">{avgResponseTime}h</span>
-          <span className="kpi-subtext">Para resolver incidentes</span>
+          <span className="kpiValue">{avgResponseTime}h</span>
+          <span className="kpiLabel">Tempo de Resposta</span>
+          <span className="kpiSubtext">Média semanal</span>
         </div>
 
-        {/* Card: Auditorias Realizadas */}
-        <div className="kpi-card ">
-          <div className="kpi-header">
-            <div className="kpi-icon icon-audits">
-              <FaCheckCircle size={20}/>
-            </div>
-             <span className="kpi-trend positive">
-              <FaArrowUp size={12}/> +12
-            </span>
+        {/* KPI: Auditorias */}
+        <div className="kpiCardGlass">
+          <div className="kpiHeader">
+             <div className="kpiIconGlass iconAudit"><FaCheckCircle /></div>
+             <span className="trendPill positive"><FaArrowUp size={10}/> +12</span>
           </div>
-          <span className="kpi-label">Auditorias Realizadas</span>
-          <span className="kpi-value">{auditsCompleted}</span>
-          <span className="kpi-subtext">Este mês</span>
+          <span className="kpiValue">{auditsCompleted}</span>
+          <span className="kpiLabel">Auditorias</span>
+          <span className="kpiSubtext">Realizadas este mês</span>
         </div>
 
-        {/* Card: Não Conformidades */}
-        <div className="kpi-card ">
-          <div className="kpi-header">
-            <div className="kpi-icon icon-nonconformity">
-              <FaExclamationTriangle size={20}/>
-            </div>
-             <span className="kpi-trend negative">
-              <FaArrowDown size={12}/> -5
-            </span>
+        {/* KPI: Não Conformidades */}
+        <div className="kpiCardGlass">
+          <div className="kpiHeader">
+             <div className="kpiIconGlass iconAlert"><FaExclamationTriangle /></div>
+             <span className="trendPill positive"><FaArrowDown size={10}/> -5</span> {/* Menos problemas = Positivo */}
           </div>
-          <span className="kpi-label">Não Conformidades</span>
-          <span className="kpi-value">{nonConformities}</span>
-          <span className="kpi-subtext">Em aberto</span>
+          <span className="kpiValue">{nonConformities}</span>
+          <span className="kpiLabel">Não Conformidades</span>
+          <span className="kpiSubtext">Pendentes de ação</span>
         </div>
 
-        {/* Card: Certificações Ativas */}
-        <div className="kpi-card ">
-          <div className="kpi-header">
-            <div className="kpi-icon icon-certifications">
-              <FaCertificate size={20}/>
-            </div>
-             <span className="kpi-trend positive">
-              <FaArrowUp size={12}/> +18
-            </span>
+        {/* KPI: Certificações */}
+        <div className="kpiCardGlass">
+          <div className="kpiHeader">
+             <div className="kpiIconGlass iconCert"><FaCertificate /></div>
+             <span className="trendPill positive"><FaArrowUp size={10}/> +18</span>
           </div>
-          <span className="kpi-label">Certificações Ativas</span>
-          <span className="kpi-value">{activeCertifications}</span>
-          <span className="kpi-subtext">Colaboradores certificados</span>
+          <span className="kpiValue">{activeCertifications}</span>
+          <span className="kpiLabel">Certificações</span>
+          <span className="kpiSubtext">Colaboradores ativos</span>
         </div>
 
-        {/* Card: Índice de Gravidade */}
-        <div className="kpi-card ">
-          <div className="kpi-header">
-            <div className="kpi-icon icon-severity">
-              <FaHeartbeat size={20}/>
-            </div>
-             <span className="kpi-trend negative">
-              <FaArrowDown size={12}/> -0.08
-            </span>
+        {/* KPI: Participação */}
+        <div className="kpiCardGlass">
+          <div className="kpiHeader">
+             <div className="kpiIconGlass iconUsers"><FaUsers /></div>
+             <span className="trendPill positive"><FaArrowUp size={10}/> +4%</span>
           </div>
-          <span className="kpi-label">Índice de Gravidade</span>
-          <span className="kpi-value">{severityIndex}</span>
-          <span className="kpi-subtext">Por 1000 horas trabalhadas</span>
-        </div>
-        <div className="kpi-card ">
-          <div className="kpi-header">
-            <div className="kpi-icon icon-participation">
-              <FaUsers size={20}/>
-            </div>
-            <span className="kpi-trend positive">
-              <FaArrowUp size={12}/> +4%
-            </span>
-          </div>
-          <span className="kpi-label">Taxa de Participação</span>
-          <span className="kpi-value">{participationRate}%</span>
-          <span className="kpi-subtext">Colaboradores engajados</span>
+          <span className="kpiValue">{participationRate}%</span>
+          <span className="kpiLabel">Engajamento</span>
+          <span className="kpiSubtext">Taxa de participação</span>
         </div>
 
-        {/* ... (demais cartões permanecem idênticos) ... */}
+        {/* KPI: Gravidade */}
+        <div className="kpiCardGlass">
+           <div className="kpiHeader">
+             <div className="kpiIconGlass iconAlert" style={{background: '#ffebee', color: '#b71c1c'}}><FaHeartbeat /></div>
+             <span className="trendPill positive"><FaArrowDown size={10}/> -0.08</span>
+           </div>
+           <span className="kpiValue">{severityIndex}</span>
+           <span className="kpiLabel">Índice Gravidade</span>
+           <span className="kpiSubtext">Por 1k horas</span>
+        </div>
       </div>
 
-      {/* Gráficos */}
-      <div className="manager-charts-grid">
-        <div className="chart-card">
-          <h2>Engajamento Semanal (Pontos)</h2>
-          <Bar options={barOptions} data={engagementData} />
+      {/* Gráficos em Glassmorphism */}
+      <div className="chartsGridModern">
+        <div className="chartSectionGlass">
+          <div className="sectionTitleGlass"><FaChartBar /> Engajamento Semanal</div>
+          <div style={{height: '250px'}}>
+            <Bar options={barOptions} data={engagementData} />
+          </div>
         </div>
-        <div className="chart-card">
-          <h2>Principais Não Conformidades Reportadas</h2>
-          <Doughnut options={doughnutOptions} data={nonConformanceData} />
+        <div className="chartSectionGlass">
+          <div className="sectionTitleGlass"><FaChartPie /> Motivos de Ocorrências</div>
+          <div style={{height: '250px', display: 'flex', justifyContent: 'center'}}>
+            <Doughnut options={doughnutOptions} data={nonConformanceData} />
+          </div>
         </div>
       </div>
 
       {/* Tabelas de Detalhes */}
-      <div className="manager-details-grid">
-        <div className="top-performers-card">
-          <h2>Top Performers em Segurança</h2>
-          <p className="section-subtitle">Colaboradores com melhor desempenho</p>
-          <div className="performers-list">
-            <div className="performers-header">
-              <span>Colaborador</span>
-              <span>Score</span>
-              <span>Treinamentos</span>
-            </div>
+      <div className="detailsGridModern">
+        
+        {/* Tabela: Top Performers */}
+        <div className="glassTableContainer">
+          <div className="glassTableHeader">
+            <h2>Top Performers</h2>
+            <p>Colaboradores destaque em segurança</p>
+          </div>
+          <div className="modernList">
             {topPerformers.map(user => (
-              <div key={user.id} className="performer-item">
-                <div className="performer-info">
-                  <span className="performer-avatar" style={{ backgroundColor: user.avatarColor }}>
+              <div key={user.id} className="modernListItem">
+                <div className="performerInfo">
+                  <div className="avatarInitials" style={{ backgroundColor: user.avatarColor || '#005A9C' }}>
                     {getInitials(user.name)}
-                  </span>
-                  <div className="performer-details">
-                    <span className="performer-name">{user.name}</span>
-                    <span className="performer-role">{user.role}</span>
+                  </div>
+                  <div className="infoText">
+                    <span className="nameText">{user.name}</span>
+                    <span className="roleText">{user.role}</span>
                   </div>
                 </div>
-                <span className="performer-score status-low">{user.score}</span>
-                <span className="performer-trainings">{user.trainings}</span>
+                <div style={{textAlign: 'right'}}>
+                   <div className="scorePill">{user.score} pts</div>
+                   <span style={{fontSize: '0.75rem', color: '#999'}}>{user.trainings} cursos</span>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="recent-incidents-card">
-          <h2>Incidentes Recentes</h2>
-          <p className="section-subtitle">Últimas ocorrências registradas</p>
-          <div className="incidents-table">
-            <div className="incidents-header">
-              <span>Data</span>
-              <span>Tipo</span>
-              <span>Severidade</span>
-              <span>Status</span>
-            </div>
+        {/* Tabela: Incidentes */}
+        <div className="glassTableContainer">
+          <div className="glassTableHeader">
+            <h2>Incidentes Recentes</h2>
+            <p>Últimas ocorrências registradas</p>
+          </div>
+          <div className="modernList">
             {recentIncidents.map(incident => (
-              <div key={incident.id} className="incident-item">
-                <span>{incident.date}</span>
-                <div className="incident-type-location">
-                  <span className="incident-type">{incident.type}</span>
-                  <span className="incident-location">{incident.location}</span>
+              <div key={incident.id} className="modernListItem">
+                <div className="infoText" style={{flex: 1}}>
+                    <span className="nameText">{incident.type}</span>
+                    <span className="roleText">{incident.date} • {incident.location}</span>
                 </div>
-                <span className={`status-badge ${getBadgeClass(incident.severity)}`}>{incident.severity}</span>
-                <span className={`status-badge ${getBadgeClass(incident.status)}`}>{incident.status}</span>
+                <div style={{display: 'flex', flexDirection: 'column', gap: '5px', alignItems: 'flex-end'}}>
+                    <span className={getStatusPillClass(incident.severity)} style={{fontSize: '0.7rem'}}>
+                        {incident.severity}
+                    </span>
+                    <span style={{fontSize: '0.75rem', fontWeight: '500', color: '#555'}}>
+                        {incident.status}
+                    </span>
+                </div>
               </div>
             ))}
           </div>
         </div>
+
       </div>
     </div>
   );

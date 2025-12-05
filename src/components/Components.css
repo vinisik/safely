@@ -1,0 +1,598 @@
+.headerModern {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  height: 85px; 
+  padding: 0 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); 
+  
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* --- Logo --- */
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.logoLink:hover {
+  opacity: 0.8;
+}
+
+.logoImg {
+  height: 3.2rem;
+  width: auto;
+  display: block;
+}
+
+/* --- Navegação Desktop (Novo Estilo "Pill") --- */
+.desktopNav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.desktopNav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  gap: 0.5rem; /* Espaço entre os botões */
+  
+  /* Container dos links estilo "Barra Flutuante" opcional */
+  background: rgba(0, 0, 0, 0.03); 
+  border-radius: 50px; /* Borda bem redonda */
+}
+
+.navLink {
+  text-decoration: none;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.4rem; /* Botão mais gordinho */
+  border-radius: 40px; /* Formato de pílula */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  display: block;
+}
+
+/* Hover suave */
+.navLink:hover {
+  color: var(--primary-color);
+  background-color: rgba(0, 90, 156, 0.35); /* Fundo branco leve */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Estado Ativo (O destaque principal) */
+.navLinkActive {
+  background-color: var(--primary-color); /* Azul principal */
+  color: white !important; /* Força texto branco */
+  box-shadow: 0 4px 15px rgba(0, 90, 156, 0.35); /* Brilho azul (Glow) */
+  transform: scale(1.02); /* Leve aumento */
+}
+
+/* --- Área do Usuário --- */
+.userInfoContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 6px;
+  padding-right: 15px;
+  border-radius: 40px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.userInfo:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.userAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white; /* Borda branca para separar do fundo */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.userName {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.userSubtitle {
+  font-size: 0.7rem;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dropdownArrow {
+  font-size: 0.8rem;
+  color: #999;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+.dropdownArrow.open {
+  transform: rotate(180deg);
+  color: var(--primary-color);
+}
+
+/* --- Dropdown Menu --- */
+.profileDropdown {
+  position: absolute;
+  top: 75px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95); /* Quase sólido */
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  z-index: 1100;
+  border: 1px solid rgba(255,255,255,0.5);
+  animation: scaleIn 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding: 10px;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.profileDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profileDropdown li a,
+.profileDropdown li button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.profileDropdown li a:hover,
+.profileDropdown li button:hover {
+  background-color: var(--secondary-color); /* Azul claro */
+  color: #003d6b;
+}
+
+/* Separador Sair */
+.profileDropdown li:last-child {
+  margin-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 8px;
+}
+.profileDropdown li:last-child button:hover {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* --- Mobile --- */
+@media (max-width: 992px) {
+  .desktopNav { display: none; }
+  .headerModern { padding: 0 1.5rem; height: 70px; }
+  .userDetails, .dropdownArrow { display: none; }
+}
+
+.side-panel-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro suave */
+  backdrop-filter: blur(4px); /* Desfoque no fundo */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 2000;
+}
+
+.side-panel-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.side-panel {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 85%;
+  max-width: 320px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95); /* Quase sólido para legibilidade */
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  transition: right 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 2001;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-panel.open {
+  right: 0;
+}
+
+.side-panel-header {
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, #f4f7fa 0%, #e3f2fd 100%);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.side-panel-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.side-panel-user-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.side-panel-user-info .user-name {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.side-panel-user-info .user-subtitle {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.add-account-btn {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: #005A9C;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.add-account-btn:active {
+  transform: scale(0.95);
+}
+
+.side-panel-nav {
+  flex-grow: 1;
+  padding: 1.5rem 1rem;
+  overflow-y: auto;
+}
+
+.side-panel-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.side-panel-nav li a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 16px;
+  transition: all 0.2s ease;
+}
+
+.side-panel-nav li a svg {
+  font-size: 1.2rem;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.side-panel-nav li a:hover,
+.side-panel-nav li a.active {
+  background-color: #e3f2fd; /* Azul bem claro */
+  color: #005A9C;
+}
+
+.side-panel-nav li a:hover svg,
+.side-panel-nav li a.active svg {
+  color: #005A9C;
+}
+
+.side-panel-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.logout-button {
+  background: #ffebee;
+  border: none;
+  color: #c62828;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 16px;
+  transition: background 0.2s;
+}
+
+.logout-button:hover {
+  background: #ffcdd2;
+}
+
+/* --- CHAT WINDOW (Estilo Bolha Moderna) --- */
+.chat-window {
+  position: fixed;
+  bottom: 90px; /* Acima da bottom nav no mobile */
+  right: 20px;
+  width: 340px;
+  height: 480px;
+  background-color: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1500;
+  border: 1px solid rgba(0,0,0,0.05);
+  animation: slideUpFade 0.3s ease-out;
+}
+
+@keyframes slideUpFade {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.chat-header {
+  background: linear-gradient(135deg, #005A9C, #004a80);
+  color: white;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.close-chat-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #f9fbfd;
+}
+
+.message {
+  padding: 10px 16px;
+  border-radius: 18px;
+  max-width: 85%;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.message.support {
+  background-color: #e9ecef; /* Cinza claro */
+  color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px; /* Efeito balão */
+}
+
+.message.user {
+  background-color: #005A9C; /* Azul Michelin */
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px; /* Efeito balão */
+  box-shadow: 0 2px 5px rgba(0, 90, 156, 0.2);
+}
+
+.chat-input-form {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  background: white;
+  gap: 10px;
+}
+
+.chat-input-form input {
+  flex-grow: 1;
+  border: 1px solid #e0e0e0;
+  border-radius: 50px;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.chat-input-form input:focus {
+  border-color: #005A9C;
+}
+
+.chat-input-form button {
+  background-color: #005A9C;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-input-form button:hover {
+  background-color: #004a80;
+}
+
+/* Responsividade Chat */
+@media (max-width: 480px) {
+  .chat-window {
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    border-radius: 0;
+    z-index: 2100; /* Cobre tudo */
+  }
+}
+
+/* --- FOOTER --- */
+.footer {
+  background-color: transparent;
+  color: #888;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: auto;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* --- NAVEGAÇÃO INFERIOR (BottomNav - Mobile) --- */
+.bottom-nav {
+  display: none; /* Escondido no Desktop */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px; /* Altura fixa */
+  background: rgba(255, 255, 255, 0.9); /* Transparente */
+  backdrop-filter: blur(10px); /* Glassmorphism */
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(255,255,255,0.5);
+  z-index: 1001;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom); /* Ajuste para iPhone X+ */
+}
+
+@media (max-width: 992px) {
+  .bottom-nav {
+    display: flex;
+  }
+}
+
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #999;
+  font-size: 0.7rem;
+  flex: 1;
+  height: 100%;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.bottom-nav a svg {
+  margin-bottom: 4px;
+  font-size: 1.4rem;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Estado Ativo (Moderno) */
+.bottom-nav a.active {
+  color: #005A9C;
+  font-weight: 600;
+}
+
+.bottom-nav a.active svg {
+  transform: translateY(-5px); /* Ícone sobe um pouco */
+  color: #005A9C;
+  filter: drop-shadow(0 4px 5px rgba(0, 90, 156, 0.3)); /* Glow no ícone */
+}
+
+/* Ponto de notificação (Pill Style) */
+.notification-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background-color: #FFC107;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.nav-icon-wrapper {
+  position: relative;
+  display: inline-block;
+}

@@ -1,0 +1,216 @@
+.headerModern {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+  height: 85px; 
+  padding: 0 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); 
+  
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* --- Logo --- */
+.logoLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+.logoLink:hover {
+  opacity: 0.8;
+}
+
+.logoImg {
+  height: 3.2rem;
+  width: auto;
+  display: block;
+}
+
+/* --- Navegação Desktop (Novo Estilo "Pill") --- */
+.desktopNav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.desktopNav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  gap: 0.5rem; /* Espaço entre os botões */
+  
+  /* Container dos links estilo "Barra Flutuante" opcional */
+  background: rgba(0, 0, 0, 0.03); 
+  border-radius: 50px; /* Borda bem redonda */
+}
+
+.navLink {
+  text-decoration: none;
+  color: #666;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.7rem 1.4rem; /* Botão mais gordinho */
+  border-radius: 40px; /* Formato de pílula */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  display: block;
+}
+
+/* Hover suave */
+.navLink:hover {
+  color: var(--primary-color);
+  background-color: rgba(0, 90, 156, 0.35); /* Fundo branco leve */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Estado Ativo (O destaque principal) */
+.navLinkActive {
+  background-color: var(--primary-color); /* Azul principal */
+  color: white !important; /* Força texto branco */
+  box-shadow: 0 4px 15px rgba(0, 90, 156, 0.35); /* Brilho azul (Glow) */
+  transform: scale(1.02); /* Leve aumento */
+}
+
+/* --- Área do Usuário --- */
+.userInfoContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  padding: 6px;
+  padding-right: 15px;
+  border-radius: 40px;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.userInfo:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.userAvatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white; /* Borda branca para separar do fundo */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  text-align: right;
+}
+
+.userName {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.userSubtitle {
+  font-size: 0.7rem;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dropdownArrow {
+  font-size: 0.8rem;
+  color: #999;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+}
+.dropdownArrow.open {
+  transform: rotate(180deg);
+  color: var(--primary-color);
+}
+
+/* --- Dropdown Menu --- */
+.profileDropdown {
+  position: absolute;
+  top: 75px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95); /* Quase sólido */
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  z-index: 1100;
+  border: 1px solid rgba(255,255,255,0.5);
+  animation: scaleIn 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+  padding: 10px;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.profileDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profileDropdown li a,
+.profileDropdown li button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.profileDropdown li a:hover,
+.profileDropdown li button:hover {
+  background-color: var(--secondary-color); /* Azul claro */
+  color: #003d6b;
+}
+
+/* Separador Sair */
+.profileDropdown li:last-child {
+  margin-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 8px;
+}
+.profileDropdown li:last-child button:hover {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* --- Mobile --- */
+@media (max-width: 992px) {
+  .desktopNav { display: none; }
+  .headerModern { padding: 0 1.5rem; height: 70px; }
+  .userDetails, .dropdownArrow { display: none; }
+}

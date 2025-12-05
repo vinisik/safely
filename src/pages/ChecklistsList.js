@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AddChecklistModal from '../components/AddChecklistModal';
-import { FaClipboard, FaClipboardList,  FaCheckCircle, FaClock, FaSearch, FaCalendar} from 'react-icons/fa';
+import { FaClipboardCheck, FaListUl, FaCheck, FaClock, FaSearch, FaCalendarAlt, FaPlus } from 'react-icons/fa';
+
+// Importa o novo CSS
+import './Pages.css';
 
 function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-
-  // const handleDelete = (e, checklistId, checklistTitle) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   if (window.confirm(`Tem certeza que deseja excluir o checklist "${checklistTitle}"?`)) {
-  //     deleteChecklist(checklistId);
-  //   }
-  // };
 
   // --- CÁLCULO DAS CONTAGENS ---
   const totalCount = checklists.length;
@@ -22,117 +17,133 @@ function ChecklistsList({ checklists, addChecklist, deleteChecklist }) {
   const completedCount = checklists.filter(c => c.status === 'completed').length;
 
   const filteredChecklists = checklists.filter(checklist => {
-    // Filtro de Status
     const statusMatch = activeFilter === 'all' || checklist.status === activeFilter;
-    
-    // Filtro de Busca (ignora maiúsculas/minúsculas)
     const searchMatch = checklist.title.toLowerCase().includes(searchTerm.toLowerCase());
-
-    // Retorna true apenas se ambos os filtros corresponderem
     return statusMatch && searchMatch;
   });
 
   return (
     <>
-      <title>Safely | Checklists</title> {/* Adiciona o título da página */}
+      <title>Safely | Checklists</title>
       <AddChecklistModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAdd={addChecklist}
       />
-      {/* --- CLASSE ADICIONADA AQUI --- */}
-      <div className="page-container checklist-list-page">
-        <div className="page-header">
+      
+      {/* Container Principal Moderno */}
+      <div className="checklistPageModern">
+        
+        {/* Header da Página */}
+        <div className="pageHeaderModern">
           <h1>Checklists de Segurança</h1>
-          <button onClick={() => setIsModalOpen(true)} className="btn btn-primary">＋ Novo Checklist</button>
+          <button onClick={() => setIsModalOpen(true)} className="btnNewChecklist">
+            <FaPlus /> Novo Checklist
+          </button>
         </div>
 
-        <div className="summary-cards-grid checklist-summary-grid"> {/* Adiciona classe específica */}
-          {/* Card Total */}
-          <div className="summary-card">
-            <div className="summary-content">
-              <span className="summary-value">{totalCount}</span>
-              <span className="summary-label">Total</span>
+        {/* Grid de Resumo (Glassmorphism) */}
+        <div className="summaryGridModern">
+          <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{totalCount}</h3>
+              <span>Total</span>
             </div>
-            <div className="summary-icon icon-total"> {/* Classe específica para cor */}
-              <FaClipboardList size={20}/>
-            </div>
-          </div>
-          {/* Card Pendentes */}
-          <div className="summary-card">
-            <div className="summary-content">
-              <span className="summary-value">{pendingCount}</span>
-              <span className="summary-label">Pendentes</span>
-            </div>
-            <div className="summary-icon icon-pending"> {/* Classe específica para cor */}
-              <FaClock size={20}/>
+            <div className="summaryIconBox iconTotal">
+              <FaListUl />
             </div>
           </div>
-          {/* Card Concluídos */}
-          <div className="summary-card">
-            <div className="summary-content">
-              <span className="summary-value">{completedCount}</span>
-              <span className="summary-label">Concluídos</span>
+          
+          <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{pendingCount}</h3>
+              <span>Pendentes</span>
             </div>
-            <div className="summary-icon icon-completed"> {/* Classe específica para cor */}
-               <FaCheckCircle size={20}/>
+            <div className="summaryIconBox iconPending">
+              <FaClock />
+            </div>
+          </div>
+          
+          <div className="summaryCardGlass">
+            <div className="summaryContent">
+              <h3>{completedCount}</h3>
+              <span>Concluídos</span>
+            </div>
+            <div className="summaryIconBox iconCompleted">
+               <FaCheck />
             </div>
           </div>
         </div>
 
-        <div className="search-bar-container">
-            <FaSearch className="search-icon" />
+        {/* Controles: Busca e Filtros */}
+        <div className="controlsContainer">
+          <div className="searchBarGlass">
+            <FaSearch className="searchIconModern" />
             <input 
               type="text" 
-              placeholder="Buscar checklist..." 
-              className="search-bar" 
+              placeholder="Buscar checklist por título..." 
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Atualiza o estado da busca
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
-        <div className="page-controls">
-          <div className="filter-buttons" style={{marginBottom: '0px'}}>
+          <div className="filterPills">
             <button
-              className={`filter-btn ${activeFilter === 'all' ? 'active' : ''}`}
+              className={`filterBtnPill ${activeFilter === 'all' ? 'active' : ''}`}
               onClick={() => setActiveFilter('all')}
             >
-              Todos ({totalCount})
+              Todos
             </button>
             <button
-              className={`filter-btn ${activeFilter === 'pending' ? 'active' : ''}`}
+              className={`filterBtnPill ${activeFilter === 'pending' ? 'active' : ''}`}
               onClick={() => setActiveFilter('pending')}
             >
-              Pendentes ({pendingCount})
+              Pendentes
             </button>
             <button
-              className={`filter-btn ${activeFilter === 'completed' ? 'active' : ''}`}
+              className={`filterBtnPill ${activeFilter === 'completed' ? 'active' : ''}`}
               onClick={() => setActiveFilter('completed')}
             >
-              Concluídos ({completedCount})
+              Concluídos
             </button>
           </div>
         </div>
 
-        {/* O container ainda existe, mas será estilizado para ser invisível */}
-        <div className="list-container">
-        {filteredChecklists.map((item) => (
-          <Link to={`/checklists/${item.id}`} key={item.id} className="list-item-link">
-             <div className="list-item checklist-item-with-icon"> {/* Adiciona nova classe */}
-                {/* 2. Adiciona o ícone aqui */}
-                <FaClipboard className="item-prefix-icon" /> 
-                <div className="list-item-content">
-                  <h3>{item.title}</h3>
-                  <span className='checklist-category'><FaCalendar/> {item.category}</span>
-                  <p className="due-date-text">
-                    <FaClock className="due-date-icon" /> {item.dueDate}
-                  </p>
-                </div>
-                <span className={`status-badge ${item.status}`}>{item.status === 'pending' ? 'Pendente' : 'Concluído'}</span>
-              </div>
-          </Link>
-        ))}
-      </div>
+        {/* Lista de Checklists (Cards) */}
+        <div className="checklistListModern">
+          {filteredChecklists.map((item) => (
+            <Link 
+              to={`/checklists/${item.id}`} 
+              key={item.id} 
+              className={`checklistItemGlass status-${item.status}`}
+            >
+               <div className="itemMainInfo">
+                  {/* Ícone Redondo */}
+                  <div className="itemIconCircle">
+                    <FaClipboardCheck />
+                  </div>
+                  
+                  <div className="itemTexts">
+                    <h3>{item.title}</h3>
+                    <div className="itemMeta">
+                      <span><FaCalendarAlt size={12}/> {item.category}</span>
+                      <span><FaClock size={12}/> {item.dueDate}</span>
+                    </div>
+                  </div>
+               </div>
+
+               <span className={`statusBadgePill ${item.status}`}>
+                 {item.status === 'pending' ? 'Pendente' : 'Concluído'}
+               </span>
+            </Link>
+          ))}
+          
+          {filteredChecklists.length === 0 && (
+            <div style={{textAlign: 'center', padding: '2rem', color: '#888'}}>
+              Nenhum checklist encontrado para este filtro.
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

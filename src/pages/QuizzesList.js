@@ -1,80 +1,119 @@
-import React from 'react';
-import ContentCard from '../components/ContentCard';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { quizzes } from '../data/mockData';
-import { FaClock, FaSearch, FaBrain, FaCheckCircle } from 'react-icons/fa';
+import { FaClock, FaSearch, FaBrain, FaCheckCircle, FaQuestionCircle } from 'react-icons/fa';
+import './Pages.css'; 
 
-// Simula uma lista maior
 const allQuizzes = [...quizzes];
 
 function QuizzesList({completedQuizzesCount, totalQuizzesCount}) {
-  const pendingQuizzesCount = totalQuizzesCount - completedQuizzesCount
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState('all');
+  
+  const pendingQuizzesCount = totalQuizzesCount - completedQuizzesCount;
+
+  const filteredQuizzes = allQuizzes.filter(quiz => 
+    quiz.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="page-container">
+    <div className="checklistPageModern">
       <title>Safely | Quizzes</title>
-      <div className="page-header">
+      
+      <div className="pageHeaderModern">
         <h1>Meus Quizzes</h1>
       </div>
   
-      <div className='page-container' >
-        <div className="summary-cards-grid checklist-summary-grid"> {/* Adiciona classe específica */}
-                          {/* Card Total */}
-            <div className="summary-card">
-              <div className="summary-content">
-                <span className="summary-value">{totalQuizzesCount}</span>
-                <span className="summary-label">Total Disponível</span>
-              </div>
-              <div className="summary-icon icon-total"> {/* Classe específica para cor */}
-                <FaBrain size={20}/>
-              </div>
-            </div>
-            {/* Card Pendentes */}
-            <div className="summary-card">
-              <div className="summary-content">
-                <span className="summary-value">{pendingQuizzesCount}</span>
-                <span className="summary-label">Quizzes Pendentes</span>
-              </div>
-              <div className="summary-icon icon-pending"> {/* Classe específica para cor */}
-                <FaClock size={20}/>
-              </div>
-            </div>
-            {/* Card Concluídos */}
-            <div className="summary-card">
-              <div className="summary-content">
-                <span className="summary-value">{completedQuizzesCount}</span>
-                <span className="summary-label">Concluídos</span>
-              </div>
-              <div className="summary-icon icon-completed"> {/* Classe específica para cor */}
-                  <FaCheckCircle size={20}/>
-              </div>
-            </div>
+      {/* Resumo */}
+      <div className="summaryGridModern">
+        <div className="summaryCardGlass">
+          <div className="summaryContent">
+            <h3>{totalQuizzesCount}</h3>
+            <span>Total</span>
           </div>
-          <div className="search-bar-container">
-          <FaSearch className="search-icon" /> 
+          <div className="summaryIconBox iconTotal">
+            <FaBrain />
+          </div>
+        </div>
+
+        <div className="summaryCardGlass">
+          <div className="summaryContent">
+            <h3>{pendingQuizzesCount}</h3>
+            <span>Pendentes</span>
+          </div>
+          <div className="summaryIconBox iconPending">
+            <FaClock />
+          </div>
+        </div>
+
+        <div className="summaryCardGlass">
+          <div className="summaryContent">
+            <h3>{completedQuizzesCount}</h3>
+            <span>Concluídos</span>
+          </div>
+          <div className="summaryIconBox iconCompleted">
+              <FaCheckCircle />
+          </div>
+        </div>
+      </div>
+
+      {/* Controles */}
+      <div className="controlsContainer">
+        <div className="searchBarGlass">
+          <FaSearch className="searchIconModern" /> 
           <input 
             type="text" 
-            placeholder="Buscar treinamento..." 
-            className="search-bar" 
+            placeholder="Buscar quiz..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="filter-buttons" style={{marginBottom: '20px'}}>
-          <button className="filter-btn active">Todos ({totalQuizzesCount})</button>
-          <button className="filter-btn">Pendentes ({pendingQuizzesCount})</button>
-          <button className="filter-btn">Concluídos ({completedQuizzesCount})</button>
+        
+        <div className="filterPills">
+          <button 
+            className={`filterBtnPill ${activeFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('all')}
+          >
+            Todos
+          </button>
+          <button 
+            className={`filterBtnPill ${activeFilter === 'pending' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('pending')}
+          >
+            Pendentes
+          </button>
+          <button 
+            className={`filterBtnPill ${activeFilter === 'completed' ? 'active' : ''}`}
+            onClick={() => setActiveFilter('completed')}
+          >
+            Concluídos
+          </button>
         </div>
-        <div className="card-grid">
-          {allQuizzes.map((quiz, index) => (
-            <ContentCard
-              key={`${quiz.id}-${index}`}
-              to={`/quiz/${quiz.id}`}
-              thumbnail={quiz.thumbnail}
-              title={quiz.title}
-              description={<p className="due-date-text">
-                            <FaClock className="due-date-icon" /> {quiz.dueDate}
-                          </p>}
-              buttonText="Iniciar Quiz"
-            />
-          ))}
-        </div>
+      </div>
+
+      {/* Grid de Quizzes */}
+      <div className="mediaGridModern">
+        {filteredQuizzes.map((quiz, index) => (
+          <Link 
+            key={`${quiz.id}-${index}`}
+            to={`/quiz/${quiz.id}`} // Nota: Verifique se sua rota é /quiz/ ou /quizzes/ no App.js
+            className="mediaCardGlass"
+          >
+            <div className="mediaThumbnailContainer">
+              <img src={quiz.thumbnail} alt={quiz.title} className="mediaThumbnail" />
+              <div className="mediaOverlayIcon">
+                <FaQuestionCircle />
+              </div>
+            </div>
+            
+            <div className="mediaContent">
+              <h3>{quiz.title}</h3>
+              <div className="mediaMeta">
+                <FaClock /> <span>{quiz.dueDate}</span>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

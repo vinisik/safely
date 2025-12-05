@@ -7,21 +7,24 @@ import rafaelaPic from '../assets/rafaela.png';
 import viniciusPic from '../assets/vinicius.png';
 import gerentePic from '../assets/gerente.png';
 import defaultPic from '../assets/profile-placeholder.png'; 
+import { FaUser, FaLock, FaArrowRight } from 'react-icons/fa';
+
+// Importa o CSS Unificado
+import './Pages.css';
 
 function LoginPage({ onLogin }) {
-  // O estado 'name' foi removido
   const [password, setPassword] = useState('');
   const [idColaborador, setidColaborador] = useState(''); 
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Lógica original mantida
 
-    // Validação de campo vazio
     if (idColaborador.trim() === '') {
       alert('Por favor, preencha o ID de colaborador.');
-      return; // Interrompe a função
+      return; 
     }
 
+    // Lógica de seleção de usuário original mantida
     let userName;
     let profilePic;
     let userRole = 'colaborador';
@@ -31,17 +34,16 @@ function LoginPage({ onLogin }) {
     else if (idColaborador === 'gabriel123') { userName = 'Gabriel Maciel'; profilePic = gabrielPic; }
     else if (idColaborador === 'rafaela123') { userName = 'Rafaela Souza'; profilePic = rafaelaPic; }
     else if (idColaborador === 'vinicius123') { userName = 'Vinicius Siqueira'; profilePic = viniciusPic; }
-    else if (idColaborador === 'gerente123') { // ID do Gestor
+    else if (idColaborador === 'gerente123') { 
         userName = 'Gestor';
         profilePic = gerentePic; 
-        userRole = 'gestor'; // Define o papel como gestor
+        userRole = 'gestor'; 
     } else {
-      userName = 'Usuário'; // Nome genérico
-      profilePic = defaultPic; // Foto de perfil padrão
+      userName = 'Usuário'; 
+      profilePic = defaultPic; 
       userRole = 'colaborador'; 
     }
 
-    // Passa o objeto de usuário com o nome e foto corretos
     onLogin({ 
       name: userName, 
       idColaborador: idColaborador,
@@ -50,45 +52,52 @@ function LoginPage({ onLogin }) {
     });
   };
 
-  // Formulário de login
   return (
-    <div className="login-page">
+    <div className="loginPageModern">
+      <title>Safely | Login</title>
       
-        <title>Safely | Login</title>
-      
-      <div className="login-form-container">
-        <form onSubmit={handleSubmit} className="login-form">
-          <div className="login-header">
+      <div className="loginCardGlass">
+        <form onSubmit={handleSubmit}>
+          <div className="loginHeaderModern">
             <img src={safelyLogoLogin} alt="Safely Logo" />
-            <h2>Bem-vindo(a) à SAFELY</h2>
-            <p>Faça login para continuar</p>
+            <h2>Bem-vindo de volta</h2>
+            <p>Acesse sua conta para continuar</p>
           </div>
 
-          {/* Campo de ID */}
-          <div className="input-group">
+          {/* Campo de ID com Ícone */}
+          <div className="inputGroupModern">
             <label htmlFor="idColaborador">ID de Colaborador</label>
-            <input
-              type="text"
-              id="idColaborador"
-              value={idColaborador}
-              onChange={(e) => setidColaborador(e.target.value)}
-              placeholder="Digite seu ID"
-            />
+            <div className="inputWrapper">
+               <FaUser className="inputIcon" />
+               <input
+                 type="text"
+                 id="idColaborador"
+                 className="inputModern"
+                 value={idColaborador}
+                 onChange={(e) => setidColaborador(e.target.value)}
+               />
+            </div>
           </div>
           
-          {/* Campo de Senha */}
-          <div className="input-group">
+          {/* Campo de Senha com Ícone */}
+          <div className="inputGroupModern">
             <label htmlFor="password">Senha</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Digite sua senha"
-            />
+            <div className="inputWrapper">
+              <FaLock className="inputIcon" />
+              <input
+                type="password"
+                id="password"
+                className="inputModern"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+              />
+            </div>
           </div>
           
-          <button type="submit" className="btn btn-login">Entrar</button>
+          <button type="submit" className="btnLoginModern">
+            Entrar na Plataforma <FaArrowRight style={{marginLeft: '8px', fontSize: '0.9rem'}}/>
+          </button>
         </form>
       </div>
     </div>

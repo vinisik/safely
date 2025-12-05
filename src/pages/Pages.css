@@ -1,0 +1,1552 @@
+:root {
+  --screen-width: 1400px;
+}
+
+/* --- Container Geral com Layout Fluido --- */
+.checklistPageModern {
+  max-width: var(--screen-width);
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Cabeçalho da Página --- */
+.pageHeaderModern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pageHeaderModern h1 {
+  font-size: 2rem;
+  color: #005A9C; /* Primary Color */
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Botão Novo Checklist (Estilo Pill com Glow) */
+.btnNewChecklist {
+  background: #005A9C;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 90, 156, 0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btnNewChecklist:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 90, 156, 0.5);
+}
+
+/* --- Cards de Resumo (Glassmorphism) --- */
+.summaryGridModern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.summaryCardGlass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.summaryCardGlass:hover {
+  transform: translateY(-5px);
+}
+
+.summaryContent h3 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  line-height: 1;
+}
+
+.summaryContent span {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.summaryIconBox {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* Cores específicas dos cards */
+.iconTotal { background: #e3f2fd; color: #005A9C; }
+.iconPending { background: #fff8e1; color: #f57f17; }
+.iconCompleted { background: #e8f5e9; color: #2e7d32; }
+
+/* --- Barra de Busca e Filtros --- */
+.controlsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.searchBarGlass {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.searchBarGlass input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border-radius: 50px;
+  border: 1px solid rgba(0,0,0,0.05);
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.searchBarGlass input:focus {
+  box-shadow: 0 4px 20px rgba(0, 90, 156, 0.15);
+  border-color: #c2e7ff;
+}
+
+.searchIconModern {
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+/* Filtros Estilo Pill */
+.filterPills {
+  display: flex;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 5px;
+  border-radius: 50px;
+}
+
+.filterBtnPill {
+  border: none;
+  background: transparent;
+  padding: 0.6rem 1.2rem;
+  border-radius: 40px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.filterBtnPill:hover {
+  color: #005A9C;
+}
+
+.filterBtnPill.active {
+  background: white;
+  color: #005A9C;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* --- Lista de Itens (Cards Flutuantes) --- */
+.checklistListModern {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checklistItemGlass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+
+.checklistItemGlass:hover {
+  transform: scale(1.01) translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  background: white;
+}
+
+/* Barra lateral colorida indicando status */
+.checklistItemGlass::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: #ccc;
+}
+.checklistItemGlass.status-pending::before { background: #f57f17; }
+.checklistItemGlass.status-completed::before { background: #2e7d32; }
+
+.itemMainInfo {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.itemIconCircle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #f0f4f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #005A9C;
+  font-size: 1.2rem;
+}
+
+.itemTexts h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.3rem 0;
+  color: #333;
+}
+
+.itemMeta {
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.itemMeta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.statusBadgePill {
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadgePill.pending { background: #fff3e0; color: #ef6c00; }
+.statusBadgePill.completed { background: #e8f5e9; color: #2e7d32; }
+
+/* --- PÁGINA DE DETALHES (ChecklistPage) --- */
+
+.checklistHeaderCard {
+  background: linear-gradient(135deg, #005A9C, #004a80);
+  color: white;
+  padding: 2.5rem;
+  border-radius: 24px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 90, 156, 0.3);
+  text-align: center;
+}
+
+.checklistHeaderCard h1 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.headerMetaGrid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  backdrop-filter: blur(5px);
+}
+
+.questionCard {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: border-color 0.3s;
+  border: 2px solid transparent;
+}
+
+.questionCard:hover {
+  border-color: #e0e0e0;
+}
+
+.questionText {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btnCheckAction {
+  flex: 1;
+  padding: 1rem;
+  border: 2px solid #eee;
+  background: white;
+  border-radius: 15px;
+  font-weight: 700;
+  color: #777;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btnCheckAction:hover {
+  background: #f9f9f9;
+}
+
+/* Botão OK Ativo */
+.btnCheckAction.ok.active {
+  background: #e8f5e9;
+  border-color: #2e7d32;
+  color: #2e7d32;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2);
+}
+
+/* Botão NOK Ativo */
+.btnCheckAction.nok.active {
+  background: #ffebee;
+  border-color: #c62828;
+  color: #c62828;
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.2);
+}
+
+.nokArea {
+  margin-top: 1.5rem;
+  background: #fafafa;
+  padding: 1.5rem;
+  border-radius: 15px;
+  animation: slideDown 0.3s ease;
+}
+
+.nokArea textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 80px;
+  margin-bottom: 10px;
+}
+
+.submitButtonContainer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.btnSubmitHuge {
+  background: #005A9C;
+  color: white;
+  border: none;
+  padding: 1.2rem 3rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 90, 156, 0.4);
+  transition: transform 0.2s;
+  width: 100%;
+  max-width: 400px;
+}
+
+.btnSubmitHuge:hover {
+  transform: scale(1.02);
+}
+
+/* Tela de Sucesso */
+.successCard {
+  text-align: center;
+  background: white;
+  padding: 3rem;
+  border-radius: 30px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 3rem auto;
+}
+
+.pointsGained {
+  display: inline-block;
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.mediaGridModern {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+
+.mediaCardGlass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.mediaCardGlass:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 15px 30px rgba(0, 90, 156, 0.15); /* Sombra azulada suave */
+}
+
+.mediaThumbnailContainer {
+  position: relative;
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+.mediaThumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.mediaCardGlass:hover .mediaThumbnail {
+  transform: scale(1.05);
+}
+
+.mediaOverlayIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: rgba(0, 90, 156, 0.85);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  padding-left: 3px; /* Ajuste visual para o ícone de Play */
+}
+
+.mediaCardGlass:hover .mediaOverlayIcon {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.mediaContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.mediaContent h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.mediaMeta {
+  margin-top: auto; /* Empurra para o final */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #666;
+  padding-top: 1rem;
+}
+
+/* --- Detalhes do Vídeo (VideoPage) --- */
+.videoWrapperGlass {
+  background: rgba(0, 0, 0, 0.03);
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.videoPlayerModern {
+  width: 100%;
+  border-radius: 16px;
+  display: block;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.videoDescriptionCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 20px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 2rem;
+  border: 1px solid #f0f0f0;
+}
+
+/* --- Quiz Interativo (QuizPage) --- */
+.quizOptionItem {
+  background: white;
+  border: 2px solid #eef2f6;
+  padding: 1.2rem 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quizOptionItem:hover {
+  border-color: #c2e7ff;
+  background: #f8fbff;
+  transform: translateX(5px);
+}
+
+.quizOptionItem.selected {
+  border-color: #005A9C;
+  background: #e3f2fd;
+  color: #005A9C;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 90, 156, 0.15);
+}
+
+.quizOptionCircle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.quizOptionItem.selected .quizOptionCircle {
+  border-color: #005A9C;
+  background-color: #005A9C;
+}
+
+.quizOptionItem.selected .quizOptionCircle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* --- Dashboard de Pontos (MyPoints) --- */
+.pointsDashboardGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Container do Gráfico */
+.chartGlassContainer {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  min-height: 350px;
+  position: relative;
+}
+
+.chartGlassContainer h2 {
+  font-size: 1.2rem;
+  color: #005A9C;
+  margin-bottom: 1rem;
+}
+
+/* Banner da Loja */
+.storeBanner {
+  background: linear-gradient(135deg, #FFC107, #FF9800);
+  border-radius: 24px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.storeBanner:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 152, 0, 0.4);
+}
+
+.storeBanner h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+
+.storeBanner p {
+  font-size: 1rem;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+/* Ícone de fundo decorativo */
+.storeBannerIconBg {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 8rem;
+  opacity: 0.2;
+  transform: rotate(-20deg);
+  z-index: 1;
+}
+
+/* --- Badges (Insígnias) --- */
+.badgesGridModern {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.badgeCardGlass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.badgeCardGlass:hover {
+  transform: translateY(-5px);
+  background: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.badgeIconCircle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.badgeCardGlass h3 {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.badgeCardGlass p {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+/* Badge Bloqueado (Placeholder) */
+.badgeCardGlass.locked {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px dashed #ccc;
+  opacity: 0.7;
+}
+
+.badgeCardGlass.locked .badgeIconCircle {
+  background: #e0e0e0 !important;
+  color: #999;
+  box-shadow: none;
+}
+
+/* --- Desafios --- */
+.challengeCardGlass {
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s;
+}
+
+.challengeCardGlass:hover {
+  border-color: #005A9C;
+}
+
+/* --- Loja de Recompensas (RewardsPage) --- */
+.rewardCardGlass {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.rewardCardGlass:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 90, 156, 0.15);
+}
+
+.rewardImageContainer {
+  height: 200px;
+  width: 100%;
+  background: #f8f9fa;
+  overflow: hidden;
+  position: relative;
+}
+
+.rewardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.rewardCardGlass:hover .rewardImage {
+  transform: scale(1.05);
+}
+
+.rewardContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.rewardCostTag {
+  background: #e3f2fd;
+  color: #005A9C;
+  align-self: flex-start;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+/* --- KPIs do Gestor (Glassmorphism) --- */
+.kpiGridModern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.kpiCardGlass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.kpiCardGlass:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 15px 35px rgba(0, 90, 156, 0.1);
+}
+
+.kpiHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.kpiIconGlass {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  /* Cores padrão, serão sobrescritas por classes específicas */
+  background: #e3f2fd;
+  color: #005A9C;
+}
+
+/* Cores específicas dos ícones KPI */
+.iconTime { background: #f3e5f5; color: #8e24aa; }
+.iconAudit { background: #e0f2f1; color: #00695c; }
+.iconAlert { background: #ffebee; color: #c62828; }
+.iconCert { background: #fff8e1; color: #f57f17; }
+.iconUsers { background: #e8f5e9; color: #2e7d32; }
+
+.trendPill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.trendPill.positive { background: #e8f5e9; color: #2e7d32; }
+.trendPill.negative { background: #ffebee; color: #c62828; }
+
+.kpiValue {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+
+.kpiLabel {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.kpiSubtext {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: auto;
+}
+
+/* --- Gráficos e Tabelas --- */
+.chartsGridModern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Reutiliza .chartGlassContainer do CSS anterior, ou cria variação */
+.chartSectionGlass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.sectionTitleGlass {
+  font-size: 1.1rem;
+  color: #005A9C;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Tabelas Modernas */
+.detailsGridModern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2rem;
+}
+
+.glassTableContainer {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 0; /* Padding controlado dentro */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+.glassTableHeader {
+  background: rgba(0, 90, 156, 0.05);
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.glassTableHeader h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.glassTableHeader p {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 5px 0 0 0;
+}
+
+/* Lista/Tabela Interna */
+.modernList {
+  display: flex;
+  flex-direction: column;
+}
+
+.modernListItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.03);
+  transition: background 0.2s;
+}
+
+.modernListItem:last-child {
+  border-bottom: none;
+}
+
+.modernListItem:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Elementos da Lista */
+.avatarInitials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.performerInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.infoText {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameText { font-weight: 600; font-size: 0.95rem; color: #333; }
+.roleText { font-size: 0.75rem; color: #777; }
+
+.scorePill {
+  background: #e3f2fd;
+  color: #005A9C;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* --- Login Moderno (Glassmorphism) --- */
+.loginPageModern {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Fundo com gradiente suave da marca */
+  background: linear-gradient(135deg, #f4f7fa 0%, #c2e7ff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Bolhas de fundo decorativas */
+.loginPageModern::before,
+.loginPageModern::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+.loginPageModern::before {
+  width: 300px;
+  height: 300px;
+  background: rgba(0, 90, 156, 0.2);
+  top: -50px;
+  left: -50px;
+  filter: blur(80px);
+}
+.loginPageModern::after {
+  width: 400px;
+  height: 400px;
+  background: rgba(0, 90, 156, 0.15);
+  bottom: -100px;
+  right: -100px;
+  filter: blur(100px);
+}
+
+.loginCardGlass {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 30px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 90, 156, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  z-index: 1;
+  text-align: center;
+}
+
+.loginHeaderModern img {
+  width: 80px;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.loginHeaderModern h2 {
+  color: #005A9C;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.loginHeaderModern p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.inputGroupModern {
+  position: relative;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.inputGroupModern label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 0.5rem;
+  margin-left: 10px;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #005A9C;
+  opacity: 0.6;
+}
+
+.inputModern {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 2.8rem; /* Espaço para o ícone */
+  border-radius: 50px;
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.inputModern:focus {
+  border-color: #005A9C;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0, 90, 156, 0.1);
+}
+
+.btnLoginModern {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 50px;
+  border: none;
+  background: #005A9C;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 90, 156, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btnLoginModern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 35px rgba(0, 90, 156, 0.4);
+  background: #004a80;
+}
+
+/* --- Perfil Moderno --- */
+.profileHeaderGlass {
+  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+  backdrop-filter: blur(12px);
+  border-radius: 30px;
+  padding: 3rem 2rem;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Avatar Composto (Foto + Logo Empresa) */
+.profileAvatarContainer {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.mainProfileImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.companyBadgeImg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 45px;
+  height: 45px;
+  background: white;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  object-fit: contain;
+}
+
+.profileMetaBadges {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.metaBadgePill {
+  background: rgba(0, 90, 156, 0.08);
+  color: #005A9C;
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Grid de Estatísticas do Perfil */
+.profileStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.statCardGlass {
+  background: white;
+  padding: 2rem;
+  border-radius: 24px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  transition: transform 0.3s;
+}
+
+.statCardGlass:hover {
+  transform: translateY(-5px);
+  border-color: #c2e7ff;
+}
+
+.statCardGlass h3 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #777;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.statCardGlass p {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #005A9C;
+  margin: 0;
+}
+
+/* Ações do Perfil */
+.profileActionsGrid {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.dashboardGridModern {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Coluna principal mais larga */
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Banner de Boas-vindas */
+.welcomeBannerGlass {
+  background: linear-gradient(135deg, #005A9C, #0277bd);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  color: white;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 90, 156, 0.25);
+}
+
+/* Elementos decorativos do banner */
+.welcomeBannerGlass::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.welcomeBannerGlass h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.welcomeBannerGlass p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+/* Seções de Conteúdo (Vidro Branco) */
+.dashboardSectionGlass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeader h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.counterBadge {
+  background: #ffc107;
+  color: #333;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkViewAll {
+  font-size: 0.9rem;
+  color: #005A9C;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.linkViewAll:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+/* --- Alertas Modernos --- */
+.alertCardGlass {
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  border-left: 4px solid;
+  background: rgba(255, 255, 255, 0.5);
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.alertCardGlass:hover {
+  transform: translateX(5px);
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.alertCardGlass h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+
+.alertCardGlass p {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.alertTime {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: 500;
+}
+
+/* Prioridades dos Alertas */
+.alertCardGlass.priority-high {
+  border-color: #ef5350;
+  background: rgba(255, 235, 238, 0.5);
+}
+.alertCardGlass.priority-high h3 { color: #c62828; }
+
+.alertCardGlass.priority-medium {
+  border-color: #ff9800;
+  background: rgba(255, 243, 224, 0.5);
+}
+.alertCardGlass.priority-medium h3 { color: #ef6c00; }
+
+.alertCardGlass.priority-low {
+  border-color: #005A9C;
+  background: rgba(227, 242, 253, 0.5);
+}
+
+/* --- Lista Compacta (Para Dashboard) --- */
+.compactListItem {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  margin-bottom: 0.8rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.compactListItem:hover {
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.compactIconBox {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #e3f2fd;
+  color: #005A9C;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+/* Estilo específico para Quiz */
+.compactIconBox.quizIcon {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.compactContent {
+  flex-grow: 1;
+}
+
+.compactContent h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  color: #333;
+}
+
+.compactMeta {
+  font-size: 0.8rem;
+  color: #777;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Estado Vazio */
+.emptyStateCard {
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255,255,255,0.4);
+  border-radius: 20px;
+  border: 1px dashed #ccc;
+  color: #777;
+}
+
+/* Mobile Dropdown (Estilo Moderno) */
+.mobileSummaryToggle {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: #005A9C;
+  margin-bottom: 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .dashboardGridModern {
+    grid-template-columns: 1fr;
+  }
+  .welcomeBannerGlass {
+    padding: 2rem;
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .chartsGridModern, .detailsGridModern {
+    grid-template-columns: 1fr;
+  }
+  .pageHeaderModern {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* Responsividade Extra */
+@media (max-width: 992px) {
+  .pointsDashboardGrid {
+    grid-template-columns: 1fr;
+  }
+  .chartGlassContainer {
+    min-height: 300px;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .controlsContainer { flex-direction: column; align-items: stretch; }
+  .filterPills { width: 100%; justify-content: space-between; overflow-x: auto; }
+  .itemMainInfo { gap: 0.8rem; }
+  .itemIconCircle { display: none; }
+  .checklistHeaderCard { padding: 1.5rem; }
+  .headerMetaGrid { flex-direction: column; gap: 0.5rem; }
+}

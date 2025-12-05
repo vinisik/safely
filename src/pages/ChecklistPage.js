@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-// A importação estática de 'checklists' foi removida daqui
+import { FaCalendarAlt, FaUser, FaClock, FaCheck, FaTimes, FaCamera } from 'react-icons/fa';
 
-function ChecklistPage({ user, checklists, updateChecklistStatus, addPoints }) { // Recebe 'checklists' como propriedade
+// Importa o novo CSS
+import './Pages.css';
+
+function ChecklistPage({ user, checklists, updateChecklistStatus, addPoints }) {
   const { id } = useParams();
-  
-  // A busca agora é feita na lista atualizada que vem das props
   const checklistData = checklists.find(c => c.id === parseInt(id));
 
   const [answers, setAnswers] = useState({});
@@ -27,81 +28,100 @@ function ChecklistPage({ user, checklists, updateChecklistStatus, addPoints }) {
   
   const handleSubmit = () => {
       if (checklistData.status !== 'completed') {
-        addPoints(50); // Adiciona 50 pontos nas checklists completadas
+        addPoints(50); 
       }
-
       updateChecklistStatus(checklistData.id, 'completed');
       setIsSubmitted(true);
   }
 
   if (!checklistData) {
     return (
-        <div className="page-container" style={{textAlign: 'center'}}>
+        <div className="checklistPageModern" style={{textAlign: 'center', marginTop: '50px'}}>
             <h2>Checklist não encontrado.</h2>
-            <p>Este item pode ter sido removido ou o link é inválido.</p>
-            <Link to="/checklists" className="btn">Voltar para a Lista</Link>
+            <Link to="/checklists" className="btnNewChecklist" style={{display: 'inline-block', marginTop: '20px'}}>Voltar</Link>
         </div>
     );
   }
   
   if (isSubmitted) {
       return (
-        <div className="page-container submission-success">
-            <h2>Checklist Enviado com Sucesso! <span>+50 pontos</span></h2>
-            <p>Obrigado, {user.name}. Suas respostas foram registradas.</p>
-            <p>Qualquer não conformidade reportada já foi notificada ao seu supervisor.</p>
-            <Link to="/checklists" className="btn">Voltar ao Início</Link>
+        <div className="checklistPageModern">
+            <div className="successCard">
+                <div style={{fontSize: '4rem', color: '#2e7d32', marginBottom: '1rem'}}>
+                    <FaCheck />
+                </div>
+                <h2>Checklist Enviado! <span className="pointsGained">+50 pts</span></h2>
+                <p style={{color: '#666', margin: '1rem 0 2rem 0'}}>
+                    Obrigado, {user.name}. Suas respostas foram registradas com segurança.
+                </p>
+                <Link to="/checklists" className="btnNewChecklist" style={{justifyContent: 'center'}}>
+                    Voltar ao Início
+                </Link>
+            </div>
         </div>
       );
   }
 
   return (
-    <div className="page-container checklist-page">
-      <div className="checklist-header">
+    <div className="checklistPageModern">
+      {/* Header com Gradiente */}
+      <div className="checklistHeaderCard">
         <h1>{checklistData.title}</h1>
-        <div className="checklist-meta">
-          <span>Operador: <strong>{user.name}</strong></span>
-          <span>Data: <strong>{new Date().toLocaleDateString()}</strong></span>
-          <span>Vencimento: <strong>{checklistData.dueDate}</strong></span>
+        <div className="headerMetaGrid">
+          <div className="metaItem"><FaUser /> {user.name}</div>
+          <div className="metaItem"><FaCalendarAlt /> {new Date().toLocaleDateString()}</div>
+          <div className="metaItem"><FaClock /> Vence em: {checklistData.dueDate}</div>
         </div>
       </div>
 
-      <div className="checklist-items-container">
+      <div className="checklistItemsContainer">
         {checklistData.items.map((item, index) => (
-          <div key={item.id} className="checklist-item card">
-            <p className="item-text">{index + 1}. {item.text}</p>
-            <div className="item-actions">
+          <div key={item.id} className="questionCard">
+            <div className="questionText">
+                <span style={{color: '#005A9C', fontWeight: 'bold', marginRight: '10px'}}>
+                    #{index + 1}
+                </span> 
+                {item.text}
+            </div>
+            
+            <div className="actionButtons">
               <button
-                className={`btn-status ok ${answers[item.id]?.status === 'ok' ? 'active' : ''}`}
+                className={`btnCheckAction ok ${answers[item.id]?.status === 'ok' ? 'active' : ''}`}
                 onClick={() => handleStatusChange(item.id, 'ok')}
               >
-                Conforme
+                <FaCheck /> Conforme
               </button>
               <button
-                className={`btn-status nok ${answers[item.id]?.status === 'nok' ? 'active' : ''}`}
+                className={`btnCheckAction nok ${answers[item.id]?.status === 'nok' ? 'active' : ''}`}
                 onClick={() => handleStatusChange(item.id, 'nok')}
               >
-                Não Conforme
+                <FaTimes /> Não Conforme
               </button>
             </div>
             
             {answers[item.id]?.status === 'nok' && (
-              <div className="non-conformance-section">
-                <label>Descreva o problema:</label>
+              <div className="nokArea">
+                <label style={{display: 'block', marginBottom: '8px', fontWeight: '600'}}>
+                    Detalhes da Não Conformidade:
+                </label>
                 <textarea 
-                    placeholder="Ex: Vazamento na mangueira inferior..."
+                    placeholder="Descreva o problema encontrado..."
                     onChange={(e) => handleCommentChange(item.id, e.target.value)}
                 />
-                <button className="btn-attach-photo">📷 Anexar Foto</button>
+                <button className="btnCheckAction" style={{width: 'auto', fontSize: '0.9rem'}}>
+                    <FaCamera /> Anexar Foto
+                </button>
               </div>
             )}
           </div>
         ))}
       </div>
       
-      <button className="btn btn-submit-checklist" onClick={handleSubmit}>
-        Enviar Checklist
-      </button>
+      <div className="submitButtonContainer">
+        <button className="btnSubmitHuge" onClick={handleSubmit}>
+          Finalizar e Enviar
+        </button>
+      </div>
     </div>
   );
 }

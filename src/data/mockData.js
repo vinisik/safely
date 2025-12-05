@@ -48,7 +48,7 @@ export const videos = [
     title: 'Vídeo de Funcionamento da Plataforma',
     thumbnail: thumbPagina,
     description: 'Conheça todas as funcionalidades da plataforma Safely nesse vídeo rápido!',
-    videoUrl: '/videos/safelyvideo.mp4',
+    videoUrl: '/videos/funcionamento.mp4',
     dueDate: '2 Min',
   },
 ];
