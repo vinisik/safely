@@ -1,24 +1,27 @@
+/* Components.css - Estilos Globais de Componentes UI */
+
+/* 1. IMPORTAÇÃO DAS FONTES */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* --- HEADER (Glassmorphism) --- */
 .headerModern {
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  
   height: 85px; 
   padding: 0 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03); 
-  
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
   position: sticky;
   top: 0;
   z-index: 1000;
   transition: all 0.3s ease;
 }
 
-/* --- Logo --- */
+/* Logo */
 .logoLink {
   display: flex;
   align-items: center;
@@ -28,14 +31,13 @@
 .logoLink:hover {
   opacity: 0.8;
 }
-
 .logoImg {
   height: 3.2rem;
   width: auto;
   display: block;
 }
 
-/* --- Navegação Desktop (Novo Estilo "Pill") --- */
+/* Navegação Desktop */
 .desktopNav {
   position: absolute;
   left: 50%;
@@ -47,41 +49,34 @@
   list-style: none;
   margin: 0;
   padding: 6px;
-  gap: 0.5rem; /* Espaço entre os botões */
-  
-  /* Container dos links estilo "Barra Flutuante" opcional */
-  background: rgba(0, 0, 0, 0.03); 
-  border-radius: 50px; /* Borda bem redonda */
+  gap: 0.5rem;
 }
 
 .navLink {
   text-decoration: none;
-  color: #666;
-  font-weight: 600;
+  color: var(--text-secondary);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
   font-size: 0.9rem;
-  padding: 0.7rem 1.4rem; /* Botão mais gordinho */
-  border-radius: 40px; /* Formato de pílula */
+  padding: 0.7rem 1.4rem;
+  border-radius: 40px;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
   display: block;
 }
 
-/* Hover suave */
 .navLink:hover {
   color: var(--primary-color);
-  background-color: rgba(0, 90, 156, 0.35); /* Fundo branco leve */
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* Estado Ativo (O destaque principal) */
 .navLinkActive {
-  background-color: var(--primary-color); /* Azul principal */
-  color: white !important; /* Força texto branco */
-  box-shadow: 0 4px 15px rgba(0, 90, 156, 0.35); /* Brilho azul (Glow) */
-  transform: scale(1.02); /* Leve aumento */
+  background-color: var(--primary-color);
+  color: #ffffff !important; /* Sempre branco no ativo */
+  box-shadow: 0 4px 15px rgba(0, 90, 156, 0.35);
+  transform: scale(1.02);
 }
 
-/* --- Área do Usuário --- */
+/* Área do Usuário */
 .userInfoContainer {
   position: relative;
   display: flex;
@@ -101,9 +96,7 @@
 }
 
 .userInfo:hover {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-color: rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  background-color: var(--glass-border);
 }
 
 .userAvatar {
@@ -111,7 +104,7 @@
   height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white; /* Borda branca para separar do fundo */
+  border: 2px solid var(--card-bg);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -123,14 +116,16 @@
 }
 
 .userName {
-  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
   font-size: 0.9rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .userSubtitle {
+  font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
-  color: #888;
+  color: var(--text-secondary);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -138,7 +133,7 @@
 
 .dropdownArrow {
   font-size: 0.8rem;
-  color: #999;
+  color: var(--text-secondary);
   margin-left: 8px;
   transition: transform 0.3s ease;
 }
@@ -147,18 +142,18 @@
   color: var(--primary-color);
 }
 
-/* --- Dropdown Menu --- */
+/* Dropdown Menu */
 .profileDropdown {
   position: absolute;
   top: 75px;
   right: 0;
-  background: rgba(255, 255, 255, 0.95); /* Quase sólido */
+  background: var(--card-bg);
   backdrop-filter: blur(20px);
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--glass-shadow);
   width: 250px;
   z-index: 1100;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid var(--glass-border);
   animation: scaleIn 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
   padding: 10px;
 }
@@ -182,7 +177,8 @@
   width: 100%;
   padding: 12px 15px;
   text-decoration: none;
-  color: #555;
+  color: var(--text-secondary);
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
   border-radius: 12px;
   border: none;
@@ -193,36 +189,29 @@
 
 .profileDropdown li a:hover,
 .profileDropdown li button:hover {
-  background-color: var(--secondary-color); /* Azul claro */
-  color: #003d6b;
+  background-color: var(--glass-border);
+  color: var(--primary-color);
 }
 
-/* Separador Sair */
 .profileDropdown li:last-child {
   margin-top: 8px;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid var(--glass-border);
   padding-top: 8px;
 }
 .profileDropdown li:last-child button:hover {
-  background-color: #ffebee;
+  background-color: rgba(198, 40, 40, 0.1);
   color: #c62828;
 }
 
-/* --- Mobile --- */
-@media (max-width: 992px) {
-  .desktopNav { display: none; }
-  .headerModern { padding: 0 1.5rem; height: 70px; }
-  .userDetails, .dropdownArrow { display: none; }
-}
-
+/* --- MENU LATERAL (SidePanel) --- */
 .side-panel-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Fundo escuro suave */
-  backdrop-filter: blur(4px); /* Desfoque no fundo */
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -241,8 +230,8 @@
   width: 85%;
   max-width: 320px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.95); /* Quase sólido para legibilidade */
-  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+  background: var(--card-bg);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.2);
   transition: right 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   z-index: 2001;
   display: flex;
@@ -255,11 +244,11 @@
 
 .side-panel-header {
   padding: 2rem 1.5rem;
-  background: linear-gradient(135deg, #f4f7fa 0%, #e3f2fd 100%);
+  background: var(--glass-bg);
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .side-panel-avatar {
@@ -267,7 +256,7 @@
   height: 55px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid white;
+  border: 3px solid var(--card-bg);
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
@@ -278,18 +267,20 @@
 }
 
 .side-panel-user-info .user-name {
+  font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .side-panel-user-info .user-subtitle {
+  font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 .add-account-btn {
-  background: white;
+  background: var(--card-bg);
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -298,13 +289,8 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  color: #005A9C;
+  color: var(--primary-color);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
-}
-
-.add-account-btn:active {
-  transform: scale(0.95);
 }
 
 .side-panel-nav {
@@ -328,39 +314,29 @@
   gap: 15px;
   padding: 1rem 1.5rem;
   text-decoration: none;
-  color: #555;
+  color: var(--text-secondary);
   font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
   font-weight: 500;
   border-radius: 16px;
   transition: all 0.2s ease;
 }
 
-.side-panel-nav li a svg {
-  font-size: 1.2rem;
-  color: #999;
-  transition: color 0.2s;
-}
-
-.side-panel-nav li a:hover,
-.side-panel-nav li a.active {
-  background-color: #e3f2fd; /* Azul bem claro */
-  color: #005A9C;
-}
-
-.side-panel-nav li a:hover svg,
-.side-panel-nav li a.active svg {
-  color: #005A9C;
+.side-panel-nav li a:hover {
+  background-color: var(--glass-border);
+  color: var(--primary-color);
 }
 
 .side-panel-footer {
   padding: 1.5rem;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid var(--glass-border);
 }
 
 .logout-button {
-  background: #ffebee;
+  background: rgba(198, 40, 40, 0.1);
   border: none;
   color: #c62828;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -374,25 +350,21 @@
   transition: background 0.2s;
 }
 
-.logout-button:hover {
-  background: #ffcdd2;
-}
-
 /* --- CHAT WINDOW (Estilo Bolha Moderna) --- */
 .chat-window {
   position: fixed;
-  bottom: 90px; /* Acima da bottom nav no mobile */
+  bottom: 90px;
   right: 20px;
   width: 340px;
   height: 480px;
-  background-color: white;
+  background-color: var(--card-bg);
   border-radius: 24px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  box-shadow: var(--glass-shadow);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   z-index: 1500;
-  border: 1px solid rgba(0,0,0,0.05);
+  border: 1px solid var(--glass-border);
   animation: slideUpFade 0.3s ease-out;
 }
 
@@ -402,7 +374,7 @@
 }
 
 .chat-header {
-  background: linear-gradient(135deg, #005A9C, #004a80);
+  background: linear-gradient(135deg, var(--primary-color), #004a80);
   color: white;
   padding: 1.2rem;
   display: flex;
@@ -412,6 +384,7 @@
 
 .chat-header h3 {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   font-weight: 600;
 }
@@ -428,7 +401,6 @@
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  line-height: 1;
 }
 
 .chat-messages {
@@ -438,7 +410,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background-color: #f9fbfd;
+  background-color: transparent;
 }
 
 .message {
@@ -447,109 +419,160 @@
   max-width: 85%;
   line-height: 1.4;
   font-size: 0.9rem;
-  position: relative;
+  font-family: 'Inter', sans-serif;
 }
 
 .message.support {
-  background-color: #e9ecef; /* Cinza claro */
-  color: #333;
+  background-color: var(--glass-border);
+  color: var(--text-color);
   align-self: flex-start;
-  border-bottom-left-radius: 4px; /* Efeito balão */
+  border-bottom-left-radius: 4px;
 }
 
 .message.user {
-  background-color: #005A9C; /* Azul Michelin */
+  background-color: var(--primary-color);
   color: white;
   align-self: flex-end;
-  border-bottom-right-radius: 4px; /* Efeito balão */
-  box-shadow: 0 2px 5px rgba(0, 90, 156, 0.2);
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .chat-input-form {
   display: flex;
   padding: 1rem;
-  border-top: 1px solid #eee;
-  background: white;
+  border-top: 1px solid var(--glass-border);
+  background: var(--card-bg);
   gap: 10px;
 }
 
 .chat-input-form input {
   flex-grow: 1;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--glass-border);
+  background: var(--input-bg);
+  color: var(--text-color);
   border-radius: 50px;
   padding: 10px 18px;
   font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.2s;
-}
-
-.chat-input-form input:focus {
-  border-color: #005A9C;
+  font-family: 'Inter', sans-serif;
 }
 
 .chat-input-form button {
-  background-color: #005A9C;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 50px;
   padding: 0 1.2rem;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
-}
-
-.chat-input-form button:hover {
-  background-color: #004a80;
-}
-
-/* Responsividade Chat */
-@media (max-width: 480px) {
-  .chat-window {
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100%; height: 100%;
-    border-radius: 0;
-    z-index: 2100; /* Cobre tudo */
-  }
 }
 
 /* --- FOOTER --- */
 .footer {
   background-color: transparent;
-  color: #888;
+  color: var(--text-secondary);
   text-align: center;
   padding: 2rem 1rem;
   margin-top: auto;
   font-size: 0.85rem;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid var(--glass-border);
 }
 
-/* --- NAVEGAÇÃO INFERIOR (BottomNav - Mobile) --- */
 .bottom-nav {
-  display: none; /* Escondido no Desktop */
+  display: none; /* Geralmente controlado por Media Query */
+  justify-content: space-between;
+  align-items: center;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 70px; /* Altura fixa */
-  background: rgba(255, 255, 255, 0.9); /* Transparente */
-  backdrop-filter: blur(10px); /* Glassmorphism */
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
-  border-top: 1px solid rgba(255,255,255,0.5);
-  z-index: 1001;
-  justify-content: space-around;
-  align-items: center;
-  padding-bottom: env(safe-area-inset-bottom); /* Ajuste para iPhone X+ */
+  
+  /* --- CORES VARIÁVEIS PARA TEMA --- */
+  background: var(--glass-bg); /* Adapta ao Claro/Escuro */
+  border-top: 1px solid var(--glass-border); /* Borda adaptável */
+  box-shadow: var(--glass-shadow); /* Sombra adaptável */
+  
+  /* Efeitos de Vidro */
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  
+  padding: 10px 0;
+  z-index: 999;
+  padding-bottom: env(safe-area-inset-bottom); /* Segurança para iPhone */
 }
 
+.bottom-nav a {
+  /* Garante botões do mesmo tamanho */
+  display: flex;
+  flex: 1 1 0px;
+  width: 0; 
+  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  
+  /* --- COR DO TEXTO INATIVO --- */
+  color: var(--text-secondary); /* Cinza adaptável */
+  
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.bottom-nav a svg {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+/* Wrapper para notificação */
+.nav-icon-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dot de Notificação */
+.notification-dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  background: #ffce00; /* Amarelo fixo ou use var(--accent-color) se tiver */
+  border-radius: 50%;
+  border: 2px solid var(--card-bg); /* Borda da cor do fundo para destacar */
+}
+
+/* --- ESTADO ATIVO --- */
+.bottom-nav a.active {
+  color: var(--primary-color); /* Azul principal (Muda no Dark Mode) */
+  font-weight: 600;
+}
+
+.bottom-nav a.active svg,
+.bottom-nav a.active span {
+  color: var(--primary-color);
+  filter: drop-shadow(0 0 5px rgba(var(--primary-rgb), 0.3)); /* Opcional: brilho */
+}
+
+.bottom-nav a.active svg {
+  transform: translateY(-2px);
+}
+
+/* --- MODAIS COMPARTILHADOS (QR Scanner, Add Checklist) --- */
 .modalBackdropGlass {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0; width: 100%; height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px); /* Desfoque no fundo atrás do modal */
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -558,17 +581,17 @@
 }
 
 .modalCardGlass {
-  background: rgba(255, 255, 255, 0.95); /* Quase sólido para leitura */
+  background: var(--card-bg);
   width: 90%;
   max-width: 600px;
   border-radius: 30px;
   padding: 2.5rem;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-border);
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: 90vh; /* Evita que estoure a altura da tela */
+  max-height: 90vh;
   overflow-y: auto;
 }
 
@@ -578,18 +601,18 @@
   align-items: center;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .modalHeaderModern h2 {
   font-family: 'Poppins', sans-serif;
-  color: #005A9C;
+  color: var(--primary-color);
   margin: 0;
   font-size: 1.5rem;
 }
 
-.btnCloseModal {
-  background: #f0f0f0;
+.btnCloseModal, .btnIconDelete {
+  background: var(--glass-border);
   border: none;
   width: 36px;
   height: 36px;
@@ -598,19 +621,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #666;
+  color: var(--text-secondary);
   transition: all 0.2s;
 }
 
 .btnCloseModal:hover {
-  background: #ffcdd2;
+  background: rgba(198, 40, 40, 0.1);
   color: #c62828;
   transform: rotate(90deg);
-}
-
-/* Inputs dentro do Modal */
-.inputGroupModal {
-  margin-bottom: 1.5rem;
 }
 
 .inputGroupModal label {
@@ -619,44 +637,35 @@
   font-weight: 600;
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
-  color: #444;
+  color: var(--text-color);
 }
 
-/* Linha de Item do Checklist */
+.inputModern {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border-radius: 50px;
+  border: 2px solid transparent;
+  background: var(--input-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-color);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.inputModern:focus {
+  border-color: var(--primary-color);
+}
+
 .itemBuilderRow {
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 0.8rem;
-  animation: slideDown 0.2s ease;
-}
-
-.itemBuilderRow input {
-  flex-grow: 1;
-}
-
-.btnIconDelete {
-  background: #ffebee;
-  color: #c62828;
-  border: none;
-  width: 42px;
-  height: 42px; /* Altura igual ao input */
-  border-radius: 50%; /* Redondo */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s;
-}
-
-.btnIconDelete:hover {
-  background: #ef5350;
-  color: white;
-  transform: scale(1.1);
 }
 
 .btnAddStep {
-  background: #e8f5e9;
+  background: rgba(46, 125, 50, 0.1);
   color: #2e7d32;
   border: 1px dashed #2e7d32;
   width: 100%;
@@ -666,31 +675,21 @@
   font-weight: 600;
   cursor: pointer;
   margin-top: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.2s;
 }
 
-.btnAddStep:hover {
-  background: #c8e6c9;
-}
-
-/* Ações do Modal */
 .modalActionsModern {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid var(--glass-border);
 }
 
 .btnGhost {
   background: transparent;
-  color: #777;
-  border: 1px solid #ccc;
+  color: var(--text-secondary);
+  border: 1px solid var(--glass-border);
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
   font-family: 'Poppins', sans-serif;
@@ -699,11 +698,10 @@
 }
 
 .btnGhost:hover {
-  background: #f5f5f5;
-  color: #333;
+  background: var(--glass-border);
+  color: var(--text-color);
 }
 
-/* Área de JSON */
 .jsonPreviewBox {
   background: #282c34;
   color: #61dafb;
@@ -713,60 +711,102 @@
   font-size: 0.85rem;
   max-height: 300px;
   overflow: auto;
-  border: 1px solid rgba(0,0,0,0.1);
 }
 
+.mobile-fab {
+  position: fixed;
+  bottom: 90px; /* Altura acima da barra de navegação */
+  
+  /* Centraliza horizontalmente */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Reset de posições antigas */
+  right: auto; 
+  
+  width: 64px; 
+  height: 64px;
+  background: var(--primary-color); /* Usa a cor do tema */
+  border-radius: 50%;
+  border: 4px solid var(--card-bg); /* Cria uma borda da cor do fundo para destacar sobre o conteúdo */
+  color: white;
+  box-shadow: 0 8px 25px rgba(0, 90, 156, 0.4);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efeito de clique mantendo a centralização */
+.mobile-fab:active {
+  transform: translateX(-50%) scale(0.9);
+}
+
+/* Opcional: Efeito de Hover */
+.mobile-fab:hover {
+  transform: translateX(-50%) translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 90, 156, 0.5);
+}
+
+/* --- AJUSTES MOBILE (Botões Maiores) --- */
 @media (max-width: 992px) {
+  
+  /* Aumentar a altura da barra para dar respiro */
   .bottom-nav {
     display: flex;
+    height: 80px; /* Aumentado de 70px para 80px */
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  /* Ícones da navegação maiores */
+  .bottom-nav a svg {
+    font-size: 1.8rem; /* Aumentado de 1.4rem */
+    margin-bottom: 6px;
+  }
+
+  /* Texto da navegação um pouco maior */
+  .bottom-nav a {
+    font-size: 0.8rem;
+  }
+
+  /* Área de toque maior */
+  .bottom-nav a {
+    padding: 10px; 
+  }
+
+  /* Botões Gerais (Pílulas e Ações) mais "gordinhos" no mobile */
+  .btnNewChecklist, 
+  .filterBtnPill, 
+  .btnCheckAction, 
+  .btnLoginModern,
+  .btnHistoryToggle {
+    padding: 1rem 1.5rem; /* Mais área de toque */
+    font-size: 1rem;
+  }
+  
+  /* Ajuste no Header para Mobile */
+  .headerModern {
+    padding: 0 1rem;
+    height: 70px;
   }
 }
 
-.bottom-nav a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #999;
-  font-size: 0.7rem;
-  flex: 1;
-  height: 100%;
-  transition: all 0.2s ease;
-  position: relative;
+/* Responsividade Geral */
+@media (max-width: 992px) {
+  .desktopNav { display: none; }
+  .headerModern { padding: 0 1.5rem; height: 70px; }
+  .userDetails, .dropdownArrow { display: none; }
+  .bottom-nav { display: flex; }
 }
 
-.bottom-nav a svg {
-  margin-bottom: 4px;
-  font-size: 1.4rem;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Estado Ativo (Moderno) */
-.bottom-nav a.active {
-  color: #005A9C;
-  font-weight: 600;
-}
-
-.bottom-nav a.active svg {
-  transform: translateY(-5px); /* Ícone sobe um pouco */
-  color: #005A9C;
-  filter: drop-shadow(0 4px 5px rgba(0, 90, 156, 0.3)); /* Glow no ícone */
-}
-
-/* Ponto de notificação (Pill Style) */
-.notification-dot {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 10px;
-  height: 10px;
-  background-color: #FFC107;
-  border-radius: 50%;
-  border: 2px solid white;
-}
-
-.nav-icon-wrapper {
-  position: relative;
-  display: inline-block;
+@media (max-width: 480px) {
+  .chat-window {
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100%;
+    border-radius: 0;
+    z-index: 2100;
+  }
 }

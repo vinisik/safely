@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { videos, quizzes, allSecurityAlerts } from '../data/mockData'; 
-import { FaClock, FaBrain, FaClipboardList, FaCalendarAlt, FaMedal, FaChalkboardTeacher, FaChevronUp, FaChevronDown, FaBell, FaPlayCircle } from 'react-icons/fa'; 
+import { FaClock, FaBrain, FaClipboardList, FaCalendarAlt, FaMedal, FaChalkboardTeacher, FaChevronUp, FaChevronDown, FaBell, FaPlayCircle, FaQrcode, FaBullhorn } from 'react-icons/fa'; 
 import useIsMobile from '../hooks/useIsMobile';
-
-// Importa o CSS Unificado
+import QRScannerModal from '../components/QRScannerModal'; 
 import './Pages.css';
 
 function Dashboard({user, checklists, totalPoints, 
@@ -12,28 +11,31 @@ function Dashboard({user, checklists, totalPoints,
     completedQuizzesCount, totalQuizzesCount, currentRankName}) {
   
   const [isSummaryDropdownOpen, setIsSummaryDropdownOpen] = useState(false);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const isMobile = useIsMobile();
   
-  // Filtros
+  // Filtros de Checklist
   const pendingChecklists = checklists.filter(c => c.status === 'pending');
   const pendingCount = pendingChecklists.length;
   const completedChecklistsCount = checklists.filter(c => c.status === 'completed').length;
   const totalChecklistsCount = checklists.length; 
 
-  // Porcentagem (opcional, se quiser usar uma barra de progresso depois)
-  const completionPercentage = totalChecklistsCount > 0 
-    ? Math.round((completedChecklistsCount / totalChecklistsCount) * 100) 
-    : 0;
-
   // Alertas Aleatórios
   const [currentAlerts, setCurrentAlerts] = useState([]);
+  
+  // Feed de Segurança Simulado
+  const feedItems = [
+    { id: 1, user: 'Carlos Silva', action: 'conquistou', detail: 'Mestre da Segurança', time: '2h atrás', icon: '🏆' },
+    { id: 2, user: 'Gestão EHS', action: 'alerta:', detail: 'Uso obrigatório de óculos', time: '4h atrás', icon: '📢' },
+    { id: 3, user: 'Ana Souza', action: 'completou', detail: 'Treinamento de Altura', time: '5h atrás', icon: '🎓' },
+  ];
+
   useEffect(() => {
     const shuffledAlerts = [...allSecurityAlerts].sort(() => 0.5 - Math.random());
-    const selectedAlerts = shuffledAlerts.slice(0, 3); // Mostra 3 alertas
+    const selectedAlerts = shuffledAlerts.slice(0, 3);
     setCurrentAlerts(selectedAlerts);
   }, []);
 
-  // Dados Mockados
   const daysWithoutAccidents = 127;
   
   const getCurrentGreeting = () => {
@@ -43,102 +45,64 @@ function Dashboard({user, checklists, totalPoints,
     else return "Boa noite";
   };
 
-  const greeting = getCurrentGreeting();
-
   return (
     <div className="checklistPageModern">
       <title>Safely | Início</title> 
-      
-      {/* Banner de Boas-vindas */}
-      <div className="welcomeBannerGlass">
-        <h1>{greeting}, {user.name}!</h1>
-        <p>Aqui está o resumo da sua segurança hoje. Mantenha o foco e continue seguro.</p>
-      </div>
+      <QRScannerModal isOpen={isQRModalOpen} onClose={() => setIsQRModalOpen(false)} />
 
-      {/* Controle Mobile (Dropdown) */}
+      {/* FAB - Botão Flutuante de Scan (APENAS MOBILE) */}
+      {/* Usa a classe .mobile-fab definida no Components.css */}
       {isMobile && (
-        <>
-          <button 
-            className="mobileSummaryToggle" 
-            onClick={() => setIsSummaryDropdownOpen(!isSummaryDropdownOpen)}
-          >
-            <span>Ver Resumo de Dados</span>
-            {isSummaryDropdownOpen ? <FaChevronUp /> : <FaChevronDown />} 
-          </button>
-
-          {isSummaryDropdownOpen && (
-            <div className="summaryGridModern" style={{marginBottom: '2rem'}}>
-               {/* Réplica dos cards para mobile dentro do dropdown se necessário, 
-                   ou apenas deixe o grid fluir normalmente no mobile.
-                   Aqui optei por mostrar o grid normal abaixo quando aberto. */}
-            </div>
-          )}
-        </>
+        <button 
+            className="mobile-fab"
+            onClick={() => setIsQRModalOpen(true)}
+            title="Scan QR Code"
+        >
+            <FaQrcode />
+        </button>
       )}
 
-      {/* Grid de Resumo (Cards Glass) - Esconde no mobile se dropdown fechado */}
+      {/* Banner de Boas-vindas */}
+      <div className="welcomeBannerGlass">
+        <h1>{getCurrentGreeting()}, {user.name}!</h1>
+        <p>Mantenha o foco. Sua segurança é nossa prioridade.</p>
+      </div>
+
+      {/* Dropdown Mobile para Resumo */}
+      {isMobile && (
+        <button className="mobileSummaryToggle" onClick={() => setIsSummaryDropdownOpen(!isSummaryDropdownOpen)}>
+            <span>Ver Resumo de Dados</span>
+            {isSummaryDropdownOpen ? <FaChevronUp /> : <FaChevronDown />} 
+        </button>
+      )}
+
+      {/* Grid de Resumo (Cards Glass) */}
       {(!isMobile || isSummaryDropdownOpen) && (
         <div className="summaryGridModern">
-          {/* Dias sem Acidentes */}
           <div className="summaryCardGlass">
-            <div className="summaryContent">
-              <h3>{daysWithoutAccidents}</h3>
-              <span>Dias Sem Acidentes</span>
-            </div>
-            <div className="summaryIconBox" style={{background: '#e0f2f1', color: '#00695c'}}>
-              <FaCalendarAlt />
-            </div>
+            <div className="summaryContent"><h3>{daysWithoutAccidents}</h3><span>Dias Sem Acidentes</span></div>
+            <div className="summaryIconBox" style={{background: 'rgba(0, 105, 92, 0.15)', color: '#00695c'}}><FaCalendarAlt /></div>
           </div>
-
-          {/* Checklists */}
           <div className="summaryCardGlass">
-            <div className="summaryContent">
-              <h3>{completedChecklistsCount}/{totalChecklistsCount}</h3>
-              <span>Checklists</span>
-            </div>
-            <div className="summaryIconBox iconTotal">
-               <FaClipboardList />
-            </div>
+            <div className="summaryContent"><h3>{completedChecklistsCount}/{totalChecklistsCount}</h3><span>Checklists</span></div>
+            <div className="summaryIconBox iconTotal"><FaClipboardList /></div>
           </div>
-
-          {/* Treinamentos */}
           <div className="summaryCardGlass">
-            <div className="summaryContent">
-              <h3>{completedVideosCount}</h3>
-              <span>Vídeos Vistos</span>
-            </div>
-            <div className="summaryIconBox iconPending">
-              <FaChalkboardTeacher />
-            </div>
+            <div className="summaryContent"><h3>{completedVideosCount}</h3><span>Vídeos Vistos</span></div>
+            <div className="summaryIconBox iconPending"><FaChalkboardTeacher /></div>
           </div>
-
-          {/* Quizzes */}
           <div className="summaryCardGlass">
-            <div className="summaryContent">
-              <h3>{completedQuizzesCount}</h3>
-              <span>Quizzes</span>
-            </div>
-            <div className="summaryIconBox iconCompleted">
-               <FaBrain />
-            </div>
+            <div className="summaryContent"><h3>{completedQuizzesCount}</h3><span>Quizzes</span></div>
+            <div className="summaryIconBox iconCompleted"><FaBrain /></div>
           </div>
-
-           {/* Pontos */}
            <div className="summaryCardGlass">
-            <div className="summaryContent">
-              <h3>{totalPoints}</h3>
-              <span>{currentRankName}</span>
-            </div>
-            <div className="summaryIconBox" style={{background: '#fff8e1', color: '#ff8f00'}}>
-               <FaMedal />
-            </div>
+            <div className="summaryContent"><h3>{totalPoints}</h3><span>{currentRankName}</span></div>
+            <div className="summaryIconBox" style={{background: 'rgba(255, 143, 0, 0.15)', color: '#ff8f00'}}><FaMedal /></div>
           </div>
         </div>
       )}
 
-      {/* Grid Principal Assimétrico */}
       <div className="dashboardGridModern">
-        
         {/* Coluna Principal (Esquerda) */}
         <div className="mainColumn">
           
@@ -146,8 +110,8 @@ function Dashboard({user, checklists, totalPoints,
           <div className="dashboardSectionGlass">
             <div className="sectionHeader">
               <h2>
-                Checklists Pendentes
-                {pendingCount > 0 && <span className="counterBadge">{pendingCount}</span>}
+                Checklists Pendentes 
+                {pendingCount > 0 && <span className="counterBadge" style={{marginLeft: '10px'}}>{pendingCount}</span>}
               </h2>
               <Link to="/checklists" className="linkViewAll">Ver Todos</Link>
             </div>
@@ -177,18 +141,39 @@ function Dashboard({user, checklists, totalPoints,
             )}
           </div>
 
+          {/* Seção: Feed de Segurança */}
+          <div className="dashboardSectionGlass">
+              <div className="sectionHeader">
+                  <h2><FaBullhorn style={{marginRight:'10px', color: '#E91E63'}}/> Feed da Comunidade</h2>
+              </div>
+              <div style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                  {feedItems.map(item => (
+                      <div key={item.id} className="compactListItem" style={{marginBottom: 0}}>
+                          <div className="compactIconBox" style={{background: 'white', borderRadius: '50%', boxShadow: '0 2px 5px rgba(0,0,0,0.1)', fontSize: '1.2rem'}}>
+                              {item.icon}
+                          </div>
+                          <div className="compactContent">
+                              <p style={{margin: 0, fontSize: '0.9rem'}}>
+                                  <strong className="nameText">{item.user}</strong> <span className="roleText">{item.action}</span> <strong className="nameText">{item.detail}</strong>
+                              </p>
+                              <span style={{fontSize: '0.75rem'}} className="roleText">{item.time}</span>
+                          </div>
+                      </div>
+                  ))}
+              </div>
+          </div>
+
           {/* Seção: Treinamentos (Videos) */}
           <div className="dashboardSectionGlass">
             <div className="sectionHeader">
               <h2>Continuar Assistindo</h2>
-              <Link to="/videos" className="linkViewAll">Galeria de Vídeos</Link>
+              <Link to="/videos" className="linkViewAll">Galeria</Link>
             </div>
             
-            {/* Grid de Vídeos Inline */}
             <div className="mediaGridModern" style={{gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', paddingBottom: 0}}>
               {videos.slice(0, 3).map(video => (
                 <Link to={`/videos/${video.id}`} key={video.id} className="mediaCardGlass" style={{marginBottom: 0}}>
-                   <div className="mediaThumbnailContainer" style={{height: '140px'}}>
+                   <div className="mediaThumbnailContainer" style={{height: '130px'}}>
                       <img src={video.thumbnail} alt={video.title} className="mediaThumbnail" />
                       <div className="mediaOverlayIcon"><FaPlayCircle /></div>
                    </div>

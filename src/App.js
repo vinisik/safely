@@ -19,12 +19,12 @@ import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import SidePanelMenu from './components/SidePanelMenu';
 import ManagerDashboard from './pages/ManagerDashboard'; 
-
 import GestorRoute from './components/GestorRoute';
 import useIsMobile from './hooks/useIsMobile';
+import './DarkMode.css'; 
 
 // Páginas Placeholder
-const SettingsPage = () => <div style={{padding: '2rem', textAlign: 'center'}}><h2>Página de Configurações (Em breve)</h2></div>;
+const SettingsPage = () => <div className="checklistPageModern" style={{textAlign: 'center'}}><h2>Página de Configurações</h2><p>Em breve...</p></div>;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -37,26 +37,27 @@ function App() {
   const pendingChecklistsCount = checklistsData.filter(c => c.status === 'pending').length;
   const completedVideosCount = completedVideoIds.size;
   const completedQuizzesCount = completedQuizIds.size;
-  const totalVideosCount = videos.length; // Pega o total do mockData
+  const totalVideosCount = videos.length; 
   const totalQuizzesCount = quizzes.length;
 
   const rankTiers = [
-  { name: 'Mestre da Segurança', minPoints: 5000 },
-  { name: 'Especialista em Prevenção', minPoints: 2500 },
-  { name: 'Guardião da Segurança', minPoints: 1000 },
-  { name: 'Aprendiz Atento', minPoints: 500 },
-  { name: 'Iniciante Consciente', minPoints: 0 }
-];
+    { name: 'Mestre da Segurança', minPoints: 5000 },
+    { name: 'Especialista em Prevenção', minPoints: 2500 },
+    { name: 'Guardião da Segurança', minPoints: 1000 },
+    { name: 'Aprendiz Atento', minPoints: 500 },
+    { name: 'Iniciante Consciente', minPoints: 0 }
+  ];
 
-const getRank = (points) => {
-  const currentRank = rankTiers.find(tier => points >= tier.minPoints);
-  return currentRank ? currentRank.name : rankTiers[rankTiers.length - 1].name;
-};
+  const getRank = (points) => {
+    const currentRank = rankTiers.find(tier => points >= tier.minPoints);
+    return currentRank ? currentRank.name : rankTiers[rankTiers.length - 1].name;
+  };
 
-const currentRankName = getRank(totalPoints); 
+  const currentRankName = getRank(totalPoints); 
   
   const [isSidePanelOpen, setIsSidePanelOpen] = useState(false);
   const isMobile = useIsMobile();
+  
   const toggleSidePanel = () => {
     setIsSidePanelOpen(!isSidePanelOpen);
   };
@@ -66,32 +67,25 @@ const currentRankName = getRank(totalPoints);
   };
 
   const handleLogout = () => {
-    setUser(null); // Limpa o usuário logado
-    setTotalPoints(0); // Reseta a pontuação para o valor inicial
-    setChecklistsData(initialChecklists); // Reseta a lista de checklists para a original
+    setUser(null); 
+    setTotalPoints(0); 
+    setChecklistsData(initialChecklists); 
     setCompletedVideoIds(new Set()); 
     setCompletedQuizIds(new Set());
     setIsChatOpen(false);
     setIsSidePanelOpen(false);
   };
 
-  const markVideoAsCompleted = (videoId, pointsValue = 75) => { // Pontuação padrão de 75
-    // Verifica se o vídeo JÁ FOI concluído antes
+  const markVideoAsCompleted = (videoId, pointsValue = 75) => { 
     if (!completedVideoIds.has(videoId)) {
-      addPoints(pointsValue); // Adiciona os pontos
-      // Adiciona o ID do vídeo ao conjunto de concluídos
+      addPoints(pointsValue); 
       setCompletedVideoIds(prevIds => new Set(prevIds).add(videoId)); 
-      console.log(`Vídeo ${videoId} concluído! +${pointsValue} pontos.`); // Para depuração
-    } else {
-      console.log(`Vídeo ${videoId} já foi concluído anteriormente.`); // Para depuração
-    }
+    } 
   };
 
   const markQuizAsCompleted = (quizId) => {
-    // Verifica se o quiz JÁ FOI concluído antes
     if (!completedQuizIds.has(quizId)) {
       setCompletedQuizIds(prevIds => new Set(prevIds).add(quizId));
-      console.log(`Quiz ${quizId} concluído.`); // Para depuração
     }
   };
   
@@ -107,8 +101,8 @@ const currentRankName = getRank(totalPoints);
     setChecklistsData(prevChecklists => 
       prevChecklists.map(checklist => 
         checklist.id === checklistId 
-          ? { ...checklist, status: newStatus } // Se encontrar o ID, atualiza o status
-          : checklist // Senão, mantém o checklist como está
+          ? { ...checklist, status: newStatus } 
+          : checklist 
       )
     );
   };
@@ -116,7 +110,6 @@ const currentRankName = getRank(totalPoints);
   const addPoints = (pointsToAdd) => {
     setTotalPoints(prevPoints => prevPoints + pointsToAdd);
   };
-
 
   if (!user) {
     return <LoginPage onLogin={handleLogin} />;
@@ -126,6 +119,7 @@ const currentRankName = getRank(totalPoints);
     <Router>
       <div className="app-container">
         <Header user={user} onLogout={handleLogout} onProfileClick={toggleSidePanel}/>
+        
         <main>
           <Routes>
             <Route path="/" element={<Dashboard user={user} 
@@ -136,27 +130,38 @@ const currentRankName = getRank(totalPoints);
                           completedQuizzesCount={completedQuizzesCount}
                           totalQuizzesCount={totalQuizzesCount}
                           currentRankName={currentRankName} />} />
+            
             <Route path="/videos" element={<VideosList completedVideosCount={completedVideosCount}
                           totalVideosCount={totalVideosCount}/>} />
+            
             <Route path="/videos/:id" element={<VideoPage markVideoAsCompleted={markVideoAsCompleted} completedVideoIds={completedVideoIds}/>} />
+            
             <Route path="/quizzes" element={<QuizzesList completedQuizzesCount={completedQuizzesCount}
                           totalQuizzesCount={totalQuizzesCount}/>} />
+            
             <Route path="/quiz/:id" element={<QuizPage addPoints={addPoints} markQuizAsCompleted={markQuizAsCompleted}/>} />
+            
             <Route 
               path="/checklists" 
               element={<ChecklistsList checklists={checklistsData} addChecklist={addChecklist} deleteChecklist={deleteChecklist} />} 
             />
+            
             <Route 
               path="/checklists/:id" 
               element={<ChecklistPage user={user} checklists={checklistsData} updateChecklistStatus={updateChecklistStatus} addPoints={addPoints}/>} 
             />
+            
             <Route path="/recompensas" element={<RewardsPage totalPoints={totalPoints}/>} />
+            
             <Route path="/pontos" element={<MyPoints totalPoints={totalPoints} currentRankName={currentRankName} />}/>
+            
             <Route 
               path="/perfil" 
               element={<ProfilePage user={user} checklists={checklistsData} totalPoints={totalPoints}/>} 
             />
+            
             <Route path="/configuracoes" element={<SettingsPage />} />
+            
             <Route 
               path="/gestao" 
               element={
@@ -173,16 +178,20 @@ const currentRankName = getRank(totalPoints);
             />
           </Routes>
         </main>
+        
         <Footer />
         <BottomNav pendingCount={pendingChecklistsCount} user={user}/>
+        
         <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
-        {!isChatOpen && <FloatingChatButton onClick={() => setIsChatOpen(true)} />}
-          {isMobile && (
+        {!isChatOpen && !isMobile && <FloatingChatButton onClick={() => setIsChatOpen(true)} />} 
+
+        {isMobile && (
           <SidePanelMenu 
             isOpen={isSidePanelOpen} 
             onClose={toggleSidePanel} 
             user={user} 
             onLogout={handleLogout} 
+            onOpenChat={() => setIsChatOpen(true)} 
           />
         )}
       </div>

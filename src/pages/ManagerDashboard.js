@@ -1,393 +1,122 @@
 import React from 'react';
 import { Bar, Doughnut, Line, Radar } from 'react-chartjs-2';
 import { 
-  Chart as ChartJS, 
-  CategoryScale, 
-  LinearScale, 
-  BarElement, 
-  Title, 
-  Tooltip, 
-  Legend, 
-  ArcElement,
-  PointElement,
-  LineElement,
-  RadialLinearScale,
-  Filler
+  Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, 
+  ArcElement, PointElement, LineElement, RadialLinearScale, Filler, Defaults
 } from 'chart.js';
 import { 
-  FaUsers, FaClock, FaCheckCircle, FaExclamationTriangle, 
-  FaCertificate, FaHeartbeat, FaArrowUp, FaArrowDown, 
-  FaFilePdf, FaFileExport, FaChartBar, FaChartPie,
-  FaShieldAlt, FaGraduationCap, FaBolt, FaTools, FaChartLine, FaNetworkWired
+  FaUsers, FaClock, FaCheckCircle, FaExclamationTriangle, FaCertificate, FaHeartbeat, 
+  FaArrowUp, FaArrowDown, FaFilePdf, FaFileExport, FaChartBar, FaChartPie,
+  FaShieldAlt, FaGraduationCap, FaBolt, FaTools, FaChartLine, FaNetworkWired, FaMapMarkedAlt
 } from 'react-icons/fa';
 import { topPerformers, recentIncidents } from '../data/mockData';
-
-// Importa o CSS Moderno
 import './Pages.css';
 
-// Registra TODOS os componentes necessários do ChartJS
-ChartJS.register(
-  CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement,
-  PointElement, LineElement, RadialLinearScale, Filler
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PointElement, LineElement, RadialLinearScale, Filler);
+
+// Configura cor padrão do texto dos gráficos para ser legível no escuro e no claro (Cinza Médio-Claro)
+ChartJS.defaults.color = '#94a3b8'; 
+ChartJS.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 
 function ManagerDashboard({ checklists }) {
-  // --- DADOS SIMULADOS (KPIs) ---
-  const kpiData = {
-    avgResponseTime: 2.3,
-    auditsCompleted: 47,
-    nonConformities: 8,
-    activeCertifications: 142,
-    participationRate: 96,
-    severityIndex: 0.12,
-    // Novos KPIs
-    daysWithoutAccidents: 365,
-    trainingHours: 1250,
-    nearMisses: 15, // Quase acidentes (reportados proativamente)
-    maintenanceRate: 98 // % de manutenção preventiva em dia
-  };
+  // Dados Mockados (Mantidos iguais)
+  const kpiData = { avgResponseTime: 2.3, auditsCompleted: 47, nonConformities: 8, activeCertifications: 142, participationRate: 96, severityIndex: 0.12, daysWithoutAccidents: 365, trainingHours: 1250, nearMisses: 15, maintenanceRate: 98 };
+  const heatmapPoints = [{ x: 20, y: 30, value: 'high', label: 'Extrusão' }, { x: 50, y: 50, value: 'medium', label: 'Montagem' }, { x: 80, y: 20, value: 'low', label: 'Expedição' }, { x: 30, y: 70, value: 'high', label: 'Caldeira' }];
 
-  // --- DADOS DOS GRÁFICOS ---
-  
-  // 1. Barras (Existente)
+  // Gráficos
   const engagementData = {
     labels: ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'],
-    datasets: [{
-      label: 'Pontos',
-      data: [650, 590, 800, 810],
-      backgroundColor: 'rgba(0, 90, 156, 0.7)',
-      borderRadius: 8,
-    }],
+    datasets: [{ label: 'Pontos', data: [650, 590, 800, 810], backgroundColor: 'rgba(56, 189, 248, 0.6)', borderRadius: 8 }] // Usei azul mais claro
   };
 
-  // 2. Rosca (Existente)
-  const nonConformanceData = {
-    labels: ['EPIs', 'Vazamentos', 'Obstrução', 'Elétrica', 'Outros'],
-    datasets: [{
-      data: [12, 19, 3, 5, 2],
-      backgroundColor: ['#ef5350', '#ffa726', '#ff7043', '#7e57c2', '#bdbdbd'],
-      borderWidth: 0,
-    }],
-  };
-
-  // 3. Linha (NOVO): Tendência de Incidentes vs Meta
   const incidentTrendData = {
     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
     datasets: [
-      {
-        label: 'Taxa de Frequência',
-        data: [2.5, 2.0, 1.8, 1.5, 0.8, 0.5],
-        borderColor: '#2e7d32', // Verde
-        backgroundColor: 'rgba(46, 125, 50, 0.2)',
-        tension: 0.4, // Curva suave
-        fill: true,
-      },
-      {
-        label: 'Limite Aceitável',
-        data: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0],
-        borderColor: '#c62828', // Vermelho
-        borderDash: [5, 5], // Linha tracejada
-        tension: 0,
-        fill: false,
-      }
+      { label: 'Taxa', data: [2.5, 2.0, 1.8, 1.5, 0.8, 0.5], borderColor: '#4ade80', backgroundColor: 'rgba(74, 222, 128, 0.2)', tension: 0.4, fill: true },
+      { label: 'Meta', data: [2.0, 2.0, 2.0, 2.0, 2.0, 2.0], borderColor: '#f87171', borderDash: [5, 5], tension: 0 }
     ]
   };
 
-  // 4. Radar (NOVO): Cultura de Segurança
+  const nonConformanceData = {
+    labels: ['EPIs', 'Vazamentos', 'Obstrução', 'Elétrica', 'Outros'],
+    datasets: [{ data: [12, 19, 3, 5, 2], backgroundColor: ['#ef5350', '#ffa726', '#ff7043', '#7e57c2', '#bdbdbd'], borderWidth: 0 }]
+  };
+
   const safetyCultureData = {
-    labels: ['Liderança', 'Procedimentos', 'Uso de EPIs', 'Comunicação', 'Relatos', 'Treinamento'],
+    labels: ['Liderança', 'Procedimentos', 'EPIs', 'Comunicação', 'Relatos', 'Treino'],
     datasets: [
-      {
-        label: 'Avaliação Atual',
-        data: [85, 90, 95, 75, 80, 88],
-        backgroundColor: 'rgba(0, 90, 156, 0.2)',
-        borderColor: '#005A9C',
-        borderWidth: 2,
-      },
-      {
-        label: 'Meta',
-        data: [90, 90, 90, 90, 90, 90],
-        backgroundColor: 'transparent',
-        borderColor: 'rgba(0,0,0,0.3)',
-        borderDash: [3, 3],
-        borderWidth: 1,
-      }
+      { label: 'Atual', data: [85, 90, 95, 75, 80, 88], backgroundColor: 'rgba(56, 189, 248, 0.2)', borderColor: '#38bdf8', borderWidth: 2 },
+      { label: 'Meta', data: [90, 90, 90, 90, 90, 90], borderColor: 'rgba(255,255,255,0.3)', borderDash: [3, 3], borderWidth: 1 }
     ],
   };
 
-  // --- OPÇÕES DE GRÁFICOS ---
+  // Opções com Cores Ajustadas
   const commonOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
+    responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
-    scales: {
-      x: { grid: { display: false } },
-      y: { grid: { color: 'rgba(0,0,0,0.05)' } }
-    }
+    scales: { x: { grid: { display: false }, ticks: { color: '#94a3b8' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } } }
   };
 
   const doughnutOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { position: 'right', labels: { usePointStyle: true, font: {family: 'Inter'} } } }
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'right', labels: { usePointStyle: true, color: '#94a3b8', font: { family: 'Inter' } } } },
+    elements: { arc: { borderWidth: 0 } } // Remove bordas brancas
   };
 
   const radarOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      r: {
-        angleLines: { color: 'rgba(0,0,0,0.1)' },
-        grid: { color: 'rgba(0,0,0,0.1)' },
-        pointLabels: { font: { family: 'Poppins', size: 11 } }
-      }
-    }
+    responsive: true, maintainAspectRatio: false,
+    scales: { r: { angleLines: { color: 'rgba(255,255,255,0.1)' }, grid: { color: 'rgba(255,255,255,0.1)' }, pointLabels: { color: '#cbd5e1', font: { family: 'Poppins', size: 11 } }, ticks: { backdropColor: 'transparent', color: '#94a3b8' } } },
+    plugins: { legend: { labels: { color: '#cbd5e1' } } }
   };
 
-  const getInitials = (name) => {
-    const names = name.split(' ');
-    return (names[0][0] + (names.length > 1 ? names[names.length - 1][0] : '')).toUpperCase();
-  };
-
-  const getStatusPillClass = (status) => {
-    const s = status.toLowerCase();
-    if (s === 'resolvido' || s === 'baixa') return 'statusBadgePill completed'; 
-    if (s === 'em análise' || s === 'média') return 'statusBadgePill pending'; 
-    return 'statusBadgePill'; 
-  };
-
-  const handleExportJSON = () => { alert("Exportando dados em JSON..."); };
-  const handlePrintPDF = () => { window.print(); };
+  // Helpers
+  const getInitials = (n) => n.split(' ').map((p,i,a)=> i===0||i===a.length-1?p[0]:'').join('').toUpperCase();
+  const getStatusPillClass = (s) => (s==='Resolvido'||s==='Baixa'?'statusBadgePill completed':(s==='Em análise'||s==='Média'?'statusBadgePill pending':'statusBadgePill'));
 
   return (
     <div className="checklistPageModern">
       <title>Safely | Painel do Gestor</title>
-
-      {/* Header */}
       <div className="pageHeaderModern">
-        <div>
-           <h1>Painel de Gestão EHS</h1>
-           <p style={{color: '#666', marginTop: '5px'}}>Visão geral de segurança, saúde e meio ambiente.</p>
-        </div>
-        
+        <div><h1>Painel de Gestão EHS</h1><p>Visão geral de segurança e indicadores.</p></div>
         <div style={{display: 'flex', gap: '10px'}}>
-          <button className="btnNewChecklist" onClick={handleExportJSON} style={{background: 'white', color: '#005A9C', border: '1px solid #005A9C'}}>
-            <FaFileExport /> Exportar
-          </button>
-          <button className="btnNewChecklist" onClick={handlePrintPDF}>
-            <FaFilePdf /> Imprimir
-          </button>
+          <button className="btnNewChecklist" style={{background:'transparent', color:'var(--primary-color)', border:'1px solid var(--primary-color)'}}><FaFileExport/> Exportar</button>
+          <button className="btnNewChecklist"><FaFilePdf/> Imprimir</button>
         </div>
       </div>
 
-      {/* --- GRID DE KPIS (AGORA COM 10 CARDS) --- */}
+      {/* Grid KPIs */}
       <div className="kpiGridModern">
-        
-        {/* KPI 1: Dias Sem Acidentes (NOVO) */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-            <div className="kpiIconGlass" style={{background: '#e8f5e9', color: '#2e7d32'}}><FaShieldAlt /></div>
-            <span className="trendPill positive"><FaArrowUp size={10}/> Recorde</span>
-          </div>
-          <span className="kpiValue">{kpiData.daysWithoutAccidents}</span>
-          <span className="kpiLabel">Dias Sem Acidentes</span>
-          <span className="kpiSubtext">Meta: 400 dias</span>
-        </div>
-
-        {/* KPI 2: Tempo Resposta */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-            <div className="kpiIconGlass iconTime"><FaClock /></div>
-            <span className="trendPill positive"><FaArrowDown size={10}/> -0.8h</span>
-          </div>
-          <span className="kpiValue">{kpiData.avgResponseTime}h</span>
-          <span className="kpiLabel">Tempo de Resposta</span>
-          <span className="kpiSubtext">Média semanal</span>
-        </div>
-
-        {/* KPI 3: Quase Acidentes (NOVO) */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-             <div className="kpiIconGlass" style={{background: '#fff3e0', color: '#f57f17'}}><FaBolt /></div>
-             <span className="trendPill positive"><FaArrowUp size={10}/> +5</span>
-          </div>
-          <span className="kpiValue">{kpiData.nearMisses}</span>
-          <span className="kpiLabel">Quase Acidentes</span>
-          <span className="kpiSubtext">Reportados (Proatividade)</span>
-        </div>
-
-        {/* KPI 4: Auditorias */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-             <div className="kpiIconGlass iconAudit"><FaCheckCircle /></div>
-             <span className="trendPill positive"><FaArrowUp size={10}/> +12</span>
-          </div>
-          <span className="kpiValue">{kpiData.auditsCompleted}</span>
-          <span className="kpiLabel">Auditorias</span>
-          <span className="kpiSubtext">Realizadas este mês</span>
-        </div>
-
-        {/* KPI 5: Não Conformidades */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-             <div className="kpiIconGlass iconAlert"><FaExclamationTriangle /></div>
-             <span className="trendPill positive"><FaArrowDown size={10}/> -5</span>
-          </div>
-          <span className="kpiValue">{kpiData.nonConformities}</span>
-          <span className="kpiLabel">Não Conformidades</span>
-          <span className="kpiSubtext">Pendentes de ação</span>
-        </div>
-
-        {/* KPI 6: Horas de Treinamento (NOVO) */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-             <div className="kpiIconGlass" style={{background: '#e3f2fd', color: '#1976d2'}}><FaGraduationCap /></div>
-             <span className="trendPill positive"><FaArrowUp size={10}/> +120h</span>
-          </div>
-          <span className="kpiValue">{kpiData.trainingHours}</span>
-          <span className="kpiLabel">Horas Treinamento</span>
-          <span className="kpiSubtext">Acumulado no ano</span>
-        </div>
-
-        {/* KPI 7: Manutenção Preventiva (NOVO) */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-             <div className="kpiIconGlass" style={{background: '#f3e5f5', color: '#7b1fa2'}}><FaTools /></div>
-             <span className="trendPill positive"><FaArrowUp size={10}/> 98%</span>
-          </div>
-          <span className="kpiValue">{kpiData.maintenanceRate}%</span>
-          <span className="kpiLabel">Manutenção</span>
-          <span className="kpiSubtext">Preventivas em dia</span>
-        </div>
-
-        {/* KPI 8: Certificações */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-             <div className="kpiIconGlass iconCert"><FaCertificate /></div>
-             <span className="trendPill positive"><FaArrowUp size={10}/> +18</span>
-          </div>
-          <span className="kpiValue">{kpiData.activeCertifications}</span>
-          <span className="kpiLabel">Certificações</span>
-          <span className="kpiSubtext">Colaboradores ativos</span>
-        </div>
-
-        {/* KPI 9: Participação */}
-        <div className="kpiCardGlass">
-          <div className="kpiHeader">
-             <div className="kpiIconGlass iconUsers"><FaUsers /></div>
-             <span className="trendPill positive"><FaArrowUp size={10}/> +4%</span>
-          </div>
-          <span className="kpiValue">{kpiData.participationRate}%</span>
-          <span className="kpiLabel">Engajamento</span>
-          <span className="kpiSubtext">Taxa de participação</span>
-        </div>
-
-        {/* KPI 10: Gravidade */}
-        <div className="kpiCardGlass">
-           <div className="kpiHeader">
-             <div className="kpiIconGlass iconAlert" style={{background: '#ffebee', color: '#b71c1c'}}><FaHeartbeat /></div>
-             <span className="trendPill positive"><FaArrowDown size={10}/> -0.08</span>
-           </div>
-           <span className="kpiValue">{kpiData.severityIndex}</span>
-           <span className="kpiLabel">Índice Gravidade</span>
-           <span className="kpiSubtext">Por 1k horas</span>
-        </div>
+        <div className="kpiCardGlass"><div className="kpiHeader"><div className="kpiIconGlass" style={{background:'rgba(74, 222, 128, 0.2)', color:'#4ade80'}}><FaShieldAlt/></div><span className="trendPill positive"><FaArrowUp/> Recorde</span></div><span className="kpiValue">{kpiData.daysWithoutAccidents}</span><span className="kpiLabel">Dias Sem Acidentes</span></div>
+        <div className="kpiCardGlass"><div className="kpiHeader"><div className="kpiIconGlass iconTime"><FaClock/></div><span className="trendPill positive"><FaArrowDown/> -0.8h</span></div><span className="kpiValue">{kpiData.avgResponseTime}h</span><span className="kpiLabel">Tempo Resposta</span></div>
+        <div className="kpiCardGlass"><div className="kpiHeader"><div className="kpiIconGlass" style={{background:'rgba(251, 146, 60, 0.2)', color:'#fb923c'}}><FaBolt/></div><span className="trendPill positive"><FaArrowUp/> +5</span></div><span className="kpiValue">{kpiData.nearMisses}</span><span className="kpiLabel">Quase Acidentes</span></div>
+        <div className="kpiCardGlass"><div className="kpiHeader"><div className="kpiIconGlass iconAudit"><FaCheckCircle/></div><span className="trendPill positive"><FaArrowUp/> +12</span></div><span className="kpiValue">{kpiData.auditsCompleted}</span><span className="kpiLabel">Auditorias</span></div>
+        <div className="kpiCardGlass"><div className="kpiHeader"><div className="kpiIconGlass iconAlert"><FaExclamationTriangle/></div><span className="trendPill positive"><FaArrowDown/> -5</span></div><span className="kpiValue">{kpiData.nonConformities}</span><span className="kpiLabel">Não Conformidades</span></div>
       </div>
 
-      {/* --- GRÁFICOS EM GLASSMORPHISM (AGORA COM 4 GRÁFICOS) --- */}
+      {/* Gráficos */}
       <div className="chartsGridModern">
-        {/* Gráfico 1: Barras */}
-        <div className="chartSectionGlass">
-          <div className="sectionTitleGlass"><FaChartBar /> Engajamento (Gamificação)</div>
-          <div style={{height: '250px'}}>
-            <Bar options={commonOptions} data={engagementData} />
-          </div>
-        </div>
-
-        {/* Gráfico 2: Linha (Tendência) */}
-        <div className="chartSectionGlass">
-          <div className="sectionTitleGlass"><FaChartLine /> Taxa de Frequência (Acidentes)</div>
-          <div style={{height: '250px'}}>
-            <Line options={commonOptions} data={incidentTrendData} />
-          </div>
-        </div>
-
-        {/* Gráfico 3: Rosca (Tipos) */}
-        <div className="chartSectionGlass">
-          <div className="sectionTitleGlass"><FaChartPie /> Tipos de Ocorrências</div>
-          <div style={{height: '250px', display: 'flex', justifyContent: 'center'}}>
-            <Doughnut options={doughnutOptions} data={nonConformanceData} />
-          </div>
-        </div>
-
-        {/* Gráfico 4: Radar (Cultura) */}
-        <div className="chartSectionGlass">
-          <div className="sectionTitleGlass"><FaNetworkWired /> Cultura de Segurança (360º)</div>
-          <div style={{height: '250px'}}>
-            <Radar options={radarOptions} data={safetyCultureData} />
-          </div>
+        <div className="chartSectionGlass"><div className="sectionTitleGlass"><FaChartBar/> Engajamento</div><div style={{height:'250px'}}><Bar options={commonOptions} data={engagementData}/></div></div>
+        <div className="chartSectionGlass"><div className="sectionTitleGlass"><FaChartLine/> Taxa de Frequência</div><div style={{height:'250px'}}><Line options={commonOptions} data={incidentTrendData}/></div></div>
+        <div className="chartSectionGlass"><div className="sectionTitleGlass"><FaChartPie/> Tipos de Ocorrência</div><div style={{height:'250px', display:'flex', justifyContent:'center'}}><Doughnut options={doughnutOptions} data={nonConformanceData}/></div></div>
+        <div className="chartSectionGlass"><div className="sectionTitleGlass"><FaNetworkWired/> Cultura de Segurança</div><div style={{height:'250px'}}><Radar options={radarOptions} data={safetyCultureData}/></div></div>
+        
+        {/* Mapa de Calor */}
+        <div className="chartSectionGlass" style={{gridColumn:'1 / -1'}}>
+            <div className="sectionTitleGlass"><FaMapMarkedAlt/> Mapa de Calor</div>
+            <div style={{position:'relative', width:'100%', height:'350px', background:'#334155', borderRadius:'16px', overflow:'hidden'}}>
+                <div style={{width:'100%', height:'100%', opacity: 0.1, background:'repeating-linear-gradient(45deg, #000, #000 10px, #222 10px, #222 20px)'}}></div>
+                {heatmapPoints.map((p,i)=>(<div key={i} style={{position:'absolute', left:`${p.x}%`, top:`${p.y}%`, width:'40px', height:'40px', borderRadius:'50%', background: p.value==='high'?'rgba(239, 68, 68, 0.6)':'rgba(234, 179, 8, 0.6)', boxShadow:'0 0 15px 5px rgba(255,255,255,0.2)', display:'flex', alignItems:'center', justifyContent:'center', color:'white', fontWeight:'bold', cursor:'pointer', transform:'translate(-50%,-50%)'}}>!</div>))}
+                <div style={{position:'absolute', bottom:10, left:10, background:'rgba(0,0,0,0.6)', color:'white', padding:'5px 10px', borderRadius:'8px', fontSize:'0.8rem'}}>Legenda: 🔴 Crítico 🟠 Atenção</div>
+            </div>
         </div>
       </div>
 
-      {/* Tabelas de Detalhes */}
+      {/* Tabelas */}
       <div className="detailsGridModern">
-        
-        {/* Tabela: Top Performers */}
-        <div className="glassTableContainer">
-          <div className="glassTableHeader">
-            <h2>Top Performers</h2>
-            <p>Colaboradores destaque em segurança</p>
-          </div>
-          <div className="modernList">
-            {topPerformers.map(user => (
-              <div key={user.id} className="modernListItem">
-                <div className="performerInfo">
-                  <div className="avatarInitials" style={{ backgroundColor: user.avatarColor || '#005A9C' }}>
-                    {getInitials(user.name)}
-                  </div>
-                  <div className="infoText">
-                    <span className="nameText">{user.name}</span>
-                    <span className="roleText">{user.role}</span>
-                  </div>
-                </div>
-                <div style={{textAlign: 'right'}}>
-                   <div className="scorePill">{user.score} pts</div>
-                   <span style={{fontSize: '0.75rem', color: '#999'}}>{user.trainings} cursos</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Tabela: Incidentes */}
-        <div className="glassTableContainer">
-          <div className="glassTableHeader">
-            <h2>Incidentes Recentes</h2>
-            <p>Últimas ocorrências registradas</p>
-          </div>
-          <div className="modernList">
-            {recentIncidents.map(incident => (
-              <div key={incident.id} className="modernListItem">
-                <div className="infoText" style={{flex: 1}}>
-                    <span className="nameText">{incident.type}</span>
-                    <span className="roleText">{incident.date} • {incident.location}</span>
-                </div>
-                <div style={{display: 'flex', flexDirection: 'column', gap: '5px', alignItems: 'flex-end'}}>
-                    <span className={getStatusPillClass(incident.severity)} style={{fontSize: '0.7rem'}}>
-                        {incident.severity}
-                    </span>
-                    <span style={{fontSize: '0.75rem', fontWeight: '500', color: '#555'}}>
-                        {incident.status}
-                    </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        <div className="glassTableContainer"><div className="glassTableHeader"><h2>Top Performers</h2></div><div className="modernList">{topPerformers.map(u=>(<div key={u.id} className="modernListItem"><div className="performerInfo"><div className="avatarInitials" style={{backgroundColor:u.avatarColor}}>{getInitials(u.name)}</div><div className="infoText"><span className="nameText">{u.name}</span><span className="roleText">{u.role}</span></div></div><div className="scorePill">{u.score} pts</div></div>))}</div></div>
+        <div className="glassTableContainer"><div className="glassTableHeader"><h2>Incidentes Recentes</h2></div><div className="modernList">{recentIncidents.map(i=>(<div key={i.id} className="modernListItem"><div className="infoText"><span className="nameText">{i.type}</span><span className="roleText">{i.date} • {i.location}</span></div><span className={getStatusPillClass(i.severity)}>{i.severity}</span></div>))}</div></div>
       </div>
     </div>
   );
 }
-
 export default ManagerDashboard;
