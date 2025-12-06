@@ -192,38 +192,53 @@ function RewardsPage({ totalPoints }) {
 
       {/* MODAL DE SUCESSO */}
       {successItem && (
-        <div className="rewardSuccessOverlay">
-           <div className="successCard">
-              <div className="successIconContainer animate-confetti">
-                 <FaCheck />
-                 {/* Partículas CSS para explosão de confete */}
-                 <div className="confetti-piece" style={{'--tx': '-50px', '--ty': '-50px'}}></div>
-                 <div className="confetti-piece" style={{'--tx': '50px', '--ty': '-50px'}}></div>
-                 <div className="confetti-piece" style={{'--tx': '-50px', '--ty': '50px'}}></div>
-                 <div className="confetti-piece" style={{'--tx': '50px', '--ty': '50px'}}></div>
-                 <div className="confetti-piece" style={{'--tx': '0px', '--ty': '-70px'}}></div>
-              </div>
+    <div className="rewardSuccessOverlay">
+        <div className="successCard">
+            
+            {/* Área Superior (Imagem + Confete) */}
+            <div className="successImageArea">
+                <div className="successIconFloat"><FaCheck /></div>
+                
+                <img src={successItem.image} alt={successItem.title} className="purchasedItemImage" />
+                
+                {/* Container de Confetes Explosivos */}
+                <div className="confetti-container">
+                    {/* Cores: Amarelo, Azul, Vermelho, Verde */}
+                    <div className="confetti-piece" style={{'--c': '#ffd700', '--tx': '-80px', '--ty': '-80px', '--r': '-45deg'}}></div>
+                    <div className="confetti-piece" style={{'--c': '#00c8ff', '--tx': '80px', '--ty': '-90px', '--r': '30deg'}}></div>
+                    <div className="confetti-piece" style={{'--c': '#ff4757', '--tx': '-100px', '--ty': '-20px', '--r': '-90deg'}}></div>
+                    <div className="confetti-piece" style={{'--c': '#2ed573', '--tx': '90px', '--ty': '10px', '--r': '60deg'}}></div>
+                    <div className="confetti-piece" style={{'--c': '#ffd700', '--tx': '-50px', '--ty': '-120px', '--r': '-20deg'}}></div>
+                    <div className="confetti-piece" style={{'--c': '#00c8ff', '--tx': '50px', '--ty': '-100px', '--r': '10deg'}}></div>
+                    <div className="confetti-piece" style={{'--c': '#ff4757', '--tx': '0px', '--ty': '-140px', '--r': '180deg', 'animationDelay': '0.1s'}}></div>
+                </div>
+            </div>
 
-              <div className="successContent">
-                  <h2 style={{color: '#005A9C', marginBottom: '0.5rem'}}>Sucesso!</h2>
-                  <p style={{marginBottom: '1.5rem'}}>Você resgatou:</p>
-                  
-                  <img src={successItem.image} alt={successItem.title} className="purchasedItemImage" />
-                  
-                  <h3 style={{fontSize: '1.3rem', margin: '1rem 0'}}>{successItem.title}</h3>
-                  <div className="rewardCostTag" style={{margin: '0 auto', display: 'inline-block'}}>
-                     -{successItem.cost} pontos
-                  </div>
-                  
-                  <br/>
-                  <button onClick={closeSuccessModal} className="btnCloseSuccess">Continuar</button>
-                  <p style={{fontSize: '0.8rem', opacity: 0.7, marginTop: '1.5rem'}}>
-                    Voucher enviado para seu e-mail.
-                  </p>
-              </div>
-           </div>
+            {/* Área Inferior (Texto e Botão) */}
+            <div className="successContent">
+                <h2>Resgate com Sucesso!</h2>
+                <p>Parabéns! Você adquiriu:</p>
+                
+                <h3 style={{fontSize: '1.3rem', margin: '0 0 0.5rem 0', fontFamily:'Poppins, sans-serif', fontWeight: 700}}>
+                    {successItem.title}
+                </h3>
+                
+                <div className="rewardCostTag">
+                    -{successItem.cost} pontos
+                </div>
+                
+                {/* Botão com margin-top aplicado via CSS */}
+                <button onClick={closeSuccessModal} className="btnCloseSuccess">
+                    Confirmar e Fechar
+                </button>
+                
+                <p style={{fontSize: '0.8rem', marginTop: '1.2rem', marginBottom: 0, opacity: 0.7}}>
+                    Verifique seu e-mail para instruções de uso.
+                </p>
+            </div>
         </div>
-      )}
+    </div>
+    )}
     </div>
   );
 }

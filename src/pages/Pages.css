@@ -1689,6 +1689,150 @@
   white-space: nowrap;
 }
 
+/* Pages.css - Modal de Sucesso Celebrativo */
+
+/* Overlay escuro */
+.rewardSuccessOverlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 2500;
+  display: flex; justify-content: center; align-items: center;
+  animation: fadeIn 0.3s ease;
+  padding: 1rem;
+}
+
+/* Cartão do Modal */
+.successCard {
+  background: #ffffff;
+  width: 100%; max-width: 400px;
+  border-radius: 30px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  position: relative; overflow: hidden;
+  text-align: center;
+  animation: popInSuccess 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex; flex-direction: column;
+}
+
+/* Área Superior (Imagem + Confete) */
+.successImageArea {
+  /* Gradiente festivo suave */
+  background: radial-gradient(circle at center, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 2.5rem 2rem;
+  display: flex; justify-content: center; align-items: center;
+  position: relative;
+  /* Garante que os confetes não vazem do card */
+  overflow: hidden; 
+}
+
+/* Imagem do Produto */
+.purchasedItemImage {
+  width: 130px; height: 130px;
+  object-fit: cover;
+  border-radius: 22px;
+  box-shadow: 0 20px 40px rgba(0, 90, 156, 0.2);
+  transform: rotate(-6deg) scale(1);
+  border: 4px solid white;
+  position: relative; z-index: 5; /* Fica na frente dos confetes */
+  animation: floatImage 3s ease-in-out infinite;
+}
+
+@keyframes floatImage {
+  0%, 100% { transform: rotate(-6deg) translateY(0); }
+  50% { transform: rotate(-6deg) translateY(-10px); }
+}
+
+/* Ícone de Check Flutuante */
+.successIconFloat {
+  position: absolute; top: 20px; right: 20px;
+  background: #22c55e; color: white;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+  z-index: 6;
+}
+
+/* --- ANIMAÇÃO DE CONFETES --- */
+.confetti-container {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 10px; height: 10px;
+  pointer-events: none;
+  z-index: 1; /* Atrás da imagem */
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 12px; height: 12px;
+  background-color: var(--c, #ffd700); /* Cor padrão */
+  border-radius: 2px;
+  opacity: 0;
+  animation: confetti-explode 1s ease-out forwards;
+}
+
+@keyframes confetti-explode {
+  0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(0) rotate(var(--r)); opacity: 0; }
+}
+
+/* Conteúdo de Texto */
+.successContent {
+  padding: 2rem 2.5rem;
+  background: var(--card-bg);
+  position: relative; z-index: 10;
+}
+
+.successContent h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: #005A9C; margin-bottom: 0.5rem;
+}
+
+.successContent p {
+  font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem;
+}
+
+/* Item e Custo */
+.rewardCostTag {
+  display: inline-block;
+  background: rgba(0, 90, 156, 0.08); color: #005A9C;
+  font-weight: 700; padding: 0.6rem 1.2rem;
+  border-radius: 50px; font-size: 1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Botão de Confirmar (Com o padding solicitado) */
+.btnCloseSuccess {
+  width: 100%;
+  background: #005A9C; /* Azul vibrante */
+  color: white;
+  border: none;
+  padding: 1.1rem;
+  border-radius: 16px;
+  font-weight: 700; font-size: 1rem; font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 8px 25px rgba(0, 90, 156, 0.3);
+  
+  /* --- AQUI ESTÁ O PADDING ACIMA DO BOTÃO --- */
+  margin-top: 2rem; 
+}
+
+.btnCloseSuccess:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 90, 156, 0.4);
+  filter: brightness(1.1);
+}
+
+@keyframes popInSuccess {
+  0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
 /* Responsividade */
 @media (max-width: 992px) {
   .dashboardGridModern {

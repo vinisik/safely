@@ -187,3 +187,25 @@ body.dark-mode .compactListItem:hover,
 body.dark-mode .checklistItemGlass:hover {
   background-color: rgba(30, 41, 59, 0.8) !important; 
 }
+
+
+body.dark-mode .successImageArea {
+  /* Gradiente escuro para a área superior */
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+body.dark-mode .successContent h2 {
+  color: #38bdf8 !important; /* Título azul neon */
+}
+
+body.dark-mode .rewardCostTag {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+body.dark-mode .btnCloseSuccess {
+  background: #38bdf8; /* Botão neon */
+  color: #0f172a; /* Texto escuro no botão claro */
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
+}

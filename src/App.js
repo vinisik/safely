@@ -30,7 +30,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [checklistsData, setChecklistsData] = useState(initialChecklists);
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [totalPoints, setTotalPoints] = useState(0);
+  const [totalPoints, setTotalPoints] = useState(2000);
   const [completedVideoIds, setCompletedVideoIds] = useState(new Set());
   const [completedQuizIds, setCompletedQuizIds] = useState(new Set()); 
 
