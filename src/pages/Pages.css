@@ -1161,86 +1161,104 @@
   background: #004a80;
 }
 
-/* --- Perfil Moderno --- */
 .profileHeaderGlass {
-  background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+  /* Removemos qualquer background image ou gradiente forçado */
+  background: var(--glass-bg); 
   backdrop-filter: blur(12px);
-  border-radius: 30px;
-  padding: 3rem 2rem;
+  border-radius: 30px; 
+  padding: 3rem 2rem; 
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.6);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+  border: 1px solid var(--glass-border); 
+  box-shadow: var(--glass-shadow); 
   margin-bottom: 2.5rem;
   position: relative;
   overflow: hidden;
 }
 
-/* Avatar Composto (Foto + Logo Empresa) */
-.profileAvatarContainer {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 1.5rem auto;
+/* Container da Foto */
+.profileAvatarContainer { 
+  position: relative; 
+  width: 140px; 
+  height: 140px; 
+  margin: 0 auto 1.5rem auto; 
 }
 
-.mainProfileImg {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid white;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+.mainProfileImg { 
+  width: 100%; 
+  height: 100%; 
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 4px solid var(--card-bg); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .companyBadgeImg {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 45px;
-  height: 45px;
-  background: white;
-  border-radius: 50%;
-  padding: 5px;
+  position: absolute; 
+  bottom: 5px; 
+  right: 5px; 
+  width: 40px; 
+  height: 40px;
+  background: white; 
+  border-radius: 50%; 
+  padding: 4px; 
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  object-fit: contain;
+  z-index: 5;
 }
 
-.profileMetaBadges {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  flex-wrap: wrap;
+/* Badges de Informação (Empresa, ID, Email) */
+.profileMetaBadges { 
+  display: flex; 
+  justify-content: center; 
+  gap: 1rem; 
+  margin-top: 1.5rem; 
+  flex-wrap: wrap; 
 }
 
 .metaBadgePill {
-  background: rgba(0, 90, 156, 0.08);
-  color: #005A9C;
-  padding: 0.5rem 1.2rem;
-  border-radius: 30px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
+  background: rgba(255, 255, 255, 0.05); /* Fundo bem sutil */
+  color: var(--text-secondary);
+  padding: 0.6rem 1.2rem; 
+  border-radius: 30px; 
+  font-size: 0.9rem; 
+  font-weight: 500;
+  display: flex; 
+  align-items: center; 
   gap: 8px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.2s;
 }
 
-/* Grid de Estatísticas do Perfil */
-.profileStatsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
+.metaBadgePill:hover {
+  background: var(--glass-border);
+  color: var(--primary-color);
+}
+
+/* Grid de Estatísticas do Topo (Pontos, Checklists) */
+.profileStatsGrid { 
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); /* Padrão Desktop: 3 colunas */
+  gap: 1.5rem; 
+  margin-bottom: 2.5rem; 
 }
 
 .statCardGlass {
-  background: white;
-  padding: 2rem;
-  border-radius: 24px;
-  text-align: center;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-  transition: transform 0.3s;
+  background: var(--glass-bg); 
+  padding: 1.5rem; 
+  border-radius: 20px;
+  text-align: center; 
+  border: 1px solid var(--glass-border); 
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.statCardGlass p { 
+  font-size: 2rem; 
+  font-weight: 800; 
+  color: var(--text-color); 
+  margin: 5px 0; 
 }
 
 .statCardGlass:hover {
@@ -1268,6 +1286,76 @@
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+}
+
+
+@media (max-width: 992px) {
+  .dashboardGridModern, .pointsDashboardGrid { 
+    grid-template-columns: 1fr !important; /* Força 1 coluna em tablets/mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Ajuste do Header do Perfil */
+  .profileHeaderGlass {
+    padding: 2rem 1rem;
+    border-radius: 20px;
+  }
+
+  .profileHeaderGlass h1 {
+    font-size: 1.5rem;
+  }
+
+  .profileAvatarContainer {
+    width: 110px;
+    height: 110px;
+  }
+
+  /* Badges em pilha no mobile */
+  .profileMetaBadges {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .metaBadgePill {
+    width: 100%;
+    justify-content: center;
+    background: var(--input-bg); /* Mais contraste no mobile */
+  }
+
+  /* Stats (Cards de cima) empilhados */
+  .profileStatsGrid {
+    grid-template-columns: 1fr; /* 1 coluna no mobile */
+    gap: 1rem;
+  }
+
+  /* Tabelas e Listas */
+  .chartsGridModern, .detailsGridModern { 
+    grid-template-columns: 1fr; 
+  }
+  
+  /* Ajuste de Texto */
+  .pageHeaderModern h1 {
+    font-size: 1.5rem;
+  }
+  
+  .statCardGlass {
+    padding: 1rem;
+    flex-direction: row; /* No mobile, ícone e texto lado a lado economiza espaço */
+    justify-content: space-between;
+    text-align: left;
+  }
+  
+  .statCardGlass div:first-child {
+    margin-bottom: 0 !important; /* Tira margem do ícone */
+    font-size: 1.8rem !important;
+  }
+  
+  .statCardGlass p {
+    font-size: 1.5rem;
+  }
 }
 
 .dashboardGridModern {
@@ -1805,7 +1893,6 @@
   transition: all 0.2s;
   box-shadow: 0 8px 25px rgba(0, 90, 156, 0.3);
   
-  /* --- AQUI ESTÁ O PADDING ACIMA DO BOTÃO --- */
   margin-top: 2rem; 
 }
 
@@ -1909,42 +1996,94 @@
 
 /* --- ESTILOS DE IMPRESSÃO (PDF) --- */
 @media print {
-  body * {
-    visibility: hidden;
-  }
-  
-  /* Esconde tudo, exceto o modal de relatório */
-  .modalBackdropGlass, 
-  .modalBackdropGlass * {
-    visibility: visible;
+  /* 1. Configurações Gerais */
+  @page {
+    margin: 0.5cm;
+    size: landscape; /* Dashboard fica melhor em paisagem */
   }
 
+  body {
+    -webkit-print-color-adjust: exact !important; /* Força impressão de cores de fundo */
+    print-color-adjust: exact !important;
+    background-color: white !important;
+    color: black !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 2. Oculta Navegação, Botões e Elementos Flutuantes */
+  .headerModern, 
+  .bottom-nav, 
+  .mobile-fab, 
+  .filterPills, 
+  .controlsContainer, 
+  .sidebarColumn, /* Opcional: Oculta a barra lateral para focar nos gráficos */
+  .btnNewChecklist, 
+  .btnGhost, 
+  .btnCloseModal,
+  .modalActionsModern,
+  .pageHeaderModern button {
+    display: none !important;
+  }
+
+  /* 3. Ajuste do Container Principal */
+  .checklistPageModern {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: visible !important;
+  }
+
+  /* 4. Ajuste dos Cards e Gráficos */
+  .dashboardGridModern {
+    display: block !important; /* Remove grid complexo para evitar quebras */
+  }
+
+  .mainColumn {
+    width: 100% !important;
+  }
+
+  /* Garante contraste e bordas no papel */
+  .summaryCardGlass, 
+  .kpiCardGlass, 
+  .chartSectionGlass, 
+  .glassTableContainer {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    color: black !important;
+    page-break-inside: avoid; /* Evita que um gráfico seja cortado ao meio */
+    margin-bottom: 1rem;
+    break-inside: avoid;
+  }
+
+  /* Força textos para preto */
+  h1, h2, h3, h4, span, p, div, strong {
+    color: black !important;
+    text-shadow: none !important;
+  }
+
+  /* 5. LÓGICA ESPECIAL PARA O MODAL (Checklist) */
+  /* Se o modal estiver na tela, ele cobre tudo e vira a página de impressão */
   .modalBackdropGlass {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: white; /* Economiza tinta */
-    width: 100%;
-    height: auto;
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100vw; 
+    height: 100%;
+    background: white !important;
+    z-index: 99999;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
   }
 
   .modalCardGlass {
-    box-shadow: none;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Esconde botões na impressão */
-  .btnCloseModal, .btnNewChecklist, .modalActionsModern {
-    display: none !important;
-  }
-  
-  /* Ajuste de cores para impressão */
-  .nokItem {
-    border: 1px solid #ccc;
-    background: #fff0f0 !important;
-    color: black !important;
+    box-shadow: none !important;
+    border: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
   }
 }
 
