@@ -2,8 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import safelyLogo from '../assets/logo.png';
 import useIsMobile from '../hooks/useIsMobile';
-import { FaUser, FaCog, FaSignOutAlt, FaMoon, FaSun } from 'react-icons/fa';
-import './Components.css';
+// Adicionado FaBookOpen aos imports
+import { FaUser, FaCog, FaSignOutAlt, FaMoon, FaSun, FaBookOpen } from 'react-icons/fa';
+import './Header.css';
 
 function Header({ user, onProfileClick, onLogout }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -62,13 +63,13 @@ function Header({ user, onProfileClick, onLogout }) {
       <nav className="desktopNav">
         <ul>
           <li><NavLink to="/" className={getNavLinkClass}>Início</NavLink></li>
+          <li><NavLink to="/videos" className={getNavLinkClass}>Treinamentos</NavLink></li>
+          <li><NavLink to="/quizzes" className={getNavLinkClass}>Quizzes</NavLink></li>
+          <li><NavLink to="/checklists" className={getNavLinkClass}>Checklists</NavLink></li>
+          <li><NavLink to="/pontos" className={getNavLinkClass}>Meus Pontos</NavLink></li>
           {user.role === 'gestor' && (
             <li><NavLink to="/gestao" className={getNavLinkClass}>Gestão</NavLink></li>
           )}
-          <li><NavLink to="/checklists" className={getNavLinkClass}>Checklists</NavLink></li>
-          <li><NavLink to="/videos" className={getNavLinkClass}>Treinamentos</NavLink></li>
-          <li><NavLink to="/quizzes" className={getNavLinkClass}>Quizzes</NavLink></li>
-          <li><NavLink to="/pontos" className={getNavLinkClass}>Meus Pontos</NavLink></li>
         </ul>
       </nav>
 
@@ -95,28 +96,33 @@ function Header({ user, onProfileClick, onLogout }) {
                   <FaUser /> Meu Perfil
                 </NavLink>
               </li>
+
+              {/* --- NOVO ITEM: TUTORIAL --- */}
+              <li>
+                <NavLink to="/tutorial" onClick={() => setDropdownOpen(false)}>
+                  <FaBookOpen /> Como Usar
+                </NavLink>
+              </li>
+              {/* --------------------------- */}
+
               <li>
                 <NavLink to="/configuracoes" onClick={() => setDropdownOpen(false)}>
                   <FaCog /> Configurações
                 </NavLink>
               </li>
               
-              {/* --- ALTERAÇÃO AQUI --- */}
+              {/* Tema */}
               <li>
                 <button onClick={toggleTheme} style={{justifyContent: 'space-between'}}>
                    <span style={{display: 'flex', alignItems: 'center', gap: '12px'}}>
-                     {/* Ícone */}
                      {darkMode ? <FaMoon /> : <FaSun />} 
-                     {/* Texto Fixo */}
                      Tema
                    </span>
-                   {/* Estado Atual (Claro ou Escuro) */}
                    <span style={{fontSize: '0.75rem', opacity: 0.6, fontWeight: '600', textTransform: 'uppercase'}}>
                      {darkMode ? 'Escuro' : 'Claro'}
                    </span>
                 </button>
               </li>
-              {/* ---------------------- */}
 
               <li>
                 <button onClick={() => {

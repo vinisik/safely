@@ -19,6 +19,7 @@ import ProfilePage from './pages/ProfilePage';
 import LoginPage from './pages/LoginPage';
 import SidePanelMenu from './components/SidePanelMenu';
 import ManagerDashboard from './pages/ManagerDashboard'; 
+import TutorialPage from './pages/TutorialPage';
 import GestorRoute from './components/GestorRoute';
 import useIsMobile from './hooks/useIsMobile';
 import './DarkMode.css'; 
@@ -180,6 +181,7 @@ function App() {
                 } />
               } 
             />
+            <Route path="/tutorial" element={<TutorialPage />} />
           </Routes>
         </main>
         
