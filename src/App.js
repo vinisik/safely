@@ -186,7 +186,7 @@ function App() {
         <Footer />
         <BottomNav pendingCount={pendingChecklistsCount} user={user}/>
         
-        <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+        <ChatWindow isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} user={user}/>
         {!isChatOpen && !isMobile && <FloatingChatButton onClick={() => setIsChatOpen(true)} />} 
 
         {isMobile && (
