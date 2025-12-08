@@ -1,16 +1,16 @@
 :root {
   --screen-width: 1400px;
-  --text-color: #0f172a;      /* Quase preto (Slate 900) */
-  --text-secondary: #334155;  /* Cinza Escuro (Slate 700) - Era #666 */
+  --text-color: #0f172a;      
+  --text-secondary: #334155; 
   --text-muted: #64748b;
 }
 
-/* --- Container Geral com Layout Fluido --- */
 .checklistPageModern {
   max-width: var(--screen-width);
   margin: 0 auto;
   padding: 2rem 1rem;
   animation: fadeIn 0.5s ease-out;
+  margin-bottom: 2.5rem;
 }
 
 @keyframes fadeIn {
@@ -18,7 +18,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Cabeçalho da Página --- */
 .pageHeaderModern {
   display: flex;
   justify-content: space-between;
@@ -28,17 +27,16 @@
 
 .pageHeaderModern h1 {
   font-size: 2rem;
-  color: #005A9C; /* Primary Color */
+  color: #005A9C; 
   font-weight: 700;
   letter-spacing: -0.5px;
 }
 
 .pageHeaderModern p {
-  color: var(--text-secondary); /* Agora é #334155 (bem mais legível) */
+  color: var(--text-secondary); 
   font-weight: 500;
 }
 
-/* Botão Novo Checklist (Estilo Pill com Glow) */
 .btnNewChecklist {
   background: #005A9C;
   color: white;
@@ -60,7 +58,6 @@
   box-shadow: 0 6px 20px rgba(0, 90, 156, 0.5);
 }
 
-/* --- Cards de Resumo (Glassmorphism) --- */
 .summaryGridModern {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -96,7 +93,7 @@
 
 .summaryContent span {
   font-size: 0.9rem;
-  color: var(--text-secondary); /* Agora é #334155 (bem mais legível) */
+  color: var(--text-secondary); 
   font-weight: 500;
 }
 
@@ -110,12 +107,10 @@
   font-size: 1.2rem;
 }
 
-/* Cores específicas dos cards */
 .iconTotal { background: #e3f2fd; color: #005A9C; }
 .iconPending { background: #fff8e1; color: #f57f17; }
 .iconCompleted { background: #e8f5e9; color: #2e7d32; }
 
-/* --- Barra de Busca e Filtros --- */
 .controlsContainer {
   display: flex;
   justify-content: space-between;
@@ -156,7 +151,6 @@
   color: #999;
 }
 
-/* Filtros Estilo Pill */
 .filterPills {
   display: flex;
   background: rgba(0, 0, 0, 0.04);
@@ -186,7 +180,6 @@
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* --- Lista de Itens (Cards Flutuantes) --- */
 .checklistListModern {
   display: flex;
   flex-direction: column;
@@ -216,7 +209,6 @@
   background: white;
 }
 
-/* Barra lateral colorida indicando status */
 .checklistItemGlass::before {
   content: '';
   position: absolute;
@@ -258,7 +250,7 @@
   display: flex;
   gap: 15px;
   font-size: 0.85rem;
-  color: var(--text-secondary); /* Agora é #334155 (bem mais legível) */
+  color: var(--text-secondary); 
   font-weight: 500;
 }
 
@@ -280,7 +272,6 @@
 .statusBadgePill.pending { background: #fff3e0; color: #ef6c00; }
 .statusBadgePill.completed { background: #e8f5e9; color: #2e7d32; }
 
-/* --- PÁGINA DE DETALHES (ChecklistPage) --- */
 
 .checklistHeaderCard {
   background: linear-gradient(135deg, #005A9C, #004a80);
@@ -315,7 +306,7 @@
 .questionCard {
   margin-bottom: 1.5rem;
   background-color: #f1f5f9; 
-  border: 1px solid #cbd5e1; /* Borda mais visível */
+  border: 1px solid #cbd5e1; 
   border-radius: 20px;
   padding: 2rem;
   margin-bottom: 1.5rem;
@@ -357,7 +348,6 @@
   background: #f9f9f9;
 }
 
-/* Botão OK Ativo */
 .btnCheckAction.ok.active {
   background: #e8f5e9;
   border-color: #2e7d32;
@@ -460,7 +450,7 @@
 .mediaCardGlass:hover {
   transform: translateY(-8px);
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 15px 30px rgba(0, 90, 156, 0.15); /* Sombra azulada suave */
+  box-shadow: 0 15px 30px rgba(0, 90, 156, 0.15); 
 }
 
 .mediaThumbnailContainer {
@@ -497,7 +487,7 @@
   font-size: 1.2rem;
   opacity: 0;
   transition: all 0.3s ease;
-  padding-left: 3px; /* Ajuste visual para o ícone de Play */
+  padding-left: 3px; 
 }
 
 .mediaCardGlass:hover .mediaOverlayIcon {
@@ -531,7 +521,6 @@
   padding-top: 1rem;
 }
 
-/* --- Detalhes do Vídeo (VideoPage) --- */
 .videoWrapperGlass {
   background: rgba(0, 0, 0, 0.03);
   padding: 1rem;
@@ -558,7 +547,6 @@
   border: 1px solid #f0f0f0;
 }
 
-/* --- Quiz Interativo (QuizPage) --- */
 .quizOptionItem {
   background: #ffffff; 
   border: 2px solid #cbd5e1;
@@ -615,7 +603,6 @@
   border-radius: 50%;
 }
 
-/* --- Dashboard de Pontos (MyPoints) --- */
 .pointsDashboardGrid {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -689,7 +676,7 @@
   z-index: 1;
 }
 
-/* --- Badges (Insígnias) --- */
+/*  Badges  */
 .badgesGridModern {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -740,7 +727,7 @@
   color: #888;
 }
 
-/* Badge Bloqueado (Placeholder) */
+/* Badge Bloqueado  */
 .badgeCardGlass.locked {
   background: rgba(0, 0, 0, 0.03);
   border: 1px dashed #ccc;
@@ -1831,6 +1818,247 @@
 @keyframes popInSuccess {
   0% { opacity: 0; transform: scale(0.8) translateY(30px); }
   100% { opacity: 1; transform: scale(1); }
+}
+
+.reportSummaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.reportStatBox {
+  background: var(--input-bg);
+  padding: 1.5rem;
+  border-radius: 20px;
+  text-align: center;
+  border: 1px solid var(--glass-border);
+}
+
+.reportStatBox h3 {
+  font-size: 2rem;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.reportStatBox span {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.stat-ok h3 { color: #4ade80; }
+.stat-nok h3 { color: #f87171; }
+
+.reportSectionTitle {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.5rem;
+}
+
+.nokItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.nokItem {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 4px solid #ef4444;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.nokItem h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.nokItem p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.complianceScore {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--glass-border);
+  border-radius: 16px;
+}
+
+.scoreCircle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 5px solid var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+/* --- ESTILOS DE IMPRESSÃO (PDF) --- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Esconde tudo, exceto o modal de relatório */
+  .modalBackdropGlass, 
+  .modalBackdropGlass * {
+    visibility: visible;
+  }
+
+  .modalBackdropGlass {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: white; /* Economiza tinta */
+    width: 100%;
+    height: auto;
+  }
+
+  .modalCardGlass {
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Esconde botões na impressão */
+  .btnCloseModal, .btnNewChecklist, .modalActionsModern {
+    display: none !important;
+  }
+  
+  /* Ajuste de cores para impressão */
+  .nokItem {
+    border: 1px solid #ccc;
+    background: #fff0f0 !important;
+    color: black !important;
+  }
+}
+
+.reportHeaderInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--input-bg);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 1.5rem;
+}
+
+.reportHeaderInfo h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: var(--text-color); }
+.reportHeaderInfo p { margin: 0; font-size: 0.85rem; color: var(--text-secondary); }
+
+.reportScoreBig {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  line-height: 1;
+  border-left: 1px solid var(--glass-border);
+  padding-left: 1.5rem;
+}
+.reportScoreBig span { display: block; font-size: 0.7rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; margin-top: 5px; }
+
+/* Grid Visual (Gráfico + KPIs) */
+.reportVisualGrid {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Gráfico de Rosca */
+.chartWrapper {
+  position: relative;
+  height: 180px;
+  width: 180px;
+  margin: 0 auto;
+}
+
+.chartCenterText {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -60%);
+  text-align: center;
+  pointer-events: none;
+}
+.chartCenterText strong { display: block; font-size: 1.5rem; color: var(--text-color); }
+.chartCenterText small { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* KPIs Laterais */
+.kpiWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.reportKpiItem {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  display: flex; flex-direction: column;
+}
+
+.reportKpiItem .kpiVal { font-size: 1.2rem; font-weight: 700; margin-top: 5px; display: flex; align-items: center; gap: 8px; }
+
+/* Tabela Técnica */
+.technicalTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.technicalTable th {
+  text-align: left;
+  padding: 10px;
+  background: rgba(0,0,0,0.03);
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--glass-border);
+}
+
+.technicalTable td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--glass-border);
+  vertical-align: top;
+}
+
+.badgeCritic {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Dark Mode para Tabela */
+body.dark-mode .technicalTable th { background: rgba(255,255,255,0.05); }
+body.dark-mode .badgeCritic { background: rgba(153, 27, 27, 0.2); color: #fca5a5; }
+
+/* Ajuste Mobile */
+@media (max-width: 600px) {
+  .reportVisualGrid { grid-template-columns: 1fr; justify-items: center; }
+  .tableResponsive { overflow-x: auto; }
+  .reportHeaderInfo { flex-direction: column; text-align: center; gap: 1rem; }
+  .reportScoreBig { border-left: none; border-top: 1px solid var(--glass-border); padding-left: 0; padding-top: 1rem; width: 100%; }
 }
 
 /* Responsividade */

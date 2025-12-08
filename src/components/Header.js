@@ -62,13 +62,13 @@ function Header({ user, onProfileClick, onLogout }) {
       <nav className="desktopNav">
         <ul>
           <li><NavLink to="/" className={getNavLinkClass}>Início</NavLink></li>
-          <li><NavLink to="/videos" className={getNavLinkClass}>Treinamentos</NavLink></li>
-          <li><NavLink to="/quizzes" className={getNavLinkClass}>Quizzes</NavLink></li>
-          <li><NavLink to="/checklists" className={getNavLinkClass}>Checklists</NavLink></li>
-          <li><NavLink to="/pontos" className={getNavLinkClass}>Meus Pontos</NavLink></li>
           {user.role === 'gestor' && (
             <li><NavLink to="/gestao" className={getNavLinkClass}>Gestão</NavLink></li>
           )}
+          <li><NavLink to="/checklists" className={getNavLinkClass}>Checklists</NavLink></li>
+          <li><NavLink to="/videos" className={getNavLinkClass}>Treinamentos</NavLink></li>
+          <li><NavLink to="/quizzes" className={getNavLinkClass}>Quizzes</NavLink></li>
+          <li><NavLink to="/pontos" className={getNavLinkClass}>Meus Pontos</NavLink></li>
         </ul>
       </nav>
 

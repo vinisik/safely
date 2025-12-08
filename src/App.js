@@ -97,11 +97,15 @@ function App() {
     setChecklistsData(prevChecklists => prevChecklists.filter(checklist => checklist.id !== idToDelete));
   };
 
-  const updateChecklistStatus = (checklistId, newStatus) => {
+  const updateChecklistStatus = (checklistId, newStatus, results = null) => {
     setChecklistsData(prevChecklists => 
       prevChecklists.map(checklist => 
         checklist.id === checklistId 
-          ? { ...checklist, status: newStatus } 
+          ? { 
+              ...checklist, 
+              status: newStatus, 
+              results: results || checklist.results 
+            } 
           : checklist 
       )
     );
